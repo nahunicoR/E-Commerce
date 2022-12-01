@@ -14,7 +14,7 @@ module.exports = (sequelize) => {
       allowNull: false,
       autoIncrement: true,
     },
-    nameproduct: {                   //Nombre del producto
+    productname: {                   //Nombre del producto
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
