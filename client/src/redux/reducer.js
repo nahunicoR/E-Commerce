@@ -12,7 +12,7 @@ const productsSlice = createSlice({
       state.products = action.payload
     },
     getProducDetail: (state, action) => {
-      state.productDetail = action.payload
+      state.productsDetail = action.payload
     }
   }
 })
