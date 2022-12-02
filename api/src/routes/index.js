@@ -14,7 +14,7 @@ router.get('/products', async (req,res) => {
     try {
 
         let infoDB = await Product.findAll();
-        infoDB.length === 0 ? res.json('LA BASE DE DATOS ESTA VACIA') : res.json(infoDB);
+        infoDB.length === 0 ? res.json('BASE DE DATOS ESTA VACIA') : res.json(infoDB);
 
     } catch (error) {
         return res.send(error.parent.detail);
@@ -36,7 +36,27 @@ router.put('/', async (req, res) => {
 });
 
 router.delete('/:id', async (req, res) => {
+    const {id} = req.params;
 
+     try {
+        
+        if(id){
+            const deleteProduct = await Product.findByPk(id);
+           if(deleteProduct){
+                await deleteProduct.destroy();
+                res.send('Product was deleted successfully')
+           }else{
+                res.status(404).send("ERROR: No matches for that ID.");
+           }
+                
+        }else{
+            res.status(400).send('ERROR: ID does not exist.');
+        }
+
+
+     } catch (error) {
+         return res.send(error.parent.detail);
+     }
 
 });
 

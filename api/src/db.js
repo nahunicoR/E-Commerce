@@ -37,7 +37,7 @@ const { User, Product, Typeproduct } = sequelize.models;
 
 // Para relacionar los tipos de productos con producto 
 
-Product.belongsToMany(Typeproduct, { through: "product_type" });
+Product.belongsToMany(Typeproduct, { through: "product_type" });//pertenece a muchos
 Typeproduct.belongsToMany(Product, { through: "product_type" });
 
 module.exports = {
