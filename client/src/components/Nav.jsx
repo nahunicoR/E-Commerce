@@ -1,6 +1,7 @@
 import React from "react";
 import { Flex, Heading, Button } from "@chakra-ui/react";
 import { FaUser } from "react-icons/fa";
+
 import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 

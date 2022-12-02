@@ -12,7 +12,7 @@ const router = Router();
 
 
 router.get('/', async (req,res,next) => {
-
+res.json('grupo 9')
 });
 
 router.get('/:id', async(req,res,next) => {
