@@ -1,16 +1,23 @@
-//import {} from "../actions";
+import { createSlice } from "@reduxjs/toolkit"
 
-const initialState = {
-    state : [],
-}
 
-function rootReducer(state = initialState, action) {
-    switch (action.type) {
-
-        default:
-            return state;
+const productsSlice = createSlice({
+  name: "products",
+  initialState: {
+      products: [],
+      productsDetail: {}
+  },
+  reducers: {
+    getAllProducts: (state, action) => {
+      state.products = action.payload
+    },
+    getProducDetail: (state, action) => {
+      state.productsDetail = action.payload
     }
-}
+  }
+})
 
+export const { getAllProducts, getProducDetail } = productsSlice.actions
 
-export default rootReducer;
+export default productsSlice.reducer
+
