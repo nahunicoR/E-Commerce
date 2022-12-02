@@ -7,7 +7,11 @@ const { DataTypes } = require('sequelize');
 // Name in DB: products
 module.exports = (sequelize) => {
   // defino el modelo
-  sequelize.define('product', {      
+
+
+
+  
+  sequelize.define('product', {
     productid: {                     //Id del producto
       type: DataTypes.INTEGER,
       primaryKey: true,
