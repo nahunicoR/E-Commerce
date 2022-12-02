@@ -1,9 +1,21 @@
 import React from "react";
 import { Flex, Heading, Button } from "@chakra-ui/react";
 import { FaUser } from "react-icons/fa";
+
 import { Link } from "react-router-dom";
 
+import { useEffect } from "react";
+import { useDispatch } from "react-redux"
+import { getProducts } from "../redux/actions";
+
+
+// OJO este useEffect no va aqui es solo para probar
 export default function Nav() {
+	const dispatch = useDispatch()
+
+	useEffect(() => {
+		dispatch(getProducts())
+	})
 	return (
 		<>
 			<Flex

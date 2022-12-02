@@ -3,13 +3,23 @@ const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
 const {
-  DB_USER, DB_PASSWORD, DB_HOST,
+  DB_USER, DB_PASSWORD, DB_HOST,DB_DEPLOY
 } = process.env;
 
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/ecomerce`, {
-  logging: false, // set to console.log to see the raw SQL queries
-  native: false, // lets Sequelize know we can use pg-native for ~30% more speed
-});
+// const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/ecomerce`, {
+//   logging: false, // set to console.log to see the raw SQL queries
+//   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+// });
+
+const sequelize = new Sequelize(
+  DB_DEPLOY,
+  {
+    logging: false, // set to console.log to see the raw SQL queries
+    native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+  }
+);
+
+
 const basename = path.basename(__filename);
 
 const modelDefiners = [];
@@ -30,16 +40,27 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { User, Product, Typeproduct } = sequelize.models;
+<<<<<<< HEAD
+const { User,Product } = sequelize.models;
+=======
+const { User, Product, Typeproduct, Seller} = sequelize.models;
+>>>>>>> hurtado
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
 
+<<<<<<< HEAD
+=======
 // Para relacionar los tipos de productos con producto 
 
 Product.belongsToMany(Typeproduct, { through: "product_type" });
 Typeproduct.belongsToMany(Product, { through: "product_type" });
 
+//Para relacionar productos con vendedores
+Seller.belongsToMany(Product, { through: "product_seller" });
+Product.belongsToMany(Seller, { through: "product_seller" });
+
+>>>>>>> hurtado
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
   conn: sequelize,     // para importart la conexión { conn } = require('./db.js');
