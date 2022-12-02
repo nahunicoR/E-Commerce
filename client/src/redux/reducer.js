@@ -21,3 +21,4 @@ export const { getAllProducts, getProducDetail } = productsSlice.actions
 
 export default productsSlice.reducer
 
+
