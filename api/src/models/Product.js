@@ -7,12 +7,12 @@ const { DataTypes } = require('sequelize');
 // Name in DB: products
 module.exports = (sequelize) => {
   // defino el modelo
+
+
+
+  
   sequelize.define('product', {
-//<<<<<<< m6nuel
-    idProduct: {                     //Id del producto
-=======
     productid: {                     //Id del producto
-//>>>>>>> main
       type: DataTypes.INTEGER,
       primaryKey: true,
       allowNull: false,
