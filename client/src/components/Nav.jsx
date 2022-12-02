@@ -8,22 +8,6 @@ import { useAuth0 } from "@auth0/auth0-react";
 export default function Nav() {
 	const { loginWithRedirect, isAuthenticated, user, logout } = useAuth0();
 
-	const logoutBtn = (
-		<Button
-			fontSize={"xl"}
-			color={"white"}
-			bg={"transparent"}
-			border={"1px solid white"}
-			_hover={{
-				bg: "blue.500",
-				border: "1px solid",
-				borderColor: "blue.500",
-			}}
-			onClick={() => logout({ returnTo: window.location.origin })}
-		>
-			Log Out
-		</Button>
-	);
 	return (
 		<>
 			<Flex
@@ -57,9 +41,25 @@ export default function Nav() {
 						}}
 						leftIcon={<FaUser />}
 					>
-						{isAuthenticated ? user : "Iniciar Sesion"}
+						{isAuthenticated ? user.name : "Iniciar Sesion"}
 					</Button>
-					{isAuthenticated ? logoutBtn : null}
+
+					{isAuthenticated ? (
+						<Button
+							fontSize={"xl"}
+							color={"white"}
+							bg={"transparent"}
+							border={"1px solid white"}
+							_hover={{
+								bg: "blue.500",
+								border: "1px solid",
+								borderColor: "blue.500",
+							}}
+							onClick={() => logout({ returnTo: window.location.origin })}
+						>
+							Log Out
+						</Button>
+					) : null}
 				</Flex>
 			</Flex>
 		</>
