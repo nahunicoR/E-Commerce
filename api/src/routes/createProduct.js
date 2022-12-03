@@ -11,7 +11,7 @@ router.post('/', async (req, res) => {
             stock,
             image
         })
-        res.status(200).send(newProduct);
+        res.status(200).json(newProduct);
     } catch (error) {
         console.log(error)
         res.send('Faltan Datos')
