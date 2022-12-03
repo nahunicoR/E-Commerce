@@ -2,34 +2,26 @@ const { Router } = require('express');
 
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
-
+const createProduct = require('./createProduct');
+const getProductsDb = require('./getProducts');
 
 const router = Router();
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 
+router.use('/product', createProduct);
+router.use('/products', getProductsDb);
 
 
 router.get('/', async (req,res,next) => {
-res.json('grupo 9')
-});
-
-router.get('/:id', async(req,res,next) => {
-    
-
-});
-
-router.post('/', async (req, res) => {
-
-});
-
-router.put('/', async (req, res) => {
-
-});
-
-router.delete('/', async (req, res) => {
-    
+res.json({
+    'ruta /post': '/product',
+    'name': '',
+    'price': '',
+    'image': 'por ahora aca se puede poner una url de una imagen',
+    'ruta /get': '/products',
+})
 });
 
 module.exports = router;
