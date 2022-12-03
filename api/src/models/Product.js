@@ -19,8 +19,11 @@ module.exports = (sequelize) => {
       allowNull: false,
       unique: true,
     },
+    stock: {
+      type: DataTypes.INTEGER,
+    },
     price: {                   //Precio Normal
-      type: DataTypes.REAL,
+      type: DataTypes.FLOAT,
     },
     image: {
       type: DataTypes.STRING
