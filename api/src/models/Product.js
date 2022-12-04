@@ -6,28 +6,31 @@ const { DataTypes } = require('sequelize');
 // Creation date: November, 29
 // Name in DB: products
 module.exports = (sequelize) => {
-  // defino el modelo
-
-
-
-  
+  // defino el modelo  
   sequelize.define('product', {
-    productid: {                     //Id del producto
+    id: {                     //Id del producto
       type: DataTypes.INTEGER,
       primaryKey: true,
       allowNull: false,
       autoIncrement: true,
     },
-
-    productname: {                   //Nombre del producto
-
+    title: {                   //Nombre del producto
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
     },
-    normalPrice: {                   //Precio Normal
-      type: DataTypes.REAL,
+    price: {
+      type: DataTypes.FLOAT,
     },
+    category: {                   //Precio Normal
+      type: DataTypes.STRING,
+    },
+    description: {
+      type: DataTypes.STRING
+    },
+    image: {
+      type: DataTypes.STRING,
+    }
     // discountprice: {                 //Precio con descuento
     //   type: DataTypes.REAL,
     // },
