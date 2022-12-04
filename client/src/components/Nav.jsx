@@ -1,6 +1,7 @@
 import React from "react";
 import { Flex, Heading, Button } from "@chakra-ui/react";
 import { FaUser } from "react-icons/fa";
+import { BiLogOut } from "react-icons/bi";
 
 import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -8,22 +9,6 @@ import { useAuth0 } from "@auth0/auth0-react";
 export default function Nav() {
 	const { loginWithRedirect, isAuthenticated, user, logout } = useAuth0();
 
-	const logoutBtn = (
-		<Button
-			fontSize={"xl"}
-			color={"white"}
-			bg={"transparent"}
-			border={"1px solid white"}
-			_hover={{
-				bg: "blue.500",
-				border: "1px solid",
-				borderColor: "blue.500",
-			}}
-			onClick={() => logout({ returnTo: window.location.origin })}
-		>
-			Log Out
-		</Button>
-	);
 	return (
 		<>
 			<Flex
@@ -49,17 +34,25 @@ export default function Nav() {
 						fontSize={"xl"}
 						color={"white"}
 						bg={"transparent"}
-						border={"1px solid white"}
 						_hover={{
 							bg: "blue.500",
-							border: "1px solid",
 							borderColor: "blue.500",
 						}}
 						leftIcon={<FaUser />}
 					>
-						{isAuthenticated ? user : "Iniciar Sesion"}
+
+						{isAuthenticated ? user.name : "Iniciar Sesion"}
 					</Button>
-					{isAuthenticated ? logoutBtn : null}
+
+					{isAuthenticated ? (
+						<Button
+							fontSize={"xl"}
+							colorScheme={"red"}
+							leftIcon={<BiLogOut />}
+							onClick={() => logout({ returnTo: window.location.origin })}
+						></Button>
+					) : null}
+
 				</Flex>
 			</Flex>
 		</>
