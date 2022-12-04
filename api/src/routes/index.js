@@ -11,6 +11,7 @@ const createUser = require('./createUser');
 
 const router = Router();
 
+
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 
