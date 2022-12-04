@@ -8,11 +8,11 @@ const getProductById = async (id) => {
             }
         })
         if (detail) {
-            return detail
+            return detail;
         }
         return 'No se encontro el producto'
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
 }
 

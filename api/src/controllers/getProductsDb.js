@@ -2,7 +2,7 @@ const { Product } = require("../db");
 
 const getProductsDb = async () => {
     try {
-        const ProductosDb = await Product.findAll()
+        const ProductosDb = await Product.findAll();
         let resp = await ProductosDb?.map( product => {
             return {
                 id: product.id,
@@ -11,9 +11,9 @@ const getProductsDb = async () => {
                 image: product.image
             }
         })
-        return resp
+        return resp;
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
 }
 

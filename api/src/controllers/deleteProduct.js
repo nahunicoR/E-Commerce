@@ -7,11 +7,11 @@ const deleteProduct = async (id) => {
                 id
             }
         })
-        console.log(detail)
-        return 'Producto eliminado'
+        console.log(detail);
+        return 'Producto eliminado';
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
 }
 
-module.exports = { deleteProduct }
+module.exports = { deleteProduct };
