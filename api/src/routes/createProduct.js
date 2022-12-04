@@ -27,7 +27,8 @@ router.post('/', async (req, res, next) => {
         if(!created) return res.status(400).json('El producto ya existe');
         res.status(200).json(product);
     } catch (error) {
-        next(error)
+        console.log(error)
+        res.send('Agregar una categoria Correcta')
     }
 });
 
