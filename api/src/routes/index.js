@@ -20,7 +20,7 @@ router.use('/products'      , getProductsDb);
 router.use('/product'       , deleteProduct);
 router.use('/product'       , getProductById);
 router.use('/product'       , updateProduct);
-router.use('/user'          , createUser)
+router.use('/user'          , createUser);
 
 
 router.get('/', async (req,res,next) => {
