@@ -4,6 +4,7 @@ import axios from "axios";
 import CardProduct from "./CardProduct";
 
 export default function Home() {
+
 	/* const products = [
 		{
 			id: 1,
@@ -57,4 +58,5 @@ export default function Home() {
 			</Grid>
 		</>
 	);
+
 }
