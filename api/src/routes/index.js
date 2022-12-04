@@ -23,6 +23,7 @@ router.use('/product'       , updateProduct);
 router.use('/user'          , createUser);
 
 
+
 router.get('/', async (req,res,next) => {
     res.json([
         {
