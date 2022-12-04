@@ -21,7 +21,7 @@ export default function Nav() {
 			>
 				<Flex w={"75%"}>
 					<Heading color="white" px="8">
-						TO-MATE
+						TO-MATE!
 					</Heading>
 				</Flex>
 
@@ -40,7 +40,6 @@ export default function Nav() {
 						}}
 						leftIcon={<FaUser />}
 					>
-
 						{isAuthenticated ? user.name : "Iniciar Sesion"}
 					</Button>
 
@@ -52,7 +51,6 @@ export default function Nav() {
 							onClick={() => logout({ returnTo: window.location.origin })}
 						></Button>
 					) : null}
-
 				</Flex>
 			</Flex>
 		</>
