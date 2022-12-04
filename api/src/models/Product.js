@@ -8,13 +8,13 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   // defino el modelo  
   sequelize.define('product', {
-    id: {                     //Id del producto
+    id: {                     
       type: DataTypes.INTEGER,
       primaryKey: true,
       allowNull: false,
       autoIncrement: true,
     },
-    title: {                   //Nombre del producto
+    title: {                  
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
@@ -22,7 +22,7 @@ module.exports = (sequelize) => {
     price: {
       type: DataTypes.FLOAT,
     },
-    category: {                   //Precio Normal
+    category: {                  
       type: DataTypes.ENUM('bombilla','mate','kit','yerba'),
     },
     description: {
