@@ -4,6 +4,7 @@ const { Router } = require('express');
 // Ejemplo: const authRouter = require('./auth.js');
 const createProduct = require('./createProduct');
 const getProductsDb = require('./getProducts');
+const getProductById = require('./getProductById');
 
 const router = Router();
 
@@ -12,6 +13,7 @@ const router = Router();
 
 router.use('/product', createProduct);
 router.use('/products', getProductsDb);
+router.use('/:id', )
 
 
 router.get('/', async (req,res,next) => {
