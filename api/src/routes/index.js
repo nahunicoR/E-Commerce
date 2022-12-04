@@ -5,6 +5,7 @@ const { Router } = require('express');
 const createProduct = require('./createProduct');
 const getProductsDb = require('./getProducts');
 const deleteProduct = require('./deleteProduct');
+const getProductById = require('./getProductById');
 
 const router = Router();
 
@@ -14,6 +15,7 @@ const router = Router();
 router.use('/product'       , createProduct);
 router.use('/products'      , getProductsDb);
 router.use('/product'       , deleteProduct);
+router.use('/product'       , getProductById);
 
 
 router.get('/', async (req,res,next) => {
