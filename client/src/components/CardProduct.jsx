@@ -45,7 +45,7 @@ export default function CardProduct({ id, img, name, price, category }) {
 					<CardFooter>
 						<Flex flexDirection={"row"} gap={"6"} alignItems={"flex-start"}>
 							<Text color="teal" fontSize="2xl">
-								{price + " USD"}
+								{"$ " + price}
 							</Text>
 							<Link to={`/detail/${id}`}>
 								<Button colorScheme={"teal"}>Detalle</Button>
