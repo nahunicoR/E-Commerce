@@ -1,8 +1,28 @@
-import React from "react";
-import { Grid, GridItem } from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
+import { Grid, GridItem, Spinner } from "@chakra-ui/react";
+import axios from "axios";
+import CardProduct from "./CardProduct";
 
 export default function Home() {
-	const products = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+	/* const products = [
+		{
+			id: 1,
+			title: "Mate Camionero",
+			price: "$12.99",
+			category: "Mates",
+			description: "Mate mediano, adecuado para entusiastas",
+			image:
+				"https://http2.mlstatic.com/D_NQ_NP_2X_793672-MLA51232459545_082022-F.webp",
+		},
+	]; */
+	const [products, setProducts] = useState([]);
+
+	useEffect(() => {
+		axios
+			.get("https://fakestoreapi.com/products?limit=9")
+			.then((res) => res.data)
+			.then((data) => setProducts(data));
+	});
 	return (
 		<>
 			<Grid
@@ -13,23 +33,27 @@ export default function Home() {
 				padding="10"
 				paddingTop={"10"}
 			>
-				<GridItem rowSpan={3} colSpan={1} bg="red.600">
+				<GridItem borderRadius={"lg"} rowSpan={3} colSpan={1} bg="red.200">
 					filter
 				</GridItem>
-				{products.map((p) => {
-					return (
-						<div key={p.id}>
-							<GridItem
-								colSpan={1}
-								h={"333px"}
-								bg={"blue.600"}
-								textAlign="center"
-							>
-								{p}
-							</GridItem>
-						</div>
-					);
-				})}
+
+				{products ? (
+					products.map((p) => {
+						return (
+							<div key={p.id}>
+								<CardProduct
+									id={p.id}
+									img={p.image}
+									name={p.title}
+									price={p.price}
+									category={p.category}
+								/>
+							</div>
+						);
+					})
+				) : (
+					<Spinner color="teal" alignSelf={"center"} size={"lg"} />
+				)}
 			</Grid>
 		</>
 	);
