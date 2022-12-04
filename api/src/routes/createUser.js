@@ -3,7 +3,7 @@ const { User } = require('../db');
 const router = Router();
 
 
-router.post('/user', async (req, res, next) => {
+router.post('/', async (req, res, next) => {
     try {
         let { name } = req.body;
         let newUser = await User.create({
