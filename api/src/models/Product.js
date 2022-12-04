@@ -14,19 +14,22 @@ module.exports = (sequelize) => {
       allowNull: false,
       autoIncrement: true,
     },
-    name: {                   //Nombre del producto
+    title: {                   //Nombre del producto
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
     },
-    stock: {
-      type: DataTypes.INTEGER,
-    },
-    price: {                   //Precio Normal
+    price: {
       type: DataTypes.FLOAT,
     },
-    image: {
+    category: {                   //Precio Normal
+      type: DataTypes.STRING,
+    },
+    description: {
       type: DataTypes.STRING
+    },
+    image: {
+      type: DataTypes.STRING,
     }
     // discountprice: {                 //Precio con descuento
     //   type: DataTypes.REAL,

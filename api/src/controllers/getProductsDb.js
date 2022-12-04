@@ -6,8 +6,10 @@ const getProductsDb = async () => {
         let resp = await ProductosDb?.map( product => {
             return {
                 id: product.id,
-                name: product.name,
-                stock: product.price,
+                title: product.title,
+                price: product.price,
+                category: product.category,
+                description: product.description,
                 image: product.image
             }
         })

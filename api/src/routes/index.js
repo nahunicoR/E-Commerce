@@ -23,17 +23,25 @@ router.use('/product'       , updateProduct);
 router.get('/', async (req,res,next) => {
     res.json([
         {
-            'ruta /GET': '/products',
-            'name': '',
-            'price': '',
-            'image': 'por ahora aca se puede poner una url de una imagen',
-            'ruta /get': '/products',
+            'Peticion /POST': '/product',
+            'id': 'INTEGER, Se crea automaticamente',
+            'title': 'STRING, nombre o titulo del producto',
+            'price': 'FLOAT, precio del producto',
+            'category': 'STRING, categoria',
+            'description': 'STRING, se puede cambiar a TEXT depende del front',
+            'image': 'STRING, url de una imagen',
         },
         {
-            'ruta /POST':'/product'
+            'Peticion /GET': '/products, obtenemos todos los registros de la DB',
         },
         {
-            'ruta /DELETE': '/product/:id',
+            'Peticion /DELETE': '/product/:id, borramos un registro pasando su id, va a ser modificado mas adelante aplicando borrado logico',
+        },
+        {
+            'Peticion /GET': '/product/:id, trae un registro por su id'
+        },
+        {
+            'Peticion /PUT': '/product/:id, actualiza un registro por medio de su id'
         }
     ])
 });

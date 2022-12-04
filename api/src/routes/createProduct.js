@@ -4,11 +4,12 @@ const router = Router();
 
 router.post('/', async (req, res) => {
     try {
-        let { name, price, stock, image } = req.body;
+        let { title, price, category, description, image } = req.body;
         let newProduct = await Product.create({
-            name,
+            title,
             price,
-            stock,
+            category,
+            description,
             image
         })
         res.status(200).json(newProduct);
