@@ -8,19 +8,19 @@ router.get('/', async (req, res, next) => {
     try {
         const data = await getProductsDb();
         if (data.length === 0) {;
-            // const charge =  products;
-            // const restApi = charge.map( product => {
-            //     return {
-            //         id: product.id,
-            //         title: product.title,
-            //         price: product.price,
-            //         category: product.type,
-            //         description: product.description,
-            //         image: product.image
-            //     }
-            // })
-            // const load = await Product.bulkCreate(restApi);
-            // return res.json(load);
+            const charge =  products;
+            const restApi = charge.map( product => {
+                return {
+                    id: product.id,
+                    title: product.title,
+                    price: product.price,
+                    category: product.type,
+                    description: product.description,
+                    image: product.image
+                }
+            })
+            const load = await Product.bulkCreate(restApi);
+            return res.json(load);
             return res.json('No hay productos cargados');
         }
         return res.status(200).json(data);
