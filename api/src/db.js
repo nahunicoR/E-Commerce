@@ -43,6 +43,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 const { Product,User } = sequelize.models;
 
 
+
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
 
