@@ -1,21 +1,14 @@
 import React from "react";
 import { Flex, Heading, Button } from "@chakra-ui/react";
 import { FaUser } from "react-icons/fa";
+import { BiLogOut } from "react-icons/bi";
 
 import { Link } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 
-import { useEffect } from "react";
-import { useDispatch } from "react-redux"
-import { getProducts } from "../redux/actions";
-
-
-// OJO este useEffect no va aqui es solo para probar
 export default function Nav() {
-	const dispatch = useDispatch()
+	const { loginWithRedirect, isAuthenticated, user, logout } = useAuth0();
 
-	useEffect(() => {
-		dispatch(getProducts())
-	})
 	return (
 		<>
 			<Flex
@@ -28,7 +21,7 @@ export default function Nav() {
 			>
 				<Flex w={"75%"}>
 					<Heading color="white" px="8">
-						TO-MATE
+						TO-MATE!
 					</Heading>
 				</Flex>
 
@@ -37,19 +30,27 @@ export default function Nav() {
 						<Link to={"/create"}>Crear Producto</Link>
 					</Button>
 					<Button
+						onClick={() => loginWithRedirect()}
 						fontSize={"xl"}
 						color={"white"}
 						bg={"transparent"}
-						border={"1px solid white"}
 						_hover={{
 							bg: "blue.500",
-							border: "1px solid",
 							borderColor: "blue.500",
 						}}
 						leftIcon={<FaUser />}
 					>
-						Iniciar Sesión
+						{isAuthenticated ? user.name : "Iniciar Sesion"}
 					</Button>
+
+					{isAuthenticated ? (
+						<Button
+							fontSize={"xl"}
+							colorScheme={"red"}
+							leftIcon={<BiLogOut />}
+							onClick={() => logout({ returnTo: window.location.origin })}
+						></Button>
+					) : null}
 				</Flex>
 			</Flex>
 		</>
