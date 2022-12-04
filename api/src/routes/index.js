@@ -7,6 +7,7 @@ const getProductsDb = require('./getProducts');
 const deleteProduct = require('./deleteProduct');
 const getProductById = require('./getProductById');
 const updateProduct = require('./updateProduct');
+const createUser = require('./createUser');   
 
 const router = Router();
 
@@ -18,6 +19,7 @@ router.use('/products'      , getProductsDb);
 router.use('/product'       , deleteProduct);
 router.use('/product'       , getProductById);
 router.use('/product'       , updateProduct);
+router.use('/user'          , createUser)
 
 
 router.get('/', async (req,res,next) => {
