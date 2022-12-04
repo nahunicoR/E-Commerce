@@ -13,7 +13,7 @@ const router = Router();
 
 router.use('/product', createProduct);
 router.use('/products', getProductsDb);
-router.use('/:id', )
+router.use('/:id', getProductById);
 
 
 router.get('/', async (req,res,next) => {
