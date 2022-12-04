@@ -40,6 +40,7 @@ export default function Nav() {
 						}}
 						leftIcon={<FaUser />}
 					>
+
 						{isAuthenticated ? user.name : "Iniciar Sesion"}
 					</Button>
 
@@ -51,6 +52,7 @@ export default function Nav() {
 							onClick={() => logout({ returnTo: window.location.origin })}
 						></Button>
 					) : null}
+
 				</Flex>
 			</Flex>
 		</>
