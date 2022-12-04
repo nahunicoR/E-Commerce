@@ -11,6 +11,7 @@ const createUser = require('./createUser');
 
 const router = Router();
 
+
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 
@@ -20,6 +21,7 @@ router.use('/product'       , deleteProduct);
 router.use('/product'       , getProductById);
 router.use('/product'       , updateProduct);
 router.use('/user'          , createUser)
+
 
 
 router.get('/', async (req,res,next) => {

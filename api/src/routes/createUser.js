@@ -2,6 +2,7 @@ const { Router } = require('express');
 const { User } = require('../db');
 const router = Router();
 
+
 router.post('/', async (req, res, next) => {
     try {
         let { name } = req.body;
@@ -12,7 +13,6 @@ router.post('/', async (req, res, next) => {
     } catch (error) {
         next(error)
     }
-
-})
+});
 
 module.exports = router;
