@@ -21,7 +21,6 @@ router.get('/', async (req, res, next) => {
             })
             const load = await Product.bulkCreate(restApi);
             return res.json(load);
-            return res.json('No hay productos cargados');
         }
         return res.status(200).json(data);
     } catch (error) {
@@ -30,6 +29,7 @@ router.get('/', async (req, res, next) => {
 })
 
 module.exports = router;
+
 const products =[
     {
      id:1,
