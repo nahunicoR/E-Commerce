@@ -30,7 +30,7 @@ router.get('/', async (req,res,next) => {
             'id': 'INTEGER, Se crea automaticamente',
             'title': 'STRING, nombre o titulo del producto',
             'price': 'FLOAT, precio del producto',
-            'category': 'STRING, categoria',
+            'category': 'ENUN, categoria si no agregan una categoria correcta no se crea.. "bombilla", "yerba","mate","kit"',
             'description': 'STRING, se puede cambiar a TEXT depende del front',
             'image': 'STRING, url de una imagen',
         },
