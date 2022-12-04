@@ -44,6 +44,10 @@ router.get('/', async (req,res,next) => {
         },
         {
             'Peticion /PUT': '/product/:id, actualiza un registro por medio de su id'
+        },
+        {
+            'Peticion /POST': '/user, Creacion de usuario',
+            'name': 'por ahora solo name'
         }
     ])
 });
