@@ -1,12 +1,21 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import {postProducts} from '../redux/actions';
 
 
 export default function CreateProduct(){
     const dispatch = useDispatch();
-    const prod = useSelector((state) => state.products);
+    //const prod = useSelector((state) => state.products);
+
+	const [sentForm, changeSentForm] = useState(false);
+    // const [input, setInput] = useState({
+  	// 	 name: "",
+	// 	 image: "",
+	// 	 price: 0,
+	// 	 description: "",
+	// 	 stock: 0,
+	// });
 
 	return(
         <Fragment>
@@ -50,7 +59,7 @@ export default function CreateProduct(){
 
 					onSubmit={(values, { resetForm }) => {
 						resetForm();
-						dispatch(postProduct(values));
+						dispatch(postProducts(values));
 						changeSentForm(true);
 						setTimeout(() => changeSentForm(false), 5000);
 						console.log(values);

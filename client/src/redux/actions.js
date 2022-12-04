@@ -7,3 +7,10 @@ export const getProducts = () => (dispatch) => {
     .catch(e=>console.log(e))
       
 }
+
+export const postProducts = () => (dispatch) => {
+  fetch("rutaback")
+  .then(res => res.json())
+  .then(resp => dispatch(postProducts(resp)))
+  .catch(e => console.log(e))
+}
