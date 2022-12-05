@@ -2,12 +2,13 @@ import { React, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getDetails, removeDetails } from "../redux/actions";
 import { Link, useParams } from "react-router-dom";
-import Loading from "../components/Loading";
+import Loading from '../components/Loading';
+import styles from './Details.module.css'
 
 export default function productDetails(props) {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(true);
+  const [Loading, setLoading] = useState(true);
 
   const productId = useSelector((state) => state.details);
   console.log(beer);
@@ -20,7 +21,7 @@ export default function productDetails(props) {
   return (
     <div>
       {productId.length === 0 ? (
-        <div>
+        <div className={styles.detailPage}>
           (<Loading setLoading={setLoading} />)
         </div>
       ) : (
