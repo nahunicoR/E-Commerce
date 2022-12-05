@@ -21,7 +21,7 @@ router.put('/:id', async (req, res) => {
         });
     } catch (error) {
         console.log(error);
-        res.json('Contacte al quipo de backend')
+        res.status(400).json('Verifique la categoria ó Contacte al quipo de backend')
     }
 })
 
