@@ -23,7 +23,7 @@ module.exports = (sequelize) => {
       type: DataTypes.FLOAT,
     },
     category: {                  
-      type: DataTypes.STRING,
+      type: DataTypes.ENUM('Bombilla','Mate','Kit','Yerba'),
     },
     description: {
       type: DataTypes.STRING

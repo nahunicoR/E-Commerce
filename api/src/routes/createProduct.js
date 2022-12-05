@@ -32,8 +32,10 @@ router.post('/', async (req, res, next) => {
         res.status(200).json(product);
     } catch (error) {
         console.log(error)
-        res.status(400).send('Faltan Datos')
-        res.send('Agregar una categoria Correcta')
+        res.status(400).json({
+            'message': "Las categorias validas son 'Bombilla','Mate','Kit','Yerba'",
+            'error': 'Error en categoria'
+        })
     }
 });
 
