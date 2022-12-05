@@ -1,0 +1,15 @@
+.detailPage{
+    background-color: green;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.box{
+    display: flex;
+    align-content: inherit;
+    flex-direction: column;
+    border-radius: 30px;
+    color: blanchedalmond;
+    background-color: brown;
+}
