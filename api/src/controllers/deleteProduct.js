@@ -7,8 +7,7 @@ const deleteProduct = async (id) => {
                 id
             }
         })
-        console.log(detail);
-        return 'Producto eliminado';
+        return `Se elimino el producto con id: ${detail}`;
     } catch (error) {
         console.log(error);
     }

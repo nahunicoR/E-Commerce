@@ -16,10 +16,12 @@ router.put('/:id', async (req, res) => {
         update.image        = image;
         console.log(update)
         await update.save()
-        res.send('Producto Actualizado');
+        res.status(200).json({
+            'message': 'Actualizacion de Producto exitosa',
+        });
     } catch (error) {
         console.log(error);
-        res.json('Contacte al quipo de backend')
+        res.status(400).json('Verifique la categoria ó Contacte al quipo de backend')
     }
 })
 
