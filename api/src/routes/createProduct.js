@@ -18,12 +18,16 @@ router.post('/', async (req, res, next) => {
             description,
             image
         }
-        const [product, created] = await Product.findOrCreate({
+       const [product, created] = await Product.findOrCreate({
             where: {
-                title
+                title,
+                price,
+                category,
+                description,
+                image
             },
             defaults: newProduct
-        })
+        });
         if(!created) return res.status(400).json('El producto ya existe');
         res.status(200).json(product);
     } catch (error) {
