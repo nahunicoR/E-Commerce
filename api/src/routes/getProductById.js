@@ -7,10 +7,10 @@ router.get('/:id', async (req, res, next) => {
     let { id } = req.params;
     try {
         let data = await getProductById(id)
-        if (data.length === 0) {
-            return res.json('No se encontro id');
+        if (data.id) {
+            return res.status(200).json(data);
         }
-        res.status(200).json(data)
+        res.status(404).json(data)
     } catch (error) {
         next(error)
     }

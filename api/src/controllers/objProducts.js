@@ -105,7 +105,6 @@ module.exports = products =[
       image:'https://cdn.shopify.com/s/files/1/0630/6254/0510/products/ce54b53a68731cf694529284ba4d4c55_orig_270x.jpg'
    },
    {
-      id:16,
       title:'Mate Torpedo Premium Cincelado con base',
       price:'1500',
       category:'Mate',
