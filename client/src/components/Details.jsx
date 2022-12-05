@@ -1,22 +1,23 @@
-import { React, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getDetails, removeDetails } from "../redux/actions";
+import { getDetails } from "../redux/actions";
 import { Link, useParams } from "react-router-dom";
 import Loading from '../components/Loading';
 import styles from './Details.module.css'
+
 
 export default function productDetails(props) {
   const { id } = useParams();
   const dispatch = useDispatch();
   const [Loading, setLoading] = useState(true);
 
-  const productId = useSelector((state) => state.details);
-  console.log(beer);
+	const productId = useSelector((state) => state.products.productsDetail);
+	console.log("product id");
 
-  useEffect(() => {
-    dispatch(removeDetails());
-    dispatch(getDetails(id));
-  }, [dispatch, id]);
+	useEffect(() => {
+		dispatch(getDetails(id));
+	}, [dispatch, id]);
+
 
   return (
     <div>
@@ -56,3 +57,4 @@ export default function productDetails(props) {
     </div>
   );
 }
+
