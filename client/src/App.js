@@ -10,7 +10,7 @@ function App() {
 		<div className="App">
 			<Nav />
 			<Routes>
-				<Route exact path="/" element={<Landing />} />
+				<Route index element={<Landing />} />
 				<Route path="/home" element={<Home />} />
 				<Route path="/create" element={<CreateProduct />} />
 				<Route path="/detail/:id" element={<Details />} />
