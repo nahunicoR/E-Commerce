@@ -5,7 +5,7 @@ export const getProducts = () => (dispatch) => {
 	fetch("https://e-commerce-production-d476.up.railway.app/products")
 		.then((res) => res.json())
 		.then((resp) => dispatch(getAllProducts(resp)))
-		.catch((e) => console.log(e));
+		.catch((e) => console.log(`Error:${e}`));
 };
 
 export const postProducts = (productInfo) => async (dispatch) => {

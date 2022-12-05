@@ -27,7 +27,7 @@ export default function Home() {
 		<>
 			<Grid
 				h={"1000px"}
-				gridTemplateRows="repeat(3,1fr)"
+				gridTemplateRows="repeat(4,1fr)"
 				gridTemplateColumns="repeat(4,1fr)"
 				gap={5}
 				padding="10"
