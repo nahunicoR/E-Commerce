@@ -26,9 +26,9 @@ export default function Details(props) {
           (<Loading setLoading={setLoading} />)
         </div>
       ) : (
-        <div>
-          <div>
-            <div>
+        <div className={styles.detailCardContainer} >
+          <div className={styles.container}>
+            <div className={styles.detailPage}>
               <h1>{productId.title}</h1>
             </div>
             <div>
