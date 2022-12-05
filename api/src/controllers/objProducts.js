@@ -139,276 +139,243 @@ module.exports = products =[
       description:'Mate Camionero tallado a mano, con base metalica',
       image:'https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_5972_270x.jpg'
    },
-   // {
-   //  id:21,
-   //  title:'Mate Camionero Clásico tallado con base',
-   //  price:'1600',
-   //  category:'Mate',
-   // description:'Mate Camionero tallado a mano, con base ceramica',
-   // image:'https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_5953_270x.jpg'
-   //  },
-   //     {
-   //  id:22,
-   //  title:'Mate Repujado',
-   //  price:'1460',
-   //  category:'Mate',
-   // description:'Mate Repujado texturado',
-   // image:'https://cdn.shopify.com/s/files/1/0630/6254/0510/products/705ea51361f61b9099fd423c7881a46d_orig_270x.progressive.jpg?v=1646826267'
-   //  },
-   //     {
-   //  id:23,
-   //  title:'Mate Exótico',
-   //  price:'1570',
-   //  category:'Mate',
-   // description:'Mate pintado y texturado curado y barnizado',
-   // image:'https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_7378_270x.jpg'
-   //  },
-   //     {
-   //  id:24,
-   //  title:'Mate Premium Cuero',
-   //  price:'1480',
-   //  category:'Mate',
-   // description:'Mate Premium Cuero estilo gaucho',
-   // image:'https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_5841_270x.jpg'
-   //  },
-   //     {
-   //  id:25,
-   //  title:'Mate Premium enano Cuero',
-   //  price:'1370',
-   //  category:'Mate',
-   // description:'Mate Especial, pintado a mano, base metalica pulida',
-   // image:'https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_5448_270x.jpg'
-   //  },
-   //     {
-   //  id:26,
-   //  title:'Mate Premium alto Cuero',
-   //  price:'1590',
-   //  category:'Mate',
-   // description:'Mate negro pintado a mano, base metalica pulida, version alta',
-   // image:'https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_5910_270x.jpg'
-   //  },
-   //     {
-   //  id:27,
-   //  title:'Mate Premium Cuero Crudo',
-   //  price:'1780',
-   //  category:'Mate',
-   // description:'Mate especial estilo litoral argentino, cuero crudo',
-   // image:'https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_0060_270x.jpg'
-   //  },
-   //     {
-   //  id:28,
-   //  title:'Mate Premium Cuero Crudo 2',
-   //  price:'1565',
-   //  category:'Mate',
-   // description:'Mate especial estilo litoral argentino, cuero crudo',
-   // image:'https://cdn.shopify.com/s/files/1/0630/6254/0510/products/182acef1b8ecdc382ac35471fd707fae_orig_270x.jpg'
-   //  },
-   //     {
-   //  id:29,
-   //  title:'Mate Argentino Madera',
-   //  price:'1970',
-   //  category:'Mate',
-   // description:'Mate Argentino Madera clásico, con molduras en aluminio',
-   // image:'https://cdn.shopify.com/s/files/1/0630/6254/0510/products/2257_270x.jpg'
-   //  },
-   //     {
-   //  id:30,
-   //  title:'Mate Argentino Madera Diseño',
-   //  price:'2000',
-   //  category:'Mate',
-   // description:'Mate Argentino Madera clásico, con molduras en acero inoxidable, diseño propio',
-   // image:'https://cdn.shopify.com/s/files/1/0630/6254/0510/products/6746048ae4b6986a809c0caba04aa2a6_orig_270x.jpg'
-   //  },
-   //     {
-   //  id:31,
-   //  title:'Mate Argentino Madera Diseño 2',
-   //  price:'2000',
-   //  category:'Mate',
-   // description:'Mate Argentino Madera clásico, con molduras en acero inoxidable, diseño propio',
-   // image:'https://cdn.shopify.com/s/files/1/0630/6254/0510/products/ce54b53a68731cf694529284ba4d4c55_orig_270x.jpg'
-   //  },
-   //     {
-   //  id:32,
-   //  title:'Mate Imperial Madera',
-   //  price:'2300',
-   //  category:'Mate',
-   // description:'Porongo, de coa, hueco por dentro, con base metalica',
-   // image:'https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_0568_270x.jpg'
-   //  },
-   //     {
-   //  id:33,
-   //  title:'Mate Imperial Criollo',
-   //  price:'2430',
-   //  category:'Mate',
-   // description:'Mate común criollo, con base metalica',
-   // image:'https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_5896_270x.jpg'
-   //  },
-   //     {
-   //  id:34,
-   //  title:'Mate Copa y Alpaca',
-   //  price:'2000',
-   //  category:'Mate',
-   // description:'Mate encuerado color negro',
-   // image:'https://cdn.shopify.com/s/files/1/0630/6254/0510/products/f558511567d1b2ebc3429d6d6fd630dc_orig_270x.jpg'
-   //  },
-   //     {
-   //  id:35,
-   //  title:'Mate Imperial Clásico',
-   //  price:'2100',
-   //  category:'Mate',
-   // description:'Mate Imperial Clásico, pintado y curado',
-   // image:'https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_3911_270x.jpg'
-   //  },
-   //     {
-   //  id:36,
-   //  title:'Mate Imperial Clásico Premium',
-   //  price:'2800',
-   //  category:'Mate',
-   // description:'Mate especial color negro y encuerado',
-   // image:'https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_8482_270x.jpg'
-   //  },
-   //     {
-   //  id:37,
-   //  title:'Mate Imperial Exótico + bombilla',
-   //  price:'3000',
-   //  category:'Mate',
-   // description:'Combo perfecto para regalar',
-   // image:'https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_8256_270x.jpg'
-   //  },
-   //     {
-   //  id:38,
-   //  title:'Mate Imperial Exótico con relieve',
-   //  price:'2500',
-   //  category:'Mate',
-   // description:'Mate especial texturado color rojo',
-   // image:'https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_7366_270x.jpg'
-   //  },
-   //     {
-   //  id:39,
-   //  title:'Mate Imperial Exótico con relieve 2',
-   //  price:'2500',
-   //  category:'Mate',
-   // description:'Mate especial texturado color barniz oscuro',
-   // image:'https://cdn.shopify.com/s/files/1/0630/6254/0510/products/dfe157bdbedbd775d4da21824e779f43_orig_270x.jpg'
-   //  },
-   //     {
-   //  id:40,
-   //  title:'Mate Imperial Calado',
-   //  price:'2700',
-   //  category:'Mate',
-   // description:'Mate calado y pintado',
-   // image:'https://cdn.shopify.com/s/files/1/0630/6254/0510/products/2b0e4e5fa151b447e134b612974911c4_orig_270x.jpg'
-   //  },
-   //     {
-   //  id:41,
-   //  title:'Mate Imperial con tapa',
-   //  price:'2600',
-   //  category:'Mate',
-   // description:'Mate con tapa de acero inoxidable para viajes',
-   // image:'https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_6579_270x.jpg'
-   //  },
-   //     {
-   //  id:42,
-   //  title:'Mate Imperial alto con tapa + bombilla',
-   //  price:'3200',
-   //  category:'Mate',
-   // description:'Combo de mate alto con tapa y bombilla de regalo',
-   // image:'https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_6827_270x.jpg'
-   //  },
-   //    {
-   //  id:43,
-   //  title:'Mate Premium Cuero Crudo con tapa + bombilla',
-   //  price:'3700',
-   //  category:'Mate',
-   // description:'Combo de mate, gaucho',
-   // image:'https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_6584_270x.jpg'
-   //  },
-   //         {
-   //  id:44,
-   //  title:'Yerba Mate con palo',
-   //  price:'800',
-   //  category:'Yerba',
-   // description:'1kg de yerba mate con palo',
-   // image:'https://matesargentinos.net/wp-content/uploads/2021/05/yerba-mate-con-palo-2-300x200.jpg'
-   //  },
-   //         {
-   //  id:45,
-   //  title:'Yerba Mate sin palo',
-   //  price:'1100',
-   //  category:'Yerba',
-   // description:'1kg de yerba mate sin palo',
-   // image:'https://matesargentinos.net/wp-content/uploads/2021/05/yerba-mate-sin-palo-1-300x200.jpg'
-   //  },
-   //         {
-   //  id:46,
-   //  title:'Yerba Mate Saborizada',
-   //  price:'1300',
-   //  category:'Yerba',
-   // description:'1kg de yerba mate saborizada',
-   // image:'https://matesargentinos.net/wp-content/uploads/2021/05/yerba-mate-saborizada-1.jpg'
-   //  },
-   //         {
-   //  id:47,
-   //  title:'Yerba Mate Tostada',
-   //  price:'1300',
-   //  category:'Yerba',
-   // description:'1kg de yerba mate tostada',
-   // image:'https://matesargentinos.net/wp-content/uploads/2021/05/yerba-mate-tostada-300x200.jpg'
-   //  },
-   //         {
-   //  id:48,
-   //  title:'Yerba Mate Compuesta',
-   //  price:'1480',
-   //  category:'Yerba',
-   // description:'1kg de yerba mate compuesta',
-   // image:'https://matesargentinos.net/wp-content/uploads/2021/05/yerba-mate-compuesta-1-180x200.jpg'
-   //  },
-   //         {
-   //  id:49,
-   //  title:'Yerba Mate para TERERÉ',
-   //  price:'1400',
-   //  category:'Yerba',
-   // description:'1kg de yerba mate para tereré',
-   // image:'https://matesargentinos.net/wp-content/uploads/2021/05/yerba-mate-terere-1.jpg'
-   //  },
-   //  {      //  {
-   //  id:50,
-   //  title:'Yerba Mate Orgánica',
-   //  price:'2000',
-   //  category:'Yerba',
-   // description:'1kg de yerba mate orgánica',
-   // image:'https://matesargentinos.net/wp-content/uploads/2021/05/yerba-mate-organica-1-1-1.jpg'
-   //  }, 
-   //    {
-   //  id:51,
-   //  title:'Yerba Mate Brasileña',
-   //  price:'3100',
-   //  category:'Yerba',
-   // description:'1kg de yerba mate brasileña',
-   // image:'https://matesargentinos.net/wp-content/uploads/2021/05/Yerba-mate-brasilena-1-1-1-scaled.jpg'
-   //  }, 
-   //    {
-   //  id:52,
-   //  title:'Kit completo. Set Matero/Canasta Matera',
-   //  price:'5300',
-   //  category:'Kit',
-   // description:'set completo de mate, canasta, bombilla, gaucho y yerba',
-   // image:'https://cdn.shopify.com/s/files/1/0567/2907/5873/products/neg.jpg?v=1653005426'
-   //  },
-   //   {
-   //  id:53,
-   //  title:'Mate Super Exclusivo con patas',
-   //  price:'5000',
-   //  category:'Kit',
-   // description:'Kit limitado de mate con patas',
-   // image:'https://http2.mlstatic.com/D_NQ_NP_862927-MLA50186301236_062022-O.webp'
-   //  },     
-   //  {
-   //  id:54,
-   //  title:'Bolso Matero todo incluido',
-   //  price:'8000',
-   //  category:'Kit',
-   // description:'Bolso matero todo incluido',
-   // image:'https://d2ye0ltusw47tz.cloudfront.net/34155883-thickbox_default/bolso-matero-porta-termo-y-mate-negro.jpg'
-   //  },
+   {
+    title:'Mate Camionero Clásico tallado con base',
+    price:'1600',
+    category:'Mate',
+   description:'Mate Camionero tallado a mano, con base ceramica',
+   image:'https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_5953_270x.jpg'
+    },
+    {
+
+    title:"Mate Repujado",
+    price:1460,
+    category:"Mate",
+   description:"Mate Repujado texturado",
+   image:"https://cdn.shopify.com/s/files/1/0630/6254/0510/products/705ea51361f61b9099fd423c7881a46d_orig_270x.progressive.jpg?v=1646826267"
+    },
+    {
+    title:"Mate Exótico",
+    price:1570,
+    category:"Mate",
+   description:"Mate pintado y texturado curado y barnizado",
+   image:"https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_7378_270x.jpg"
+    },
+    {
+    title:"Mate Premium Cuero",
+    price:1480,
+    category:"Mate",
+   description:"Mate Premium Cuero estilo gaucho",
+   image:"https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_5841_270x.jpg"
+    },
+    {
+    title:"Mate Premium enano Cuero",
+    price:1370,
+    category:"Mate",
+   description:"Mate Especial, pintado a mano, base metalica pulida",
+   image:"https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_5448_270x.jpg"
+    },
+    {
+    title:"Mate Premium alto Cuero",
+    price:1590,
+    category:"Mate",
+   description:"Mate negro pintado a mano, base metalica pulida, version alta",
+   image:"https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_5910_270x.jpg"
+    },
+    {
+    title:"Mate Premium Cuero Crudo",
+    price:1780,
+    category:"Mate",
+   description:"Mate especial estilo litoral argentino, cuero crudo",
+   image:"https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_0060_270x.jpg"
+    },
+    {
+    title:"Mate Premium Cuero Crudo 2",
+    price:1565,
+    category:"Mate",
+   description:"Mate especial estilo litoral argentino, cuero crudo",
+   image:"https://cdn.shopify.com/s/files/1/0630/6254/0510/products/182acef1b8ecdc382ac35471fd707fae_orig_270x.jpg"
+    },
+    {
+    title:"Mate Argentino Madera",
+    price:1970,
+    category:"Mate",
+   description:"Mate Argentino Madera clásico, con molduras en aluminio",
+   image:"https://cdn.shopify.com/s/files/1/0630/6254/0510/products/2257_270x.jpg"
+    },
+    {
+    title:"Mate Argentino Madera Diseño",
+    price:2000,
+    category:"Mate",
+   description:"Mate Argentino Madera clásico, con molduras en acero inoxidable, diseño propio",
+   image:"https://cdn.shopify.com/s/files/1/0630/6254/0510/products/6746048ae4b6986a809c0caba04aa2a6_orig_270x.jpg"
+    },
+    {
+    title:"Mate Argentino Madera Diseño 2",
+    price:2000,
+    category:"Mate",
+   description:"Mate Argentino Madera clásico, con molduras en acero inoxidable, diseño propio",
+   image:"https://cdn.shopify.com/s/files/1/0630/6254/0510/products/ce54b53a68731cf694529284ba4d4c55_orig_270x.jpg"
+    },
+    {
+    title:"Mate Imperial Madera",
+    price:2300,
+    category:"Mate",
+   description:"Porongo, de coa, hueco por dentro, con base metalica",
+   image:"https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_0568_270x.jpg"
+    },
+    {
+    title:"Mate Imperial Criollo",
+    price:2430,
+    category:"Mate",
+   description:"Mate común criollo, con base metalica",
+   image:"https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_5896_270x.jpg"
+    },
+    {
+    title:"Mate Copa y Alpaca",
+    price:2000,
+   category:"Mate",
+   description:"Mate encuerado color negro",
+   image:"https://cdn.shopify.com/s/files/1/0630/6254/0510/products/f558511567d1b2ebc3429d6d6fd630dc_orig_270x.jpg"
+    },
+    {
+    title:"Mate Imperial Clásico",
+    price:2100,
+    category:"Mate",
+   description:"Mate Imperial Clásico, pintado y curado",
+   image:"https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_3911_270x.jpg"
+    },
+    {
+    title:"Mate Imperial Clásico Premium",
+    price:2800,
+    category:"Mate",
+   description:"Mate especial color negro y encuerado",
+   image:"https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_8482_270x.jpg"
+    },
+    {
+    title:"Mate Imperial Exótico + bombilla",
+    price:3000,
+    category:"Mate",
+   description:"Combo perfecto para regalar",
+   image:"https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_8256_270x.jpg"
+    },
+    {
+    title:"Mate Imperial Exótico con relieve",
+    price:2500,
+    category:"Mate",
+   description:"Mate especial texturado color rojo",
+   image:"https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_7366_270x.jpg"
+    },
+    {
+    title:"Mate Imperial Exótico con relieve 2",
+    price:2500,
+    category:"Mate",
+   description:"Mate especial texturado color barniz oscuro",
+   image:"https://cdn.shopify.com/s/files/1/0630/6254/0510/products/dfe157bdbedbd775d4da21824e779f43_orig_270x.jpg"
+    },
+    {
+    title:"Mate Imperial Calado",
+    price:2700,
+    category:"Mate",
+   description:"Mate calado y pintado",
+   image:"https://cdn.shopify.com/s/files/1/0630/6254/0510/products/2b0e4e5fa151b447e134b612974911c4_orig_270x.jpg"
+    },
+    {
+    title:"Mate Imperial con tapa",
+    price:2600,
+    category:"Mate",
+   description:"Mate con tapa de acero inoxidable para viajes",
+   image:"https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_6579_270x.jpg"
+    },
+    {
+    title:"Mate Imperial alto con tapa + bombilla",
+    price:3200,
+    category:"Mate",
+   description:"Combo de mate alto con tapa y bombilla de regalo",
+   image:"https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_6827_270x.jpg"
+    },
+    {
+    title:"Mate Premium Cuero Crudo con tapa + bombilla",
+    price:3700,
+    category:"Mate",
+   description:"Combo de mate, gaucho",
+   image:"https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_6584_270x.jpg"
+    },
+    {
+    title:"Yerba Mate con palo",
+    price:800,
+    category:"Yerba",
+   description:"1kg de yerba mate con palo",
+   image:"https://matesargentinos.net/wp-content/uploads/2021/05/yerba-mate-con-palo-2-300x200.jpg"
+    },
+    {
+    title:"Yerba Mate sin palo",
+    price:1100,
+    category:"Yerba",
+   description:"1kg de yerba mate sin palo",
+   image:"https://matesargentinos.net/wp-content/uploads/2021/05/yerba-mate-sin-palo-1-300x200.jpg"
+    },
+    {
+    title:"Yerba Mate Saborizada",
+    price:1300,
+    category:"Yerba",
+   description:"1kg de yerba mate saborizada",
+   image:"https://matesargentinos.net/wp-content/uploads/2021/05/yerba-mate-saborizada-1.jpg"
+    },
+    {
+    title:"Yerba Mate Tostada",
+    price:1300,
+    category:"Yerba",
+   description:"1kg de yerba mate tostada",
+   image:"https://matesargentinos.net/wp-content/uploads/2021/05/yerba-mate-tostada-300x200.jpg"
+    },
+    {
+    title:"Yerba Mate Compuesta",
+    price:1480,
+    category:"Yerba",
+   description:"1kg de yerba mate compuesta",
+   image:"https://matesargentinos.net/wp-content/uploads/2021/05/yerba-mate-compuesta-1-180x200.jpg"
+    },
+     {
+    title:"Yerba Mate para TERERÉ",
+    price:1400,
+    category:"Yerba",
+   description:"1kg de yerba mate para tereré",
+   image:"https://matesargentinos.net/wp-content/uploads/2021/05/yerba-mate-terere-1.jpg"
+    },
+    {
+    title:"Yerba Mate Orgánica",
+    price:2000,
+    category:"Yerba",
+   description:"1kg de yerba mate orgánica",
+   image:"https://matesargentinos.net/wp-content/uploads/2021/05/yerba-mate-organica-1-1-1.jpg"
+    }, 
+      {
+    title:"Yerba Mate Brasileña",
+    price:3100,
+    category:"Yerba",
+   description:"1kg de yerba mate brasileña",
+   image:"https://matesargentinos.net/wp-content/uploads/2021/05/Yerba-mate-brasilena-1-1-1-scaled.jpg"
+    }, 
+      {
+    title:"Kit completo. Set Matero/Canasta Matera",
+    price:5300,
+    category:"Kit",
+   description:"set completo de mate, canasta, bombilla, gaucho y yerba",
+   image:"https://cdn.shopify.com/s/files/1/0567/2907/5873/products/neg.jpg?v=1653005426"
+    },
+     {
+    title:"Mate Super Exclusivo con patas",
+    price:5000,
+    category:"Kit",
+   description:"Kit limitado de mate con patas",
+   image:"https://http2.mlstatic.com/D_NQ_NP_862927-MLA50186301236_062022-O.webp"
+    },     
+    {
+    title:"Bolso Matero todo incluido",
+    price:8000,
+    category:"Kit",
+   description:"Bolso matero todo incluido",
+   image:"https://d2ye0ltusw47tz.cloudfront.net/34155883-thickbox_default/bolso-matero-porta-termo-y-mate-negro.jpg"
+    },
   ]
