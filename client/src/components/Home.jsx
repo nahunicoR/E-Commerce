@@ -85,7 +85,6 @@ const orderByCategory = (array, check) => {
 						</CheckboxGroup>
 					</Box>
         </GridItem>
-
         {currentProducts ? (
           orderByCategory(products, check).map((p) => {
             return (

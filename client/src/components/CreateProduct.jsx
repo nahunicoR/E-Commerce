@@ -2,6 +2,7 @@ import React, { Fragment, useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useDispatch } from 'react-redux'
 import {postProducts} from '../redux/actions';
+import styles from './CreateProduct.module.css'
 
 
 export default function CreateProduct(){
@@ -9,17 +10,10 @@ export default function CreateProduct(){
     //const prod = useSelector((state) => state.products);
 
 	const [sentForm, changeSentForm] = useState(false);
-    // const [input, setInput] = useState({
-  	// 	 name: "",
-	// 	 image: "",
-	// 	 price: 0,
-	// 	 description: "",
-	// 	 stock: 0,
-	// });
 
 	return(
         <Fragment>
-			<div>
+			<div className={styles.container}>
              <h1>Crear producto</h1>
                 <Formik
                     initialValues={{
@@ -73,14 +67,14 @@ export default function CreateProduct(){
 							setFieldValue,
 							handleBlur,
 						}) => (
-							<Form>
+							<Form className={styles.formulario} onSubmit={handleSubmit}>
 								<div>
 									<label>Nombre: </label>
 									<Field type="text" id="name" name="name" />
 									<ErrorMessage
 										name="name"
 										component={() => (
-											<div>{errors.name}</div>
+											<div className={styles.error}>{errors.name}</div>
 										)}
 										/>
 								</div>
@@ -99,7 +93,7 @@ export default function CreateProduct(){
 									<ErrorMessage
 										name="image"
 										component={() => (
-											<div>{errors.image}</div>
+											<div className={styles.error}>{errors.image}</div>
 										)}
 									/>
 								</div>
@@ -110,7 +104,7 @@ export default function CreateProduct(){
 									<ErrorMessage
 										name="price"
 										component={() => (
-											<div>{errors.price}</div>
+											<div className={styles.error}>{errors.price}</div>
 										)}
 									/>
 								</div>
@@ -121,7 +115,7 @@ export default function CreateProduct(){
 									<ErrorMessage
 										name="stock"
 										component={() => (
-											<div>{errors.stock}</div>
+											<div className={styles.error}>{errors.stock}</div>
 										)}
 									/>
 								</div>
@@ -135,7 +129,7 @@ export default function CreateProduct(){
 								</div>
 								<button type="submit">Añadir</button>
 								{sentForm && (
-									<p>
+									<p className={styles.exito}>
 										¡El producto se ha añadido exitosamente!
 									</p>
 								)}
