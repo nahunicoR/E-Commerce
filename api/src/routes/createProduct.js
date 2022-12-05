@@ -2,10 +2,9 @@ const { Router } = require('express');
 const { Product } = require('../db');
 const router = Router();
 
-router.post('/', async (req, res) => {
+router.post('/', async (req, res, next) => {
+    const { title, price, category, description, image } = req.body;
     try {
-        let { title, price, category, description, image } = req.body;
-
         if(!title) return res.status(400).json('No se ingreso titulo');
         if(!price) return res.status(400).json('No se ingreso precio');
         if(!category) return res.status(400).json('No se ingreso categoria');
@@ -19,8 +18,7 @@ router.post('/', async (req, res) => {
             description,
             image
         }
-
-        const [product, created] = await Product.findOrCreate({
+       const [product, created] = await Product.findOrCreate({
             where: {
                 title,
                 price,
@@ -31,12 +29,14 @@ router.post('/', async (req, res) => {
             defaults: newProduct
         });
         if(!created) return res.status(400).json('El producto ya existe');
-        res.status(200).json(newProduct);
+        res.status(200).json(product);
     } catch (error) {
         console.log(error)
-        res.send('Faltan Datos')
+        res.status(400).json({
+            'message': "Las categorias validas son 'Bombilla','Mate','Kit','Yerba'",
+            'error': 'Error en categoria'
+        })
     }
-
-})
+});
 
 module.exports = router;
