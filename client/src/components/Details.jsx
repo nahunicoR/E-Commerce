@@ -6,7 +6,7 @@ import Loading from '../components/Loading';
 import styles from './Details.module.css'
 
 
-export default function productDetails(props) {
+export default function Details(props) {
   const { id } = useParams();
   const dispatch = useDispatch();
   const [Loading, setLoading] = useState(true);
