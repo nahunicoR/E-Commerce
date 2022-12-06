@@ -7,6 +7,7 @@ const getProductsDb = require('./getProducts');
 const deleteProduct = require('./deleteProduct');
 const getProductById = require('./getProductById');
 const updateProduct = require('./updateProduct');
+const getProductByName = require('./getProductByName');
 const createUser = require('./createUser');   
 
 const router = Router();
@@ -20,6 +21,7 @@ router.use('/products'      , getProductsDb);
 router.use('/product'       , deleteProduct);
 router.use('/product'       , getProductById);
 router.use('/product'       , updateProduct);
+router.use('/product'       , getProductByName);
 router.use('/user'          , createUser);
 
 
@@ -30,7 +32,7 @@ router.get('/', async (req,res,next) => {
             'id': 'INTEGER, Se crea automaticamente',
             'title': 'STRING, nombre o titulo del producto',
             'price': 'FLOAT, precio del producto',
-            'category': 'STRING, categoria',
+            'category': 'ENUN, categoria si no agregan una categoria correcta no se crea.. "Bombilla", "Yerba","Mate","Kit"',
             'description': 'STRING, se puede cambiar a TEXT depende del front',
             'image': 'STRING, url de una imagen',
         },
@@ -38,13 +40,16 @@ router.get('/', async (req,res,next) => {
             'Peticion /GET': '/products, obtenemos todos los registros de la DB',
         },
         {
-            'Peticion /DELETE': '/product/:id, borramos un registro pasando su id, va a ser modificado mas adelante aplicando borrado logico',
+            'Peticion /DELETE': '/product/:id, borramos un registro pasando su id, va a ser modificado mas adelante aplicando borrado logico, Alguien lo sugirio escucho sugerencias',
         },
         {
             'Peticion /GET': '/product/:id, trae un registro por su id'
         },
         {
-            'Peticion /PUT': '/product/:id, actualiza un registro por medio de su id'
+            'Peticion /PUT': '/product/:id, actualiza un registro por medio de su id asegurarse que la categoria sea correcta'
+        },
+        {
+            'Peticion /GET': '/product?title="Nombre a buscar"'
         },
         {
             'Peticion /POST': '/user, Creacion de usuario',

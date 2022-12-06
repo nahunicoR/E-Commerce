@@ -22,6 +22,7 @@ import {
 	orderByNames,
 	orderByPrices,
 	filterByCategory,
+	filterByMaterials,
 } from "../redux/actions";
 import Filter from "./Filter";
 
@@ -74,6 +75,11 @@ export default function Home() {
 	};
 	const handleSortbyPrice = (e) => {
 		dispatch(orderByPrices(e.target.value));
+		setCurrentPage(1);
+	};
+	const handleFilterByMaterial = (e) => {
+		console.log(e.target.value);
+		dispatch(filterByMaterials(e.target.value));
 		setCurrentPage(1);
 	};
 	//info de nuestra db https://e-commerce-production-d476.up.railway.app/products
@@ -136,6 +142,7 @@ export default function Home() {
 									name={p.title}
 									price={p.price}
 									category={p.category}
+									material={p.material}
 								/>
 							</div>
 						);

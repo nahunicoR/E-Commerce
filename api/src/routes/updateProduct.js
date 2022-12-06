@@ -6,7 +6,7 @@ const router = Router();
 
 router.put('/:id', async (req, res) => {
     let {id} = req.params;
-    let { title, price, category, description, image } = req.body;
+    let { title, price, category, description, image, material} = req.body;
     try {
         let update = await updateProduct(id);
         update.title        = title;
@@ -14,12 +14,15 @@ router.put('/:id', async (req, res) => {
         update.category     = category;
         update.description  = description;
         update.image        = image;
+        update.material     = material;
         console.log(update)
         await update.save()
-        res.send('Producto Actualizado');
+        res.status(200).json({
+            'message': 'Actualizacion de Producto exitosa',
+        });
     } catch (error) {
         console.log(error);
-        res.json('Contacte al quipo de backend')
+        res.status(400).json('Verifique la categoria ó Contacte al quipo de backend')
     }
 })
 
