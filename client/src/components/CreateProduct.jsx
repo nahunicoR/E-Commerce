@@ -115,7 +115,7 @@ export default function CreateProduct() {
 
 								<div>
 									<label>Material: </label>
-									<Field type="number" id="material" name="material" />
+									<Field type="text" id="material" name="material" />
 									<ErrorMessage
 										name="material"
 										component={() => (
