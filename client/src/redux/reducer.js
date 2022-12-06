@@ -54,6 +54,15 @@ const productsSlice = createSlice({
 					  );
 			state.products = categoryFilter;
 		},
+		filterByMaterial: (state, action) => {
+			let materialFilter =
+				action.payload === "all"
+					? state.productsFilter
+					: state.productsFilter.filter(
+							(c) => c.material === action.payload
+					  );
+			state.products = materialFilter;
+		},
 	},
 });
 
@@ -63,6 +72,7 @@ export const {
 	orderByName,
 	orderByPrice,
 	filterByCategories,
+	filterByMaterial,
 } = productsSlice.actions;
 
 export default productsSlice.reducer;
