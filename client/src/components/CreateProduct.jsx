@@ -1,8 +1,10 @@
-import React, { Fragment, useState } from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import { useDispatch } from "react-redux";
-import { postProducts } from "../redux/actions";
-import styles from "../css/CreateProduct.module.css";
+
+import React, { Fragment, useState } from 'react';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { useDispatch } from 'react-redux'
+import {postProducts} from '../redux/actions';
+import styles from './CreateProduct.module.css'
+
 
 export default function CreateProduct() {
 	const dispatch = useDispatch();
@@ -10,17 +12,18 @@ export default function CreateProduct() {
 
 	const [sentForm, changeSentForm] = useState(false);
 
-	return (
-		<Fragment>
+	return(
+        <Fragment>
 			<div className={styles.container}>
-				<h1>Crear producto</h1>
-				<Formik
-					initialValues={{
+             <h1>Crear producto</h1>
+                <Formik
+                    initialValues={{
+
 						name: "",
 						image: "",
 						price: "",
 						description: "",
-						stock: 0,
+						material: "",
 					}}
 					validate={(values) => {
 						let errors = {};
@@ -41,10 +44,12 @@ export default function CreateProduct() {
 							errors.price = "El precio debe ser mayor a 0";
 						}
 
-						if (!values.stock) {
-							errors.stock = "Este campo es requerido";
-						} else if (values.stock < 0) {
-							errors.stock = "Debe ser mayor a 0";
+
+						if (!values.material) {
+							errors.material = "Este campo es requerido";
+						}else if (values.material === 'Sintetico'|| values.material === 'Artesanal' || values.material === 'Industrial') {
+							errors.material = "Debe ser alguna opción Sintetico, Artesanal o Industrial.";
+
 						}
 						return errors;
 					}}
@@ -55,26 +60,27 @@ export default function CreateProduct() {
 						setTimeout(() => changeSentForm(false), 5000);
 						console.log(values);
 					}}
-				>
-					{({
-						values,
-						errors,
-						handleSubmit,
-						handleChange,
-						setFieldValue,
-						handleBlur,
-					}) => (
-						<Form className={styles.formulario} onSubmit={handleSubmit}>
-							<div>
-								<label>Nombre: </label>
-								<Field type="text" id="name" name="name" />
-								<ErrorMessage
-									name="name"
-									component={() => (
-										<div className={styles.error}>{errors.name}</div>
-									)}
-								/>
-							</div>
+
+					>
+						{({
+							values,
+							errors,
+							handleSubmit,
+							handleChange,
+							setFieldValue,
+							handleBlur,
+						}) => (
+							<Form className={styles.formulario} onSubmit={handleSubmit}>
+								<div>
+									<label>Nombre: </label>
+									<Field type="text" id="name" name="name" />
+									<ErrorMessage
+										name="name"
+										component={() => (
+											<div className={styles.error}>{errors.name}</div>
+										)}
+										/>
+								</div>
 
 							<div>
 								<label>Imagen: </label>
@@ -84,56 +90,59 @@ export default function CreateProduct() {
 									id="image"
 									name="image"
 									onChange={(event) =>
-										setFieldValue("image", event.currentTarget.files[0])
-									}
-								/>
-								<ErrorMessage
-									name="image"
-									component={() => (
-										<div className={styles.error}>{errors.image}</div>
-									)}
-								/>
-							</div>
 
-							<div>
-								<label>Precio: </label>
-								<Field type="number" id="price" name="price" />
-								<ErrorMessage
-									name="price"
-									component={() => (
-										<div className={styles.error}>{errors.price}</div>
-									)}
-								/>
-							</div>
+									setFieldValue("image", event.currentTarget.files[0])
+								}
+									/>
+									<ErrorMessage
+										name="image"
+										component={() => (
+											<div className={styles.error}>{errors.image}</div>
+										)}
+									/>
+								</div>
 
-							<div>
-								<label>Stock: </label>
-								<Field type="number" id="stock" name="stock" />
-								<ErrorMessage
-									name="stock"
-									component={() => (
-										<div className={styles.error}>{errors.stock}</div>
-									)}
-								/>
-							</div>
+								<div>
+									<label>Precio: </label>
+									<Field type="number" id="price" name="price" />
+									<ErrorMessage
+										name="price"
+										component={() => (
+											<div className={styles.error}>{errors.price}</div>
+										)}
+									/>
+								</div>
+
+								<div>
+									<label>Material: </label>
+									<Field type="number" id="material" name="material" />
+									<ErrorMessage
+										name="material"
+										component={() => (
+											<div className={styles.error}>{errors.material}</div>
+										)}
+									/>
+								</div>
 
 							<div>
 								<Field
 									name="description"
 									as="textarea"
 									placeholder="Description"
-								/>
-							</div>
-							<button type="submit">Añadir</button>
-							{sentForm && (
-								<p className={styles.exito}>
-									¡El producto se ha añadido exitosamente!
-								</p>
-							)}
-						</Form>
-					)}
-				</Formik>
-			</div>
+
+									/>
+								</div>
+								<button type="submit">Añadir</button>
+								{sentForm && (
+									<p className={styles.exito}>
+										¡El producto se ha añadido exitosamente!
+									</p>
+								)}
+							</Form>
+						)}
+            	</Formik>
+         	</div>
+
 		</Fragment>
 	);
 }
