@@ -13,7 +13,7 @@ import {
 import { Card, CardBody, CardFooter } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
-export default function CardProduct({ id, img, name, price, category }) {
+export default function CardProduct({ id, img, name, price, category,material }) {
 	return (
 		<>
 			<GridItem colSpan={1}>
@@ -61,6 +61,9 @@ export default function CardProduct({ id, img, name, price, category }) {
 						{/* <HStack spacing={"3"}> */}
 						<Text marginRight={"13"} color="teal" fontSize="3xl">
 							{"$" + price}
+						</Text>
+						<Text marginRight={"13"} color="teal" fontSize="3xl">
+							{ material}
 						</Text>
 						<Link to={`/detail/${id}`}>
 							<Button size={"md"} colorScheme={"teal"}>
