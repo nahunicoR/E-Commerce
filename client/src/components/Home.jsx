@@ -18,7 +18,7 @@ export default function Home() {
 	//redux
 	const dispatch = useDispatch();
 	const products = useSelector((state) => state.products.products);
-
+	//change
 	//console.log(products);
 
 	//Logica de paginaton
