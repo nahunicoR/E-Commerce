@@ -30,6 +30,9 @@ module.exports = (sequelize) => {
     },
     image: {
       type: DataTypes.STRING,
+    },
+    material: {
+      type: DataTypes.STRING,
     }
     // discountprice: {                 //Precio con descuento
     //   type: DataTypes.REAL,
