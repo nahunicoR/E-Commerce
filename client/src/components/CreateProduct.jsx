@@ -21,7 +21,7 @@ export default function CreateProduct(){
 						image:"",
 						price: "",
 						description: "",
-						stock: 0,
+						material: "",
 					}}
 					validate={(values) =>{
 						let errors = {};
@@ -42,10 +42,10 @@ export default function CreateProduct(){
 							errors.price = "El precio debe ser mayor a 0";
 						}
 
-						if (!values.stock) {
-							errors.stock = "Este campo es requerido";
-						}else if (values.stock < 0) {
-							errors.stock = "Debe ser mayor a 0";
+						if (!values.material) {
+							errors.material = "Este campo es requerido";
+						}else if (values.material === 'Sintetico'|| values.material === 'Artesanal' || values.material === 'Industrial') {
+							errors.material = "Debe ser alguna opción Sintetico, Artesanal o Industrial.";
 						}
 						return errors;
 						}
@@ -110,12 +110,12 @@ export default function CreateProduct(){
 								</div>
 
 								<div>
-									<label>Stock: </label>
-									<Field type="number" id="stock" name="stock" />
+									<label>Material: </label>
+									<Field type="number" id="material" name="material" />
 									<ErrorMessage
-										name="stock"
+										name="material"
 										component={() => (
-											<div className={styles.error}>{errors.stock}</div>
+											<div className={styles.error}>{errors.material}</div>
 										)}
 									/>
 								</div>

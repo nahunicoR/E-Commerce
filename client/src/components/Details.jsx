@@ -29,29 +29,33 @@ export default function Details(props) {
         <div className={styles.detailCardContainer} >
           <div className={styles.container}>
             <div className={styles.detailPage}>
-              <h1>{productId.title}</h1>
-            </div>
-            <div>
+              <h1 className={styles.h1}>{productId.title}</h1>
               <img src={productId.image} alt="Imagen Producto" />
             </div>
-            <div>
+            <div className={styles.textsContainer}>
               <p>
                 <strong>Descripción: </strong>
-                {productId.description}
+                  {productId.description}
               </p>
               <p>
                 <strong>Precio: </strong>
-                {productId.price}
+                 {productId.price}
               </p>
               <p>
                 <strong>Categoría: </strong>
-                {productId.category}
+                 {productId.category}
+              </p>
+              <p>
+                <strong>Material: </strong>
+                 {productId.material}
               </p>
             </div>
           </div>
-          <Link to="/home">
-            <button>Volver</button>
-          </Link>
+          <div className={styles.btnContainer}>
+            <Link to="/home">
+              <button className={styles.btnBack}>Volver</button>
+            </Link>
+          </div>
         </div>
       )}
     </div>
