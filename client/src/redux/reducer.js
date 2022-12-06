@@ -4,11 +4,13 @@ const productsSlice = createSlice({
 	name: "products",
 	initialState: {
 		products: [],
+		productsFilter: [],
 		productsDetail: {},
 	},
 	reducers: {
 		getAllProducts: (state, action) => {
 			state.products = action.payload;
+			state.productsFilter = action.payload;
 		},
 		getProductsDetail: (state, action) => {
 			state.productsDetail = action.payload;
@@ -35,16 +37,32 @@ const productsSlice = createSlice({
 				  });
 		},
 		orderByPrice: (state, action) => {
-			action.payload === "-price"
-				? state.countries.sort((a, b) => {
+			action.payload === "+price"
+				? state.products.sort((a, b) => {
 						return a.price - b.price;
 				  })
-				: state.products.sort();
+				: state.products.sort((a, b) => {
+						return b.price - a.price;
+				  });
+		},
+		filterByCategories: (state, action) => {
+			let categoryFilter =
+				action.payload === "all"
+					? state.productsFilter
+					: state.productsFilter.filter(
+							(c) => c.category.toLowerCase() === action.payload
+					  );
+			state.products = categoryFilter;
 		},
 	},
 });
 
-export const { getAllProducts, getProductsDetail, orderByName, orderByPrice } =
-	productsSlice.actions;
+export const {
+	getAllProducts,
+	getProductsDetail,
+	orderByName,
+	orderByPrice,
+	filterByCategories,
+} = productsSlice.actions;
 
 export default productsSlice.reducer;
