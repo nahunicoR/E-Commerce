@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getDetails } from "../redux/actions";
 import { Link, useParams } from "react-router-dom";
+
 import Loading from '../components/Loading';
 import styles from './Details.module.css'
 
@@ -18,6 +19,7 @@ export default function Details(props) {
 	useEffect(() => {
 		dispatch(getDetails(id));
 	}, [dispatch, id]);
+
 
   return (
     <div>
@@ -60,4 +62,5 @@ export default function Details(props) {
       )}
     </div>
   );
+
 }
