@@ -22,6 +22,7 @@ import {
 	orderByNames,
 	orderByPrices,
 	filterByCategory,
+	filterByMaterials
 } from "../redux/actions";
 
 export default function Home() {
@@ -75,6 +76,11 @@ export default function Home() {
 		dispatch(orderByPrices(e.target.value));
 		setCurrentPage(1);
 	};
+	const handleFilterByMaterial = (e)=> {
+		console.log(e.target.value)
+		dispatch(filterByMaterials(e.target.value));
+		setCurrentPage(1);
+	}
 	//info de nuestra db https://e-commerce-production-d476.up.railway.app/products
 	useEffect(() => {
 		setTimeout(() => {
@@ -178,6 +184,31 @@ export default function Home() {
 								</Stack>
 							</CheckboxGroup>
 						</Stack>
+						<Text textAlign={"center"} fontWeight="semibold">
+							{"Material"}
+						</Text>
+						<Stack spacing={[1, 5]} direction={["column"]}>
+							<CheckboxGroup
+								colSpan="auto"
+								colorScheme="teal"
+								/* defaultValue={"all"} */
+							>
+								<Stack spacing={[1, 5]} direction={"column"}>
+									<Checkbox onChange={handleFilterByMaterial} value="all">
+										Todos
+									</Checkbox>
+									<Checkbox onChange={handleFilterByMaterial} value="Industrial">
+										Industrial
+									</Checkbox>
+									<Checkbox onChange={handleFilterByMaterial} value="Artesanal">
+										Artesanal
+									</Checkbox>
+									<Checkbox onChange={handleFilterByMaterial} value="Sintetico">
+										Sintetico
+									</Checkbox>
+								</Stack>
+							</CheckboxGroup>
+						</Stack>
 					</Box>
 				</GridItem>
 				{currentProducts.length !== 0 ? (
@@ -190,6 +221,7 @@ export default function Home() {
 									name={p.title}
 									price={p.price}
 									category={p.category}
+									material={p.material}
 								/>
 							</div>
 						);
