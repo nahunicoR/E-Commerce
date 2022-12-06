@@ -4,7 +4,7 @@ import { getDetails } from "../redux/actions";
 import { Link, useParams } from "react-router-dom";
 
 import Loading from "../components/Loading";
-import styles from "./Details.module.css";
+import styles from "../css/Details.module.css";
 
 export default function Details(props) {
 	const { id } = useParams();
