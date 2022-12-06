@@ -3,6 +3,7 @@ import {
 	getProductsDetail,
 	orderByName,
 	orderByPrice,
+	filterByCategories,
 } from "./reducer";
 import axios from "axios";
 
@@ -38,4 +39,7 @@ export const orderByNames = (filter) => (dispatch) => {
 
 export const orderByPrices = (filter) => (dispatch) => {
 	return dispatch(orderByPrice(filter));
+};
+export const filterByCategory = (filter) => (dispatch) => {
+	return dispatch(filterByCategories(filter));
 };
