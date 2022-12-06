@@ -130,6 +130,7 @@ export default function Home() {
 					handleFilterByCategory={handleFilterByCategory}
 					handleSortbyName={handleSortbyName}
 					handleSortbyPrice={handleSortbyPrice}
+					handleFilterByMaterial={handleFilterByMaterial}
 				/>
 
 				{currentProducts.length !== 0 ? (

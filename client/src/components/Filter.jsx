@@ -16,6 +16,7 @@ function Filter({
 	handleFilterByCategory,
 	handleSortbyName,
 	handleSortbyPrice,
+	handleFilterByMaterial,
 }) {
 	return (
 		<>
@@ -75,6 +76,31 @@ function Filter({
 								</Checkbox>
 								<Checkbox onChange={handleFilterByCategory} value="kit">
 									Kit
+								</Checkbox>
+							</Stack>
+						</CheckboxGroup>
+					</Stack>
+					<Text textAlign={"center"} fontWeight="semibold">
+						{"Material"}
+					</Text>
+					<Stack spacing={[1, 5]} direction={["column"]}>
+						<CheckboxGroup
+							colSpan="auto"
+							colorScheme="teal"
+							/* defaultValue={"all"} */
+						>
+							<Stack spacing={[1, 5]} direction={"column"}>
+								<Checkbox onChange={handleFilterByMaterial} value="all">
+									Todos
+								</Checkbox>
+								<Checkbox onChange={handleFilterByMaterial} value="Industrial">
+									Industrial
+								</Checkbox>
+								<Checkbox onChange={handleFilterByMaterial} value="Artesanal">
+									Artesanal
+								</Checkbox>
+								<Checkbox onChange={handleFilterByMaterial} value="Sintetico">
+									Sintetico
 								</Checkbox>
 							</Stack>
 						</CheckboxGroup>
