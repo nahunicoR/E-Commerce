@@ -1,4 +1,9 @@
-import { getAllProducts, getProductsDetail } from "./reducer";
+import {
+	getAllProducts,
+	getProductsDetail,
+	orderByName,
+	orderByPrice,
+} from "./reducer";
 import axios from "axios";
 
 export const getProducts = () => (dispatch) => {
@@ -25,4 +30,12 @@ export const getDetails = (id) => async (dispatch) => {
 	} catch (error) {
 		console.log(error);
 	}
+};
+
+export const orderByNames = (filter) => (dispatch) => {
+	return dispatch(orderByName(filter));
+};
+
+export const orderByPrices = (filter) => (dispatch) => {
+	return dispatch(orderByPrice(filter));
 };
