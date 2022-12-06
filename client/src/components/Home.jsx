@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
-	Checkbox,
+	/* Checkbox, */
 	Grid,
 	GridItem,
 	Spinner,
-	Stack,
+	/* Stack,
 	CheckboxGroup,
 	Box,
-	Text,
+	Text, */
 	Flex,
-	Input,
+	/* Input,
 	HStack,
-	IconButton,
+	IconButton, */
 } from "@chakra-ui/react";
-import { BiSearch } from "react-icons/bi";
+/* import { BiSearch } from "react-icons/bi"; */
 import CardProduct from "./CardProduct";
 import Pagination from "./Pagination";
 import {
@@ -23,6 +23,7 @@ import {
 	orderByPrices,
 	filterByCategory,
 } from "../redux/actions";
+import Filter from "./Filter";
 
 export default function Home() {
 	//redux
@@ -92,94 +93,39 @@ export default function Home() {
 				padding="10"
 				paddingTop={"10"}
 			>
-				<GridItem rowSpan={3} colSpan={1}>
-					<Box borderWidth="1px" borderRadius="lg" p={4}>
-						<Box paddingBottom={4}>
-							<HStack paddingBottom={5}>
-								<Input size={"md"} />
-								<IconButton
-									colorScheme={"teal"}
-									aria-label="Search database"
-									icon={<BiSearch />}
-								/>
-							</HStack>
-							<Text textAlign={"center"} fontWeight="semibold">
-								Ordenar
-							</Text>
-							<CheckboxGroup /* defaultValue={"A-Z"} */ colorScheme="teal">
-								<Stack spacing={[1, 5]} direction={["column"]}>
-									<Checkbox onChange={handleSortbyName} value="A-Z">
-										A-Z
-									</Checkbox>
-									<Checkbox onChange={handleSortbyName} value="Z-A">
-										A-Z
-									</Checkbox>
-									<Checkbox onChange={handleSortbyPrice} value="-precio">
-										Menor precio
-									</Checkbox>
-									<Checkbox onChange={handleSortbyPrice} value="+precio">
-										Mayor precio
-									</Checkbox>
-								</Stack>
-							</CheckboxGroup>
-						</Box>
-
-						{/* <Text textAlign={"center"} fontWeight="semibold">
+				{/* <Text textAlign={"center"} fontWeight="semibold">
 							Categoria:
-						</Text>
-						<CheckboxGroup colorScheme="teal">
+							</Text>
+							<CheckboxGroup colorScheme="teal">
 							<Stack spacing={[1, 5]} direction={["column"]}>
-								<CheckboxGroup colSpan="auto" colorScheme="teal">
-									<Stack spacing={[1, 5]} direction={"column"}>
-										<Checkbox onChange={handlerCheck} value="bombilla">
-											Bombilla
-										</Checkbox>
-										<Checkbox onChange={handlerCheck} value="mate">
-											Mate
-										</Checkbox>
-										<Checkbox onChange={handlerCheck} value="yerba">
-											Yerba
-										</Checkbox>
-										<Checkbox onChange={handlerCheck} value="kit">
-											Kit
-										</Checkbox>
-									</Stack>
-								</CheckboxGroup>
+							<CheckboxGroup colSpan="auto" colorScheme="teal">
+							<Stack spacing={[1, 5]} direction={"column"}>
+							<Checkbox onChange={handlerCheck} value="bombilla">
+							Bombilla
+							</Checkbox>
+							<Checkbox onChange={handlerCheck} value="mate">
+							Mate
+							</Checkbox>
+							<Checkbox onChange={handlerCheck} value="yerba">
+							Yerba
+							</Checkbox>
+							<Checkbox onChange={handlerCheck} value="kit">
+							Kit
+							</Checkbox>
 							</Stack>
+							</CheckboxGroup>
+							</Stack>
+
 						</CheckboxGroup> */}
 
-						{/*dejo el filtro de abajo ya que soluciona por ahora la paginación automaticamente*/}
+				{/*dejo el filtro de abajo ya que soluciona por ahora la paginación automaticamente*/}
 
-						<Text textAlign={"center"} fontWeight="semibold">
-							{"Categoria"}
-						</Text>
-						<Stack spacing={[1, 5]} direction={["column"]}>
-							<CheckboxGroup
-								colSpan="auto"
-								colorScheme="teal"
-								/* defaultValue={"all"} */
-							>
-								<Stack spacing={[1, 5]} direction={"column"}>
-									<Checkbox onChange={handleFilterByCategory} value="all">
-										Todos
-									</Checkbox>
-									<Checkbox onChange={handleFilterByCategory} value="mate">
-										Mate
-									</Checkbox>
-									<Checkbox onChange={handleFilterByCategory} value="yerba">
-										Yerba
-									</Checkbox>
-									<Checkbox onChange={handleFilterByCategory} value="bombilla">
-										Bombilla
-									</Checkbox>
-									<Checkbox onChange={handleFilterByCategory} value="kit">
-										Kit
-									</Checkbox>
-								</Stack>
-							</CheckboxGroup>
-						</Stack>
-					</Box>
-				</GridItem>
+				<Filter
+					handleFilterByCategory={handleFilterByCategory}
+					handleSortbyName={handleSortbyName}
+					handleSortbyPrice={handleSortbyPrice}
+				/>
+
 				{currentProducts.length !== 0 ? (
 					currentProducts.map((p) => {
 						return (
