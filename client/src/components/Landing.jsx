@@ -1,35 +1,23 @@
 import React from 'react'
-import images from '../export/export'
-import './Landing.css';
-import { motion } from 'framer-motion'
+import style from './Landing.module.css';
 import { Button } from "@chakra-ui/button";
 import { Link } from "react-router-dom";
 import {  Stack } from "@chakra-ui/layout";
+import img1 from  "../assets/img1.jpg";
 
 const Landing = () => {
   return (
 	
-				<div>
-					<Stack>
+		<div>
+				<Stack>
 								
 						<Button w={"10%"}>
 							<Link to={"/home"}>Vamos a Matear</Link>
 						</Button>
-					</Stack>
-				
-			
-    <motion.div className='slider-container'>
-        <motion.div className='slider' drag='x' 
-        dragConstraints={{right: 0, left:-2123}} >
-        {images.map(image => (
-            <motion.div className='item'>
-                <img src={image} alt="" />
-            </motion.div>
-        ))}
-        </motion.div>
-        
-    </motion.div>
-	</div>
+                       <div className= {style.container}> <img src = {img1} alt= "imagen tomando mate"/></div>
+				</Stack>
+    
+	     </div>
   )
 }
 
