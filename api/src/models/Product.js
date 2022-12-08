@@ -3,6 +3,7 @@ const { DataTypes } = require('sequelize');
 // Luego le injectamos la conexion a sequelize.
 
 
+
 // Creation date: November, 29
 // Name in DB: products
 module.exports = (sequelize) => {
