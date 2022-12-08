@@ -4,6 +4,10 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const routes = require('./routes/index.js');
 
+// Para obtnener la configuración de acceso y definición de valores de la nube
+const cloudinary = require("./cloudConfig");
+const uploader = require("./multerCloud"); 
+
 require('./db.js');
 
 const server = express();
