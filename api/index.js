@@ -10,12 +10,13 @@ const port = process.env.PORT || 3001;
 // Author: Alejandro Téllez
 
 // Description: Para levantar el servidor
-server.get('/', (req, res) => {
-  res.send("Server cloudinary is running")
+// Probar en postman o navegador: http://localhost:3001/cloudinary
+server.get('/cloudinary', (req, res) => {
+  res.send(`%s listening at ${port}`)
 });
 
 //Se genera la ruta del post
-server.post("/upload", uploader.single("file"), async (req, res) => {
+server.post("/cloudinary/upload", uploader.single("file"), async (req, res) => {
   const upload = await cloudinary.v2.uploader.upload(req.file.path);
   return res.json({
     success: true,
