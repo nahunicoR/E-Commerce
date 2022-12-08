@@ -8,6 +8,7 @@ const routes = require('./routes/index.js');
 const cloudinary = require("./cloudConfig");
 const uploader = require("./multerCloud"); 
 
+
 require('./db.js');
 
 const server = express();
@@ -31,8 +32,9 @@ server.use('/', routes);
 // Create Date: december 6, 2022
 // Author: Alejandro Téllez
 // Description: Para levantar el servidor cloudinary
+//const app = express();
 
-server.get('/', (req, res) => {
+server.get('/cloudinary', (req, res) => {
   res.send("cloudinary is running");
 });
 
