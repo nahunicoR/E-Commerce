@@ -1,6 +1,6 @@
 //Librerías para cloudinary
-const cloudinary = require("./cloudinary");
-const uploader = require("./multer");
+const cloudinary = require("./cloudConfig");
+const uploader = require("./multerCloud");
 
 const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
