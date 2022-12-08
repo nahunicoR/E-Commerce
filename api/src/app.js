@@ -24,6 +24,23 @@ server.use((req, res, next) => {
 
 server.use('/', routes);
 
+// Create Date: december 6, 2022
+// Author: Alejandro Téllez
+// Description: Para levantar el servidor cloudinary
+
+server.get('/', (req, res) => {
+  res.send("cloudinary is running");
+});
+
+//Se crea la ruta para carga de imagenes
+server.post("/upload", uploader.single("file"), async (req, res) => {
+  const upload = await cloudinary.v2.uploader.upload(req.file.path);
+  return res.json({
+    success: true,
+    file: upload.secure_url,
+  });
+});
+
 // Error catching endware.
 server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
   const status = err.status || 500;
