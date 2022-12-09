@@ -16,8 +16,10 @@ server.get('/cloudinary', (req, res) => {
 });
 
 //Se genera la ruta del post
-server.post("/cloudinary/upload", uploader.single("file"), async (req, res) => {
+// server.post("/cloudinary/upload", uploader.single("file"), async (req, res) => {  //Para subir una imagen
+ server.post("/cloudinary/upload", uploader.single("file"), async (req, res) => {
   const upload = await cloudinary.v2.uploader.upload(req.file.path);
+  console.log(req.file.path)
   return res.json({
     success: true,
     file: upload.secure_url,
