@@ -37,19 +37,31 @@ const productsSlice = createSlice({
 				  });
 		},
 		orderByPrice: (state, action) => {
-			action.payload === "+price"
+			action.payload === "-price"
 				? state.products.sort((a, b) => {
-						return a.price - b.price;
+						if (a.price === b.price) {
+							return 0;
+						}
+						if (a.price < b.price) {
+							return -1;
+						}
+						return 1;
 				  })
 				: state.products.sort((a, b) => {
-						return b.price - a.price;
+						if (a.price === b.price) {
+							return 0;
+						}
+						if (a.price < b.price) {
+							return 1;
+						}
+						return -1;
 				  });
 		},
 		filterByCategories: (state, action) => {
 			let categoryFilter =
 				action.payload === "all"
-					? state.productsFilter
-					: state.productsFilter.filter(
+					? state.products
+					: state.products.filter(
 							(c) => c.category.toLowerCase() === action.payload
 					  );
 			state.products = categoryFilter;
@@ -57,11 +69,12 @@ const productsSlice = createSlice({
 		filterByMaterial: (state, action) => {
 			let materialFilter =
 				action.payload === "all"
-					? state.productsFilter
-					: state.productsFilter.filter(
-							(c) => c.material === action.payload
-					  );
+					? state.products
+					: state.products.filter((c) => c.material === action.payload);
 			state.products = materialFilter;
+		},
+		getProductByName: (state, action) => {
+			state.products = action.payload;
 		},
 	},
 });
@@ -73,6 +86,7 @@ export const {
 	orderByPrice,
 	filterByCategories,
 	filterByMaterial,
+	getProductByName,
 } = productsSlice.actions;
 
 export default productsSlice.reducer;

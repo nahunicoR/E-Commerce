@@ -5,6 +5,7 @@ import {
 	orderByPrice,
 	filterByCategories,
 	filterByMaterial,
+	getProductByName,
 } from "./reducer";
 import axios from "axios";
 
@@ -29,6 +30,17 @@ export const getDetails = (id) => async (dispatch) => {
 			`https://e-commerce-production-d476.up.railway.app/product/${id}`
 		);
 		return dispatch(getProductsDetail(detail.data));
+	} catch (error) {
+		console.log(error);
+	}
+};
+export const searchProduct = (query) => async (dispatch) => {
+	try {
+		let search = await axios.get(
+			`https://e-commerce-production-d476.up.railway.app/product?title=${query}`
+		);
+
+		return dispatch(getProductByName(search.data));
 	} catch (error) {
 		console.log(error);
 	}
