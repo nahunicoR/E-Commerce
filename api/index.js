@@ -16,15 +16,30 @@ server.get('/cloudinary', (req, res) => {
 });
 
 //Se genera la ruta del post
-// server.post("/cloudinary/upload", uploader.single("file"), async (req, res) => {  //Para subir una imagen
+//Para subir una imagen
  server.post("/cloudinary/upload", uploader.single("file"), async (req, res) => {
+  
   const upload = await cloudinary.v2.uploader.upload(req.file.path);
-  console.log(req.file.path)
+ 
+ 
   return res.json({
     success: true,
     file: upload.secure_url,
+    data: "Imagen ha sido cargada",
   });
 });
+
+
+
+
+//Para varias imagenes en temporal
+// server.post("/cloudinary/upload", uploader.array("files"), uploadFiles);
+
+// function uploadFiles(req, res) {
+//     console.log(req.body);
+//     console.log(req.files);
+//     res.json({ message: "Successfully uploaded files" });
+// }
 
 
 // Syncing all the models at once.
