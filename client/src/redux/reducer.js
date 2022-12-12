@@ -63,8 +63,8 @@ const productsSlice = createSlice({
 		filterByCategories: (state, action) => {
 			let categoryFilter =
 				action.payload === "all"
-					? state.products
-					: state.products.filter(
+					? state.productsFilter
+					: state.productsFilter.filter(
 							(c) => c.category.toLowerCase() === action.payload
 					  );
 			state.products = categoryFilter;
@@ -72,8 +72,8 @@ const productsSlice = createSlice({
 		filterByMaterial: (state, action) => {
 			let materialFilter =
 				action.payload === "all"
-					? state.products
-					: state.products.filter((c) => c.material === action.payload);
+					? state.productsFilter
+					: state.productsFilter.filter((c) => c.material === action.payload);
 			state.products = materialFilter;
 		},
 		getProductByName: (state, action) => {
