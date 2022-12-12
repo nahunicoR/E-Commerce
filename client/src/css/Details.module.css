@@ -1,0 +1,64 @@
+.generalDetails {
+	height: 100vh;
+	width: 100vw;
+}
+
+.container {
+	justify-content: space-between;
+	align-items: center;
+	margin: auto;
+	margin-bottom: 20px;
+	margin-top: 5px;
+
+	display: inline-flex;
+	border: 5px solid #ffffff;
+	border-radius: 5px;
+	background-color: rgb(233, 245, 252);
+	border: 5px solid rgb(233, 245, 252);
+	border-radius: 7px;
+}
+
+.detailCardContainer {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+	width: 100vw;
+	justify-content: center;
+}
+
+.detailPage {
+	font-weight: bold;
+	font-size: large;
+	padding-right: 40px;
+	justify-content: center;
+}
+
+.h1 {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 10px;
+}
+
+.textsContainer {
+	display: flex;
+	flex-direction: column;
+	padding: 10px;
+}
+
+.btnContainer {
+	display: flex;
+	justify-content: center;
+}
+
+.btnBack {
+	border: 3px solid rgb(233, 245, 252);
+	border-radius: 7px;
+	font-style: italic;
+	background-color: rgb(184, 225, 248);
+	padding-right: 2px;
+	padding-left: 2px;
+}
+
+.btnBack:hover {
+	background-color: #ffffff;
+}

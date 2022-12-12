@@ -6,7 +6,7 @@ const router = Router();
 
 router.put('/:id', async (req, res) => {
     let {id} = req.params;
-    let { title, price, category, description, image } = req.body;
+    let { title, price, category, description, image, material} = req.body;
     try {
         let update = await updateProduct(id);
         update.title        = title;
@@ -14,6 +14,7 @@ router.put('/:id', async (req, res) => {
         update.category     = category;
         update.description  = description;
         update.image        = image;
+        update.material     = material;
         console.log(update)
         await update.save()
         res.status(200).json({

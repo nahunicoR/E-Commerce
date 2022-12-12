@@ -10,7 +10,8 @@ const getProductsDb = async () => {
                 price: product.price,
                 category: product.category,
                 description: product.description,
-                image: product.image
+                image: product.image,
+                material: product.material
             }
         })
         return resp;
