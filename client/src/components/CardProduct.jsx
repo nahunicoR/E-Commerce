@@ -13,6 +13,8 @@ import {
 } from "@chakra-ui/react";
 import { Card, CardBody, CardFooter } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addProductsCart } from "../redux/actions";
 
 export default function CardProduct({
 	id,
@@ -21,7 +23,9 @@ export default function CardProduct({
 	price,
 	category,
 	material,
+	product
 }) {
+	const dispatch = useDispatch()
 	return (
 		<>
 			<GridItem colSpan={1}>
@@ -80,6 +84,9 @@ export default function CardProduct({
 								Detalle
 							</Button>
 						</Link>
+							<Button size={"md"} colorScheme={"teal"} marginLeft={"1.5"} onClick={()=>dispatch(addProductsCart(product))}>
+								+
+							</Button>
 					</CardFooter>
 				</Card>
 			</GridItem>

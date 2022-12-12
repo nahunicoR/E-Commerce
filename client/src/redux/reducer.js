@@ -6,6 +6,9 @@ const productsSlice = createSlice({
 		products: [],
 		productsFilter: [],
 		productsDetail: {},
+		cart: localStorage.hasOwnProperty("cart") 
+		?	JSON.parse(localStorage.getItem("cart"))
+		: []
 	},
 	reducers: {
 		getAllProducts: (state, action) => {
@@ -63,6 +66,9 @@ const productsSlice = createSlice({
 					  );
 			state.products = materialFilter;
 		},
+		addProductCart: (state, action) => {
+			state.cart = [...state.cart, action.payload]
+		}
 	},
 });
 
@@ -73,6 +79,7 @@ export const {
 	orderByPrice,
 	filterByCategories,
 	filterByMaterial,
+	addProductCart
 } = productsSlice.actions;
 
 export default productsSlice.reducer;
