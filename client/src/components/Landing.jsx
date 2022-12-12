@@ -1,13 +1,30 @@
-import React from 'react'
-import style from './Landing.module.css';
+import React from "react";
 import { Button } from "@chakra-ui/button";
 import { Link } from "react-router-dom";
 import {  Stack } from "@chakra-ui/layout";
-import img1 from  "../assets/img1.jpg";
+import { Image } from "@chakra-ui/react";
+import Carousel from "react-multi-carousel";
+import 'react-multi-carousel/lib/styles.css';
 
-const Landing = () => {
-  return (
-	
+
+const responsive = {
+	desktop: {
+	  breakpoint: { max: 2000, min: 1024 },
+	  items: 3
+	},
+	tablet: {
+	  breakpoint: { max: 1024, min: 464 },
+	  items: 2
+	},
+	mobile: {
+	  breakpoint: { max: 464, min: 0 },
+	  items: 1
+	}
+  };
+ 
+
+export default function Landing() {
+	return (
 		<div>
 			<Stack>
 
@@ -37,17 +54,3 @@ const Landing = () => {
 		</div>
 	);
 }
-
-export default Landing
-
-
-
-
-
-
-
-
-
-// 
-// 	
-// 
