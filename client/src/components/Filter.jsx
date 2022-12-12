@@ -28,6 +28,7 @@ function Filter({
 					<Box paddingBottom={4}>
 						<HStack paddingBottom={5}>
 							<Input
+								placeholder="Busqueda..."
 								name="search"
 								value={input}
 								onChange={handleInputChange}
