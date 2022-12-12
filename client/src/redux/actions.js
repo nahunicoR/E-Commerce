@@ -7,6 +7,7 @@ import {
 	filterByMaterial,
 	getProductByName,
 	addProductCart,
+	deleteProductCart,
 } from "./reducer";
 import axios from "axios";
 
@@ -63,4 +64,7 @@ export const filterByMaterials = (filter) => (dispatch) => {
 
 export const addProductsCart = (product) => (dispatch) => {
 	return dispatch(addProductCart(product));
+};
+export const deleteProductsCart = (product) => (dispatch) => {
+	return dispatch(deleteProductCart(product));
 };

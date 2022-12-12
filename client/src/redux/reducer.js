@@ -6,9 +6,9 @@ const productsSlice = createSlice({
 		products: [],
 		productsFilter: [],
 		productsDetail: {},
-		cart: localStorage.hasOwnProperty("cart") 
-		?	JSON.parse(localStorage.getItem("cart"))
-		: []
+		cart: localStorage.hasOwnProperty("cart")
+			? JSON.parse(localStorage.getItem("cart"))
+			: [],
 	},
 	reducers: {
 		getAllProducts: (state, action) => {
@@ -76,15 +76,16 @@ const productsSlice = createSlice({
 					: state.products.filter((c) => c.material === action.payload);
 			state.products = materialFilter;
 		},
-<<<<<<< HEAD
 		getProductByName: (state, action) => {
 			state.products = action.payload;
 		},
-=======
 		addProductCart: (state, action) => {
-			state.cart = [...state.cart, action.payload]
-		}
->>>>>>> e51add4f849913de6e0c3e5d70c25f82c955a546
+			state.cart = [...state.cart, action.payload];
+		},
+		deleteProductCart: (state, action) => {
+			let deleteProduct = state.cart.filter((p) => p.id !== action.payload);
+			state.cart = deleteProduct;
+		},
 	},
 });
 
@@ -95,11 +96,9 @@ export const {
 	orderByPrice,
 	filterByCategories,
 	filterByMaterial,
-<<<<<<< HEAD
 	getProductByName,
-=======
-	addProductCart
->>>>>>> e51add4f849913de6e0c3e5d70c25f82c955a546
+	addProductCart,
+	deleteProductCart,
 } = productsSlice.actions;
 
 export default productsSlice.reducer;
