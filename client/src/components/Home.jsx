@@ -162,6 +162,7 @@ export default function Home() {
 									price={p.price}
 									category={p.category}
 									material={p.material}
+									product={p}
 								/>
 							</div>
 						);
