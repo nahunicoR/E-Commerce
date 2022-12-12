@@ -27,7 +27,12 @@ function Filter({
 				<Box borderWidth="1px" borderRadius="lg" p={4}>
 					<Box paddingBottom={4}>
 						<HStack paddingBottom={5}>
-							<Input value={input} onChange={handleInputChange} size={"md"} />
+							<Input
+								name="search"
+								value={input}
+								onChange={handleInputChange}
+								size={"md"}
+							/>
 							<IconButton
 								onClick={handleSearch}
 								colorScheme={"teal"}

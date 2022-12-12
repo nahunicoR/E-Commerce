@@ -5,6 +5,8 @@ import Home from "./components/Home";
 import Landing from "./components/Landing";
 import CreateProduct from "./components/CreateProduct";
 import Details from "./components/Details";
+import UserDashboard from "./components/UserDashboard";
+
 function App() {
 	return (
 		<div className="App">
@@ -14,6 +16,7 @@ function App() {
 				<Route path="/home" element={<Home />} />
 				<Route path="/create" element={<CreateProduct />} />
 				<Route path="/detail/:id" element={<Details />} />
+				<Route path="/dashboard" element={<UserDashboard />} />
 			</Routes>
 		</div>
 	);

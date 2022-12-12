@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getDetails } from "../redux/actions";
 import { Link, useParams } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 import {
 	Flex,
 	HStack,
@@ -13,16 +14,25 @@ import {
 	Text,
 	IconButton,
 	Spinner,
+	useToast,
 } from "@chakra-ui/react";
 import { FaArrowLeft, FaHeart } from "react-icons/fa";
 
 export default function Details(props) {
 	const { id } = useParams();
 	const dispatch = useDispatch();
+	const { isAuthenticated } = useAuth0();
+	const toast = useToast();
+	//estados locales
 	const [loading, setLoading] = useState(true);
+	const [liked, setLiked] = useState(false);
 
 	const productId = useSelector((state) => state.products.productsDetail);
 	/* console.log("product id"); */
+
+	const handleLike = () => {
+		setLiked(!liked);
+	};
 
 	useEffect(() => {
 		dispatch(getDetails(id));
@@ -99,10 +109,29 @@ export default function Details(props) {
 									alignItems={"center"}
 									marginTop={50}
 								>
-									<Button w={"60%"} colorScheme={"teal"}>
+									<Button
+										onClick={
+											isAuthenticated
+												? null
+												: () => {
+														toast({
+															title: "Primero inicie sesión",
+															position: "bottom",
+															status: "info",
+															isClosable: true,
+														});
+												  }
+										}
+										w={"60%"}
+										colorScheme={"teal"}
+									>
 										Añadir al Carrito
 									</Button>
-									<IconButton icon={<FaHeart />} />
+									<IconButton
+										onClick={handleLike}
+										color={liked ? "red.400" : null}
+										icon={<FaHeart />}
+									/>
 								</Flex>
 							</Flex>
 						</Flex>

@@ -70,12 +70,12 @@ export default function Home() {
 	const [input, setInput] = useState("");
 	const handleInputChange = (e) => {
 		setInput(e.target.value);
+		handleSearch(e);
 	};
 	const handleSearch = (e) => {
 		e.preventDefault();
 		console.log(input);
 		dispatch(searchProduct(input));
-		setInput("");
 	};
 	//logica de checkBoxes
 	const handleSortbyName = (e) => {
@@ -109,7 +109,7 @@ export default function Home() {
 			<Grid
 				h={"1000px"}
 				gridTemplateRows="repeat(4,1fr)"
-				gridTemplateColumns="repeat(4,500px,400px)"
+				gridTemplateColumns="repeat(4,1fr)"
 				gap={5}
 				padding="10"
 				paddingTop={"10"}
