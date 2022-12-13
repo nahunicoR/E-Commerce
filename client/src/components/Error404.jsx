@@ -1,6 +1,6 @@
 import React from 'react'
 import logo from "../assets/LogoTo-Mate.png";
-import { Text, Stack,Container,Box, Card, Image, HStack } from '@chakra-ui/react';
+import { Text, Stack,Container, Card, Image, HStack } from '@chakra-ui/react';
 
 const Error404 = () => {
   return (
