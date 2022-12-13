@@ -6,6 +6,7 @@ import Landing from "./components/Landing";
 import CreateProduct from "./components/CreateProduct";
 import Details from "./components/Details";
 import UserDashboard from "./components/UserDashboard";
+import Cart from "./components/Cart"
 
 function App() {
 	return (
@@ -17,6 +18,7 @@ function App() {
 				<Route path="/create" element={<CreateProduct />} />
 				<Route path="/detail/:id" element={<Details />} />
 				<Route path="/dashboard" element={<UserDashboard />} />
+				<Route path="/cart" element={<Cart />} />
 			</Routes>
 		</div>
 	);
