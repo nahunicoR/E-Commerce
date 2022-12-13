@@ -35,7 +35,7 @@ export default function Nav() {
 						<Link to={"/create"}>Crear Producto</Link>
 					</Button>
 					<Button
-						onClick={() => loginWithRedirect()}
+						onClick={!isAuthenticated ? () => loginWithRedirect() : null}
 						fontSize={"lg"}
 						color={"white"}
 						bg={"transparent"}
@@ -45,7 +45,11 @@ export default function Nav() {
 						}}
 						leftIcon={<FaUser />}
 					>
-						{isAuthenticated ? user.name : "Iniciar Sesion"}
+						{isAuthenticated ? (
+							<Link to={"/dashboard"}>{user.name}</Link>
+						) : (
+							"Iniciar Sesion"
+						)}
 					</Button>
 
 					{isAuthenticated ? (

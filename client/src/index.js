@@ -5,29 +5,22 @@ import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import { BrowserRouter as Router } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";
-import { Auth0Provider } from "@auth0/auth0-react";
 
-const domain = process.env.REACT_APP_AUTH0_DOMAIN;
-const clientId = process.env.REACT_APP_AUTH0_CLIENTID;
+import Auth0ProviderWithHistory from "./auth/auth0-provider-with-history";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
 	<React.StrictMode>
-		<Auth0Provider
-			domain={domain}
-			clientId={clientId}
-			redirectUri={window.location.origin}
-		>
-			<ChakraProvider>
-				<Provider store={store}>
-					<Router>
+		<Router>
+			<Auth0ProviderWithHistory>
+				<ChakraProvider>
+					<Provider store={store}>
 						<App />
-					</Router>
-				</Provider>
-			</ChakraProvider>
-		</Auth0Provider>
+					</Provider>
+				</ChakraProvider>
+			</Auth0ProviderWithHistory>
+		</Router>
 	</React.StrictMode>
-
 );
 
 // If you want to start measuring performance in your app, pass a function
