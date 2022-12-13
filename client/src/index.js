@@ -5,8 +5,12 @@ import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import { BrowserRouter as Router } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";
+import axios from "axios";
 
 import Auth0ProviderWithHistory from "./auth/auth0-provider-with-history";
+
+//axios.defaults.baseURL = "http://localhost:3001";
+axios.defaults.baseURL = "https://e-commerce-production-d476.up.railway.app";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
