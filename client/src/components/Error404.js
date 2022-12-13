@@ -10,9 +10,7 @@ const Error404 = () => {
             <Container maxW='md' bg='gray.200' color='black'>
                     <Text fontSize='6xl' as='b' color='black' textAlign='center'> 404</Text>
                     <Text fontSize='50px' color='tomato'>Page not Found</Text>
-
                     <Image src={logo} alt="page logo" w={"250px"}/>
-                
             </Container>
         </HStack>
         </Stack>
