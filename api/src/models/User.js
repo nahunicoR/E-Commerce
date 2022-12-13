@@ -14,5 +14,9 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    rol: {
+      type: DataTypes.ENUM('user','guest','admin','superadmin'),
+    },
   });
+  
 };
