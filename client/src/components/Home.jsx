@@ -23,6 +23,7 @@ import {
 	orderByPrices,
 	filterByCategory,
 	filterByMaterials,
+	searchProduct,
 } from "../redux/actions";
 import Filter from "./Filter";
 
@@ -31,6 +32,7 @@ export default function Home() {
 	const dispatch = useDispatch();
 	const products = useSelector((state) => state.products.products);
 	//change
+	const [loading, setLoading] = useState(true);
 	//console.log(products);
 
 	//Logica de paginaton
@@ -63,6 +65,18 @@ export default function Home() {
 			setCheck({ value, checked });
 		}
 	}; */
+
+	//logica de searchBar
+	const [input, setInput] = useState("");
+	const handleInputChange = (e) => {
+		setInput(e.target.value);
+		handleSearch(e);
+	};
+	const handleSearch = (e) => {
+		e.preventDefault();
+		console.log(input);
+		dispatch(searchProduct(input));
+	};
 	//logica de checkBoxes
 	const handleSortbyName = (e) => {
 		dispatch(orderByNames(e.target.value));
@@ -84,16 +98,17 @@ export default function Home() {
 	};
 	//info de nuestra db https://e-commerce-production-d476.up.railway.app/products
 	useEffect(() => {
+		dispatch(getProducts());
 		setTimeout(() => {
-			dispatch(getProducts());
-		}, 1200);
+			setLoading(false);
+		}, 800);
 	}, [dispatch]);
 
 	return (
 		<>
 			<Grid
 				h={"1000px"}
-				gridTemplateRows="repeat(3,1fr)"
+				gridTemplateRows="repeat(4,1fr)"
 				gridTemplateColumns="repeat(4,1fr)"
 				gap={5}
 				padding="10"
@@ -131,9 +146,12 @@ export default function Home() {
 					handleSortbyName={handleSortbyName}
 					handleSortbyPrice={handleSortbyPrice}
 					handleFilterByMaterial={handleFilterByMaterial}
+					handleInputChange={handleInputChange}
+					handleSearch={handleSearch}
+					input={input}
 				/>
 
-				{currentProducts.length !== 0 ? (
+				{!loading ? (
 					currentProducts.map((p) => {
 						return (
 							<div key={p.id}>
@@ -144,6 +162,7 @@ export default function Home() {
 									price={p.price}
 									category={p.category}
 									material={p.material}
+									product={p}
 								/>
 							</div>
 						);
@@ -155,11 +174,14 @@ export default function Home() {
 						</Flex>
 					</GridItem>
 				)}
-				<Pagination
-					pagination={pagination}
-					productsPerPage={productsPerPage}
-					allProducts={products.length}
-				/>
+
+				{!loading ? (
+					<Pagination
+						pagination={pagination}
+						productsPerPage={productsPerPage}
+						allProducts={products.length}
+					/>
+				) : null}
 			</Grid>
 		</>
 	);

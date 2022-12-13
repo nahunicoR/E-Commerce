@@ -5,6 +5,8 @@ import {
 	orderByPrice,
 	filterByCategories,
 	filterByMaterial,
+	getProductByName,
+	addProductCart
 } from "./reducer";
 import axios from "axios";
 
@@ -33,6 +35,17 @@ export const getDetails = (id) => async (dispatch) => {
 		console.log(error);
 	}
 };
+export const searchProduct = (query) => async (dispatch) => {
+	try {
+		let search = await axios.get(
+			`https://e-commerce-production-d476.up.railway.app/product?title=${query}`
+		);
+
+		return dispatch(getProductByName(search.data));
+	} catch (error) {
+		console.log(error);
+	}
+};
 
 export const orderByNames = (filter) => (dispatch) => {
 	return dispatch(orderByName(filter));
@@ -46,4 +59,8 @@ export const filterByCategory = (filter) => (dispatch) => {
 };
 export const filterByMaterials = (filter) => (dispatch) => {
 	return dispatch(filterByMaterial(filter));
+};
+
+export const addProductsCart = (product) => (dispatch) => {
+	return dispatch(addProductCart(product))
 };
