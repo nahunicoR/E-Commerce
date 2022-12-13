@@ -6,8 +6,8 @@ import {
 	filterByCategories,
 	filterByMaterial,
 	getProductByName,
-	addProductCart,
 	deleteProductCart,
+	addProductCart,
 } from "./reducer";
 import axios from "axios";
 

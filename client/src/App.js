@@ -6,8 +6,8 @@ import Landing from "./components/Landing";
 import CreateProduct from "./components/CreateProduct";
 import Details from "./components/Details";
 import UserDashboard from "./components/UserDashboard";
-
 import Cart from "./components/Cart";
+
 function App() {
 	return (
 		<div className="App">
