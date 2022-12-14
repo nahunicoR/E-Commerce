@@ -8,13 +8,16 @@ const deleteProduct = require('./deleteProduct');
 const getProductById = require('./getProductById');
 const updateProduct = require('./updateProduct');
 const getProductByName = require('./getProductByName');
-const createUser = require('./createUser');   
+   
 
-//Para usuarios
+//Para usuarios Alejandro Téllez
 
 const getUsersDb = require('./getUsers');
 const getOrdersUsers = require('./getOrdersUsers');
 const getUserIdOrders = require('./getUserIdOrders');
+const createUser = require('./createUser');               // Creado por Jesús Delgado
+const updateUser = require('./updateUser');               // Creado por Jesús Delgado
+
 
 const router = Router();
 
@@ -28,13 +31,15 @@ router.use('/product'       , deleteProduct);
 router.use('/product'       , getProductById);
 router.use('/product'       , updateProduct);
 router.use('/product'       , getProductByName);
-router.use('/user'          , createUser);
 
-//Para usuarios
+
+//Para usuarios Alejandro Téllez
 
 router.use('/users', getUsersDb)
 router.use('/users', getOrdersUsers)
 router.use('/users', getUserIdOrders)
+router.use('/user',  createUser);      //Creado por Jesús Delgado
+router.use('/user',  updateUser);
 
 router.get('/', async (req,res,next) => {
     res.json([
@@ -62,12 +67,7 @@ router.get('/', async (req,res,next) => {
         {
             'Peticion /GET': '/product?title="Nombre a buscar"'
         },
-        {
-            'Peticion /POST': '/user, Creacion de usuario',
-            'name': 'por ahora solo name'
-        },
-
-        {
+                {
             '*************** USERS ': '*********************** ',
             'Peticion /GET': '/users/all, para obtener todos los usuarios de la base de datos',
         },
@@ -77,7 +77,15 @@ router.get('/', async (req,res,next) => {
         {
             'Peticion /GET': '/users/id/ordenes, para obtener un usario y sus ordenes de la base de datos',
             'id': 'id del usuario'
-        }
+        },
+        {
+            'Peticion /POST': '/user, Creación de usuario     Jesús Delgado',   
+            'name, rol, email': 'Todos las propiedades'
+        },
+        {
+            'Peticion /PUT': '/user, Modificación de usuario',   
+            'rol': 'si el ROL se guarda como denegado, el usuario ya no podrá usar la plataforma'
+        },
     ])
 });
 
