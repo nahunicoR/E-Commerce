@@ -98,6 +98,7 @@ export const {
 	filterByMaterial,
 	getProductByName,
 	addProductCart,
+	deleteProductCart,
 } = productsSlice.actions;
 
 export default productsSlice.reducer;
