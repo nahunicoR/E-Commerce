@@ -16,7 +16,7 @@ module.exports = (sequelize) => {
       allowNull: false,
       autoIncrement: true,
     },
-    purchaseCost: {                  //Costo o Monto de lo comprado                 
+    purchaseCost: {                 //Costo o Monto de lo comprado                 
       type: DataTypes.REAL,
       allowNull: false,
       unique: true,
@@ -24,10 +24,12 @@ module.exports = (sequelize) => {
     payOrder: {                     //Orden de Compra (pasarela de pago)
       type: DataTypes.STRING,
     },
-    paymentMethod: {                  //Para el método de pago (Mastercard, visa, etc)
+    paymentMethod: {                //Para el método de pago (Mastercard, visa, etc)
       type: DataTypes.STRING,
     },
-       
+    status: {                       //Para el determinar en fase del proceso se encuentra (creada, cancelada, completa)
+      type: DataTypes.STRING,
+    }, 
   },
   {
     timestamps: true,
