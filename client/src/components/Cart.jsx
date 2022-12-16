@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import CartItem from "./CartItem"
 import { useSelector } from 'react-redux'
 import { FaArrowRight } from 'react-icons/fa'
-import { Box, Stack, Heading, Flex, Button, Text, HStack } from "@chakra-ui/react";
+import { Box, Stack, Heading, Button, Text, HStack } from "@chakra-ui/react";
 
 
 export function formatPrice(value, opts = {}) {
