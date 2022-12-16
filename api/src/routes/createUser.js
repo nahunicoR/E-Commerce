@@ -38,6 +38,7 @@ router.post('/', validatorCreateUser, async (req, res, next) => {
         !created ? res.status(400).json('El usuario ya existe') : res.status(200).json(user);
 
     } catch (error) {
+        next(error);
         res.status(400).json(error.message)
     }
 });
