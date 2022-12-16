@@ -88,6 +88,7 @@ export default function Home() {
 			dispatch(getProducts());
 		}, 1200);
 	}, [dispatch]);
+	
 
 	return (
 		<>

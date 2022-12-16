@@ -5,9 +5,11 @@ import {
 	orderByPrice,
 	filterByCategories,
 	filterByMaterial,
-	addProductCart
-} from "./reducer";
+	addProductCart,
+	deleteProductCart
+	} from "./reducer";
 import axios from "axios";
+
 
 export const getProducts = () => (dispatch) => {
 	fetch("https://e-commerce-production-d476.up.railway.app/products")
@@ -52,3 +54,9 @@ export const filterByMaterials = (filter) => (dispatch) => {
 export const addProductsCart = (product) => (dispatch) => {
 	return dispatch(addProductCart(product))
 };
+
+export const deleteProductsCart = (product) => (dispatch) => {
+	return dispatch(deleteProductCart(product))
+};
+
+

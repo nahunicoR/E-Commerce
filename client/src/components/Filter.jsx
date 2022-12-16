@@ -40,7 +40,7 @@ function Filter({
 									A-Z
 								</Checkbox>
 								<Checkbox onChange={handleSortbyName} value="Z-A">
-									A-Z
+									Z-A
 								</Checkbox>
 								<Checkbox onChange={handleSortbyPrice} value="-precio">
 									Menor precio

@@ -2,8 +2,7 @@ import { useEffect } from "react"
 import CartItem from "./CartItem"
 import { useSelector } from 'react-redux'
 import { FaArrowRight } from 'react-icons/fa'
-import { Box, Stack, Heading, Flex, Button, Text, HStack } from "@chakra-ui/react";
-
+import { Box, Stack, Heading, Button, Text, HStack } from "@chakra-ui/react";
 
 export function formatPrice(value, opts = {}) {
   const { locale = 'en-US', currency = 'USD' } = opts
@@ -15,15 +14,18 @@ export function formatPrice(value, opts = {}) {
   return formatter.format(value)
 }
 
+
+
 export default function Cart() {
   const productsInCart = useSelector((state) => state.products.cart);
   console.log(productsInCart);
+  
+  let total = 0; 
+  productsInCart.map((product) => {
+  total = total + (product.price*product.quantity)
+  return total;
+});
 
-  let total = 0 
-  productsInCart.map(product => {
-    total = total + product.price
-   return total 
-  })
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(productsInCart))
   },[productsInCart])
@@ -38,23 +40,27 @@ export default function Cart() {
         <HStack alignItems={"flex-start"} >
           <Stack spacing={{ base: "8", md: "10" }} flex="2">
             <Heading fontSize="2xl" fontWeight="extrabold">
-              Carrito de Compras ({productsInCart.length} Productos)
+              Carrito de Compras 
             </Heading>
 
             <Stack spacing="6" >
-              {productsInCart?.map((item) => (<CartItem key={item.id} {...item} />))}
+              {productsInCart?.map((item) => (
+              <CartItem key={item.id} {...item} />
+              ))}              
             </Stack>
           </Stack>
           {/* -----checkout------- */}
           <HStack alignItems={"flex-start"} width = {250}>
             <Stack spacing="8" rounded="lg" padding="8" width="full" >
-              <Heading size="md">Resumen del Pedido</Heading>
+              <Heading fontWeight={"bold"} size="md">
+                Resumen del Pedido</Heading>
+                <Text fontSize="lg" fontWeight="semibold"> ({productsInCart.length} Productos)</Text>
               <Stack spacing="6">
                 <Stack justify="space-between" textAlign={"right"}>
                   <Text fontSize="lg" fontWeight="semibold">
                     Total
                   </Text>
-                  <Text fontSize="xl" fontWeight="extrabold">
+                  <Text color={"teal"} fontSize="xl" fontWeight="extrabold">
                     {formatPrice(total)}
                   </Text>
                 </Stack>
@@ -65,7 +71,7 @@ export default function Cart() {
                 fontSize="md"
                 rightIcon={<FaArrowRight />}>
                 Pagar
-              </Button>
+              </Button>             
             </Stack>
           </HStack>
         </HStack>
