@@ -1,6 +1,6 @@
 /* Date Creation: December 13, 2022
    Author: Alejandro Téllez Aguilar
-   Description: Crea la ruta /users/orders para otener todos los usuarios
+   Description: Crea la ruta /users/orders para otener todos los usuarios con sus ordenes
 */
 
 const { User, Order } = require("../db");
