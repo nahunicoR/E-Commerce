@@ -28,7 +28,7 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
     },
     status: {                       //Para el determinar en fase del proceso se encuentra (creada, cancelada, completa)
-      type: DataTypes.STRING,
+      type: DataTypes.ENUM('creada','cancelada','completa','proceso'),
     }, 
   },
   {
