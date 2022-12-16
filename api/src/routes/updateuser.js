@@ -1,6 +1,10 @@
 const { Router } = require('express');
 const { updateUser } = require('../controllers/updateUser');
 
+/* Date Creation: December 12, 2022
+   Author: Alejandro Téllez Aguilar
+   Description: Crea la ruta /user/id para otener actualizar el estado del Usuario
+*/
 
 const router = Router();
 
