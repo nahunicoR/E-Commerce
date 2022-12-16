@@ -1,6 +1,6 @@
 /* Date Creation: December 13, 2022
    Author: Alejandro Téllez Aguilar
-   Description: Crea el servicio de la ruta /users/?id/orders para otener todos los usuarios
+   Description: Crea el servicio de la ruta /users/?id/orders para otener todos los usuarios y sus ordenes
 */
 
 const { User, Order } = require("../db");
