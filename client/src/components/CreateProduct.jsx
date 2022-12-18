@@ -142,3 +142,230 @@ export default function CreateProduct() {
 		</Fragment>
 	);
 }
+
+
+
+// import React, { useState } from "react";
+// import { useDispatch} from "react-redux";
+// import { postProducts, getProducts } from "../redux/actions";
+// import styles from "../css/CreateProduct.module.css";
+// import { Cloudinary } from './Cloudinary';
+// import { useEffect } from "react";
+
+// export default function CreateProduct() {
+// 	const dispatch = useDispatch();
+// 	const [error, setError] = useState({});
+
+// 	useEffect(() => {
+// 		dispatch(getProducts());
+// 	},[dispatch]);
+
+// 	const [input, setInput] = useState({
+//         title: "",
+//         price: 0,
+//         image: [],
+//         description: "",
+//         category:"",
+// 		    material: "",
+//       });
+
+//     // const handleChange = (e) => {
+//     //     setInput({
+//     //         ...input,
+//     //         [e.target.name]: e.target.value,
+//     //     });
+//     //         setError(
+//     //             validate({
+//     //                 ...input,
+//     //                 [e.target.name]: e.target.value,
+//     //             }
+//     //         )
+//     // )}
+    
+
+//     const handleChange = (e) => {
+// 			const {name, value} = e.target;
+// 			setInput({
+// 				...input,
+// 				[name] : value
+// 			})
+// 			setError(validate({
+// 				...input,
+// 				[name]: value
+// 			}));
+// 			console.log(input)
+// 		}  
+
+// 	const validate = (input) => {
+
+//         let errors = {};
+
+//         if (!input.title) {
+// 			errors.title = "Este campo es requerido";
+// 		} else if (!/[a-zA-ZñÑ\s]{2,50}/.test(input.title)) {
+// 			errors.title = "Debe contener solo letras y espacios";
+// 		}
+
+// 		if (!input.image) {
+// 			errors.image = "Debe seleccionar una imagen";
+// 		}
+
+// 		if (!input.price) {
+// 			errors.price = "Añade un precio";
+// 		} else if (input.price < 0) {
+// 			errors.price = "El precio debe ser mayor a 0";
+// 		}
+
+// 	if (!input.category) {
+// 			errors.category = "Este campo es requerido";
+// 		} else if (
+// 			input.category === "Yerba" ||
+// 			input.category === "Mate" ||
+// 			input.category === "Bombilla" ||
+// 			input.category === "Kit"
+// 		) {
+// 			errors.category =
+// 				"Debe ser alguna opción Yerba, Mate, Bombilla o Kit.";
+// 		}
+
+// 		if (!input.material) {
+// 			errors.material = "Este campo es requerido";
+// 		} else if (
+// 			input.material === "Sintetico" ||
+// 			input.material === "Artesanal" ||
+// 			input.material === "Industrial"
+// 		) {
+// 			errors.material =
+// 				"Debe ser alguna opción Sintetico, Artesanal o Industrial.";
+// 		}
+// 		return errors;
+// 	}
+
+//     const handleSubmit = (e) =>{
+//         e.preventDefault();
+// 		if(input.length){
+//             dispatch(postProducts(input))
+//             setInput({
+//                 name: "",
+//                 price: 0,
+//                 image: [],
+//                 description:"",
+// 				category:"",
+// 				material:"",
+//               });
+//               alert("Se creó un nuevo producto!")  
+//         }
+//         else {
+//             alert("Completa los campos.")
+//         }
+//     }
+
+
+// 	 const addImage = async (e) => {
+// 		 const imageUp = await Cloudinary(e.target.files[0]);
+//      console.log("iu" + imageUp)
+// 			input.image.push(imageUp.url);
+//       setInput({
+//         ...input,
+//       });
+// 		};
+
+	
+//     return ( <div className="ProductCreate">
+//         <form onSubmit={(e) => handleSubmit(e)}>
+//           <div className="mb-3" style={{display:"flex", flexDirection:"column" ,alignItems:"center"}}>
+
+//             <label  className="form-label">
+//               Nombre del producto
+//             </label>
+//             <input
+//               style={{width:'600px'}}
+//               type="text"
+//               placeholder="Nombre..."
+//               value={input.title} 
+//               name='title' 
+//               onChange={handleChange}  
+//             /> 
+//             {error.title && <p >{error.title}</p>}
+                      
+//             <label>
+//               Precio
+//             </label>
+//             <input
+//             style={{width:'600px'}}
+//               type="number"
+//               placeholder="Precio..."
+//               value={input.price} 
+//               name='price' 
+//               onChange={handleChange}
+//             />
+//             {error.price && <p>{error.price}</p>}
+
+//             <label>
+//               Imagen
+//             </label>
+//             <input
+//             style={{width:'600px'}}
+//               type="file"
+//               placeholder="Imagen..."
+//               name='image' 
+//               onChange={(e) => {
+//                 addImage(e)
+//               }}
+//             />
+//             {error.image && <p >{error.image}</p>}
+//             <label className="form-label">
+//               Descripción del producto: 
+//             </label>
+//             <input
+//               style={{width:'600px'}}
+//               type="text"
+//               placeholder="Descripción..."
+//               value={input.description} 
+//               name='description' 
+//               onChange={handleChange}  
+//             /> 
+//             {error.description && <p >{error.description}</p>}
+
+// 			<label>
+//                     Categoría: 
+//                 </label> 
+// 				<div className={styles.circle}>
+// 				<label className={styles.labelName}>
+// 					<input type="radio" className={styles.circle} value='Mate' name="material" onChange={handleChange}/> Mate
+// 				</label>
+// 				<label className={styles.labelName}>
+// 					<input type="radio" className={styles.circle} value='Yerba' name="material" onChange={handleChange}/> Yerba
+// 				</label>
+// 				<label className={styles.labelName}>
+// 					<input type="radio" className={styles.circle} value='Bombilla' name="material" onChange={handleChange}/> Bombilla
+// 				</label>
+// 				<label className={styles.labelName}>
+// 					<input type="radio" className={styles.circle} value='Kit' name="material" onChange={handleChange}/> Kit
+// 				</label>
+// 				</div>
+
+//                 <label>
+//                     Material: 
+//                 </label> 
+// 				<div className={styles.circle}>
+// 				<label className={styles.labelName}>
+// 					<input type="radio" className={styles.circle} value='Sintetico' name="material" onChange={handleChange}/> Sintetico
+// 				</label>
+// 				<label className={styles.labelName}>
+// 					<input type="radio" className={styles.circle} value='Industrial' name="material" onChange={handleChange}/> Industrial
+// 				</label>
+// 				<label className={styles.labelName}>
+// 					<input type="radio" className={styles.circle} value='Artesanal' name="material" onChange={handleChange}/> Artesanal
+// 				</label>
+// 				</div>
+//             		{error.material && <p >{error.material}</p>}
+//           <hr />
+//           <button type="submit" className="btn btn-primary">
+//             Crear
+//           </button>
+//           </div>
+//         </form>
+//       </div>
+//     )
+// }
