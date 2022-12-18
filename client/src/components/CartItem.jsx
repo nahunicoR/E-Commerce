@@ -2,7 +2,8 @@ import { formatPrice } from "./Cart"
 import { Box, Stack, Text, Image } from "@chakra-ui/react"
 
 export default function CartItem(props) {
-  const {title, image, price, quantity } = props
+  
+  const {title, image, price } = props
   return (
     <div>
       <Stack direction="row" spacing="5" width="full" border="1px solid #eee" shadow={"md"} padding={"1rem"}>
