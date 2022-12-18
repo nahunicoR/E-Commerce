@@ -6,6 +6,7 @@ import { Box, Stack, Text, Image, Button  } from "@chakra-ui/react"
 export default function CartItem(props) {
   const dispatch = useDispatch();
   const {id, title, image, price, quantity} = props
+  
   return (
     <div>
       <Stack 

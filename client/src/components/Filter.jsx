@@ -5,9 +5,9 @@ import {
 	Input,
 	IconButton,
 	Text,
-	Checkbox,
+	Radio,
 	Stack,
-	CheckboxGroup,
+	RadioGroup,
 } from "@chakra-ui/react";
 import { BiSearch } from "react-icons/bi";
 import React from "react";
@@ -17,6 +17,9 @@ function Filter({
 	handleSortbyName,
 	handleSortbyPrice,
 	handleFilterByMaterial,
+	handleInputChange,
+	handleSearch,
+	input,
 }) {
 	return (
 		<>
@@ -24,8 +27,15 @@ function Filter({
 				<Box borderWidth="1px" borderRadius="lg" p={4}>
 					<Box paddingBottom={4}>
 						<HStack paddingBottom={5}>
-							<Input size={"md"} />
+							<Input
+								placeholder="Busqueda..."
+								name="search"
+								value={input}
+								onChange={handleInputChange}
+								size={"md"}
+							/>
 							<IconButton
+								onClick={handleSearch}
 								colorScheme={"teal"}
 								aria-label="Search database"
 								icon={<BiSearch />}
@@ -34,9 +44,9 @@ function Filter({
 						<Text textAlign={"center"} fontWeight="semibold">
 							Ordenar
 						</Text>
-						<CheckboxGroup /* defaultValue={"A-Z"} */ colorScheme="teal">
+						<RadioGroup /* defaultValue={"A-Z"} */ colorScheme="teal">
 							<Stack spacing={[1, 5]} direction={["column"]}>
-								<Checkbox onChange={handleSortbyName} value="A-Z">
+								<Radio onChange={handleSortbyName} value="A-Z">
 									A-Z
 								</Checkbox>
 								<Checkbox onChange={handleSortbyName} value="Z-A">
@@ -44,66 +54,66 @@ function Filter({
 								</Checkbox>
 								<Checkbox onChange={handleSortbyPrice} value="-precio">
 									Menor precio
-								</Checkbox>
-								<Checkbox onChange={handleSortbyPrice} value="+precio">
+								</Radio>
+								<Radio onChange={handleSortbyPrice} value="+price">
 									Mayor precio
-								</Checkbox>
+								</Radio>
 							</Stack>
-						</CheckboxGroup>
+						</RadioGroup>
 					</Box>
 
 					<Text textAlign={"center"} fontWeight="semibold">
 						{"Categoria"}
 					</Text>
 					<Stack spacing={[1, 5]} direction={["column"]}>
-						<CheckboxGroup
+						<RadioGroup
 							colSpan="auto"
 							colorScheme="teal"
 							/* defaultValue={"all"} */
 						>
 							<Stack spacing={[1, 5]} direction={"column"}>
-								<Checkbox onChange={handleFilterByCategory} value="all">
+								<Radio onChange={handleFilterByCategory} value="all">
 									Todos
-								</Checkbox>
-								<Checkbox onChange={handleFilterByCategory} value="mate">
+								</Radio>
+								<Radio onChange={handleFilterByCategory} value="mate">
 									Mate
-								</Checkbox>
-								<Checkbox onChange={handleFilterByCategory} value="yerba">
+								</Radio>
+								<Radio onChange={handleFilterByCategory} value="yerba">
 									Yerba
-								</Checkbox>
-								<Checkbox onChange={handleFilterByCategory} value="bombilla">
+								</Radio>
+								<Radio onChange={handleFilterByCategory} value="bombilla">
 									Bombilla
-								</Checkbox>
-								<Checkbox onChange={handleFilterByCategory} value="kit">
+								</Radio>
+								<Radio onChange={handleFilterByCategory} value="kit">
 									Kit
-								</Checkbox>
+								</Radio>
 							</Stack>
-						</CheckboxGroup>
+						</RadioGroup>
 					</Stack>
 					<Text textAlign={"center"} fontWeight="semibold">
 						{"Material"}
 					</Text>
 					<Stack spacing={[1, 5]} direction={["column"]}>
-						<CheckboxGroup
+						<RadioGroup
 							colSpan="auto"
 							colorScheme="teal"
 							/* defaultValue={"all"} */
 						>
 							<Stack spacing={[1, 5]} direction={"column"}>
-								<Checkbox onChange={handleFilterByMaterial} value="all">
+								<Radio onChange={handleFilterByMaterial} value="all">
 									Todos
-								</Checkbox>
-								<Checkbox onChange={handleFilterByMaterial} value="Industrial">
+								</Radio>
+								<Radio onChange={handleFilterByMaterial} value="Industrial">
 									Industrial
-								</Checkbox>
-								<Checkbox onChange={handleFilterByMaterial} value="Artesanal">
+								</Radio>
+								<Radio onChange={handleFilterByMaterial} value="Artesanal">
 									Artesanal
-								</Checkbox>
-								<Checkbox onChange={handleFilterByMaterial} value="Sintetico">
+								</Radio>
+								<Radio onChange={handleFilterByMaterial} value="Sintetico">
 									Sintetico
-								</Checkbox>
+								</Radio>
 							</Stack>
-						</CheckboxGroup>
+						</RadioGroup>
 					</Stack>
 				</Box>
 			</GridItem>
