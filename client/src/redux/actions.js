@@ -11,11 +11,12 @@ import {
 } from "./reducer";
 import axios from "axios";
 
-export const getProducts = () => (dispatch) => {
-	fetch("https://e-commerce-production-d476.up.railway.app/products")
-		.then((res) => res.json())
-		.then((resp) => dispatch(getAllProducts(resp)))
-		.catch((e) => console.log(`Error:${e}`));
+export const getProducts = () => async (dispatch) => {
+	let products = await axios.get("/products")
+	try {
+		return dispatch(getAllProducts(products.data))
+	} catch (error) {
+		console.log(error)
 };
 
 export const postProducts = (productInfo) => async (dispatch) => {
