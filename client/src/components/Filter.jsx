@@ -50,7 +50,7 @@ function Filter({
 									A-Z
 								</Radio>
 								<Radio onChange={handleSortbyName} value="Z-A">
-									A-Z
+									Z-A
 								</Radio>
 								<Radio onChange={handleSortbyPrice} value="-price">
 									Menor precio
