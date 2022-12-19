@@ -5,9 +5,9 @@ import {
 	orderByPrice,
 	filterByCategories,
 	filterByMaterial,
-	getProductByName,
-	deleteProductCart,
 	addProductCart,
+	deleteProductCart,
+	getProductByName,
 } from "./reducer";
 import axios from "axios";
 

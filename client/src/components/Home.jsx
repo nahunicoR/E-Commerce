@@ -103,6 +103,7 @@ export default function Home() {
 			setLoading(false);
 		}, 800);
 	}, [dispatch]);
+	
 
 	return (
 		<>

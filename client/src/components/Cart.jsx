@@ -2,14 +2,7 @@ import { useEffect } from "react";
 import CartItem from "./CartItem";
 import { useSelector } from "react-redux";
 import { FaArrowRight } from "react-icons/fa";
-import {
-	Box,
-	Stack,
-	Heading,
-	/*  Flex, */ Button,
-	Text,
-	HStack,
-} from "@chakra-ui/react";
+import { Box, Stack, Heading, Button, Text, HStack } from "@chakra-ui/react";
 
 export function formatPrice(value, opts = {}) {
 	const { locale = "en-US", currency = "USD" } = opts;
@@ -43,7 +36,7 @@ export default function Cart() {
 			>
 				<HStack alignItems={"flex-start"}>
 					<Stack spacing={{ base: "8", md: "10" }} flex="2">
-						<Heading fontSize="2xl" fontWeight="bold">
+						<Heading fontSize="2xl" fontWeight="extrabold">
 							Carrito de Compras ({productsInCart.length} Productos)
 						</Heading>
 
@@ -56,15 +49,13 @@ export default function Cart() {
 					{/* -----checkout------- */}
 					<HStack alignItems={"flex-start"} width={250}>
 						<Stack spacing="8" rounded="lg" padding="8" width="full">
-							<Heading fontWeight={"bold"} size="md">
-								Resumen del Pedido
-							</Heading>
+							<Heading size="md">Resumen del Pedido</Heading>
 							<Stack spacing="6">
 								<Stack justify="space-between" textAlign={"right"}>
 									<Text fontSize="lg" fontWeight="semibold">
 										Total
 									</Text>
-									<Text color={"teal"} fontSize="xl" fontWeight="extrabold">
+									<Text fontSize="xl" fontWeight="extrabold">
 										{formatPrice(total)}
 									</Text>
 								</Stack>

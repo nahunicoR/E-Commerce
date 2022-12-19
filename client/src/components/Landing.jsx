@@ -24,6 +24,7 @@ const responsive = {
 export default function Landing() {
 	return (
 		<div>
+<<<<<<< HEAD
 			<Stack position={"relative"} height={"86hv"}>
 				<Carousel responsive={responsive}>
 					<Image
@@ -64,6 +65,29 @@ export default function Landing() {
 					<Link to={"/home"}>Vamos a Matear</Link>
 				</Button>
 			</Stack>
+=======
+			<Stack position= {"relative"} height={"86vh"}>			
+				<Carousel responsive={responsive}>	
+		              <Image  boxSize='750px' objectFit='cover' 
+		                   src= {"https://yerbasara.files.wordpress.com/2017/04/mate3.jpg"} />
+		              <Image  boxSize='750px' objectFit='cover'
+		                   src= {"https://yerbasara.files.wordpress.com/2017/06/a59cd1f930d61534cacb05b3f9d19104cd2b19365e17063e72pimgpsh_fullsize_distr.png?w=661&h=334"}  />
+		              <Image  boxSize='750px' objectFit='cover'
+		                   src= {"https://s3.amazonaws.com/static.om.anigamy.net/static.biennatural.com.ar/App/Article/el-mate-una-infusion-exclusiva-de-los-argentinos-6272-mainImage-0.jpg"}  />
+		              <Image  boxSize='750px' objectFit='cover'
+		                   src= {"https://statics.forbesargentina.com/2021/06/crop/60d1e2c96474f__822x460.webp"} />
+	            </Carousel>
+	              <Button 
+				     colorScheme={"teal"}
+					 position={'absolute'}
+    				 top="45%"
+				     left={"44%"}
+				     size={"lg"}
+				     w={"15%"}>
+						<Link to={"/home"}>Vamos a Matear</Link>
+					 </Button>
+         </Stack>
+>>>>>>> 1ff50e97e79748022572252445085ed7338ad840
 		</div>
 	);
 }
