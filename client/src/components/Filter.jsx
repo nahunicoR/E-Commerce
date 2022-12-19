@@ -48,11 +48,11 @@ function Filter({
 							<Stack spacing={[1, 5]} direction={["column"]}>
 								<Radio onChange={handleSortbyName} value="A-Z">
 									A-Z
-								</Radio>
-								<Radio onChange={handleSortbyName} value="Z-A">
-									A-Z
-								</Radio>
-								<Radio onChange={handleSortbyPrice} value="-price">
+								</Checkbox>
+								<Checkbox onChange={handleSortbyName} value="Z-A">
+									Z-A
+								</Checkbox>
+								<Checkbox onChange={handleSortbyPrice} value="-precio">
 									Menor precio
 								</Radio>
 								<Radio onChange={handleSortbyPrice} value="+price">

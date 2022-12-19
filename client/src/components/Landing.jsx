@@ -26,7 +26,7 @@ const responsive = {
 export default function Landing() {
 	return (
 		<div>
-			<Stack position= {"relative"} height={"86hv"}>			
+			<Stack position= {"relative"} height={"86vh"}>			
 				<Carousel responsive={responsive}>	
 		              <Image  boxSize='750px' objectFit='cover' 
 		                   src= {"https://yerbasara.files.wordpress.com/2017/04/mate3.jpg"} />
@@ -44,9 +44,9 @@ export default function Landing() {
 				     left={"44%"}
 				     size={"lg"}
 				     w={"15%"}>
-					<Link to={"/home"}>Vamos a Matear</Link>
-				   </Button>	
-            </Stack>
+						<Link to={"/home"}>Vamos a Matear</Link>
+					 </Button>
+         </Stack>
 		</div>
 	);
 }
