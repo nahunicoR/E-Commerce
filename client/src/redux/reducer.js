@@ -4,7 +4,8 @@ const productsSlice = createSlice({
 	name: "products",
 	initialState: {
 		products: [],
-		productsFilter: [],
+		allProducts: [],
+		filteredBatch: [],
 		productsDetail: {},
 		cart: localStorage.hasOwnProperty("cart")
 			? JSON.parse(localStorage.getItem("cart"))
@@ -14,7 +15,7 @@ const productsSlice = createSlice({
 	reducers: {
 		getAllProducts: (state, action) => {
 			state.products = action.payload;
-			state.productsFilter = action.payload;
+			state.allProducts = action.payload;
 		},
 		getProductsDetail: (state, action) => {
 			state.productsDetail = action.payload;
@@ -62,25 +63,22 @@ const productsSlice = createSlice({
 				  });
 		},
 		filterByCategories: (state, action) => {
-			let categoryFilter =
+			state.filteredBatch =
 				action.payload === "all"
-					? state.productsFilter
-					: state.productsFilter.filter(
+					? state.allProducts
+					: state.allProducts.filter(
 							(c) => c.category.toLowerCase() === action.payload
 					  );
-			state.products = categoryFilter;
+			state.products = state.filteredBatch;
 		},
 		filterByMaterial: (state, action) => {
 			let materialFilter =
 				action.payload === "all"
-					? state.productsFilter
-					: state.productsFilter.filter((c) => c.material === action.payload);
+					? state.filteredBatch
+					: state.filteredBatch.filter((c) => c.material === action.payload);
 			state.products = materialFilter;
 		},
 		addProductCart: (state, action) => {
-			let localStorage = state.products.find(
-				(product) => product.id === action.payload.id
-			);
 			let itemInCart = state.cart.find(
 				(product) => product.id === action.payload.id
 			);

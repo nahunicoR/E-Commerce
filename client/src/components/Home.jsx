@@ -1,19 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-	/* Checkbox, */
-	Grid,
-	GridItem,
-	Spinner,
-	/* Stack,
-	CheckboxGroup,
-	Box,
-	Text, */
-	Flex,
-	/* Input,
-	HStack,
-	IconButton, */
-} from "@chakra-ui/react";
+import { Grid, GridItem, Spinner, Flex } from "@chakra-ui/react";
 /* import { BiSearch } from "react-icons/bi"; */
 import CardProduct from "./CardProduct";
 import Pagination from "./Pagination";
@@ -103,7 +90,6 @@ export default function Home() {
 			setLoading(false);
 		}, 800);
 	}, [dispatch]);
-	
 
 	return (
 		<>
