@@ -4,17 +4,18 @@ const productsSlice = createSlice({
 	name: "products",
 	initialState: {
 		products: [],
-		productsFilter: [],
+		allProducts: [],
+		filteredBatch: [],
 		productsDetail: {},
-		cart: localStorage.hasOwnProperty("cart") 
-		? JSON.parse(localStorage.getItem("cart"))
-		: []
+		cart: localStorage.hasOwnProperty("cart")
+			? JSON.parse(localStorage.getItem("cart"))
+			: [],
 	},
-	cart:[],
+	cart: [],
 	reducers: {
 		getAllProducts: (state, action) => {
 			state.products = action.payload;
-			state.productsFilter = action.payload;
+			state.allProducts = action.payload;
 		},
 		getProductsDetail: (state, action) => {
 			state.productsDetail = action.payload;
@@ -62,48 +63,49 @@ const productsSlice = createSlice({
 				  });
 		},
 		filterByCategories: (state, action) => {
-			let categoryFilter =
+			state.filteredBatch =
 				action.payload === "all"
-					? state.products
-					: state.products.filter(
+					? state.allProducts
+					: state.allProducts.filter(
 							(c) => c.category.toLowerCase() === action.payload
 					  );
-			state.products = categoryFilter;
+			state.products = state.filteredBatch;
 		},
 		filterByMaterial: (state, action) => {
 			let materialFilter =
 				action.payload === "all"
-					? state.products
-					: state.products.filter((c) => c.material === action.payload);
+					? state.filteredBatch
+					: state.filteredBatch.filter((c) => c.material === action.payload);
 			state.products = materialFilter;
 		},
-		addProductCart: (state, action) => { 
-			let localStorage = state.products.find(
+		addProductCart: (state, action) => {
+			let itemInCart = state.cart.find(
 				(product) => product.id === action.payload.id
-			)
-			let itemInCart = state.cart.find((product) => product.id === action.payload.id);
+			);
 			return itemInCart
-			? {
-				...state,
-				cart: state.cart.map((product) =>
-				product.id === action.payload.id 
-				? { ...product, quantity: product.quantity + 1}
-				: product
-				)
-			}
-			:{
-			...state,
-			cart: [...state.cart, {...action.payload, quantity: 1}],
-			}
+				? {
+						...state,
+						cart: state.cart.map((product) =>
+							product.id === action.payload.id
+								? { ...product, quantity: product.quantity + 1 }
+								: product
+						),
+				  }
+				: {
+						...state,
+						cart: [...state.cart, { ...action.payload, quantity: 1 }],
+				  };
 		},
+
+		getProductByName: (state, action) => {
+			state.products = action.payload;
+		},
+
 		deleteProductCart: (state, action) => {
 			let deleteProduct = state.cart.filter((p) => p.id !== action.payload);
 			state.cart = deleteProduct;
 		},
-		getProductByName: (state, action) => {
-			state.products = action.payload;
-		},
-	}
+	},
 });
 
 export const {

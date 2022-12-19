@@ -27,7 +27,9 @@ export default function Nav() {
 					alignItems="center"
 				>
 					<Image src={logo} alt="page logo" w={"80px"} />
-					<Heading color="white">TO-MATE!</Heading>
+					<Heading color="white">
+						<Link to="/home">TO-MATE!</Link>
+					</Heading>
 				</Flex>
 
 				<Flex justifyContent={"space-evenly"} w={"25%"}>
@@ -60,13 +62,16 @@ export default function Nav() {
 							onClick={() => logout({ returnTo: window.location.origin })}
 						></Button>
 					) : null}
-					
-						<Flex alignItems={"center"} paddingRight={"1.5"} position={"relative"}>
-							<Link to={"/cart"}>
-								<FaShoppingCart color="white" fontSize={"1.5rem"}/> 
-							</Link>
-						</Flex>
-					
+
+					<Flex
+						alignItems={"center"}
+						paddingRight={"1.5"}
+						position={"relative"}
+					>
+						<Link to={"/cart"}>
+							<FaShoppingCart color="white" fontSize={"1.5rem"} />
+						</Link>
+					</Flex>
 				</Flex>
 			</Flex>
 		</>
