@@ -5,8 +5,9 @@ import {
 	orderByPrice,
 	filterByCategories,
 	filterByMaterial,
+	addProductCart,
+	deleteProductCart,
 	getProductByName,
-	addProductCart
 } from "./reducer";
 import axios from "axios";
 
@@ -17,7 +18,7 @@ export const getProducts = () => async (dispatch) => {
 	} catch (error) {
 		console.log(error)
 	}
-}
+};
 
 export const postProducts = (productInfo) => async (dispatch) => {
 	let post = await axios.post(
@@ -66,3 +67,9 @@ export const filterByMaterials = (filter) => (dispatch) => {
 export const addProductsCart = (product) => (dispatch) => {
 	return dispatch(addProductCart(product))
 };
+
+export const deleteProductsCart = (product) => (dispatch) => {
+	return dispatch(deleteProductCart(product))
+};
+
+
