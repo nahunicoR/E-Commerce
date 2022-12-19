@@ -98,16 +98,11 @@ const productsSlice = createSlice({
 						cart: [...state.cart, { ...action.payload, quantity: 1 }],
 				  };
 		},
-		deleteProductCart: (state, action) => {
-			let deleteProduct = state.cart.filter((p) => p.id !== action.payload);
-			state.cart = deleteProduct;
-		},
+
 		getProductByName: (state, action) => {
 			state.products = action.payload;
 		},
-		addProductCart: (state, action) => {
-			state.cart = [...state.cart, action.payload];
-		},
+
 		deleteProductCart: (state, action) => {
 			let deleteProduct = state.cart.filter((p) => p.id !== action.payload);
 			state.cart = deleteProduct;
