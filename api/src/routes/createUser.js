@@ -1,5 +1,6 @@
 const { Router } = require('express');
 const { User } = require('../db');
+const bcrypt = require('bcrypt');
 const router = Router();
 
 function validatorCreateUser(req,res,next){
@@ -23,8 +24,10 @@ function validatorCreateUser(req,res,next){
 
 router.post('/', validatorCreateUser, async (req, res, next) => {
     try {
-        const { name, lastName, email, password } = req.body;
-     
+        const { name, lastName, email, rol, password } = req.body;
+       
+        let hashedPassword = await bcrypt.hash(password, 10);
+
         const formatEmail = email.toLowerCase();
 
         const [user, created] = await User.findOrCreate({
@@ -32,7 +35,8 @@ router.post('/', validatorCreateUser, async (req, res, next) => {
                 name,
                 lastName, 
                 email: formatEmail,
-                password   
+                rol: rol || 'user',
+                password: hashedPassword 
             }
         })
         !created ? res.status(400).json('El usuario ya existe') : res.status(200).json(user);
