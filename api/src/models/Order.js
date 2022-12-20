@@ -18,8 +18,6 @@ module.exports = (sequelize) => {
     },
     purchaseCost: {                 //Costo o Monto de lo comprado                 
       type: DataTypes.REAL,
-      allowNull: false,
-      unique: true,
     },
     payOrder: {                     //Orden de Compra (pasarela de pago)
       type: DataTypes.STRING,
