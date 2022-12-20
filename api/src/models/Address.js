@@ -16,7 +16,7 @@ module.exports = (sequelize) => {
       allowNull: false,
       autoIncrement: true,
     },
-    maistreet: {                      //Calle principal                 
+    mainstreet: {                      //Calle principal                 
       type: DataTypes.STRING,
     },
     number: {                        //Número exterior
