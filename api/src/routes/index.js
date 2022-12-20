@@ -26,6 +26,13 @@ const updateUser = require('./updateUser');               // Creado por Jesús D
 
 const createOrder = require('./createOrder');
 
+
+/* Para Address 
+   Author: Alejandro Téllez
+*/
+
+const createAdress = require('./createAddress');
+
 const router = Router();
 
 
@@ -55,6 +62,12 @@ router.use('/user',  updateUser);
 */
 
 router.use('/order',  createOrder);
+
+/* Para Address 
+   Author: Alejandro Téllez 
+*/
+
+router.use('/address',  createAdress);
 
 router.get('/', async (req,res,next) => {
     res.json([
@@ -104,6 +117,12 @@ router.get('/', async (req,res,next) => {
         {
             '*************** ORDERS ': '*********************** ',
             'Peticion /POST': '/create, para crear la orden en la base de datos',
+        },
+
+
+        {
+            '*************** ADDRESS ': '*********************** ',
+            'Peticion /POST': '/address, para crear la orden en la base de datos',
         },
     ])
 });
