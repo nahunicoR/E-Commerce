@@ -32,6 +32,7 @@ const createOrder = require('./createOrder');
 */
 
 const createAdress = require('./createAddress');
+const getAddressByUser = require('./getAddressByUser');
 
 const router = Router();
 
@@ -63,11 +64,13 @@ router.use('/user',  updateUser);
 
 router.use('/order',  createOrder);
 
+
 /* Para Address 
    Author: Alejandro Téllez 
 */
 
 router.use('/address',  createAdress);
+router.use('/addresses', getAddressByUser);
 
 router.get('/', async (req,res,next) => {
     res.json([
@@ -123,6 +126,10 @@ router.get('/', async (req,res,next) => {
         {
             '*************** ADDRESS ': '*********************** ',
             'Peticion /POST': '/address, para crear la orden en la base de datos',
+        },
+
+        {
+            'Peticion /GET': '/user/id/streets, para obtener los domicilios del usuario',
         },
     ])
 });
