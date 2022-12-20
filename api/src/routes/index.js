@@ -33,6 +33,8 @@ const createOrder = require('./createOrder');
 
 const createAdress = require('./createAddress');
 const getAddressByUser = require('./getAddressByUser');
+const updateAddressUser = require('./updateAddressUser');
+
 
 const router = Router();
 
@@ -71,6 +73,8 @@ router.use('/order',  createOrder);
 
 router.use('/address',  createAdress);
 router.use('/addresses', getAddressByUser);
+router.use('/address', updateAddressUser);
+
 
 router.get('/', async (req,res,next) => {
     res.json([
@@ -129,7 +133,11 @@ router.get('/', async (req,res,next) => {
         },
 
         {
-            'Peticion /GET': '/user/id/streets, para obtener los domicilios del usuario',
+            'Peticion /GET': '/address/id/streets, para obtener los domicilios del usuario',
+        },
+
+        {
+            'Peticion /PUT': '/address/id, para modificar el domicilio del usuario',
         },
     ])
 });
