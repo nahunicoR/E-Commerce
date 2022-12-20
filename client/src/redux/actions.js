@@ -17,8 +17,7 @@ export const getProducts = () => async (dispatch) => {
 		return dispatch(getAllProducts(products.data))
 	} catch (error) {
 		console.log(error)
-	}
-}
+};
 
 export const postProducts = (productInfo) => async (dispatch) => {
 	let post = await axios.post("/product", productInfo);
