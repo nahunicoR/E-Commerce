@@ -59,9 +59,15 @@ module.exports = (sequelize) => {
         }
       }
     },
+    rol: {
+      type: DataTypes.ENUM,
+      values: ['user','superadmin','guest','admin','denegado'],
+      defaultValue: 'user'
+   },
     password: {
       type: DataTypes.STRING,
       allowNull: false
     }
+    
   });
 };
