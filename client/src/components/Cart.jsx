@@ -1,8 +1,15 @@
 import { useEffect } from "react";
 import CartItem from "./CartItem";
 import { useSelector } from "react-redux";
-import { FaArrowRight } from "react-icons/fa";
-import { Box, Stack, Heading, Button, Text, HStack } from "@chakra-ui/react";
+import PayButton from './PayButton.jsx';
+import {
+	Box,
+	Stack,
+	Heading,
+	/*  Flex, */ 
+	Text,
+	HStack,
+} from "@chakra-ui/react";
 
 export function formatPrice(value, opts = {}) {
 	const { locale = "en-US", currency = "USD" } = opts;
@@ -60,14 +67,7 @@ export default function Cart() {
 									</Text>
 								</Stack>
 							</Stack>
-							<Button
-								colorScheme="teal"
-								size="lg"
-								fontSize="md"
-								rightIcon={<FaArrowRight />}
-							>
-								Pagar
-							</Button>
+							<PayButton productsInCart={productsInCart}/>
 						</Stack>
 					</HStack>
 				</HStack>
