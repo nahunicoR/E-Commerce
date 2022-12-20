@@ -5,14 +5,33 @@ module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('user', {
     id: {                     
-      type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER,          //id del Usuario
       primaryKey: true,
       allowNull: false,
       autoIncrement: true,
     },
-    name: {
+    name: {                            //Nombre del usuario
       type: DataTypes.STRING,
       allowNull: false,
     },
+    rol: {                             //Papel que desempeña en el sistema
+      type: DataTypes.ENUM('user','guest','admin','superadmin', 'denegado'),
+    },
+    email: {                           //Correo del usuario
+      type: DataTypes.STRING(40),
+      allowNull: false,
+      unique: {
+          msg: 'El email necesita ser unico'
+      },
+      validate: {
+          isEmail: {
+              msg: 'Email no valido'
+          },
+          notEmpty: {
+              msg: 'Ingrese un email'
+          }
+      }
+  }
   });
+  
 };

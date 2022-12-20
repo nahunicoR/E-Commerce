@@ -5,9 +5,11 @@ const router = Router();
 
 router.post('/', async (req, res, next) => {
     try {
-        let { name } = req.body;
+        let { name, rol, email } = req.body;
         let newUser = await User.create({
-            name
+            name,
+            rol,
+            email
         })
         res.status(200).json(newUser);
     } catch (error) {
