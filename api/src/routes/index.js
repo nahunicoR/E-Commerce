@@ -10,7 +10,9 @@ const updateProduct = require('./updateProduct');
 const getProductByName = require('./getProductByName');
    
 
-//Para usuarios Alejandro Téllez
+/* Para usuarios 
+   Author: Alejandro Téllez
+*/
 
 const getUsersDb = require('./getUsers');
 const getOrdersUsers = require('./getOrdersUsers');
@@ -18,6 +20,11 @@ const getUserIdOrders = require('./getUserIdOrders');
 const createUser = require('./createUser');               // Creado por Jesús Delgado
 const updateUser = require('./updateUser');               // Creado por Jesús Delgado
 
+/* Para ordenes 
+   Author: Alejandro Téllez
+*/
+
+const createOrder = require('./createOrder');
 
 const router = Router();
 
@@ -33,13 +40,21 @@ router.use('/product'       , updateProduct);
 router.use('/product'       , getProductByName);
 
 
-//Para usuarios Alejandro Téllez
+/* Para usuarios 
+   Author: Alejandro Téllez 
+*/
 
 router.use('/users', getUsersDb)
 router.use('/users', getOrdersUsers)
 router.use('/users', getUserIdOrders)
 router.use('/user',  createUser);      //Creado por Jesús Delgado
 router.use('/user',  updateUser);
+
+/* Para Ordenes 
+   Author: Alejandro Téllez 
+*/
+
+router.use('/order',  createOrder);
 
 router.get('/', async (req,res,next) => {
     res.json([
@@ -67,7 +82,7 @@ router.get('/', async (req,res,next) => {
         {
             'Peticion /GET': '/product?title="Nombre a buscar"'
         },
-                {
+        {
             '*************** USERS ': '*********************** ',
             'Peticion /GET': '/users/all, para obtener todos los usuarios de la base de datos',
         },
@@ -85,6 +100,10 @@ router.get('/', async (req,res,next) => {
         {
             'Peticion /PUT': '/user, Modificación de usuario',   
             'rol': 'si el ROL se guarda como denegado, el usuario ya no podrá usar la plataforma'
+        },
+        {
+            '*************** ORDERS ': '*********************** ',
+            'Peticion /POST': '/create, para crear la orden en la base de datos',
         },
     ])
 });
