@@ -17,7 +17,7 @@ module.exports = (sequelize) => {
       type: DataTypes.REAL,
       allowNull: false,
     },
-    purchaseprice: {                    //Precio de Compra (precio al día del producto)
+    purchaseprice: {                   //Precio de Compra (precio al día del producto)
       type: DataTypes.REAL,
       allowNull: false,
     },
