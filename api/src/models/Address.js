@@ -24,6 +24,11 @@ module.exports = (sequelize) => {
     },
     postalcode: {                    //Código postal
       type: DataTypes.INTEGER,
+      validate: {
+          isNumeric: {
+              msg: 'Debe ser un número'
+          }
+      }
     },
     street1: {                       //Entre la calle 1
       type: DataTypes.STRING,
