@@ -5,31 +5,29 @@ import {
 	orderByPrice,
 	filterByCategories,
 	filterByMaterial,
+	addProductCart,
+	deleteProductCart,
 	getProductByName,
-	addProductCart
 } from "./reducer";
 import axios from "axios";
 
-export const getProducts = () => (dispatch) => {
-	fetch("/products")
-		.then((res) => res.json())
-		.then((resp) => dispatch(getAllProducts(resp)))
-		.catch((e) => console.log(`Error:${e}`));
+export const getProducts = () => async (dispatch) => {
+	let products = await axios.get("/products")
+	try {
+		return dispatch(getAllProducts(products.data))
+	} catch (error) {
+		console.log(error)
+	}
 };
 
 export const postProducts = (productInfo) => async (dispatch) => {
-	let post = await axios.post(
-		"/product",
-		productInfo
-	);
+	let post = await axios.post("/product", productInfo);
 	return post;
 };
 
 export const getDetails = (id) => async (dispatch) => {
 	try {
-		let detail = await axios.get(
-			`/product/${id}`
-		);
+		let detail = await axios.get(`/product/${id}`);
 		return dispatch(getProductsDetail(detail.data));
 	} catch (error) {
 		console.log(error);
@@ -37,9 +35,7 @@ export const getDetails = (id) => async (dispatch) => {
 };
 export const searchProduct = (query) => async (dispatch) => {
 	try {
-		let search = await axios.get(
-			`/product?title=${query}`
-		);
+		let search = await axios.get(`/product?title=${query}`);
 
 		return dispatch(getProductByName(search.data));
 	} catch (error) {
@@ -62,5 +58,8 @@ export const filterByMaterials = (filter) => (dispatch) => {
 };
 
 export const addProductsCart = (product) => (dispatch) => {
-	return dispatch(addProductCart(product))
+	return dispatch(addProductCart(product));
+};
+export const deleteProductsCart = (product) => (dispatch) => {
+	return dispatch(deleteProductCart(product));
 };
