@@ -13,25 +13,61 @@ module.exports = (sequelize) => {
     name: {                            //Nombre del usuario
       type: DataTypes.STRING,
       allowNull: false,
-    },
-    rol: {                             //Papel que desempeña en el sistema
-      type: DataTypes.ENUM('user','guest','admin','superadmin', 'denegado'),
-    },
-    email: {                           //Correo del usuario
-      type: DataTypes.STRING(40),
-      allowNull: false,
-      unique: {
-          msg: 'El email necesita ser unico'
-      },
-      validate: {
-          isEmail: {
-              msg: 'Email no valido'
-          },
-          notEmpty: {
-              msg: 'Ingrese un email'
-          }
+      validate:{
+        notNull:{
+          msg:"El campo no puede estar vacio"
+        },
+        isAlpha:{
+          args: true,
+          msg:"El nombre solo puede contener letras"
+        },
+        len:{
+          args:[3,70],
+          msg:"El nombre tiene que ser entre 3 y 70 caracteres"
+        }
       }
-  }
+    },
+    lastName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate:{
+        notNull:{
+          msg:"El campo no puede estar vacio"
+        },
+        isAlpha:{
+          args: true,
+          msg:"El apellido solo puede contener letras"
+        },
+        len:{
+          args:[3,70],
+          msg:"El apellido tiene que ser entre 3 y 70 caracteres"
+        }
+      }
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        isEmail: {
+          args: true,
+          msg: 'Email no valido'
+        },
+        isLowercase:{
+          args: true,
+          msg: 'El email debe ser en minuscula'
+        }
+      }
+    },
+    rol: {
+      type: DataTypes.ENUM,
+      values: ['user','superadmin','guest','admin','denegado'],
+      defaultValue: 'user'
+   },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false
+    }
   });
   
 };

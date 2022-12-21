@@ -1,11 +1,12 @@
 import { formatPrice } from "./Cart";
 import { useDispatch } from "react-redux";
+import { Button, Box, Stack, Text, Image } from "@chakra-ui/react";
 import { deleteProductsCart } from "../redux/actions";
-import { Box, Stack, Text, Image, Button } from "@chakra-ui/react";
 
 export default function CartItem(props) {
 	const dispatch = useDispatch();
-	const { id, title, image, price /* , quantity */ } = props;
+	const { id, title, image, price, quantity } = props;
+
 	return (
 		<div>
 			<Stack
@@ -37,22 +38,20 @@ export default function CartItem(props) {
 							fontSize="2xl"
 							paddingTop={"2rem"}
 						>
-							{formatPrice(price)}
+							{formatPrice(price)} x {quantity}
 						</Text>
 					</Stack>
 				</Box>
-				<Box p={"5"}>
-					<Button
-						colorScheme={"teal"}
-						marginTop={"10"}
-						marginLeft={"7"}
-						onClick={() => {
-							dispatch(deleteProductsCart(id));
-						}}
-					>
-						Delete
-					</Button>
-				</Box>
+				<Button
+					colorScheme={"teal"}
+					marginTop={"10"}
+					marginLeft={"7"}
+					onClick={() => {
+						dispatch(deleteProductsCart(id));
+					}}
+				>
+					Delete
+				</Button>
 			</Stack>
 		</div>
 	);
