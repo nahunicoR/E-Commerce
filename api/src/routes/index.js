@@ -18,7 +18,7 @@ const getUsersDb = require('./getUsers');
 const getOrdersUsers = require('./getOrdersUsers');
 const getUserIdOrders = require('./getUserIdOrders');
 const createUser = require('./createUser');               // Creado por Jesús Delgado
-const updateUser = require('./updateUser');               // Creado por Jesús Delgado
+const updateUser = require('./updateuser');               // Creado por Jesús Delgado
 
 /* Para ordenes 
    Author: Alejandro Téllez
