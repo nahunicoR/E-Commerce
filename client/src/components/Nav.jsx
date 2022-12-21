@@ -1,6 +1,6 @@
 import React from "react";
 import { Flex, Heading, Button, Image } from "@chakra-ui/react";
-import { FaUser } from "react-icons/fa";
+import { FaUser, FaShoppingCart } from "react-icons/fa";
 import { BiLogOut } from "react-icons/bi";
 import logo from "../assets/LogoTo-Mate.png";
 import { Link } from "react-router-dom";
@@ -27,7 +27,9 @@ export default function Nav() {
 					alignItems="center"
 				>
 					<Image src={logo} alt="page logo" w={"80px"} />
-					<Heading color="white">TO-MATE!</Heading>
+					<Heading color="white">
+						<Link to="/home">TO-MATE!</Link>
+					</Heading>
 				</Flex>
 
 				<Flex justifyContent={"space-evenly"} w={"25%"}>
@@ -35,7 +37,7 @@ export default function Nav() {
 						<Link to={"/create"}>Crear Producto</Link>
 					</Button>
 					<Button
-						onClick={() => loginWithRedirect()}
+						onClick={!isAuthenticated ? () => loginWithRedirect() : null}
 						fontSize={"lg"}
 						color={"white"}
 						bg={"transparent"}
@@ -45,7 +47,11 @@ export default function Nav() {
 						}}
 						leftIcon={<FaUser />}
 					>
-						{isAuthenticated ? user.name : "Iniciar Sesion"}
+						{isAuthenticated ? (
+							<Link to={"/dashboard"}>{user.name}</Link>
+						) : (
+							"Iniciar Sesion"
+						)}
 					</Button>
 
 					{isAuthenticated ? (
@@ -56,6 +62,16 @@ export default function Nav() {
 							onClick={() => logout({ returnTo: window.location.origin })}
 						></Button>
 					) : null}
+
+					<Flex
+						alignItems={"center"}
+						paddingRight={"1.5"}
+						position={"relative"}
+					>
+						<Link to={"/cart"}>
+							<FaShoppingCart color="white" fontSize={"1.5rem"} />
+						</Link>
+					</Flex>
 				</Flex>
 			</Flex>
 		</>

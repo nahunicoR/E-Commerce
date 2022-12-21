@@ -4,13 +4,18 @@ const productsSlice = createSlice({
 	name: "products",
 	initialState: {
 		products: [],
-		productsFilter: [],
+		allProducts: [],
+		filteredBatch: [],
 		productsDetail: {},
+		cart: localStorage.hasOwnProperty("cart")
+			? JSON.parse(localStorage.getItem("cart"))
+			: [],
 	},
+	cart: [],
 	reducers: {
 		getAllProducts: (state, action) => {
 			state.products = action.payload;
-			state.productsFilter = action.payload;
+			state.allProducts = action.payload;
 		},
 		getProductsDetail: (state, action) => {
 			state.productsDetail = action.payload;
@@ -37,31 +42,68 @@ const productsSlice = createSlice({
 				  });
 		},
 		orderByPrice: (state, action) => {
-			action.payload === "+price"
+			action.payload === "-price"
 				? state.products.sort((a, b) => {
-						return a.price - b.price;
+						if (a.price === b.price) {
+							return 0;
+						}
+						if (a.price < b.price) {
+							return -1;
+						}
+						return 1;
 				  })
 				: state.products.sort((a, b) => {
-						return b.price - a.price;
+						if (a.price === b.price) {
+							return 0;
+						}
+						if (a.price < b.price) {
+							return 1;
+						}
+						return -1;
 				  });
 		},
 		filterByCategories: (state, action) => {
-			let categoryFilter =
+			state.filteredBatch =
 				action.payload === "all"
-					? state.productsFilter
-					: state.productsFilter.filter(
+					? state.allProducts
+					: state.allProducts.filter(
 							(c) => c.category.toLowerCase() === action.payload
 					  );
-			state.products = categoryFilter;
+			state.products = state.filteredBatch;
 		},
 		filterByMaterial: (state, action) => {
 			let materialFilter =
 				action.payload === "all"
-					? state.productsFilter
-					: state.productsFilter.filter(
-							(c) => c.material === action.payload
-					  );
+					? state.filteredBatch
+					: state.filteredBatch.filter((c) => c.material === action.payload);
 			state.products = materialFilter;
+		},
+		addProductCart: (state, action) => {
+			let itemInCart = state.cart.find(
+				(product) => product.id === action.payload.id
+			);
+			return itemInCart
+				? {
+						...state,
+						cart: state.cart.map((product) =>
+							product.id === action.payload.id
+								? { ...product, quantity: product.quantity + 1 }
+								: product
+						),
+				  }
+				: {
+						...state,
+						cart: [...state.cart, { ...action.payload, quantity: 1 }],
+				  };
+		},
+
+		getProductByName: (state, action) => {
+			state.products = action.payload;
+		},
+
+		deleteProductCart: (state, action) => {
+			let deleteProduct = state.cart.filter((p) => p.id !== action.payload);
+			state.cart = deleteProduct;
 		},
 	},
 });
@@ -73,6 +115,9 @@ export const {
 	orderByPrice,
 	filterByCategories,
 	filterByMaterial,
+	addProductCart,
+	deleteProductCart,
+	getProductByName,
 } = productsSlice.actions;
 
 export default productsSlice.reducer;

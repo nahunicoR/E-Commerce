@@ -5,30 +5,39 @@ import {
 	orderByPrice,
 	filterByCategories,
 	filterByMaterial,
+	addProductCart,
+	deleteProductCart,
+	getProductByName,
 } from "./reducer";
 import axios from "axios";
 
-export const getProducts = () => (dispatch) => {
-	fetch("https://e-commerce-production-d476.up.railway.app/products")
-		.then((res) => res.json())
-		.then((resp) => dispatch(getAllProducts(resp)))
-		.catch((e) => console.log(`Error:${e}`));
+export const getProducts = () => async (dispatch) => {
+	let products = await axios.get("/products")
+	try {
+		return dispatch(getAllProducts(products.data))
+	} catch (error) {
+		console.log(error)
+	}
 };
 
 export const postProducts = (productInfo) => async (dispatch) => {
-	let post = await axios.post(
-		"https://e-commerce-production-d476.up.railway.app/product",
-		productInfo
-	);
+	let post = await axios.post("/product", productInfo);
 	return post;
 };
 
 export const getDetails = (id) => async (dispatch) => {
 	try {
-		let detail = await axios.get(
-			`https://e-commerce-production-d476.up.railway.app/product/${id}`
-		);
+		let detail = await axios.get(`/product/${id}`);
 		return dispatch(getProductsDetail(detail.data));
+	} catch (error) {
+		console.log(error);
+	}
+};
+export const searchProduct = (query) => async (dispatch) => {
+	try {
+		let search = await axios.get(`/product?title=${query}`);
+
+		return dispatch(getProductByName(search.data));
 	} catch (error) {
 		console.log(error);
 	}
@@ -46,4 +55,11 @@ export const filterByCategory = (filter) => (dispatch) => {
 };
 export const filterByMaterials = (filter) => (dispatch) => {
 	return dispatch(filterByMaterial(filter));
+};
+
+export const addProductsCart = (product) => (dispatch) => {
+	return dispatch(addProductCart(product));
+};
+export const deleteProductsCart = (product) => (dispatch) => {
+	return dispatch(deleteProductCart(product));
 };

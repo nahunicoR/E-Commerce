@@ -5,12 +5,12 @@ module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('user', {
     id: {                     
-      type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER,          //id del Usuario
       primaryKey: true,
       allowNull: false,
       autoIncrement: true,
     },
-    name: {
+    name: {                            //Nombre del usuario
       type: DataTypes.STRING,
       allowNull: false,
       validate:{
@@ -68,6 +68,6 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false
     }
-    
   });
+  
 };

@@ -10,9 +10,13 @@ import {
 	Flex,
 	Divider,
 	HStack,
+	/* useToast, */
 } from "@chakra-ui/react";
 import { Card, CardBody, CardFooter } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addProductsCart } from "../redux/actions";
+/* import { useAuth0 } from "@auth0/auth0-react"; */
 
 export default function CardProduct({
 	id,
@@ -21,7 +25,12 @@ export default function CardProduct({
 	price,
 	category,
 	material,
+	product,
 }) {
+	/* const { isAuthenticated } = useAuth0();
+	const toast = useToast(); */
+	const dispatch = useDispatch();
+
 	return (
 		<>
 			<GridItem colSpan={1}>
@@ -80,6 +89,23 @@ export default function CardProduct({
 								Detalle
 							</Button>
 						</Link>
+						<Button
+							size={"md"}
+							colorScheme={"teal"}
+							marginLeft={"1.5"}
+							onClick={
+								() => dispatch(addProductsCart(product))
+								/* isAuthenticated
+									? handleAddProduct(product)
+									: toast({
+											status: "info",
+											title: "Primero inicie sesión",
+											isClosable: true,
+									  }) */
+							}
+						>
+							+
+						</Button>
 					</CardFooter>
 				</Card>
 			</GridItem>
