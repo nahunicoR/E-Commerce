@@ -34,6 +34,7 @@ const createOrder = require('./createOrder');
 const createAdress = require('./createAddress');
 const getAddressByUser = require('./getAddressByUser');
 const updateAddressUser = require('./updateAddressUser');
+const deleteAddressUser = require('./deleteAddressUser');
 
 
 const router = Router();
@@ -74,6 +75,7 @@ router.use('/order',  createOrder);
 router.use('/address',  createAdress);
 router.use('/addresses', getAddressByUser);
 router.use('/address', updateAddressUser);
+router.use('/address', deleteAddressUser);
 
 
 router.get('/', async (req,res,next) => {
@@ -135,9 +137,11 @@ router.get('/', async (req,res,next) => {
         {
             'Peticion /GET': '/address/id/streets, para obtener los domicilios del usuario',
         },
-
         {
             'Peticion /PUT': '/address/id, para modificar el domicilio del usuario',
+        },
+        {
+            'Peticion /DELETE': 'address/?id=xx&userId=xx, debe ser por query para eliminar el domicilio del usuario',
         },
     ])
 });
