@@ -38,7 +38,6 @@ const updateAddressUser = require('./updateAddressUser');
 
 const router = Router();
 
-
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 
