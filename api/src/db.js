@@ -1,12 +1,13 @@
 require('dotenv').config();
 const { Sequelize } = require('sequelize');
+
 const fs = require('fs');
 const path = require('path');
 const {
   DB_USER, DB_PASSWORD, DB_HOST,DB_DEPLOY
 } = process.env;
 
-// const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/ecomercee`, {
+// const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/ecomerce`, {
 //   logging: false, // set to console.log to see the raw SQL queries
 //   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 // });
@@ -40,12 +41,26 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Product, User } = sequelize.models;
-
-
+const { User, Order, Orderdetail, Product, Address  } = sequelize.models; // Importar Modelos
 // Aca vendrian las relaciones
-// Product.hasMany(Reviews);
 
+// Relación uno a muchos
+
+//Usario tendrá muchas ordenes de compra (Para surtir la orden o carrito)
+//Se añade la propiedad id de User a la tabla Order
+User.hasMany(Order, { as: "ordenes", foreignkey: "id"});
+Order.belongsTo(User, { as: "user"});  //No se requiere generar una foreignkey por ya se creando el id
+
+//La orden está formada por muchos productos 
+Product.hasMany(Orderdetail, { as: "orderdetails", foreignkey: "id"});
+Orderdetail.belongsTo(Product, { as: "product"});  
+
+//y además, la Orden es el encabezado del detalle de la orden, por lo que Order es uno a mucho Orderdetail
+Order.hasMany(Orderdetail, { as: "headorder", foreignkey: "id"});
+
+//Para relacionar al User con Address
+User.hasMany(Address, { as: "streets", foreignkey: "id"});
+//Address.belongsTo(User, { as: "user"});  //No se requiere generar una foreignkey por ya se creando el id
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

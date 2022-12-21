@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import CartItem from "./CartItem";
 import { useSelector } from "react-redux";
-import { FaArrowRight } from "react-icons/fa";
+import PayButton from './PayButton.jsx';
 import {
 	Box,
 	Stack,
 	Heading,
-	/*  Flex, */ Button,
+	/*  Flex, */ 
 	Text,
 	HStack,
 } from "@chakra-ui/react";
@@ -43,7 +43,7 @@ export default function Cart() {
 			>
 				<HStack alignItems={"flex-start"}>
 					<Stack spacing={{ base: "8", md: "10" }} flex="2">
-						<Heading fontSize="2xl" fontWeight="bold">
+						<Heading fontSize="2xl" fontWeight="extrabold">
 							Carrito de Compras ({productsInCart.length} Productos)
 						</Heading>
 
@@ -56,27 +56,18 @@ export default function Cart() {
 					{/* -----checkout------- */}
 					<HStack alignItems={"flex-start"} width={250}>
 						<Stack spacing="8" rounded="lg" padding="8" width="full">
-							<Heading fontWeight={"bold"} size="md">
-								Resumen del Pedido
-							</Heading>
+							<Heading size="md">Resumen del Pedido</Heading>
 							<Stack spacing="6">
 								<Stack justify="space-between" textAlign={"right"}>
 									<Text fontSize="lg" fontWeight="semibold">
 										Total
 									</Text>
-									<Text color={"teal"} fontSize="xl" fontWeight="extrabold">
+									<Text fontSize="xl" fontWeight="extrabold">
 										{formatPrice(total)}
 									</Text>
 								</Stack>
 							</Stack>
-							<Button
-								colorScheme="teal"
-								size="lg"
-								fontSize="md"
-								rightIcon={<FaArrowRight />}
-							>
-								Pagar
-							</Button>
+							<PayButton productsInCart={productsInCart}/>
 						</Stack>
 					</HStack>
 				</HStack>

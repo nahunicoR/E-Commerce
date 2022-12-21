@@ -33,16 +33,16 @@ module.exports = (sequelize) => {
     },
     material: {
       type: DataTypes.STRING,
-    }
+    },
     // discountprice: {                 //Precio con descuento
     //   type: DataTypes.REAL,
     // },
     // promotionprice: {                //Precio de promoción
     //   type: DataTypes.REAL,
     // },
-    // productstock: {                  //Cantidad de piezas existentes 
-    //   type: DataTypes.INTEGER,
-    // },
+    stock: {                           //Cantidad de piezas existentes 
+       type: DataTypes.INTEGER,
+     },
     // productpresentation: {           //Presentación ejemplo: 300 gms, 500 gms, 1 kg
     //   type: DataTypes.STRING(15),
     // },
@@ -58,6 +58,8 @@ module.exports = (sequelize) => {
     // },
   },
   {
-    timestamps: false,
+    //agregando la propiedad paranoid automaticamente se crea una columna deleteAt que inicia en null y cuando se llama al Metodo destroy el registro queda oculto 
+    paranoid: true,
+    timestamps: true,
   });
 };
