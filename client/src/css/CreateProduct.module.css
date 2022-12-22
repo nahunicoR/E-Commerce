@@ -17,6 +17,10 @@
 	text-align: center;
 }
 
+.formulario p {
+	color: red;
+}
+
 .formulario > div {
 	margin-bottom: 20px;
 }
@@ -42,7 +46,7 @@
 }
 
 .selects {
-	display: flex;
+	display: grid;
 	margin: auto;
 }
 

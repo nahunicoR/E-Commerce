@@ -3,6 +3,29 @@ import { useDispatch } from "react-redux";
 import { postProducts } from "../redux/actions";
 import styles from "../css/CreateProduct.module.css";
 
+const validate = ( form ) => {
+	let errors = {};
+	if (!form.title) {
+	  errors.title = 'Este campo es Obligatorio'
+	}
+	if (!form.price) {
+	  errors.price = 'Este campo es Obligatorio'
+	}
+	if (!form.category) {
+		errors.category = 'Este campo es Obligatorio'
+	}
+	if (!form.material) {
+		errors.material = 'Este campo es Obligatorio'
+	}
+	if (!form.description) {
+		errors.description = 'Este campo es Obligatorio'
+	}
+	if (!form.image) {
+		errors.image = 'Este campo es Obligatorio'
+	}
+	return errors;
+  }
+
 export default function CreateProduct() {
 	const dispatch = useDispatch();
 	const [image, setImage] = useState('');
@@ -14,11 +37,24 @@ export default function CreateProduct() {
 		description: '',
 		image:''
 	})
+	const [errors, setErrors] = useState({
+		title: '',
+		price: '',
+		category: '',
+		material: '',
+		description: '',
+		image:''
+	})
+	
 	const handleChange = (e) => {
 		setForm({
 		  	...form,
 		    [e.target.name]: e.target.value
 		});
+		setErrors( validate({
+			...form,
+			[e.target.name] : e.target.value
+		}));
 	}
 	const handleSelectCategory = (e) => {
 		setForm({
@@ -79,6 +115,7 @@ export default function CreateProduct() {
 						onChange={ handleChange }
 						placeholder='Nombre del Producto:'
 					/>
+					<p>{ errors.title && errors.title }</p>
 				</div>
 
 				<div>
@@ -90,9 +127,12 @@ export default function CreateProduct() {
 						onChange={ handleChange }
 						placeholder='Precio: '
 					/>
+					<p>{ errors.price && errors.price }</p>
 				</div>
 
 				<div className={`${ styles.selects }`}>
+					<div>
+
 					{/* <label>Categoria: </label> */}
 					<select name='category' onChange={ handleSelectCategory } defaultValue='categoria'>
 						<option disabled value="categoria">Seleccionar Categoria</option>
@@ -101,9 +141,6 @@ export default function CreateProduct() {
 						<option value="Mate">Mate</option>
 						<option value="Yerba">Yerba</option>
 					</select>
-				{/* </div>
-
-				<div> */}
 					{/* <label>Material: </label> */}
 					<select name='material' onChange={ handleSelectMaterial } defaultValue='material'>
 						<option disabled value="material">Seleccionar Material</option>
@@ -111,17 +148,24 @@ export default function CreateProduct() {
 						<option value="Industrial">Industrial</option>
 						<option value="Sintetico">Sintetico</option>
 					</select>
+					</div>
+				</div>
+
+				<div>
+					<p>{ errors.category && 'Estos campos son obligatorios' }</p>
 				</div>
 
 				<div>
 					<label>Descripcion: </label>
 					<textarea value={form.description} name='description' onChange={ handleChange }/>
+					<p>{ errors.description && errors.description }</p>
 				</div>
 
 				<div>
 					<label>Imagen: </label>
 					<input hidden type='text' value={ form.image = image } name='image' onChange={ handleChange }/>
 					<input type='file' onChange={ uploadImage } />
+					<p>{ errors.image && errors.image }</p>
 				</div>
 
 				<button type='submit'> Crear Producto </button>
