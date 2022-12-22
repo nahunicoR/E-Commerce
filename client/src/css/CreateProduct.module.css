@@ -1,18 +1,24 @@
-.container {
-	min-height: 100vh;
+.content {
 	display: flex;
-	align-items: flex-start;
 	justify-content: center;
+	margin-top: 5px;
 }
 
-
 .formulario {
+	display: grid;
 	min-width: 600px;
-	margin-top: 50px;
 	background: #fff;
 	border-radius: 5px;
 	padding: 20px;
 	box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 4px;
+}
+
+.formulario h2 {
+	text-align: center;
+}
+
+.formulario p {
+	color: red;
 }
 
 .formulario > div {
@@ -30,7 +36,7 @@
 .formulario input,
 .formulario textarea {
 	font-family: 'Open Sans', sans-serif;
-	width: 70%;
+	width: 100%;
 	border-radius: 5px;
 	border: 1px solid #444444;
 	font-size: 18px;
@@ -39,9 +45,20 @@
 	color: #1f1f1f;
 }
 
+.selects {
+	display: grid;
+	margin: auto;
+}
+
+.selects select {
+	border: 1px solid black;
+	margin: 15px;
+	border-radius: 5px;
+}
+
 .formulario input:focus {
 	outline: none;
-	border: 2px solid #0085FF;
+	border: 2px solid #319795;
 }
 
 .formulario .error {
@@ -52,7 +69,7 @@
 
 .formulario button[type="submit"] {
 	display: block;
-	background: #0085FF;
+	background: #319795;
 	font-weight: 600;
 	font-family: 'Open Sans', sans-serif;
 	border: none;
@@ -66,7 +83,7 @@
 }
 
 .formulario button[type="submit"]:hover {
-	background: #0051ff;
+	background: #38aeac;
 }
 
 .formulario .exito {
