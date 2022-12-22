@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from "react-redux";
 import { postProducts } from "../redux/actions";
 import styles from "../css/CreateProduct.module.css";
@@ -11,24 +11,23 @@ const validate = ( form ) => {
 	if (!form.price) {
 	  errors.price = 'Este campo es Obligatorio'
 	}
-	if (!form.category) {
+	if (!form.category || !form.material ) {
 		errors.category = 'Este campo es Obligatorio'
-	}
-	if (!form.material) {
-		errors.material = 'Este campo es Obligatorio'
 	}
 	if (!form.description) {
 		errors.description = 'Este campo es Obligatorio'
 	}
-	if (!form.image) {
-		errors.image = 'Este campo es Obligatorio'
-	}
+	// if (!form.image) {
+	// 	errors.image = 'Este campo es Obligatorio'
+	// }
 	return errors;
   }
 
 export default function CreateProduct() {
 	const dispatch = useDispatch();
 	const [image, setImage] = useState('');
+	const [button, setButton] = useState(true);
+	const [loading, setLoading] = useState(false)
 	const [form, setForm] = useState({
 		title: '',
 		price: '',
@@ -45,6 +44,19 @@ export default function CreateProduct() {
 		description: '',
 		image:''
 	})
+
+	useEffect(() => {
+	  if (	form.title.length > 0 &&
+			form.price.length > 0 &&
+			form.category.length > 0 &&
+			form.material.length > 0 &&
+			form.description.length > 0 ) {
+		setButton(false)
+	  } else {
+		setButton( true )
+	  }	
+	}, [form, setButton])
+	
 	
 	const handleChange = (e) => {
 		setForm({
@@ -85,7 +97,6 @@ export default function CreateProduct() {
 		)
 		const file = await res.json();
 		setImage(file.secure_url);
-		console.log(file.secure_url);
 	}
 
 	const handleSubmit = (e) => {
@@ -152,23 +163,39 @@ export default function CreateProduct() {
 				</div>
 
 				<div>
-					<p>{ errors.category && 'Estos campos son obligatorios' }</p>
-				</div>
-
-				<div>
 					<label>Descripcion: </label>
-					<textarea value={form.description} name='description' onChange={ handleChange }/>
+					<textarea 
+						value={form.description} 
+						name='description' 
+						onChange={ handleChange }
+					/>
 					<p>{ errors.description && errors.description }</p>
 				</div>
 
-				<div>
+				<div className={`${ styles.image }`}>
 					<label>Imagen: </label>
-					<input hidden type='text' value={ form.image = image } name='image' onChange={ handleChange }/>
-					<input type='file' onChange={ uploadImage } />
-					<p>{ errors.image && errors.image }</p>
+					<input 
+						hidden 
+						type='text' 
+						value={ form.image = image } 
+						name='image' 
+						onChange={ handleChange }
+					/>
+					<input 
+						type='file' 
+						onChange={ uploadImage } 
+						placeholder="Imagen"
+					/>
+					<div>
+						{image ? 
+						<img src={image} style={{ width:"190px", height:"auto" }} />: 
+						(<h4>Cargar imagen...</h4>)}
+					</div>
 				</div>
 
-				<button type='submit'> Crear Producto </button>
+				<button type='submit' disabled={ button }> 
+					Crear Producto 
+				</button>
 
 			</form>
 		</div>
