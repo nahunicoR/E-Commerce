@@ -58,6 +58,8 @@ module.exports = (sequelize) => {
     // },
   },
   {
-    timestamps: false,
+    //agregando la propiedad paranoid automaticamente se crea una columna deleteAt que inicia en null y cuando se llama al Metodo destroy el registro queda oculto 
+    paranoid: true,
+    timestamps: true,
   });
 };

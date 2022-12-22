@@ -24,7 +24,7 @@ const responsive = {
 export default function Landing() {
 	return (
 		<div>
-			<Stack position={"relative"} height={"86hv"}>
+			<Stack position={"relative"} height={"86vh"}>
 				<Carousel responsive={responsive}>
 					<Image
 						boxSize="750px"
