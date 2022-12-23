@@ -9,7 +9,7 @@ const router = Router();
 router.get('/', async (req, res, next) => {
     try {
         const data = await getProductsDb();
-        if (data.length === 0) {
+        if (!data.length) {
             const load = await Product.bulkCreate(products);
             return res.json(load);
         }
