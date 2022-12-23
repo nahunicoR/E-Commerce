@@ -35,11 +35,11 @@ server.get('/cloudinary', (req, res) => {
 //Para varias imagenes en temporal
 // server.post("/cloudinary/upload", uploader.array("files"), uploadFiles);
 
-// function uploadFiles(req, res) {
-//     console.log(req.body);
-//     console.log(req.files);
-//     res.json({ message: "Successfully uploaded files" });
-// }
+function uploadFiles(req, res) {
+    console.log(req.body);
+    console.log(req.files);
+    res.json({ message: "Successfully uploaded files" });
+}
 
 
 // Syncing all the models at once.
