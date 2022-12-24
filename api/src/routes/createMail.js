@@ -6,6 +6,7 @@ const router = Router();
 /* Date Creation: December 21, 2022
    Author: Alejandro Téllez Aguilar
    Description: Crea el servicio de la ruta /mail para el correo de compra para el usuario
+   //tyvvqqdwlvqtjzeu
    Usuarios de Prueba:
    nahunico.r@gmail.com           Nahuel
    wzseba@gmail.com               Sebastian
@@ -26,7 +27,7 @@ router.post('/mail', (req, res, next) => { //async
     secure: false, // true for 465, false for other ports
     auth: {
       user: "atacolmx@gmail.com", // generated ethereal user
-      pass: "tyvvqqdwlvqtjzeu", // generated ethereal password
+      pass: "aqui va la contraseña", // generated ethereal password
     },
   });
 
