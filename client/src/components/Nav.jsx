@@ -59,7 +59,9 @@ export default function Nav() {
 							fontSize={"lg"}
 							colorScheme={"red"}
 							leftIcon={<BiLogOut />}
-							onClick={() => logout({ returnTo: window.location.origin })}
+							onClick={() =>
+								logout({ returnTo: window.location.origin + "/home" })
+							}
 						></Button>
 					) : null}
 
