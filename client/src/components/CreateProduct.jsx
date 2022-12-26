@@ -27,7 +27,6 @@ export default function CreateProduct() {
 	const dispatch = useDispatch();
 	const [image, setImage] = useState("");
 	const [button, setButton] = useState(true);
-	const [loading, setLoading] = useState(false);
 	const [form, setForm] = useState({
 		title: "",
 		price: "",
@@ -198,7 +197,11 @@ export default function CreateProduct() {
 					<input type="file" onChange={uploadImage} placeholder="Imagen" />
 					<div>
 						{image ? (
-							<img src={image} style={{ width: "190px", height: "auto" }} />
+							<img
+								alt="test"
+								src={image}
+								style={{ width: "190px", height: "auto" }}
+							/>
 						) : (
 							<h4>Cargar imagen...</h4>
 						)}
