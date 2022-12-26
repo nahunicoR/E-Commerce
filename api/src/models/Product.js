@@ -42,6 +42,7 @@ module.exports = (sequelize) => {
     // },
     stock: {                           //Cantidad de piezas existentes 
        type: DataTypes.INTEGER,
+       defaultValue: 70,
      },
     // productpresentation: {           //Presentación ejemplo: 300 gms, 500 gms, 1 kg
     //   type: DataTypes.STRING(15),
