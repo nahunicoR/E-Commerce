@@ -4,7 +4,7 @@ const router = Router();
 
 /* Date Creation: December 16, 2022
    Author: Alejandro Téllez Aguilar
-   Description: Crea el servicio de la ruta /oder para orden de compra
+   Description: Crea el servicio de la ruta /oder para crear la orden de compra
 */
 router.post('/create', async (req, res, next) => {
     const { purchaseCost, payOrder, paymentMethod, status, userId } = req.body;

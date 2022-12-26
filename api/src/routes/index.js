@@ -26,6 +26,23 @@ const updateUser = require('./updateUser');               // Creado por Jesús D
 
 const createOrder = require('./createOrder');
 
+
+/* Para Address 
+   Author: Alejandro Téllez
+*/
+
+const createAdress = require('./createAddress');
+const getAddressByUser = require('./getAddressByUser');
+const updateAddressUser = require('./updateAddressUser');
+const deleteAddressUser = require('./deleteAddressUser');
+
+/* Para Emails 
+   Author: Alejandro Téllez
+*/
+
+const createMail = require('./createMail');
+
+
 const router = Router();
 
 
@@ -55,6 +72,24 @@ router.use('/user',  updateUser);
 */
 
 router.use('/order',  createOrder);
+
+
+/* Para Address 
+   Author: Alejandro Téllez 
+*/
+
+router.use('/address',  createAdress);
+router.use('/addresses', getAddressByUser);
+router.use('/address', updateAddressUser);
+router.use('/address', deleteAddressUser);
+
+/* Para Mails 
+   Author: Alejandro Téllez 
+*/
+
+router.use('/',  createMail);
+
+
 
 router.get('/', async (req,res,next) => {
     res.json([
@@ -105,6 +140,29 @@ router.get('/', async (req,res,next) => {
             '*************** ORDERS ': '*********************** ',
             'Peticion /POST': '/create, para crear la orden en la base de datos',
         },
+
+
+        {
+            '*************** ADDRESS ': '*********************** ',
+            'Peticion /POST': '/address, para crear la orden en la base de datos',
+        },
+
+        {
+            'Peticion /GET': '/addresses/id/streets, para obtener los domicilios del usuario',
+        },
+        {
+            'Peticion /PUT': '/address/id, para modificar el domicilio del usuario',
+        },
+        {
+            'Peticion /DELETE': 'address/?id=xx&userId=xx, debe ser por query para eliminar el domicilio del usuario',
+        },
+        {
+            '*************** MAIL ': '*********************** ',
+            'Peticion /POST': '/mail, para crear el correo y enviarlo',
+        },
+
+
+
     ])
 });
 
