@@ -1,168 +1,404 @@
-import React, { Fragment, useState } from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { postProducts } from "../redux/actions";
 import styles from "../css/CreateProduct.module.css";
 
+const validate = (form) => {
+	let errors = {};
+	if (!form.title) {
+		errors.title = "Este campo es Obligatorio";
+	}
+	if (!form.price) {
+		errors.price = "Este campo es Obligatorio";
+	}
+	if (!form.category || !form.material) {
+		errors.category = "Este campo es Obligatorio";
+	}
+	if (!form.description) {
+		errors.description = "Este campo es Obligatorio";
+	}
+	// if (!form.image) {
+	// 	errors.image = 'Este campo es Obligatorio'
+	// }
+	return errors;
+};
+
 export default function CreateProduct() {
 	const dispatch = useDispatch();
-	//const prod = useSelector((state) => state.products);
+	const [image, setImage] = useState("");
+	const [button, setButton] = useState(true);
+	const [loading, setLoading] = useState(false);
+	const [form, setForm] = useState({
+		title: "",
+		price: "",
+		category: "",
+		material: "",
+		description: "",
+		image: "",
+	});
+	const [errors, setErrors] = useState({
+		title: "",
+		price: "",
+		category: "",
+		material: "",
+		description: "",
+		image: "",
+	});
 
-	const [sentForm, changeSentForm] = useState(false);
+	useEffect(() => {
+		if (
+			form.title.length > 0 &&
+			form.price.length > 0 &&
+			form.category.length > 0 &&
+			form.material.length > 0 &&
+			form.description.length > 0
+		) {
+			setButton(false);
+		} else {
+			setButton(true);
+		}
+	}, [form, setButton]);
+
+	const handleChange = (e) => {
+		setForm({
+			...form,
+			[e.target.name]: e.target.value,
+		});
+		setErrors(
+			validate({
+				...form,
+				[e.target.name]: e.target.value,
+			})
+		);
+	};
+	const handleSelectCategory = (e) => {
+		setForm({
+			...form,
+			category: e.target.value,
+		});
+	};
+
+	const handleSelectMaterial = (e) => {
+		setForm({
+			...form,
+			material: e.target.value,
+		});
+	};
+
+	const uploadImage = async (e) => {
+		const files = e.target.files;
+		const data = new FormData();
+		data.append("file", files[0]);
+		data.append("upload_preset", "ecomerce");
+		// setLoading(true);
+		const res = await fetch(
+			"https://api.cloudinary.com/v1_1/m6nuel/image/upload",
+			{
+				method: "POST",
+				body: data,
+			}
+		);
+		const file = await res.json();
+		setImage(file.secure_url);
+	};
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		dispatch(postProducts(form));
+		console.log(form);
+		setForm({
+			title: "",
+			price: "",
+			category: "",
+			material: "",
+			description: "",
+			image: "",
+		});
+	};
 
 	return (
-		<Fragment>
-			<div className={styles.container}>
-				<h1>Crear producto</h1>
-				<Formik
-					initialValues={{
-						name: "",
-						image: "",
-						price: "",
-						description: "",
-						material: "",
-						stock: 0,
-					}}
-					validate={(values) => {
-						let errors = {};
+		<div className={`${styles.content}`}>
+			<form className={`${styles.formulario}`} onSubmit={handleSubmit}>
+				<h2>Crear Producto</h2>
+				<div>
+					{/* <label>Nombre del Producto: </label> */}
+					<input
+						type="text"
+						value={form.title}
+						name="title"
+						onChange={handleChange}
+						placeholder="Nombre del Producto:"
+					/>
+					<p>{errors.title && errors.title}</p>
+				</div>
 
-						if (!values.name) {
-							errors.name = "Este campo es requerido";
-						} else if (!/[a-zA-ZñÑ\s]{2,50}/.test(values.name)) {
-							errors.name = "Debe contener solo letras y espacios";
-						}
+				<div>
+					{/* <label>Precio: </label> */}
+					<input
+						type="number"
+						value={form.price}
+						name="price"
+						onChange={handleChange}
+						placeholder="Precio: "
+					/>
+					<p>{errors.price && errors.price}</p>
+				</div>
 
-						if (!values.image) {
-							errors.image = "Debe seleccionar una imagen";
-						}
+				<div className={`${styles.selects}`}>
+					<div>
+						{/* <label>Categoria: </label> */}
+						<select
+							name="category"
+							onChange={handleSelectCategory}
+							defaultValue="categoria"
+						>
+							<option disabled value="categoria">
+								Seleccionar Categoria
+							</option>
+							<option value="Bombilla">Bombilla</option>
+							<option value="Kit">Kit</option>
+							<option value="Mate">Mate</option>
+							<option value="Yerba">Yerba</option>
+						</select>
+						{/* <label>Material: </label> */}
+						<select
+							name="material"
+							onChange={handleSelectMaterial}
+							defaultValue="material"
+						>
+							<option disabled value="material">
+								Seleccionar Material
+							</option>
+							<option value="Artesanal">Artesanal</option>
+							<option value="Industrial">Industrial</option>
+							<option value="Sintetico">Sintetico</option>
+						</select>
+					</div>
+				</div>
 
-						if (!values.price) {
-							errors.price = "Selecciona un precio";
-						} else if (values.price < 0) {
-							errors.price = "El precio debe ser mayor a 0";
-						}
+				<div>
+					<label>Descripcion: </label>
+					<textarea
+						value={form.description}
+						name="description"
+						onChange={handleChange}
+					/>
+					<p>{errors.description && errors.description}</p>
+				</div>
 
-						if (!values.material) {
-							errors.material = "Este campo es requerido";
-						} else if (
-							values.material === "Sintetico" ||
-							values.material === "Artesanal" ||
-							values.material === "Industrial"
-						) {
-							errors.material =
-								"Debe ser alguna opción Sintetico, Artesanal o Industrial.";
-						}
+				<div className={`${styles.image}`}>
+					<label>Imagen: </label>
+					<input
+						hidden
+						type="text"
+						value={(form.image = image)}
+						name="image"
+						onChange={handleChange}
+					/>
+					<input type="file" onChange={uploadImage} placeholder="Imagen" />
+					<div>
+						{image ? (
+							<img src={image} style={{ width: "190px", height: "auto" }} />
+						) : (
+							<h4>Cargar imagen...</h4>
+						)}
+					</div>
+				</div>
 
-						if (!values.stock) {
-							errors.stock = "Éste campo es requerido";
-						  } else if (values.stock < 0) {
-							errors.stock = "El stock debe ser superior a 0";
-						  }
-						  return errors;
-						}}
-		
-					onSubmit={(values, { resetForm }) => {
-						resetForm();
-						dispatch(postProducts(values));
-						changeSentForm(true);
-						setTimeout(() => changeSentForm(false), 5000);
-						console.log(values);
-					}}
-					>
-					{({
-						values,
-						errors,
-						handleSubmit,
-						handleChange,
-						setFieldValue,
-						handleBlur,
-					}) => (
-						<Form className={styles.formulario} onSubmit={handleSubmit}>
-							<div>
-								<label>Nombre: </label>
-								<Field type="text" id="name" name="name" />
-								<ErrorMessage
-									name="name"
-									component={() => (
-										<div className={styles.error}>{errors.name}</div>
-									)}
-								/>
-							</div>
-
-							<div>
-								<label>Imagen: </label>
-								<input
-									accept="image/png,image/jpeg"
-									type="file"
-									id="image"
-									name="image"
-									onChange={(event) =>
-										setFieldValue("image", event.currentTarget.files[0])
-									}
-								/>
-								<ErrorMessage
-									name="image"
-									component={() => (
-										<div className={styles.error}>{errors.image}</div>
-									)}
-								/>
-							</div>
-
-							<div>
-								<label>Precio: </label>
-								<Field type="number" id="price" name="price" />
-								<ErrorMessage
-									name="price"
-									component={() => (
-										<div className={styles.error}>{errors.price}</div>
-									)}
-								/>
-							</div>
-
-							<div>
-								<label>Material: </label>
-								<Field type="text" id="material" name="material" />
-								<ErrorMessage
-									name="material"
-									component={() => (
-										<div className={styles.error}>{errors.material}</div>
-									)}
-								/>
-							</div>
-
-							<div>
-								<Field
-									name="description"
-									as="textarea"
-									placeholder="Description"
-								/>
-							</div>
-
-							<div>
-								<label htmlFor="stock">Stock: </label>
-								<Field type="number" id="stock" name="stock" />
-								<ErrorMessage
-								name="stock"
-								component={() => (
-								<div className={styles.error}>{errors.stock}</div>
-								)}
-								/>
-							</div>
-							<button type="submit">Añadir</button>
-							{sentForm && (
-								<p className={styles.exito}>
-									¡El producto se ha añadido exitosamente!
-								</p>
-							)}
-						</Form>
-					)}
-				</Formik>
-			</div>
-		</Fragment>
+				<button type="submit" disabled={button}>
+					Crear Producto
+				</button>
+			</form>
+		</div>
 	);
 }
 
+// import React, { Fragment, useState } from "react";
+// import { Formik, Form, Field, ErrorMessage } from "formik";
+// import { useDispatch } from "react-redux";
+// import { postProducts } from "../redux/actions";
+// import styles from "../css/CreateProduct.module.css";
+// import { uploadImage } from "../cloudinary";
 
+// 	const dispatch = useDispatch();
+
+// 	const [sentForm, changeSentForm] = useState(false);
+// 	const [image, setImage] = useState('');
+
+// 	// const url = uploadImage()
+// 	const uploadImage = async (e) => {
+// 		const files = e.target.files;
+// 		const data = new FormData();
+// 		data.append("file",files[0]);
+// 		data.append("upload_preset", "ecomerce");
+// 		// setLoading(true);
+// 		const res = await fetch(
+// 			"https://api.cloudinary.com/v1_1/m6nuel/image/upload",
+// 			{
+// 				method: "POST",
+// 				body: data,
+// 			}
+// 		)
+// 		const file = await res.json();
+// 		setImage(file.secure_url);
+// 		console.log(file.secure_url);
+// 		console.log(image)
+// 		// setLoading(false)
+// 		// return file.secure_url
+// 	}
+
+// 	return (
+// 		<Fragment>
+// 			<div className={styles.container}>
+// 				<h1>Crear producto</h1>
+// 				<Formik
+// 					initialValues={{
+//         				title: "",
+//         				price: "",
+//         				image: "",
+//         				description: "",
+//         				category:"",
+// 						material: "",
+// 					}}
+// 					validate={(values) => {
+// 						let errors = {};
+
+// 						if (!values.name) {
+// 							errors.name = "Este campo es requerido";
+// 						} else if (!/[a-zA-ZñÑ\s]{2,50}/.test(values.name)) {
+// 							errors.name = "Debe contener solo letras y espacios";
+// 						}
+
+// 						if (!values.image) {
+// 							errors.image = "Debe seleccionar una imagen";
+// 						}
+
+// 						if (!values.price) {
+// 							errors.price = "Selecciona un precio";
+// 						} else if (values.price < 0) {
+// 							errors.price = "El precio debe ser mayor a 0";
+// 						}
+
+// 						if (!values.category) {
+// 							errors.category = "La categoria debe ser Bombilla, Mate, Yerba o Kit";
+// 						}
+
+// 						if (!values.material) {
+// 							errors.material = "Este campo es requerido";
+// 						} else if (
+// 							values.material === "Sintetico" ||
+// 							values.material === "Artesanal" ||
+// 							values.material === "Industrial"
+// 						) {
+// 							errors.material =
+// 								"Debe ser alguna opción Sintetico, Artesanal o Industrial.";
+// 						}
+// 						return errors;
+// 					}}
+// 					onSubmit={(values, { resetForm }) => {
+// 						resetForm();
+// 						dispatch(postProducts(values));
+// 						changeSentForm(true);
+// 						setTimeout(() => changeSentForm(false), 5000);
+// 						console.log(values);
+// 					}}
+// 					onChange={ uploadImage }
+// 				>
+// 					{({
+// 						values,
+// 						errors,
+// 						handleSubmit,
+// 						handleChange,
+// 						setFieldValue,
+// 						handleBlur,
+// 					}) => (
+// 						<Form className={styles.formulario} onSubmit={handleSubmit}>
+// 							<div>
+// 								<label>Nombre: </label>
+// 								<Field type="text" id="title" name="title" />
+// 								<ErrorMessage
+// 									name="name"
+// 									component={() => (
+// 										<div className={styles.error}>{errors.name}</div>
+// 									)}
+// 								/>
+// 							</div>
+
+// 							<div>
+// 								<label>Imagen: </label>
+// 								<Field
+// 									hidden
+// 									// accept="image/png,image/jpeg"
+// 									type="text"
+// 									id="image"
+// 									name="image"
+// 									value={ values.image = image }
+// 									// onChange={(event) =>
+// 									// 	setFieldValue("image", event.currentTarget.files[0])
+// 									// }
+// 								/>
+// 								<input type='file' onChange={ handleChange } />
+// 								<ErrorMessage
+// 									name="image"
+// 									component={() => (
+// 										<div className={styles.error}>{errors.image}</div>
+// 									)}
+// 								/>
+// 							</div>
+
+// 							<div>
+// 								<label>Precio: </label>
+// 								<Field type="number" id="price" name="price" />
+// 								<ErrorMessage
+// 									name="price"
+// 									component={() => (
+// 										<div className={styles.error}>{errors.price}</div>
+// 									)}
+// 								/>
+// 							</div>
+
+// 							<div>
+// 								<label>Categoria: </label>
+// 								<Field type="text" id="category" name="category" />
+// 								<ErrorMessage
+// 									name="category"
+// 									component={() => (
+// 										<div className={styles.error}>{errors.category}</div>
+// 									)}
+// 								/>
+// 							</div>
+
+// 							<div>
+// 								<label>Material: </label>
+// 								<Field type="text" id="material" name="material" />
+// 								<ErrorMessage
+// 									name="material"
+// 									component={() => (
+// 										<div className={styles.error}>{errors.material}</div>
+// 									)}
+// 								/>
+// 							</div>
+
+// 							<div>
+// 								<Field
+// 									name="description"
+// 									as="textarea"
+// 									placeholder="Description"
+// 								/>
+// 							</div>
+// 							<button type="submit">Añadir</button>
+// 							{sentForm && (
+// 								<p className={styles.exito}>
+// 									¡El producto se ha añadido exitosamente!
+// 								</p>
+// 							)}
+// 						</Form>
+// 					)}
+// 				</Formik>
+// 			</div>
+// 		</Fragment>
+// 	);
+// }
 
 // import React, { useState } from "react";
 // import { useDispatch} from "react-redux";
@@ -200,7 +436,6 @@ export default function CreateProduct() {
 //     //             }
 //     //         )
 //     // )}
-    
 
 //     const handleChange = (e) => {
 // 			const {name, value} = e.target;
@@ -213,7 +448,7 @@ export default function CreateProduct() {
 // 				[name]: value
 // 			}));
 // 			console.log(input)
-// 		}  
+// 		}
 
 // 	const validate = (input) => {
 
@@ -272,13 +507,12 @@ export default function CreateProduct() {
 // 				category:"",
 // 				material:"",
 //               });
-//               alert("Se creó un nuevo producto!")  
+//               alert("Se creó un nuevo producto!")
 //         }
 //         else {
 //             alert("Completa los campos.")
 //         }
 //     }
-
 
 // 	 const addImage = async (e) => {
 // 		 const imageUp = await Cloudinary(e.target.files[0]);
@@ -289,7 +523,6 @@ export default function CreateProduct() {
 //       });
 // 		};
 
-	
 //     return ( <div className="ProductCreate">
 //         <form onSubmit={(e) => handleSubmit(e)}>
 //           <div className="mb-3" style={{display:"flex", flexDirection:"column" ,alignItems:"center"}}>
@@ -301,12 +534,12 @@ export default function CreateProduct() {
 //               style={{width:'600px'}}
 //               type="text"
 //               placeholder="Nombre..."
-//               value={input.title} 
-//               name='title' 
-//               onChange={handleChange}  
-//             /> 
+//               value={input.title}
+//               name='title'
+//               onChange={handleChange}
+//             />
 //             {error.title && <p >{error.title}</p>}
-                      
+
 //             <label>
 //               Precio
 //             </label>
@@ -314,8 +547,8 @@ export default function CreateProduct() {
 //             style={{width:'600px'}}
 //               type="number"
 //               placeholder="Precio..."
-//               value={input.price} 
-//               name='price' 
+//               value={input.price}
+//               name='price'
 //               onChange={handleChange}
 //             />
 //             {error.price && <p>{error.price}</p>}
@@ -327,28 +560,28 @@ export default function CreateProduct() {
 //             style={{width:'600px'}}
 //               type="file"
 //               placeholder="Imagen..."
-//               name='image' 
+//               name='image'
 //               onChange={(e) => {
 //                 addImage(e)
 //               }}
 //             />
 //             {error.image && <p >{error.image}</p>}
 //             <label className="form-label">
-//               Descripción del producto: 
+//               Descripción del producto:
 //             </label>
 //             <input
 //               style={{width:'600px'}}
 //               type="text"
 //               placeholder="Descripción..."
-//               value={input.description} 
-//               name='description' 
-//               onChange={handleChange}  
-//             /> 
+//               value={input.description}
+//               name='description'
+//               onChange={handleChange}
+//             />
 //             {error.description && <p >{error.description}</p>}
 
 // 			<label>
-//                     Categoría: 
-//                 </label> 
+//                     Categoría:
+//                 </label>
 // 				<div className={styles.circle}>
 // 				<label className={styles.labelName}>
 // 					<input type="radio" className={styles.circle} value='Mate' name="material" onChange={handleChange}/> Mate
@@ -365,8 +598,8 @@ export default function CreateProduct() {
 // 				</div>
 
 //                 <label>
-//                     Material: 
-//                 </label> 
+//                     Material:
+//                 </label>
 // 				<div className={styles.circle}>
 // 				<label className={styles.labelName}>
 // 					<input type="radio" className={styles.circle} value='Sintetico' name="material" onChange={handleChange}/> Sintetico
