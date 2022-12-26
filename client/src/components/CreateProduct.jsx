@@ -21,6 +21,7 @@ export default function CreateProduct() {
 						price: "",
 						description: "",
 						material: "",
+						stock: 0,
 					}}
 					validate={(values) => {
 						let errors = {};
@@ -51,8 +52,15 @@ export default function CreateProduct() {
 							errors.material =
 								"Debe ser alguna opción Sintetico, Artesanal o Industrial.";
 						}
-						return errors;
-					}}
+
+						if (!values.stock) {
+							errors.stock = "Éste campo es requerido";
+						  } else if (values.stock < 0) {
+							errors.stock = "El stock debe ser superior a 0";
+						  }
+						  return errors;
+						}}
+		
 					onSubmit={(values, { resetForm }) => {
 						resetForm();
 						dispatch(postProducts(values));
@@ -60,7 +68,7 @@ export default function CreateProduct() {
 						setTimeout(() => changeSentForm(false), 5000);
 						console.log(values);
 					}}
-				>
+					>
 					{({
 						values,
 						errors,
@@ -127,6 +135,17 @@ export default function CreateProduct() {
 									name="description"
 									as="textarea"
 									placeholder="Description"
+								/>
+							</div>
+
+							<div>
+								<label htmlFor="stock">Stock: </label>
+								<Field type="number" id="stock" name="stock" />
+								<ErrorMessage
+								name="stock"
+								component={() => (
+								<div className={styles.error}>{errors.stock}</div>
+								)}
 								/>
 							</div>
 							<button type="submit">Añadir</button>
