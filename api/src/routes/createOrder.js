@@ -7,7 +7,7 @@ const router = Router();
    Description: Crea el servicio de la ruta /oder para crear la orden de compra
 */
 router.post('/create', async (req, res, next) => {
-    const { purchaseCost, payOrder, paymentMethod, status, userId } = req.body;
+    const { purchaseCost, payOrder, paymentMethod, status, userId, addressorderId } = req.body;
     try {
       if (req.body.status === "creada"){
         let newOrder = await Order.create({
@@ -15,11 +15,13 @@ router.post('/create', async (req, res, next) => {
             payOrder,
             paymentMethod,
             status,
-            userId
+            userId,
+            addressorderId
         });
         res.status(200).json({
-            "Id order" : newOrder.id, 
-            "Id user" : newOrder.userId
+            "Orden:" : newOrder.id, 
+            "Usuario:" : newOrder.userId,
+            "Domicilio:": newOrder.addressorderId  
         });
     } else {
         res.status(400).json({
