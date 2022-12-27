@@ -11,7 +11,8 @@ const getProductsDb = async () => {
                 category: product.category,
                 description: product.description,
                 image: product.image,
-                material: product.material
+                material: product.material,
+                stock: product.stock,
             }
         })
         return resp;
