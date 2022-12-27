@@ -5,7 +5,8 @@ module.exports = products =[
       category:'Bombilla',
       description:'Bombilla económica de aluminio',
       image:'https://cdn.shopify.com/s/files/1/0630/6254/0510/products/c40d2093be97e34edab289e0cf0d6f15_orig_270x.progressive.jpg?v=1647031170',
-      material: 'Industrial'
+      material: 'Industrial',
+      stock: 50
    },
    {
       title:'Bombilla para molienda fina',
@@ -13,7 +14,8 @@ module.exports = products =[
       category:'Bombilla',
       description:'Bombilla con base monilienda, aluminio y filtro de acero inoxidable',
       image:'https://cdn.shopify.com/s/files/1/0630/6254/0510/products/4ae619f439cb528cb523d561038f92c9_orig_270x.progressive.jpg?v=1647031688',
-      material: 'Industrial'
+      material: 'Industrial',
+      stock: 50
    },
    {
       title:'Bombilla Clásica',
@@ -21,7 +23,8 @@ module.exports = products =[
       category:'Bombilla',
       description:'Bombilla clásica de acero inoxidable',
       image:'https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_6988_270x.progressive.jpg?v=1652861228',
-      material: 'Industrial'
+      material: 'Industrial',
+      stock: 50
    },
    {
       title:'Bombilla Clásica con punta dorada',
@@ -29,7 +32,8 @@ module.exports = products =[
       category:'Bombilla',
       description:'Bombilla clásica de acero inoxidable con punta dorada',
       image:'https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_0647_270x.progressive.jpg?v=1669286847',
-      material: 'Industrial'
+      material: 'Industrial',
+      stock: 50
    },
    {
       title:'Bombilla Clásica Pico de Loro',
@@ -37,7 +41,8 @@ module.exports = products =[
       category:'Bombilla',
       description:'Bombilla clásica de acero inoxidable con pico de loro',
       image:'https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_5370_270x.progressive.jpg?v=1647192240',
-      material: 'Industrial'
+      material: 'Industrial',
+      stock: 50
    },
    {
       title:'Bombilla Corta',
@@ -45,7 +50,8 @@ module.exports = products =[
       category:'Bombilla',
       description:'Bombilla corta de aluminio, ideal para mate pequeño o taza',
       image:'https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_9957_270x.progressive.jpg?v=1665662310',
-      material: 'Industrial'
+      material: 'Industrial',
+      stock: 50
    },
    {
       title:'Bombilla Resorte',
@@ -53,7 +59,8 @@ module.exports = products =[
       category:'Bombilla',
       description:'Bombilla de acero inoxidable con resorte',
       image:'https://cdn.shopify.com/s/files/1/0630/6254/0510/products/cd8baa631b14792b315caf1f46235207_orig_270x.progressive.jpg?v=1647038039',
-      material: 'Sintetico'
+      material: 'Sintetico',
+      stock: 50
    },
    {
       title:'Bombilla Exclusiva Premium',
@@ -61,7 +68,8 @@ module.exports = products =[
       category:'Bombilla',
       description:'Bombilla de acero inoxidable con resorte y punta dorada, producto Premium',
       image:'https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_9983_270x.progressive.jpg?v=1665660210',
-      material: 'Sintetico'
+      material: 'Sintetico',
+      stock: 50
    },
    {
       title:'Bombilla Pico de Loro Exclusiva Premium',
@@ -69,7 +77,8 @@ module.exports = products =[
       category:'Bombilla',
       description:'Bombilla de acero inoxidable con resorte y pico de loro, producto Premium',
       image:'https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_7815_270x.progressive.jpg?v=1657112585',
-      material: 'Sintetico'
+      material: 'Sintetico',
+      stock: 50
    },
    {
       title:'Mate con base',
@@ -77,7 +86,8 @@ module.exports = products =[
       category:'Mate',
       description:'Mate de madera con base artesanal',
       image:'https://cdn.shopify.com/s/files/1/0630/6254/0510/products/2248_270x.jpg',
-      material: 'Sintetico'
+      material: 'Sintetico',
+      stock: 50
    },
    {
       title:'Set Mate con Bombilla',
@@ -85,7 +95,8 @@ module.exports = products =[
       category:'Mate',
       description:'Set de mate de madera con bombilla de acero inoxidable',
       image:'https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_6804_270x.progressive.jpg?v=1651842573',
-      material: 'Sintetico'
+      material: 'Sintetico',
+      stock: 50
    },
    {
       title:'Mate Torpedo Clásico',
@@ -93,7 +104,8 @@ module.exports = products =[
       category:'Mate',
       description:'Mate de madera con base artesanal',
       image:'https://cdn.shopify.com/s/files/1/0630/6254/0510/products/912d34cf2c12e13df48c24a58768beaa_orig_270x.progressive.jpg?v=1660826980',
-      material: 'Sintetico'
+      material: 'Sintetico',
+      stock: 50
    },
    {
       title:'Mate Torpedo Premium Alpaca',
@@ -101,7 +113,8 @@ module.exports = products =[
       category:'Mate',
       description:'Mate de alpaca con base artesanal cuero',
       image:'https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_6112_270x.progressive.jpg?v=1660905652',
-      material: 'Sintetico'
+      material: 'Sintetico',
+      stock: 50
    },
    {
       title:'Mate Torpedo Premium con base',
@@ -109,7 +122,8 @@ module.exports = products =[
       category:'Mate',
       description:'Mate excepcional color rojo',
       image:'https://cdn.shopify.com/s/files/1/0630/6254/0510/products/31bacc6f3f4a5f97d6ead06d3f118e6a_orig_270x.jpg',
-      material: 'Sintetico'
+      material: 'Sintetico',
+      stock: 50
    },
    {
       title:'Mate Torpedo Especial',
@@ -117,7 +131,8 @@ module.exports = products =[
       category:'Mate',
       description:'Mate especial color negro',
       image:'https://cdn.shopify.com/s/files/1/0630/6254/0510/products/ce54b53a68731cf694529284ba4d4c55_orig_270x.jpg',
-      material: 'Sintetico'
+      material: 'Sintetico',
+      stock: 50
    },
    {
       title:'Mate Torpedo Premium Cincelado con base',
@@ -125,7 +140,8 @@ module.exports = products =[
       category:'Mate',
       description:'Mate Torpedo Especial, cincelado color madera',
       image:'https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_6824_cdd1988c-a666-4ddb-865e-d0b024b200cd_270x.jpg',
-      material: 'Artesanal'
+      material: 'Artesanal',
+      stock: 50
    },
    {
       title:'Mate Torpedo Premium alto',
@@ -133,7 +149,8 @@ module.exports = products =[
       category:'Mate',
       description:'Mate forrado en cuero marrón con acabado en costura',
       image:'https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_5810_41bb5b2b-3e4b-4b52-b7f9-b5147f877db0_270x.jpg',
-      material: 'Sintetico'
+      material: 'Sintetico',
+      stock: 50
    },
    {
       title:'Mate Clásico tallado',
@@ -141,7 +158,8 @@ module.exports = products =[
       category:'Mate',
       description:'Mate con tallado hecho artesanalmente, curado y barnizado',
       image:'https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_5963_270x.jpg',
-      material: 'Artesanal'
+      material: 'Artesanal',
+      stock: 50
    },
    {
       title:'Mate Camionero Clásico',
@@ -149,7 +167,8 @@ module.exports = products =[
       category:'Mate',
       description:'Mate clásico negro apto para viaje ',
       image:'https://cdn.shopify.com/s/files/1/0630/6254/0510/products/214_270x.jpg',
-      material: 'Sintetico'
+      material: 'Sintetico',
+      stock: 50
    },
    {
       title:'Mate Camionero Clásico tallado',
@@ -157,7 +176,8 @@ module.exports = products =[
       category:'Mate',
       description:'Mate Camionero tallado a mano, con base metalica',
       image:'https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_5972_270x.jpg',
-      material: 'Artesanal'
+      material: 'Artesanal',
+      stock: 50
    },
    {
     title:'Mate Camionero Clásico tallado con base',
@@ -165,7 +185,8 @@ module.exports = products =[
     category:'Mate',
    description:'Mate Camionero tallado a mano, con base ceramica',
    image:'https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_5953_270x.jpg',
-   material: 'Artesanal'
+   material: 'Artesanal',
+   stock: 50
     },
     {
 
@@ -174,7 +195,8 @@ module.exports = products =[
     category:"Mate",
    description:"Mate Repujado texturado",
    image:"https://cdn.shopify.com/s/files/1/0630/6254/0510/products/705ea51361f61b9099fd423c7881a46d_orig_270x.progressive.jpg?v=1646826267",
-   material: 'Artesanal'
+   material: 'Artesanal',
+   stock: 50
     },
     {
     title:"Mate Exótico",
@@ -182,7 +204,8 @@ module.exports = products =[
     category:"Mate",
    description:"Mate pintado y texturado curado y barnizado",
    image:"https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_7378_270x.jpg",
-   material: 'Artesanal'
+   material: 'Artesanal',
+   stock: 50
     },
     {
     title:"Mate Premium Cuero",
@@ -190,7 +213,8 @@ module.exports = products =[
     category:"Mate",
    description:"Mate Premium Cuero estilo gaucho",
    image:"https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_5841_270x.jpg",
-   material: 'Artesanal'
+   material: 'Artesanal',
+   stock: 50
     },
     {
     title:"Mate Premium enano Cuero",
@@ -198,7 +222,8 @@ module.exports = products =[
     category:"Mate",
    description:"Mate Especial, pintado a mano, base metalica pulida",
    image:"https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_5448_270x.jpg",
-   material: 'Artesanal'
+   material: 'Artesanal',
+   stock: 50
     },
     {
     title:"Mate Premium alto Cuero",
@@ -206,7 +231,8 @@ module.exports = products =[
     category:"Mate",
    description:"Mate negro pintado a mano, base metalica pulida, version alta",
    image:"https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_5910_270x.jpg",
-   material: 'Artesanal'
+   material: 'Artesanal',
+   stock: 50
     },
     {
     title:"Mate Premium Cuero Crudo",
@@ -214,7 +240,8 @@ module.exports = products =[
     category:"Mate",
    description:"Mate especial estilo litoral argentino, cuero crudo",
    image:"https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_0060_270x.jpg",
-   material: 'Artesanal'
+   material: 'Artesanal',
+   stock: 50
     },
     {
     title:"Mate Premium Cuero Crudo 2",
@@ -222,7 +249,8 @@ module.exports = products =[
     category:"Mate",
    description:"Mate especial estilo litoral argentino, cuero crudo",
    image:"https://cdn.shopify.com/s/files/1/0630/6254/0510/products/182acef1b8ecdc382ac35471fd707fae_orig_270x.jpg",
-   material: 'Artesanal'
+   material: 'Artesanal',
+   stock: 50
     },
     {
     title:"Mate Argentino Madera",
@@ -230,7 +258,8 @@ module.exports = products =[
     category:"Mate",
    description:"Mate Argentino Madera clásico, con molduras en aluminio",
    image:"https://cdn.shopify.com/s/files/1/0630/6254/0510/products/2257_270x.jpg",
-   material: 'Industrial'
+   material: 'Industrial',
+   stock: 50
     },
     {
     title:"Mate Argentino Madera Diseño",
@@ -238,7 +267,8 @@ module.exports = products =[
     category:"Mate",
    description:"Mate Argentino Madera clásico, con molduras en acero inoxidable, diseño propio",
    image:"https://cdn.shopify.com/s/files/1/0630/6254/0510/products/6746048ae4b6986a809c0caba04aa2a6_orig_270x.jpg",
-   material: 'Artesanal'
+   material: 'Artesanal',
+   stock: 50
     },
     {
     title:"Mate Argentino Madera Diseño 2",
@@ -246,7 +276,8 @@ module.exports = products =[
     category:"Mate",
    description:"Mate Argentino Madera clásico, con molduras en acero inoxidable, diseño propio",
    image:"https://cdn.shopify.com/s/files/1/0630/6254/0510/products/ce54b53a68731cf694529284ba4d4c55_orig_270x.jpg",
-   material: 'Artesanal'
+   material: 'Artesanal',
+   stock: 50
     },
     {
     title:"Mate Imperial Madera",
@@ -254,7 +285,8 @@ module.exports = products =[
     category:"Mate",
    description:"Porongo, de coa, hueco por dentro, con base metalica",
    image:"https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_0568_270x.jpg",
-   material: 'Industrial'
+   material: 'Industrial',
+   stock: 50
     },
     {
     title:"Mate Imperial Criollo",
@@ -262,7 +294,8 @@ module.exports = products =[
     category:"Mate",
    description:"Mate común criollo, con base metalica",
    image:"https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_5896_270x.jpg",
-   material: 'Industrial'
+   material: 'Industrial',
+   stock: 50
     },
     {
     title:"Mate Copa y Alpaca",
@@ -270,7 +303,8 @@ module.exports = products =[
    category:"Mate",
    description:"Mate encuerado color negro",
    image:"https://cdn.shopify.com/s/files/1/0630/6254/0510/products/f558511567d1b2ebc3429d6d6fd630dc_orig_270x.jpg",
-   material: 'Artesanal'
+   material: 'Artesanal',
+   stock: 50
     },
     {
     title:"Mate Imperial Clásico",
@@ -278,7 +312,8 @@ module.exports = products =[
     category:"Mate",
    description:"Mate Imperial Clásico, pintado y curado",
    image:"https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_3911_270x.jpg",
-   material: 'Artesanal'
+   material: 'Artesanal',
+   stock: 50
     },
     {
     title:"Mate Imperial Clásico Premium",
@@ -286,7 +321,8 @@ module.exports = products =[
     category:"Mate",
    description:"Mate especial color negro y encuerado",
    image:"https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_8482_270x.jpg",
-   material: 'Artesanal'
+   material: 'Artesanal',
+   stock: 50
     },
     {
     title:"Mate Imperial Exótico + bombilla",
@@ -294,7 +330,8 @@ module.exports = products =[
     category:"Mate",
    description:"Combo perfecto para regalar",
    image:"https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_8256_270x.jpg",
-   material: 'Industrial'
+   material: 'Industrial',
+   stock: 50
     },
     {
     title:"Mate Imperial Exótico con relieve",
@@ -302,7 +339,8 @@ module.exports = products =[
     category:"Mate",
    description:"Mate especial texturado color rojo",
    image:"https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_7366_270x.jpg",
-   material: 'Artesanal'
+   material: 'Artesanal',
+   stock: 50
     },
     {
     title:"Mate Imperial Exótico con relieve 2",
@@ -310,7 +348,8 @@ module.exports = products =[
     category:"Mate",
    description:"Mate especial texturado color barniz oscuro",
    image:"https://cdn.shopify.com/s/files/1/0630/6254/0510/products/dfe157bdbedbd775d4da21824e779f43_orig_270x.jpg",
-   material: 'Industrial'
+   material: 'Industrial',
+   stock: 50
     },
     {
     title:"Mate Imperial Calado",
@@ -318,7 +357,8 @@ module.exports = products =[
     category:"Mate",
    description:"Mate calado y pintado",
    image:"https://cdn.shopify.com/s/files/1/0630/6254/0510/products/2b0e4e5fa151b447e134b612974911c4_orig_270x.jpg",
-   material: 'Sintetico'
+   material: 'Sintetico',
+   stock: 50
     },
     {
     title:"Mate Imperial con tapa",
@@ -326,7 +366,8 @@ module.exports = products =[
     category:"Mate",
    description:"Mate con tapa de acero inoxidable para viajes",
    image:"https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_6579_270x.jpg",
-   material: 'Industrial'
+   material: 'Industrial',
+   stock: 50
     },
     {
     title:"Mate Imperial alto con tapa + bombilla",
@@ -334,7 +375,8 @@ module.exports = products =[
     category:"Mate",
    description:"Combo de mate alto con tapa y bombilla de regalo",
    image:"https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_6827_270x.jpg",
-   material: 'Industrial'
+   material: 'Industrial',
+   stock: 50
     },
     {
     title:"Mate Premium Cuero Crudo con tapa + bombilla",
@@ -342,7 +384,8 @@ module.exports = products =[
     category:"Mate",
    description:"Combo de mate, gaucho",
    image:"https://cdn.shopify.com/s/files/1/0630/6254/0510/products/IMG_6584_270x.jpg",
-   material: 'Industrial'
+   material: 'Industrial',
+   stock: 50
     },
     {
     title:"Yerba Mate con palo",
@@ -350,7 +393,8 @@ module.exports = products =[
     category:"Yerba",
    description:"1kg de yerba mate con palo",
    image:"https://matesargentinos.net/wp-content/uploads/2021/05/yerba-mate-con-palo-2-300x200.jpg",
-   material: 'Industrial'
+   material: 'Industrial',
+   stock: 50
     },
     {
     title:"Yerba Mate sin palo",
@@ -358,7 +402,8 @@ module.exports = products =[
     category:"Yerba",
    description:"1kg de yerba mate sin palo",
    image:"https://matesargentinos.net/wp-content/uploads/2021/05/yerba-mate-sin-palo-1-300x200.jpg",
-   material: 'Industrial'
+   material: 'Industrial',
+   stock: 50
     },
     {
     title:"Yerba Mate Saborizada",
@@ -366,7 +411,8 @@ module.exports = products =[
     category:"Yerba",
    description:"1kg de yerba mate saborizada",
    image:"https://matesargentinos.net/wp-content/uploads/2021/05/yerba-mate-saborizada-1.jpg",
-   material: 'Sintetico'
+   material: 'Sintetico',
+   stock: 50
     },
     {
     title:"Yerba Mate Tostada",
@@ -374,7 +420,8 @@ module.exports = products =[
     category:"Yerba",
    description:"1kg de yerba mate tostada",
    image:"https://matesargentinos.net/wp-content/uploads/2021/05/yerba-mate-tostada-300x200.jpg",
-   material: 'Sintetico'
+   material: 'Sintetico',
+   stock: 50
     },
     {
     title:"Yerba Mate Compuesta",
@@ -382,7 +429,8 @@ module.exports = products =[
     category:"Yerba",
    description:"1kg de yerba mate compuesta",
    image:"https://matesargentinos.net/wp-content/uploads/2021/05/yerba-mate-compuesta-1-180x200.jpg",
-   material: 'Artesanal'
+   material: 'Artesanal',
+   stock: 50
     },
      {
     title:"Yerba Mate para TERERÉ",
@@ -390,7 +438,8 @@ module.exports = products =[
     category:"Yerba",
    description:"1kg de yerba mate para tereré",
    image:"https://matesargentinos.net/wp-content/uploads/2021/05/yerba-mate-terere-1.jpg",
-   material: 'Artesanal'
+   material: 'Artesanal',
+   stock: 50
     },
     {
     title:"Yerba Mate Orgánica",
@@ -398,7 +447,8 @@ module.exports = products =[
     category:"Yerba",
    description:"1kg de yerba mate orgánica",
    image:"https://matesargentinos.net/wp-content/uploads/2021/05/yerba-mate-organica-1-1-1.jpg",
-   material: 'Artesanal'
+   material: 'Artesanal',
+   stock: 50
     }, 
       {
     title:"Yerba Mate Brasileña",
@@ -406,7 +456,8 @@ module.exports = products =[
     category:"Yerba",
    description:"1kg de yerba mate brasileña",
    image:"https://matesargentinos.net/wp-content/uploads/2021/05/Yerba-mate-brasilena-1-1-1-scaled.jpg",
-   material: 'Industrial'
+   material: 'Industrial',
+   stock: 50
     }, 
       {
     title:"Kit completo. Set Matero/Canasta Matera",
@@ -414,7 +465,8 @@ module.exports = products =[
     category:"Kit",
    description:"set completo de mate, canasta, bombilla, gaucho y yerba",
    image:"https://cdn.shopify.com/s/files/1/0567/2907/5873/products/neg.jpg?v=1653005426",
-   material: 'Industrial'
+   material: 'Industrial',
+   stock: 50
     },
      {
     title:"Mate Super Exclusivo con patas",
@@ -422,7 +474,8 @@ module.exports = products =[
     category:"Kit",
    description:"Kit limitado de mate con patas",
    image:"https://http2.mlstatic.com/D_NQ_NP_862927-MLA50186301236_062022-O.webp",
-   material: 'Sintetico'
+   material: 'Sintetico',
+   stock: 50
     },     
     {
     title:"Bolso Matero todo incluido",
