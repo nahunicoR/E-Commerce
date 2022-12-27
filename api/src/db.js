@@ -51,8 +51,11 @@ const { User, Order, Orderdetail, Product, Address } = sequelize.models; // Impo
 
 //Usario tendrá muchas ordenes de compra (Para surtir la orden o carrito)
 //Se añade la propiedad id de User a la tabla Order
-User.hasMany(Order, { as: "ordenes", foreignkey: "id" });
-Order.belongsTo(User, { as: "user" }); //No se requiere generar una foreignkey por ya se creando el id
+
+User.hasMany(Order, { as: "ordenes", foreignkey: "id"});
+Order.belongsTo(User, { as: "user"});  //No se requiere generar una foreignkey por ya se creando el id
+Order.belongsTo(Address, { as: "addressorder"});  //Una orden debe llevar el domicilio
+
 
 //La orden está formada por muchos productos
 Product.hasMany(Orderdetail, { as: "orderdetails", foreignkey: "id" });
