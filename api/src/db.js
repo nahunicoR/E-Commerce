@@ -4,7 +4,8 @@ const { Sequelize } = require("sequelize");
 const fs = require("fs");
 const path = require("path");
 //no comentar linea debajo, sirve para pruebas locales de Back-End.
-const {  DB_USER, DB_PASSWORD, DB_HOST , DB_DEPLOY } = process.env;
+const {  /*DB_USER, DB_PASSWORD, DB_HOST ,*/ DB_DEPLOY } = process.env;
+//descomentar DB_USER DB_PASWORD Y DB_HOST para pruebas locales de Back-End.
 
 const sequelize = new Sequelize(DB_DEPLOY, {
 	logging: false, // set to console.log to see the raw SQL queries
