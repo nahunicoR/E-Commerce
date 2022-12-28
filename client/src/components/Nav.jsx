@@ -1,14 +1,23 @@
 import React from "react";
-import { Flex, Heading, Button, Image } from "@chakra-ui/react";
+import { Flex, Heading, Button, Image, Text } from "@chakra-ui/react";
 import { FaUser, FaShoppingCart } from "react-icons/fa";
 import { BiLogOut } from "react-icons/bi";
 import logo from "../assets/LogoTo-Mate.png";
 import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useSelector } from "react-redux";
 
 export default function Nav() {
 	const { loginWithRedirect, isAuthenticated, user, logout } = useAuth0();
-
+	const QuantityOfProduct = useSelector(state => state.products.cart)
+	let topCenter = 4
+	let leftCenter = 2.5
+	let size = "larger"
+	if(QuantityOfProduct.length > 9) {
+		topCenter = 3
+		leftCenter = 1
+		size = "md"
+	}
 	return (
 		<>
 			<Flex
@@ -70,6 +79,7 @@ export default function Nav() {
 						paddingRight={"1.5"}
 						position={"relative"}
 					>
+						{QuantityOfProduct.length ? <Text position={"absolute"} top={-topCenter} left={leftCenter} fontSize={size} color={"white"} fontWeight={"bold"}>{QuantityOfProduct.length}</Text>: null}
 						<Link to={"/cart"}>
 							<FaShoppingCart color="white" fontSize={"1.5rem"} />
 						</Link>
