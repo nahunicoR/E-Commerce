@@ -105,6 +105,21 @@ const productsSlice = createSlice({
 			let deleteProduct = state.cart.filter((p) => p.id !== action.payload);
 			state.cart = deleteProduct;
 		},
+
+		deleteQuantity: (state, action) => {
+			let deleteQ = state.cart.find(
+				(product) => product.id === action.payload.id
+			);
+			return deleteQ
+				? {
+						...state,
+						cart: state.cart.map((product) =>
+							product.id === action.payload.id
+								? { ...product, quantity: product.quantity - 1 }
+								: product
+						),
+				  }: null
+		}
 	},
 });
 
@@ -118,6 +133,7 @@ export const {
 	addProductCart,
 	deleteProductCart,
 	getProductByName,
+	deleteQuantity
 } = productsSlice.actions;
 
 export default productsSlice.reducer;
