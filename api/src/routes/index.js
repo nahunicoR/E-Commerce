@@ -25,6 +25,7 @@ const updateUser = require('./updateUser');               // Creado por Jesús D
 */
 
 const createOrder = require('./createOrder');
+const createDetailorder = require('./createDetailorder');
 
 
 /* Para Address 
@@ -72,6 +73,7 @@ router.use('/user',  updateUser);
 */
 
 router.use('/order',  createOrder);
+router.use('/detailorder',  createDetailorder);
 
 
 /* Para Address 
@@ -138,7 +140,10 @@ router.get('/', async (req,res,next) => {
         },
         {
             '*************** ORDERS ': '*********************** ',
-            'Peticion /POST': '/create, para crear la orden en la base de datos',
+            'Peticion /POST': '/order, para crear la orden en la base de datos',
+        },
+        {
+            'Peticion /POST': '/detailorder, para crear el detalle de la orden en la base de datos',
         },
 
 
