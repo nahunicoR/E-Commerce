@@ -1,0 +1,20 @@
+/*Se crea este archivo para manipular settings globales y particulares del sitio*/
+
+html {
+	margin: 0px;
+	padding: 0px;
+	scroll-behavior: smooth;
+	overflow: scroll;
+	overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+	width: 0; /* Remove scrollbar space */
+	background: transparent; /* Optional: just make scrollbar invisible */
+}
+
+body {
+	/*Ajuste de zoom, localhost zoomea a 80 por default, para que el app se vea proporcional
+    */
+	zoom: 80%;
+}
