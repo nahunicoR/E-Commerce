@@ -8,7 +8,8 @@ const deleteProduct = require('./deleteProduct');
 const getProductById = require('./getProductById');
 const updateProduct = require('./updateProduct');
 const getProductByName = require('./getProductByName');
-   
+
+
 
 /* Para usuarios 
    Author: Alejandro Téllez
@@ -88,6 +89,16 @@ router.use('/address', deleteAddressUser);
 */
 
 router.use('/',  createMail);
+
+// MercadoPado
+const PaymentController = require('../controllers/PaymentsController');
+const PaymentService = require('../services/PaymentsService');
+const PaymentInstance = new PaymentController( new PaymentService() );
+
+router.get("/payment", function (req, res, next) {
+    PaymentInstance.getPaymentLink(req, res)
+}) //min 29
+   
 
 
 
