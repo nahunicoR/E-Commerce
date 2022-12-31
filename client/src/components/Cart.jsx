@@ -29,7 +29,7 @@ export default function Cart() {
 
 	let total = 0;
 	productsInCart.map((product) => {
-		total = total + product.price;
+		total = total + product.price * product.quantity;
 		return total;
 	});
 	useEffect(() => {
