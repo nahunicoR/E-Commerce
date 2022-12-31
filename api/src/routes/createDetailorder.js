@@ -81,7 +81,7 @@ async function sendMail(to, name, orderproducts){
     secure: false, // true for 465, false for other ports
     auth: {
       user: "atacolmx@gmail.com", // generated ethereal user
-      pass: "aquí va la clave", // generated ethereal password
+      pass: "aqui va la clave", // generated ethereal password
     },
    });  //Fin de función
 
