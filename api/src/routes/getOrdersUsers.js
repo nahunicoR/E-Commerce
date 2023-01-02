@@ -8,7 +8,7 @@ const {User, Order} = require('../db');
 */
 const router = Router();
 
-router.get('/orders', async (req, res, next) => {
+router.get('/', async (req, res, next) => {
     try {
       const data = await getOrdersUsers();
       return res.status(200).json(data);
