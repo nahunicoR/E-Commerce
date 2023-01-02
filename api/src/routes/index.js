@@ -96,7 +96,7 @@ router.use('/',  createMail);
 */
 const mercadoPago = require('./mercadopago');
 
-router.use('/mercadoPago', mercadoPago);
+router.use('/payment', mercadoPago);
 
 
 
