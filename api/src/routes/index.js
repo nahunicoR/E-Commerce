@@ -93,6 +93,13 @@ router.use('/address', deleteAddressUser);
 
 router.use('/',  createMail);
 
+/* Para Mercado Pago
+    Autho: Nahuel Riveros
+*/
+const mercadoPago = require('./mercadopago');
+
+router.use('/mercadoPago', mercadoPago);
+
 
 
 router.get('/', async (req,res,next) => {

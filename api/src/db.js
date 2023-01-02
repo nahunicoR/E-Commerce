@@ -3,18 +3,18 @@ const { Sequelize } = require("sequelize");
 
 const fs = require("fs");
 const path = require("path");
-// const { DB_USER, DB_PASSWORD, DB_HOST  // DB_DEPLOY 
-// } = process.env;
-const { /* DB_USER, DB_PASSWORD, DB_HOST  */ DB_DEPLOY } = process.env;
+const { DB_USER, DB_PASSWORD, DB_HOST  // DB_DEPLOY 
+} = process.env;
+//const { /* DB_USER, DB_PASSWORD, DB_HOST  */ DB_DEPLOY } = process.env;
 
-//  const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/ecomerce`, {
-//  	logging: false, // set to console.log to see the raw SQL queries
-//  	native: false, // lets Sequelize know we can use pg-native for ~30% more speed
-//  });
-const sequelize = new Sequelize(DB_DEPLOY, {
-	logging: false, // set to console.log to see the raw SQL queries
-	native: false, // lets Sequelize know we can use pg-native for ~30% more speed
-});
+ const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/ecomerce`, {
+ 	logging: false, // set to console.log to see the raw SQL queries
+ 	native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+ });
+// const sequelize = new Sequelize(DB_DEPLOY, {
+// 	logging: false, // set to console.log to see the raw SQL queries
+// 	native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+// });
 
 // const sequelize = new Sequelize(
 //   DB_DEPLOY,
@@ -57,9 +57,8 @@ const { User, Order, Orderdetail, Product, Address } = sequelize.models; // Impo
 
 //Usario tendrá muchas ordenes de compra (Para surtir la orden o carrito)
 //Se añade la propiedad id de User a la tabla Order
-
-User.hasMany(Order, { as: "ordenes", foreignkey: "id"});
-Order.belongsTo(User, { as: "user"});  //No se requiere generar una foreignkey por ya se creando el id
+User.hasMany(Order, { as: "ordenes", foreignkey: "id" });
+Order.belongsTo(User, { as: "user" }); //No se requiere generar una foreignkey por ya se creando el id
 Order.belongsTo(Address, { as: "addressorder"});  //Una orden debe llevar el domicilio
 
 
