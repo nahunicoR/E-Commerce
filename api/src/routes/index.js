@@ -81,7 +81,6 @@ router.use('/order',  cancelOrder);
 /* Para Address 
    Author: Alejandro Téllez 
 */
-const mercadoPago = require('./mercadoPago');
 
 router.use('/address',  createAdress);
 router.use('/addresses', getAddressByUser);
@@ -97,7 +96,7 @@ router.use('/',  createMail);
 /* Para Mercado Pago
     Autho: Nahuel Riveros
 */
-const mercadoPago = require('./mercadoPago');
+const mercadoPago = require('./mercadopago');
 
 router.use('/mercadoPago', mercadoPago);
 
