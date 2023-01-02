@@ -8,6 +8,7 @@ import {
 	addProductCart,
 	deleteProductCart,
 	getProductByName,
+	deleteQuantity
 } from "./reducer";
 import axios from "axios";
 
@@ -63,3 +64,7 @@ export const addProductsCart = (product) => (dispatch) => {
 export const deleteProductsCart = (product) => (dispatch) => {
 	return dispatch(deleteProductCart(product));
 };
+export const deleteQuantityCard = (product) => (dispatch) => {
+	return dispatch(deleteQuantity(product));
+};
+

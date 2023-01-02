@@ -1,12 +1,15 @@
 import { formatPrice } from "./Cart";
 import { useDispatch } from "react-redux";
 import { Button, Box, Stack, Text, Image } from "@chakra-ui/react";
-import { deleteProductsCart } from "../redux/actions";
+import { deleteProductsCart, deleteQuantityCard } from "../redux/actions";
+import { MdArrowDropUp, MdArrowDropDown } from "react-icons/md"
+import { addProductsCart } from "../redux/actions";
 
 export default function CartItem(props) {
 	const dispatch = useDispatch();
-	const { id, title, image, price, quantity } = props;
-
+	const { id, title, image, price, quantity, stock } = props;
+	let arrowCenter = 2.5
+	if(quantity > 9) arrowCenter=4.5
 	return (
 		<div>
 			<Stack
@@ -33,13 +36,21 @@ export default function CartItem(props) {
 						<Text fontWeight="medium" fontSize={"1.1rem"}>
 							{title}
 						</Text>
-						<Text
+						<Box
 							color={("gray.400", "gray.800")}
 							fontSize="2xl"
 							paddingTop={"2rem"}
-						>
+							display={"flex"}
+							>
 							{formatPrice(price)} x {quantity}
-						</Text>
+							<Stack position={"relative"}>
+								<Box position={"absolute"} right={-arrowCenter} top={-3} fontSize={"2rem"} color="#9aa0a6" cursor={"pointer"} >
+									<Text _hover={{ color: "teal.500"  }}><MdArrowDropUp onClick={() => quantity < stock ? dispatch(addProductsCart(props)): null}/></Text>
+									<Text _hover={{ color: "teal.500"  }}><MdArrowDropDown onClick={() => quantity > 1 ? dispatch(deleteQuantityCard(props)): null}/></Text>
+								</Box>
+							</Stack>
+						</Box>	
+							 
 					</Stack>
 				</Box>
 				<Button

@@ -26,6 +26,8 @@ const updateUser = require('./updateUser');               // Creado por Jesús D
 */
 
 const createOrder = require('./createOrder');
+const createDetailorder = require('./createDetailorder');
+const cancelOrder = require('./cancelOrder');
 
 
 /* Para Address 
@@ -73,6 +75,8 @@ router.use('/user',  updateUser);
 */
 
 router.use('/order',  createOrder);
+router.use('/detailorder',  createDetailorder);
+router.use('/order',  cancelOrder);
 
 
 /* Para Address 
@@ -90,15 +94,12 @@ router.use('/address', deleteAddressUser);
 
 router.use('/',  createMail);
 
-// MercadoPado
-const PaymentController = require('../controllers/PaymentsController');
-const PaymentService = require('../services/PaymentsService');
-const PaymentInstance = new PaymentController( new PaymentService() );
+/* Para Mercado Pago
+    Autho: Nahuel Riveros
+*/
+const mercadoPago = require('./mercadopago');
 
-router.get("/payment", function (req, res, next) {
-    PaymentInstance.getPaymentLink(req, res)
-}) //min 29
-   
+router.use('/payment', mercadoPago);
 
 
 
@@ -149,7 +150,10 @@ router.get('/', async (req,res,next) => {
         },
         {
             '*************** ORDERS ': '*********************** ',
-            'Peticion /POST': '/create, para crear la orden en la base de datos',
+            'Peticion /POST': '/order, para crear la orden en la base de datos',
+        },
+        {
+            'Peticion /POST': '/detailorder, para crear el detalle de la orden en la base de datos',
         },
 
 
@@ -171,8 +175,12 @@ router.get('/', async (req,res,next) => {
             '*************** MAIL ': '*********************** ',
             'Peticion /POST': '/mail, para crear el correo y enviarlo',
         },
-
-
+        {
+            '*************** ORDERS ': '*********************** ',
+            'Peticion /POST': '/order, para crear la orden ',
+            'Peticion /POST': '/orderdetail, para crear detalle de la orden ',
+            'Peticion /DELETE': '/order/:id, para cancelar la orden ',
+        },
 
     ])
 });
