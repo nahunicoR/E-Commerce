@@ -16,7 +16,6 @@ const getProductByName = require('./getProductByName');
 */
 
 const getUsersDb = require('./getUsers');
-const getOrdersUsers = require('./getOrdersUsers');
 const getUserIdOrders = require('./getUserIdOrders');
 const createUser = require('./createUser');               // Creado por Jesús Delgado
 const updateUser = require('./updateUser');               // Creado por Jesús Delgado
@@ -28,6 +27,8 @@ const updateUser = require('./updateUser');               // Creado por Jesús D
 const createOrder = require('./createOrder');
 const createDetailorder = require('./createDetailorder');
 const cancelOrder = require('./cancelOrder');
+const getOrdersUsers = require('./getOrdersUsers');
+const getOrderByUser = require('./getOrderByUser');
 
 
 /* Para Address 
@@ -44,7 +45,6 @@ const deleteAddressUser = require('./deleteAddressUser');
 */
 
 const createMail = require('./createMail');
-
 
 const router = Router();
 
@@ -65,7 +65,6 @@ router.use('/product'       , getProductByName);
 */
 
 router.use('/users', getUsersDb)
-router.use('/users', getOrdersUsers)
 router.use('/users', getUserIdOrders)
 router.use('/user',  createUser);      //Creado por Jesús Delgado
 router.use('/user',  updateUser);
@@ -77,7 +76,8 @@ router.use('/user',  updateUser);
 router.use('/order',  createOrder);
 router.use('/detailorder',  createDetailorder);
 router.use('/order',  cancelOrder);
-
+router.use('/orders', getOrdersUsers);
+router.use('/order', getOrderByUser);
 
 /* Para Address 
    Author: Alejandro Téllez 
@@ -95,7 +95,7 @@ router.use('/address', deleteAddressUser);
 router.use('/',  createMail);
 
 /* Para Mercado Pago
-    Autho: Nahuel Riveros
+    Author: Nahuel Riveros
 */
 const mercadoPago = require('./mercadopago');
 
@@ -134,9 +134,6 @@ router.get('/', async (req,res,next) => {
             'Peticion /GET': '/users/all, para obtener todos los usuarios de la base de datos',
         },
         {
-            'Peticion /GET': '/users/orders, para obtener todos los usuarios y sus ordenes de la base de datos',
-        },
-        {
             'Peticion /GET': '/users/id/ordenes, para obtener un usario y sus ordenes de la base de datos',
             'id': 'id del usuario'
         },
@@ -151,11 +148,19 @@ router.get('/', async (req,res,next) => {
         {
             '*************** ORDERS ': '*********************** ',
             'Peticion /POST': '/order, para crear la orden en la base de datos',
+            
         },
+        
         {
             'Peticion /POST': '/detailorder, para crear el detalle de la orden en la base de datos',
         },
-
+        {
+            'Peticion /GET': '/orders, para obtener todos los usuarios y sus ordenes de la base de datos',
+            'Peticion /GET': '/order/:userid/orders, para obtener todas las ordenes de un usuario',
+            'Peticion /POST': '/order, para crear la orden ',
+            'Peticion /POST': '/orderdetail, para crear detalle de la orden ',
+            'Peticion /DELETE': '/order/:id, para cancelar la orden ',
+        }, 
 
         {
             '*************** ADDRESS ': '*********************** ',
@@ -177,9 +182,8 @@ router.get('/', async (req,res,next) => {
         },
         {
             '*************** ORDERS ': '*********************** ',
-            'Peticion /POST': '/order, para crear la orden ',
-            'Peticion /POST': '/orderdetail, para crear detalle de la orden ',
-            'Peticion /DELETE': '/order/:id, para cancelar la orden ',
+            
+
         },
 
     ])

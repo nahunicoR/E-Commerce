@@ -9,6 +9,7 @@ const PayButton = ({ productsInCart }) => {
 	const handleCheckout = () => {
 		console.log(productsInCart, user);
 	};
+	
 
 	return (
 		<Button
