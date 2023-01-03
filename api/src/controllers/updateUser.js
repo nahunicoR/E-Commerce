@@ -1,8 +1,8 @@
 const { User } = require("../db");
 
-const updateUser = async (id) => {
+const updateUser = async (useremail) => {
     try {
-        let detail = await User.findByPk(id);
+        let detail = await User.findByPk(useremail);
         console.log(detail);
         
         return detail;
