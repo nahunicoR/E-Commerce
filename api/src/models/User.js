@@ -3,6 +3,9 @@ const { DataTypes } = require('sequelize');
 // Luego le injectamos la conexion a sequelize.
 module.exports = (sequelize) => {
   // defino el modelo
+  
+  //corrijo el modelo de User, de acuerdo a lo que debiera mandar Auth0 desde Front-End.
+  //queda pendiente la validación de roles en back, ver si es necesaria la asignacion de roles.
   sequelize.define('user', {
     email: {
       type: DataTypes.STRING,
@@ -27,10 +30,6 @@ module.exports = (sequelize) => {
         notNull:{
           msg:"El campo no puede estar vacio"
         },
-        isAlpha:{
-          args: true,
-          msg:"El nombre solo puede contener letras"
-        },
         len:{
           args:[3,70],
           msg:"El nombre tiene que ser entre 3 y 70 caracteres"
@@ -44,10 +43,6 @@ module.exports = (sequelize) => {
         notNull:{
           msg:"El campo no puede estar vacio"
         },
-        isAlpha:{
-          args: true,
-          msg:"El apellido solo puede contener letras"
-        },
         len:{
           args:[3,70],
           msg:"El apellido tiene que ser entre 3 y 70 caracteres"
@@ -60,10 +55,5 @@ module.exports = (sequelize) => {
       values: ['user','superadmin','guest','admin','denegado'],
       defaultValue: 'user'
    },
-    password: {
-      type: DataTypes.STRING,
-      allowNull: false
-    }
   });
-  
 };
