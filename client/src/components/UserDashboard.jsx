@@ -21,15 +21,15 @@ import {
 export default function UserDashboard() {
 	const { user } = useAuth0();
 	const navigate = useNavigate();
+	console.log(user);
 
 	const slideRight = () => {
 		var slider = document.getElementsByClassName("css-1peemgu");
-		console.log(slider);
+
 		slider.scrollRight = slider.scrollRight + 500;
 	};
 	const slideLeft = () => {
 		var slider = document.getElementsByClassName("css-1peemgu");
-		console.log(slider);
 		slider.scrollLeft = slider.scrollLeft + 500;
 	};
 
@@ -116,6 +116,8 @@ export default function UserDashboard() {
 						{orders.map((o) => {
 							return (
 								<Box
+									display={"flex"}
+									alignItems={"center"}
 									padding={"8"}
 									border={"1px"}
 									borderColor={"gray.200"}
