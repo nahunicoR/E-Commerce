@@ -84,7 +84,6 @@ router.post('/',  (req,res,next) => {
     //         unit_price: item.price
     //     }
     // })
-    
     const prod = req.body
     const preference = {
         items: [
