@@ -2,11 +2,11 @@ const express = require('express');
 const router = express.Router();
 const { Product, Order, Orderdetail, User, Address } = require('../db.js');
 const mercadopago = require('mercadopago');
-const {MERCADO_PAGO_KEY_TEST} = process.env;
+const {ACCESS_TOKEN} = process.env;
 
-// mercadopago.configure({
-//     access_token: MERCADO_PAGO_KEY_TEST
-// });
+mercadopago.configure({
+    access_token: ACCESS_TOKEN
+});
 
 router.post('/', async (req,res,next) => {
     
@@ -82,7 +82,7 @@ router.post('/',  (req,res,next) => {
     //         unit_price: item.price
     //     }
     // })
-    
+
     const prod = req.body
     const preference = {
         items: [
