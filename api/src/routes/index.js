@@ -8,7 +8,8 @@ const deleteProduct = require('./deleteProduct');
 const getProductById = require('./getProductById');
 const updateProduct = require('./updateProduct');
 const getProductByName = require('./getProductByName');
-   
+
+
 
 /* Para usuarios 
    Author: Alejandro Téllez

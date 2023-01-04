@@ -4,8 +4,9 @@ const { Product, Order, Orderdetail, User, Address } = require('../db.js');
 const mercadopago = require('mercadopago');
 const {ACCESS_TOKEN} = process.env;
 
+
 mercadopago.configure({
-    access_token: ACCESS_TOKEN
+    access_token: MERCADO_PAGO_KEY_TEST
 });
 
 router.post('/', async (req,res,next) => {
@@ -69,6 +70,7 @@ const preference = {
         expiration_date_to: "2016-02-28T12:00:00.000-04:00"
     }
 
+
 router.post('/',  (req,res,next) => {
     // const {cartItems, user} = req.body;
     // const ml_cart = cartItems.map(item => {
@@ -82,7 +84,6 @@ router.post('/',  (req,res,next) => {
     //         unit_price: item.price
     //     }
     // })
-
     const prod = req.body
     const preference = {
         items: [
@@ -94,7 +95,7 @@ router.post('/',  (req,res,next) => {
                 description: prod.description,
                 category_id: "art",
                 quantity: prod.quantity,
-                unit_price: prod.unit_price
+                unit_price: prod.price
             }
         ],
         // payer: {
