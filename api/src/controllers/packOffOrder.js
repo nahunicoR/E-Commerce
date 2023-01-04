@@ -1,27 +1,18 @@
-const { Order, Address } = require("../db");
+const { Order, Orderdetail } = require("../db");
 
-/* Date Creation: January 2, 2023
-      Author: Alejandro Téllez Aguilar
-   Description: Crea la ruta /order cambiar el estado de la orden
+/* Date Creation: December 29, 2022
+   Author: Alejandro Téllez Aguilar
+   Description: Crea el servicio de la ruta /oders para cambiar el esatdo de una orden de compra
 */
 
-
-
-const packOffOrder = async (orderid, status) => {
-    const id = orderid
+const packOffOrder = async (id) => {
     try {
-        const order = await Order.findByPk(id);
-        order.status = status
-        await order.save();
+        let order = await Order.findByPk(id)
         if (order) {
-           return order;
-        } else {
-            return {
-                'message': 'Orden no ha sido encontrada.',
-                'error': `El id: ${id} no existe`
-            };
-        } 
+            Order.getHeadorder();
+        }
         
+        return res.json(order)
     } catch (error) {
         console.log(error);
     }
