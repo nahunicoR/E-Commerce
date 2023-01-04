@@ -7,14 +7,9 @@ const path = require("path");
 //no comentar linea debajo, sirve para pruebas locales de Back-End.
 
 // const { DB_USER, DB_PASSWORD, DB_HOST  // DB_DEPLOY 
-// } = process.env;
-
+//  } = process.env;
 
 const {  /*DB_USER, DB_PASSWORD, DB_HOST ,*/  DB_DEPLOY } = process.env;
-
-
-
-
 
 //  const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/ecomerce`, {
 //  	logging: false, // set to console.log to see the raw SQL queries
