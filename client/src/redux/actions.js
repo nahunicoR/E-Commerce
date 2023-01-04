@@ -8,7 +8,8 @@ import {
 	addProductCart,
 	deleteProductCart,
 	getProductByName,
-	deleteQuantity
+	deleteQuantity,
+	reviews
 } from "./reducer";
 import axios from "axios";
 
@@ -67,4 +68,17 @@ export const deleteProductsCart = (product) => (dispatch) => {
 export const deleteQuantityCard = (product) => (dispatch) => {
 	return dispatch(deleteQuantity(product));
 };
+export const getReviews = () => async (dispatch) => {
+		let reviewsResponse = await axios.get("/reviews")
+		console.log(reviewsResponse)
+		try {
+			return dispatch(reviews(reviewsResponse.data))
+		} catch (error) {
+			console.log(error)
+		}
+	};
+// 	export const postReview = (reviewInfo) => async (dispatch) => {
+// 		let post = await axios.post("/review", reviewInfo);
+// 		return post;
+// 	};
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getDetails } from "../redux/actions";
+import { getDetails, getReviews } from "../redux/actions";
 import { Link, useParams } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import {
@@ -17,6 +17,7 @@ import {
 	useToast,
 } from "@chakra-ui/react";
 import { FaArrowLeft, FaHeart } from "react-icons/fa";
+import Review from "./Review";
 
 export default function Details(props) {
 	const { id } = useParams();
@@ -29,18 +30,20 @@ export default function Details(props) {
 
 	const productId = useSelector((state) => state.products.productsDetail);
 	/* console.log("product id"); */
-
+	// const reviews = useSelector(state => state.products.reviews)
+// console.log(reviews)
 	const handleLike = () => {
 		setLiked(!liked);
 	};
 
 	useEffect(() => {
+		dispatch(getReviews())
 		dispatch(getDetails(id));
 		setTimeout(() => {
 			setLoading(false);
 		}, 800);
 	}, [dispatch, id]);
-
+	const reviews = useSelector(state => state.products.reviews)
 	return (
 		/* productId.length === 0 ? (
 				<div className={styles.detailPage}>
@@ -175,7 +178,9 @@ export default function Details(props) {
 						w="40%"
 						h={"610"}
 						alignSelf={"start"}
+						overflowY={"scroll"}
 					>
+						<Review />
 					</Box>	
 				</Flex>
 			) : (

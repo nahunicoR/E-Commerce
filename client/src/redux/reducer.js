@@ -10,6 +10,7 @@ const productsSlice = createSlice({
 		cart: localStorage.hasOwnProperty("cart")
 			? JSON.parse(localStorage.getItem("cart"))
 			: [],
+		reviews: []	
 	},
 	cart: [],
 	reducers: {
@@ -119,6 +120,9 @@ const productsSlice = createSlice({
 								: product
 						),
 				  }: null
+		},
+		reviews: (state, action) => {
+			state.reviews = action.payload
 		}
 	},
 });
@@ -133,7 +137,8 @@ export const {
 	addProductCart,
 	deleteProductCart,
 	getProductByName,
-	deleteQuantity
+	deleteQuantity,
+	reviews,
 } = productsSlice.actions;
 
 export default productsSlice.reducer;
