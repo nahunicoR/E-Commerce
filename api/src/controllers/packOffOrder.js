@@ -2,10 +2,10 @@ const { Order, Orderdetail } = require("../db");
 
 /* Date Creation: December 29, 2022
    Author: Alejandro Téllez Aguilar
-   Description: Crea el servicio de la ruta /oders para Cancelar una orden de compra
+   Description: Crea el servicio de la ruta /oders para cambiar el esatdo de una orden de compra
 */
 
-const cancelOrder = async (id) => {
+const packOffOrder = async (id) => {
     try {
         let order = await Order.findByPk(id)
         if (order) {
@@ -18,4 +18,4 @@ const cancelOrder = async (id) => {
     }
 }
 
-module.exports = { cancelOrder };
+module.exports = { packOffOrder };

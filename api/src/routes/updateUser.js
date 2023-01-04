@@ -8,11 +8,11 @@ const { updateUser } = require('../controllers/updateUser');
 
 const router = Router();
 
-router.put('/:id', async (req, res) => {
-    let {id} = req.params;
+router.put('/:useremail', async (req, res) => {
+    let {useremail} = req.params;
     let { rol} = req.body;
     try {
-        let update = await updateUser(id);
+        let update = await updateUser(useremail);
         
         update.rol          = rol;
         
