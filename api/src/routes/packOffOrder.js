@@ -2,23 +2,19 @@ const { Router } = require('express');
 //const { Sequelize } = require('sequelize');
 const { Orderdetail, Product, Order } = require('../db');
 const  nodemailer = require('nodemailer');
-const { cancelOrder } = require('../controllers/cancelOrder');
+const { packOffOrder } = require('../controllers/packOffOrder');
 //tyvvqqdwlvqtjzeu
 const router = Router();
 let productosCorreo = 0; //Para controlar la cadena de productos que se han vendido
 
-/* Date Creation: December 29, 2022
+/* Date Creation: January 3, 2023
    Author: Alejandro Téllez Aguilar
-   Description: Crea la ruta /oders para Cancelar una orden de compra
+   Description: Crea la ruta /oder para Actualizar una orden de compra
 */
-router.delete('/', async (req, res, next) => {
+router.put('/', async (req, res, next) => {
     
-   
-
-    const { orderId, email, name, status} = req.body;
-   
-          
-    try {
+   const { orderId, email, name, status} = req.body;
+   try {
 
         // //Cambia de estado de la orden
 
@@ -44,18 +40,20 @@ router.delete('/', async (req, res, next) => {
              data.headorder.forEach(element => {
               console.log(element.productId, element.purchasedamount)
               //Actualiza el stock con cada producto
-              const odetail = updateStock(element.productId,element.purchasedamount);
-              productosCorreo++
+              if (status === "cancelada") {
+                 const odetail = updateStock(element.productId,element.purchasedamount,status);
+                 productosCorreo++
+              }   
              });   
-
-            /*
-              Envía correo al usuario sobre lo cancelado
-             */ 
-              console.log(name,email,productosCorreo)  
-              const send = await sendMail(email,name, productosCorreo)
+             console.log(name,email,productosCorreo)  
+            
+             // Envía correo al usuario 
+              
+              
+              const send = await sendMail(email,name, productosCorreo, status)
             return res.status(200).json({
               
-              "message:": "Orden Cancelada.",
+              "message:": "Orden " + status,
               "Orden": orderId,
               data
             }); 
@@ -89,15 +87,17 @@ async function changeStateOrder(orderId,state){
 async function updateStock(id,purchasedamount){
     
     let od = await Product.findByPk(id)
-    od.stock = od.stock + purchasedamount
-    //Se crea la cadena de productos para enviar correo
-     productosCorreo = productosCorreo + od.title + ": " + purchasedamount + "  ";
+    
+      od.stock = od.stock + purchasedamount
+      //Se crea la cadena de productos para enviar correo
+      
+      
     await od.save();
     
 };
 
 
-async function sendMail(to, name, orderproducts){
+async function sendMail(to, name, orderproducts, status){
   
     // crear un objeto transportador reutilizable utilizando el transporte SMTP predeterminado
    let transporter = nodemailer.createTransport({
@@ -106,27 +106,52 @@ async function sendMail(to, name, orderproducts){
     secure: false, // true for 465, false for other ports
     auth: {
       user: "atacolmx@gmail.com", // generated ethereal user
-      pass: "tyvvqqdwlvqtjzeu", // generated ethereal password
+      pass: "aqui va la clave", // generated ethereal password
     },
    });  //Fin de función
-
-  
+ 
+   //Si es cancelada
+  if (status === "cancelada"){ 
     // enviar correo con objeto de transporte definido
     return transporter.sendMail({ //await
       from: '"Su compra ha sido cancelada." <pruebadecorreo@example.com>', // sender address
       
       to: to,
-      subject: "Cancelación su compra " + name, // Subject line
+      subject: "Cancelación de su compra " + name, // Subject line
       //"Enviando correo de prueba desde la API E-Commerce generado por Alejandro Téllez.", // plain text body
       text: 'Productos cancelados:  ' + orderproducts,
       //html: "<b>Hello world?</b>", // html body
-  }, (err, info) => {
-    if (err) res.status(500).send({success: false, error: err.message});
-    return res.status(200).send({
+     }, (err, info) => {
+     if (err) res.status(500).send({success: false, error: err.message});
+      return res.status(200).send({
         success: true,
         message: "Correo enviado."
-    });
+     });
+     
   });
+  }
+  //Si es surtida o en proceso
+  console.log(status);
+  if (status === "proceso"){ 
+    // enviar correo con objeto de transporte definido
+    return transporter.sendMail({ //await
+      from: '"Productos empacados y enviados." <pruebadecorreo@example.com>', // sender address
+      
+      to: to,
+      subject: name + ", hemos enviado tus productos.", // Subject line
+      //"Enviando correo de prueba desde la API E-Commerce generado por Alejandro Téllez.", // plain text body
+      text: 'Productos enviados:  ' + orderproducts,
+      //html: "<b>Hello world?</b>", // html body
+     }, (err, info) => {
+     if (err) res.status(500).send({success: false, error: err.message});
+      return res.status(200).send({
+        success: true,
+        message: "Correo enviado."
+     });
+     
+  });
+}
+
 
 } // Fin de función
 

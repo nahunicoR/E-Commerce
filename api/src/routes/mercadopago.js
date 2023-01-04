@@ -4,9 +4,11 @@ const { Product, Order, Orderdetail, User, Address } = require('../db.js');
 const mercadopago = require('mercadopago');
 const {ACCESS_TOKEN} = process.env;
 
+
 mercadopago.configure({
-    access_token: ACCESS_TOKEN
+    access_token: MERCADO_PAGO_KEY_TEST
 });
+
     //---------------------------------------------------------------------------------->
     //POST DE PREFERENCIA HASTA EL MOMENTO INDIVIDUAL SIN CARRITO DE COMPRAS
 router.post('/',  (req,res,next) => {
@@ -22,7 +24,6 @@ router.post('/',  (req,res,next) => {
     //         unit_price: item.price
     //     }
     // })
-
     const prod = req.body
     const preference = {
         items: [
