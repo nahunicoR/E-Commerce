@@ -29,6 +29,7 @@ const createDetailorder = require('./createDetailorder');
 const packOffOrder = require('./packOffOrder');
 const getOrdersUsers = require('./getOrdersUsers');
 const getOrderByUser = require('./getOrderByUser');
+const getOrderStatus = require('./getOrderStatus');
 
 
 /* Para Address 
@@ -78,6 +79,7 @@ router.use('/detailorder',  createDetailorder);
 router.use('/order',  packOffOrder);
 router.use('/orders', getOrdersUsers);
 router.use('/order', getOrderByUser);
+router.use('/order', getOrderStatus);
 
 /* Para Address 
    Author: Alejandro Téllez 
@@ -97,9 +99,9 @@ router.use('/',  createMail);
 /* Para Mercado Pago
     Author: Nahuel Riveros
 */
-const mercadoPago = require('./mercadopago');
+// const mercadoPago = require('./mercadopago');
 
-router.use('/payment', mercadoPago);
+// router.use('/payment', mercadoPago);
 
 
 
