@@ -17,6 +17,7 @@ import {
 	useToast,
 } from "@chakra-ui/react";
 import { FaArrowLeft, FaHeart } from "react-icons/fa";
+import axios from "axios";
 
 export default function Details(props) {
 	const { id } = useParams();
@@ -33,6 +34,19 @@ export default function Details(props) {
 	const handleLike = () => {
 		setLiked(!liked);
 	};
+
+	const handleCompra = () => {
+		console.log('compra');
+		console.log(productId)
+		let compra = {
+			...productId,
+			quantity: 1
+		}
+		console.log(compra);
+		axios.post('http://localhost:3001/payment', compra)
+		.then((res)=> window.location.href = res.data)
+		.catch((err)=> console.log(err))
+	}
 
 	useEffect(() => {
 		dispatch(getDetails(id));
@@ -148,7 +162,7 @@ export default function Details(props) {
 							isAuthenticated
 							?
 							<Button
-							// onClick={}
+								onClick={ handleCompra }
 								w={"40%"}
 								colorScheme={"teal"}
 								top="85%"
@@ -157,7 +171,7 @@ export default function Details(props) {
 							</Button>
 							:
 							<Button
-							// onClick={}
+								onClick={ handleCompra }
 								w={"40%"}
 								colorScheme={"teal"}
 								top="85%"
