@@ -48,7 +48,7 @@ export default function Details(props) {
 				</div> */
 		<>
 			{!loading ? (
-				<Flex flexDirection={"column"} p="50">
+				<Flex flexDirection={"row"} p="2">
 					<Link to="/home">
 						<Button
 							leftIcon={<FaArrowLeft />}
@@ -59,18 +59,19 @@ export default function Details(props) {
 						</Button>
 					</Link>
 					<Box
-						borderWidth="1px"
+						borderWidth="3px"
 						borderRadius="lg"
+						margin="2px"
 						w="50%"
-						h={"600"}
-						alignSelf={"center"}
+						h={"610"}
+						alignSelf={"start"}
 					>
 						<Flex
 							flexDirection={"row"}
 							justifyContent={"space-evenly"}
 							alignItems={"center"}
 						>
-							<Flex margin={30} w={"50%"} h={"500"}>
+							<Flex flexDirection={"column"} alignItems={"center"} margin={30} w={"50%"} h={"500"}>
 								<Image
 									alt="product show"
 									height={"100%"}
@@ -90,7 +91,6 @@ export default function Details(props) {
 											{productId.title}
 										</Heading>
 									</Flex>
-									<Tag w={"fit-content"}>{productId.category}</Tag>
 								</HStack>
 								<Heading size={"sm"}>Descripción:</Heading>
 								<Text>{productId.description}</Text>
@@ -98,10 +98,12 @@ export default function Details(props) {
 								<Text color="teal" fontSize="3xl">
 									$ {productId.price}
 								</Text>
-								<Heading size={"sm"}>Material</Heading>
+								<Heading size={"md"}>Material</Heading>
 								<Tag colorScheme={"teal"} variant={"outline"} w={"fit-content"}>
 									{productId.material}
 								</Tag>
+								<Heading size={"md"}>Categoria</Heading>
+								<Tag size={"md"} w={"fit-content"}>{productId.category}</Tag>
 								<Flex
 									gap={3}
 									flexDirection={"row"}
@@ -109,33 +111,72 @@ export default function Details(props) {
 									alignItems={"center"}
 									marginTop={50}
 								>
-									<Button
-										onClick={
-											isAuthenticated
-												? null
-												: () => {
-														toast({
-															title: "Primero inicie sesión",
-															position: "bottom",
-															status: "info",
-															isClosable: true,
-														});
-												  }
-										}
-										w={"60%"}
-										colorScheme={"teal"}
-									>
-										Añadir al Carrito
-									</Button>
-									<IconButton
-										onClick={handleLike}
-										color={liked ? "red.400" : null}
-										icon={<FaHeart />}
-									/>
 								</Flex>
 							</Flex>
+							
 						</Flex>
-					</Box>
+						<Flex 
+							flexDirection={"row"} 
+							p="-10"
+							justifyContent={"space-evenly"}
+							margin-top="100"
+						>
+						<Button
+							onClick={
+								isAuthenticated
+								? null
+								: () => {
+									toast({
+										title: "Primero inicie sesión",
+										position: "bottom",
+										status: "info",
+										isClosable: true,
+									});
+							}}
+							w={"40%"}
+							colorScheme={"teal"}
+							>
+							Añadir al Carrito
+						</Button>
+						<IconButton
+							onClick={handleLike}
+							color={liked ? "red.400" : null}
+							icon={<FaHeart />}
+							margin="0 15px"
+							/>
+						{
+							isAuthenticated
+							?
+							<Button
+							// onClick={}
+								w={"40%"}
+								colorScheme={"teal"}
+								top="85%"
+							>
+								Comprar
+							</Button>
+							:
+							<Button
+							// onClick={}
+								w={"40%"}
+								colorScheme={"teal"}
+								top="85%"
+								disabled
+							>
+							Comprar
+						</Button>
+						}
+						</Flex>
+					</Box>	
+					<Box
+						borderWidth="3px"
+						borderRadius="lg"
+						margin="2px"
+						w="40%"
+						h={"610"}
+						alignSelf={"start"}
+					>
+					</Box>	
 				</Flex>
 			) : (
 				<Flex h={"1000px"} justifyContent={"center"} alignItems="center">
