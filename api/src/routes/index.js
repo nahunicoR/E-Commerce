@@ -8,7 +8,8 @@ const deleteProduct = require('./deleteProduct');
 const getProductById = require('./getProductById');
 const updateProduct = require('./updateProduct');
 const getProductByName = require('./getProductByName');
-   
+
+
 
 /* Para usuarios 
    Author: Alejandro Téllez
@@ -100,6 +101,8 @@ const mercadoPago = require('./mercadopago');
 
 router.use('/payment', mercadoPago);
 
+const review = require("./createReview");
+router.use("/reviews", review)
 
 
 router.get('/', async (req,res,next) => {
