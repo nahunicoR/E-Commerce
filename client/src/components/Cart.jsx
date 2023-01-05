@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import CartItem from "./CartItem";
 import { useSelector } from "react-redux";
 import PayButton from './PayButton.jsx';
+import {useAuth0} from '@auth0/auth0-react';
 import {
 	Box,
 	Stack,
@@ -22,12 +23,13 @@ export function formatPrice(value, opts = {}) {
 }
 
 export default function Cart() {
+	const {isAuthenticated} = useAuth0()
 	const productsInCart = useSelector((state) => state.products.cart);
 	console.log(productsInCart);
 
 	let total = 0;
 	productsInCart.map((product) => {
-		total = total + product.price;
+		total = total + product.price * product.quantity;
 		return total;
 	});
 	useEffect(() => {
@@ -67,7 +69,11 @@ export default function Cart() {
 									</Text>
 								</Stack>
 							</Stack>
-							<PayButton productsInCart={productsInCart}/>
+							{ isAuthenticated ? <PayButton productsInCart={productsInCart}/> :
+							<Text fontSize="lg" fontWeight="semibold">
+							Registrate para poder pagar por tus productos!
+							</Text>
+							}
 						</Stack>
 					</HStack>
 				</HStack>

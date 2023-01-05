@@ -24,9 +24,9 @@ function validatorCreateUser(req,res,next){
 
 router.post('/', validatorCreateUser, async (req, res, next) => {
     try {
-        const { name, lastName, email, rol, password } = req.body;
+        const { name, lastName, email, rol } = req.body;   //password
        
-        let hashedPassword = await bcrypt.hash(password, 10);
+        //let hashedPassword = await bcrypt.hash(password, 10);
 
         const formatEmail = email.toLowerCase();
 
@@ -35,8 +35,8 @@ router.post('/', validatorCreateUser, async (req, res, next) => {
                 name,
                 lastName, 
                 email: formatEmail,
-                rol: rol || 'user',
-                password: hashedPassword 
+                rol: rol || 'user'
+                //password: hashedPassword 
             }
         })
         !created ? res.status(400).json('El usuario ya existe') : res.status(200).json(user);

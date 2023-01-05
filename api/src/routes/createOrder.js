@@ -4,10 +4,10 @@ const router = Router();
 
 /* Date Creation: December 16, 2022
    Author: Alejandro Téllez Aguilar
-   Description: Crea el servicio de la ruta /oder para orden de compra
+   Description: Crea el servicio de la ruta /oder para crear la orden de compra
 */
-router.post('/create', async (req, res, next) => {
-    const { purchaseCost, payOrder, paymentMethod, status, userId } = req.body;
+router.post('/', async (req, res, next) => {
+    const { purchaseCost, payOrder, paymentMethod, status, userEmail, addressorderId } = req.body;
     try {
       if (req.body.status === "creada"){
         let newOrder = await Order.create({
@@ -15,11 +15,13 @@ router.post('/create', async (req, res, next) => {
             payOrder,
             paymentMethod,
             status,
-            userId
+            userEmail,
+            addressorderId
         });
         res.status(200).json({
-            "Id order" : newOrder.id, 
-            "Id user" : newOrder.userId
+            "Orden:" : newOrder.id, 
+            "Usuario:" : newOrder.userEmail,
+            "Domicilio:": newOrder.addressorderId  
         });
     } else {
         res.status(400).json({

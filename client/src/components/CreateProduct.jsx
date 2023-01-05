@@ -1,91 +1,93 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { postProducts } from "../redux/actions";
 import styles from "../css/CreateProduct.module.css";
 
-const validate = ( form ) => {
+const validate = (form) => {
 	let errors = {};
 	if (!form.title) {
-	  errors.title = 'Este campo es Obligatorio'
+		errors.title = "Este campo es Obligatorio";
 	}
 	if (!form.price) {
-	  errors.price = 'Este campo es Obligatorio'
+		errors.price = "Este campo es Obligatorio";
 	}
-	if (!form.category || !form.material ) {
-		errors.category = 'Este campo es Obligatorio'
+	if (!form.category || !form.material) {
+		errors.category = "Este campo es Obligatorio";
 	}
 	if (!form.description) {
-		errors.description = 'Este campo es Obligatorio'
+		errors.description = "Este campo es Obligatorio";
 	}
 	// if (!form.image) {
 	// 	errors.image = 'Este campo es Obligatorio'
 	// }
 	return errors;
-  }
+};
 
 export default function CreateProduct() {
 	const dispatch = useDispatch();
-	const [image, setImage] = useState('');
+	const [image, setImage] = useState("");
 	const [button, setButton] = useState(true);
-	const [loading, setLoading] = useState(false)
 	const [form, setForm] = useState({
-		title: '',
-		price: '',
-		category: '',
-		material: '',
-		description: '',
-		image:''
-	})
+		title: "",
+		price: "",
+		category: "",
+		material: "",
+		description: "",
+		image: "",
+	});
 	const [errors, setErrors] = useState({
-		title: '',
-		price: '',
-		category: '',
-		material: '',
-		description: '',
-		image:''
-	})
+		title: "",
+		price: "",
+		category: "",
+		material: "",
+		description: "",
+		image: "",
+	});
 
 	useEffect(() => {
-	  if (	form.title.length > 0 &&
+		if (
+			form.title.length > 0 &&
 			form.price.length > 0 &&
 			form.category.length > 0 &&
 			form.material.length > 0 &&
-			form.description.length > 0 ) {
-		setButton(false)
-	  } else {
-		setButton( true )
-	  }	
-	}, [form, setButton])
-	
-	
+			form.description.length > 0
+		) {
+			setButton(false);
+		} else {
+			setButton(true);
+		}
+	}, [form, setButton]);
+
 	const handleChange = (e) => {
 		setForm({
-		  	...form,
-		    [e.target.name]: e.target.value
-		});
-		setErrors( validate({
 			...form,
-			[e.target.name] : e.target.value
-		}));
-	}
+			[e.target.name]: e.target.value,
+		});
+		setErrors(
+			validate({
+				...form,
+				[e.target.name]: e.target.value,
+			})
+		);
+	};
 	const handleSelectCategory = (e) => {
 		setForm({
-		  	...form,
+			...form,
 			category: e.target.value,
-		})
-	}
+		});
+	};
 
 	const handleSelectMaterial = (e) => {
 		setForm({
-		  	...form,
+			...form,
 			material: e.target.value,
-		})
-	}
+		});
+	};
 
 	const uploadImage = async (e) => {
 		const files = e.target.files;
 		const data = new FormData();
-		data.append("file",files[0]);
+		data.append("file", files[0]);
 		data.append("upload_preset", "ecomerce");
 		// setLoading(true);
 		const res = await fetch(
@@ -94,136 +96,125 @@ export default function CreateProduct() {
 				method: "POST",
 				body: data,
 			}
-		)
+		);
 		const file = await res.json();
 		setImage(file.secure_url);
-	}
+	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		dispatch( postProducts( form ) );
-		console.log(form)
+		dispatch(postProducts(form));
+		console.log(form);
 		setForm({
-			title: '',
-			price: '',
-			category: '',
-			material: '',
-			description: '',
-			image:''
-		})
-	}
+			title: "",
+			price: "",
+			category: "",
+			material: "",
+			description: "",
+			image: "",
+		});
+	};
 
 	return (
-		<div className={`${ styles.content }`}>
-			<form className={`${styles.formulario}`} onSubmit={ handleSubmit }>
-			<h2>Crear Producto</h2>
+		<div className={`${styles.content}`}>
+			<form className={`${styles.formulario}`} onSubmit={handleSubmit}>
+				<h2>Crear Producto</h2>
 				<div>
 					{/* <label>Nombre del Producto: </label> */}
-					<input 
-						type='text' 
-						value={form.title} 
-						name='title' 
-						onChange={ handleChange }
-						placeholder='Nombre del Producto:'
+					<input
+						type="text"
+						value={form.title}
+						name="title"
+						onChange={handleChange}
+						placeholder="Nombre del Producto:"
 					/>
-					<p>{ errors.title && errors.title }</p>
+					<p>{errors.title && errors.title}</p>
 				</div>
 
 				<div>
 					{/* <label>Precio: </label> */}
-					<input 
-						type='number' 
-						value={form.price} 
-						name='price' 
-						onChange={ handleChange }
-						placeholder='Precio: '
+					<input
+						type="number"
+						value={form.price}
+						name="price"
+						onChange={handleChange}
+						placeholder="Precio: "
 					/>
-					<p>{ errors.price && errors.price }</p>
+					<p>{errors.price && errors.price}</p>
 				</div>
 
-				<div className={`${ styles.selects }`}>
+				<div className={`${styles.selects}`}>
 					<div>
-
-					{/* <label>Categoria: </label> */}
-					<select name='category' onChange={ handleSelectCategory } defaultValue='categoria'>
-						<option disabled value="categoria">Seleccionar Categoria</option>
-						<option value="Bombilla">Bombilla</option>
-						<option value="Kit">Kit</option>
-						<option value="Mate">Mate</option>
-						<option value="Yerba">Yerba</option>
-					</select>
-					{/* <label>Material: </label> */}
-					<select name='material' onChange={ handleSelectMaterial } defaultValue='material'>
-						<option disabled value="material">Seleccionar Material</option>
-						<option value="Artesanal">Artesanal</option>
-						<option value="Industrial">Industrial</option>
-						<option value="Sintetico">Sintetico</option>
-					</select>
+						{/* <label>Categoria: </label> */}
+						<select
+							name="category"
+							onChange={handleSelectCategory}
+							defaultValue="categoria"
+						>
+							<option disabled value="categoria">
+								Seleccionar Categoria
+							</option>
+							<option value="Bombilla">Bombilla</option>
+							<option value="Kit">Kit</option>
+							<option value="Mate">Mate</option>
+							<option value="Yerba">Yerba</option>
+						</select>
+						{/* <label>Material: </label> */}
+						<select
+							name="material"
+							onChange={handleSelectMaterial}
+							defaultValue="material"
+						>
+							<option disabled value="material">
+								Seleccionar Material
+							</option>
+							<option value="Artesanal">Artesanal</option>
+							<option value="Industrial">Industrial</option>
+							<option value="Sintetico">Sintetico</option>
+						</select>
 					</div>
 				</div>
 
 				<div>
 					<label>Descripcion: </label>
-					<textarea 
-						value={form.description} 
-						name='description' 
-						onChange={ handleChange }
+					<textarea
+						value={form.description}
+						name="description"
+						onChange={handleChange}
 					/>
-					<p>{ errors.description && errors.description }</p>
+					<p>{errors.description && errors.description}</p>
 				</div>
 
-				<div className={`${ styles.image }`}>
+				<div className={`${styles.image}`}>
 					<label>Imagen: </label>
-					<input 
-						hidden 
-						type='text' 
-						value={ form.image = image } 
-						name='image' 
-						onChange={ handleChange }
+					<input
+						hidden
+						type="text"
+						value={(form.image = image)}
+						name="image"
+						onChange={handleChange}
 					/>
-					<input 
-						type='file' 
-						onChange={ uploadImage } 
-						placeholder="Imagen"
-					/>
+					<input type="file" onChange={uploadImage} placeholder="Imagen" />
 					<div>
-						{image ? 
-						<img src={image} style={{ width:"190px", height:"auto" }} />: 
-						(<h4>Cargar imagen...</h4>)}
+						{image ? (
+							<img
+								alt="test"
+								src={image}
+								style={{ width: "190px", height: "auto" }}
+							/>
+						) : (
+							<h4>Cargar imagen...</h4>
+						)}
 					</div>
 				</div>
 
-				<button type='submit' disabled={ button }> 
-					Crear Producto 
+				<button type="submit" disabled={button}>
+					Crear Producto
 				</button>
-
 			</form>
 		</div>
-	)
+	);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // import React, { Fragment, useState } from "react";
 // import { Formik, Form, Field, ErrorMessage } from "formik";
@@ -412,8 +403,6 @@ export default function CreateProduct() {
 // 	);
 // }
 
-
-
 // import React, { useState } from "react";
 // import { useDispatch} from "react-redux";
 // import { postProducts, getProducts } from "../redux/actions";
@@ -450,7 +439,6 @@ export default function CreateProduct() {
 //     //             }
 //     //         )
 //     // )}
-    
 
 //     const handleChange = (e) => {
 // 			const {name, value} = e.target;
@@ -463,7 +451,7 @@ export default function CreateProduct() {
 // 				[name]: value
 // 			}));
 // 			console.log(input)
-// 		}  
+// 		}
 
 // 	const validate = (input) => {
 
@@ -522,13 +510,12 @@ export default function CreateProduct() {
 // 				category:"",
 // 				material:"",
 //               });
-//               alert("Se creó un nuevo producto!")  
+//               alert("Se creó un nuevo producto!")
 //         }
 //         else {
 //             alert("Completa los campos.")
 //         }
 //     }
-
 
 // 	 const addImage = async (e) => {
 // 		 const imageUp = await Cloudinary(e.target.files[0]);
@@ -539,7 +526,6 @@ export default function CreateProduct() {
 //       });
 // 		};
 
-	
 //     return ( <div className="ProductCreate">
 //         <form onSubmit={(e) => handleSubmit(e)}>
 //           <div className="mb-3" style={{display:"flex", flexDirection:"column" ,alignItems:"center"}}>
@@ -551,12 +537,12 @@ export default function CreateProduct() {
 //               style={{width:'600px'}}
 //               type="text"
 //               placeholder="Nombre..."
-//               value={input.title} 
-//               name='title' 
-//               onChange={handleChange}  
-//             /> 
+//               value={input.title}
+//               name='title'
+//               onChange={handleChange}
+//             />
 //             {error.title && <p >{error.title}</p>}
-                      
+
 //             <label>
 //               Precio
 //             </label>
@@ -564,8 +550,8 @@ export default function CreateProduct() {
 //             style={{width:'600px'}}
 //               type="number"
 //               placeholder="Precio..."
-//               value={input.price} 
-//               name='price' 
+//               value={input.price}
+//               name='price'
 //               onChange={handleChange}
 //             />
 //             {error.price && <p>{error.price}</p>}
@@ -577,28 +563,28 @@ export default function CreateProduct() {
 //             style={{width:'600px'}}
 //               type="file"
 //               placeholder="Imagen..."
-//               name='image' 
+//               name='image'
 //               onChange={(e) => {
 //                 addImage(e)
 //               }}
 //             />
 //             {error.image && <p >{error.image}</p>}
 //             <label className="form-label">
-//               Descripción del producto: 
+//               Descripción del producto:
 //             </label>
 //             <input
 //               style={{width:'600px'}}
 //               type="text"
 //               placeholder="Descripción..."
-//               value={input.description} 
-//               name='description' 
-//               onChange={handleChange}  
-//             /> 
+//               value={input.description}
+//               name='description'
+//               onChange={handleChange}
+//             />
 //             {error.description && <p >{error.description}</p>}
 
 // 			<label>
-//                     Categoría: 
-//                 </label> 
+//                     Categoría:
+//                 </label>
 // 				<div className={styles.circle}>
 // 				<label className={styles.labelName}>
 // 					<input type="radio" className={styles.circle} value='Mate' name="material" onChange={handleChange}/> Mate
@@ -615,8 +601,8 @@ export default function CreateProduct() {
 // 				</div>
 
 //                 <label>
-//                     Material: 
-//                 </label> 
+//                     Material:
+//                 </label>
 // 				<div className={styles.circle}>
 // 				<label className={styles.labelName}>
 // 					<input type="radio" className={styles.circle} value='Sintetico' name="material" onChange={handleChange}/> Sintetico

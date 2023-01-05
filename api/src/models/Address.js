@@ -16,7 +16,7 @@ module.exports = (sequelize) => {
       allowNull: false,
       autoIncrement: true,
     },
-    maistreet: {                      //Calle principal                 
+    mainstreet: {                      //Calle principal                 
       type: DataTypes.STRING,
     },
     number: {                        //Número exterior
@@ -24,6 +24,11 @@ module.exports = (sequelize) => {
     },
     postalcode: {                    //Código postal
       type: DataTypes.INTEGER,
+      validate: {
+          isNumeric: {
+              msg: 'Debe ser un número'
+          }
+      }
     },
     street1: {                       //Entre la calle 1
       type: DataTypes.STRING,

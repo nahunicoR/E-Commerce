@@ -3,7 +3,7 @@ const { Product } = require('../db');
 const router = Router();
 
 router.post('/', async (req, res, next) => {
-    const { title, price, category, description, image, material } = req.body;
+    const { title, price, category, description, image, material, stock } = req.body;
     try {
         if(!title) return res.status(400).json('No se ingreso titulo');
         if(!price) return res.status(400).json('No se ingreso precio');
@@ -11,14 +11,15 @@ router.post('/', async (req, res, next) => {
         if(!description) return res.status(400).json('No se ingreso descripcion');
         if(!image) return res.status(400).json('No se ingreso imagen');
         if(!material) return res.status(400).json('No se ingreso material');
-        
+        if(!stock) return res.status(400).json('No se ingreso stock');
         const newProduct = {
             title,
             price,
             category,
             description,
             image,
-            material
+            material,
+            stock
         }
        const [product, created] = await Product.findOrCreate({
             where: {
@@ -27,7 +28,8 @@ router.post('/', async (req, res, next) => {
                 category,
                 description,
                 image,
-                material
+                material,
+                stock
             },
             defaults: newProduct
         });
