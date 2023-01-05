@@ -174,7 +174,7 @@ export default function Details(props) {
 								w={"40%"}
 								colorScheme={"teal"}
 								top="85%"
-								// disabled
+								disabled
 							>
 							Comprar
 						</Button>

@@ -27,7 +27,7 @@ export function formatPrice(value, opts = {}) {
 export default function Cart() {
 	const {isAuthenticated} = useAuth0()
 	const productsInCart = useSelector((state) => state.products.cart);
-	let products = productsInCart;
+	// let products = productsInCart;
 	let total = 0;
 	productsInCart.map((product) => {
 		total = total + product.price * product.quantity;
@@ -82,18 +82,21 @@ export default function Cart() {
 									</Text>
 								</Stack>
 							</Stack>
-							<Button
-								onClick={ handleCompra }
-								w={"40%"}
-								colorScheme={"teal"}
-								top="85%"
-							>
-								Comprar
-							</Button>
-							{ isAuthenticated ? <PayButton productsInCart={productsInCart}/> :
-							<Text fontSize="lg" fontWeight="semibold">
-							Registrate para poder pagar por tus productos!
-							</Text>
+							
+							{ isAuthenticated 
+								?
+									<Button
+										onClick={ handleCompra }
+										w={"40%"}
+										colorScheme={"teal"}
+										top="85%"
+									>
+										Comprar
+									</Button>
+								:									
+									<Text fontSize="lg" fontWeight="semibold">
+										Registrate para poder pagar por tus productos!
+									</Text>
 							}
 						</Stack>
 					</HStack>
