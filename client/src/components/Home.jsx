@@ -11,6 +11,7 @@ import {
 	filterByCategory,
 	filterByMaterials,
 	searchProduct,
+	getReviews
 } from "../redux/actions";
 import Filter from "./Filter";
 
@@ -86,6 +87,7 @@ export default function Home() {
 	//info de nuestra db https://e-commerce-production-d476.up.railway.app/products
 	useEffect(() => {
 		dispatch(getProducts());
+		dispatch(getReviews())
 		setTimeout(() => {
 			setLoading(false);
 		}, 800);

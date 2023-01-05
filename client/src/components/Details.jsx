@@ -51,16 +51,7 @@ export default function Details(props) {
 				</div> */
 		<>
 			{!loading ? (
-				<Flex flexDirection={"row"} p="2">
-					<Link to="/home">
-						<Button
-							leftIcon={<FaArrowLeft />}
-							alignSelf={"flex-start"}
-							colorScheme={"teal"}
-						>
-							Volver
-						</Button>
-					</Link>
+				<Flex flexDirection={"row"} p="2" justifyContent={"center"}>
 					<Box
 						borderWidth="3px"
 						borderRadius="lg"
@@ -73,7 +64,20 @@ export default function Details(props) {
 							flexDirection={"row"}
 							justifyContent={"space-evenly"}
 							alignItems={"center"}
+							position={"relative"}
 						>
+							<Link to="/home">
+						<Button
+							leftIcon={<FaArrowLeft />}
+							alignSelf={"flex-start"}
+							colorScheme={"teal"}
+							position={"absolute"}
+							top={0}
+							margin={"0.5rem"}
+						>
+							Volver
+						</Button>
+					</Link>
 							<Flex flexDirection={"column"} alignItems={"center"} margin={30} w={"50%"} h={"500"}>
 								<Image
 									alt="product show"
@@ -180,6 +184,9 @@ export default function Details(props) {
 						alignSelf={"start"}
 						overflowY={"scroll"}
 					>
+						<Text marginLeft={"1.5rem"} fontSize={"1.5rem"} fontWeight={"bold"} marginTop={"1rem"}>
+							Opiniones del producto
+						</Text>
 						<Review />
 					</Box>	
 				</Flex>
