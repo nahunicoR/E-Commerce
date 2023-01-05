@@ -10,7 +10,9 @@ import {
 	/*  Flex, */ 
 	Text,
 	HStack,
+	Button,
 } from "@chakra-ui/react";
+import axios from "axios";
 
 export function formatPrice(value, opts = {}) {
 	const { locale = "en-US", currency = "USD" } = opts;
@@ -25,8 +27,7 @@ export function formatPrice(value, opts = {}) {
 export default function Cart() {
 	const {isAuthenticated} = useAuth0()
 	const productsInCart = useSelector((state) => state.products.cart);
-	console.log(productsInCart);
-
+	let products = productsInCart;
 	let total = 0;
 	productsInCart.map((product) => {
 		total = total + product.price * product.quantity;
@@ -35,6 +36,18 @@ export default function Cart() {
 	useEffect(() => {
 		localStorage.setItem("cart", JSON.stringify(productsInCart));
 	}, [productsInCart]);
+
+	const handleCompra = () => {
+		let compra = {
+			title: 'Compra del carrito',
+			description: 'orden de compra de todos los productos',
+			quantity: 1,
+			price: total
+		}
+		axios.post('/payment', compra)
+		.then((res)=> window.location.href = res.data)
+		.catch((err)=> console.log(err))
+	}
 	return (
 		<div>
 			<Box
@@ -69,6 +82,14 @@ export default function Cart() {
 									</Text>
 								</Stack>
 							</Stack>
+							<Button
+								onClick={ handleCompra }
+								w={"40%"}
+								colorScheme={"teal"}
+								top="85%"
+							>
+								Comprar
+							</Button>
 							{ isAuthenticated ? <PayButton productsInCart={productsInCart}/> :
 							<Text fontSize="lg" fontWeight="semibold">
 							Registrate para poder pagar por tus productos!

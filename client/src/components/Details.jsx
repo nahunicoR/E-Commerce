@@ -29,7 +29,6 @@ export default function Details(props) {
 	const [liked, setLiked] = useState(false);
 
 	const productId = useSelector((state) => state.products.productsDetail);
-	/* console.log("product id"); */
 
 	const handleLike = () => {
 		setLiked(!liked);
@@ -43,7 +42,7 @@ export default function Details(props) {
 			quantity: 1
 		}
 		console.log(compra);
-		axios.post('http://localhost:3001/payment', compra)
+		axios.post('/payment', compra)
 		.then((res)=> window.location.href = res.data)
 		.catch((err)=> console.log(err))
 	}
@@ -175,7 +174,7 @@ export default function Details(props) {
 								w={"40%"}
 								colorScheme={"teal"}
 								top="85%"
-								disabled
+								// disabled
 							>
 							Comprar
 						</Button>
