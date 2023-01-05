@@ -7,7 +7,7 @@ const router = Router();
    Description: Crea el servicio de la ruta /address para crear el domicilio de cada usuario
 */
 router.post('/', async (req, res, next) => {
-    const { mainstreet, number, postalcode, street1, street2, name, phonenumber, additionals, userId } = req.body;
+    const { mainstreet, number, postalcode, street1, street2, name, phonenumber, additionals, userEmail } = req.body;
     try {
       
         let newAddress = await Address.create({
@@ -19,7 +19,7 @@ router.post('/', async (req, res, next) => {
             name,
             phonenumber,
             additionals,
-            userId
+            userEmail
         });
         res.status(200).json({
             "Id street" : newAddress.id, 

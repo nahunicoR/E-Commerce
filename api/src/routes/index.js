@@ -26,9 +26,10 @@ const updateUser = require('./updateUser');               // Creado por Jesús D
 
 const createOrder = require('./createOrder');
 const createDetailorder = require('./createDetailorder');
-const cancelOrder = require('./cancelOrder');
+const packOffOrder = require('./packOffOrder');
 const getOrdersUsers = require('./getOrdersUsers');
 const getOrderByUser = require('./getOrderByUser');
+const getOrderStatus = require('./getOrderStatus');
 
 
 /* Para Address 
@@ -75,9 +76,10 @@ router.use('/user',  updateUser);
 
 router.use('/order',  createOrder);
 router.use('/detailorder',  createDetailorder);
-router.use('/order',  cancelOrder);
+router.use('/order',  packOffOrder);
 router.use('/orders', getOrdersUsers);
 router.use('/order', getOrderByUser);
+router.use('/order', getOrderStatus);
 
 /* Para Address 
    Author: Alejandro Téllez 
@@ -97,9 +99,9 @@ router.use('/',  createMail);
 /* Para Mercado Pago
     Author: Nahuel Riveros
 */
-const mercadoPago = require('./mercadopago');
+// const mercadoPago = require('./mercadopago');
 
-router.use('/payment', mercadoPago);
+// router.use('/payment', mercadoPago);
 
 const review = require("./createReview");
 router.use("/reviews", review)
@@ -150,18 +152,10 @@ router.get('/', async (req,res,next) => {
         {
             '*************** ORDERS ': '*********************** ',
             'Peticion /POST': '/order, para crear la orden en la base de datos',
-            
-        },
-        
-        {
+            'Peticion /PUT': '/order, para modificar la orden en la base de datos',
             'Peticion /POST': '/detailorder, para crear el detalle de la orden en la base de datos',
-        },
-        {
             'Peticion /GET': '/orders, para obtener todos los usuarios y sus ordenes de la base de datos',
             'Peticion /GET': '/order/:userid/orders, para obtener todas las ordenes de un usuario',
-            'Peticion /POST': '/order, para crear la orden ',
-            'Peticion /POST': '/orderdetail, para crear detalle de la orden ',
-            'Peticion /DELETE': '/order/:id, para cancelar la orden ',
         }, 
 
         {
