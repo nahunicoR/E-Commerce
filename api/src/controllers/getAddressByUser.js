@@ -6,12 +6,11 @@
 const { User, Address } = require("../db");
 
 const getUserAddressByUser = async (req, res, next) => {
-    const id = req.params
+    const email = req.params
     try {
-        const userDb = await User.findByPk(id);
+        const userDb = await User.findByPk(email);
         if (userDb) {
             User.getStreets();
-
         }
         return res.json(userDb);
     } catch (error) {
