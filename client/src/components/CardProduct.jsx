@@ -33,7 +33,7 @@ export default function CardProduct({
 
 	return (
 		<>
-			<GridItem colSpan={1}>
+			<GridItem /* colSpan={1} */ gridArea={"card"}>
 				<Card
 					transition={"0.2s"}
 					h={"400"}
@@ -42,6 +42,7 @@ export default function CardProduct({
 						boxShadow: "0 10px 18px 0 rgba(0, 0, 0, 0.2)",
 						transform: "scale(1.02)",
 					}}
+					margin={"auto"}
 					/* overflow={"hidden"} */
 				>
 					<CardBody>

@@ -23,7 +23,7 @@ function Filter({
 }) {
 	return (
 		<>
-			<GridItem rowSpan={3} colSpan={1}>
+			<GridItem gridArea={"filter"} /* rowSpan={3} colSpan={1} */>
 				<Box borderWidth="1px" borderRadius="lg" p={4}>
 					<Box paddingBottom={4}>
 						<HStack paddingBottom={5}>
