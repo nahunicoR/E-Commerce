@@ -9,6 +9,7 @@ const getProductById = require('./getProductById');
 const updateProduct = require('./updateProduct');
 const getProductByName = require('./getProductByName');
 const getImageByProduct = require('./getImageByProduct');
+const deleteImageProduct = require('./deleteImageProduct');
 
 
 
@@ -68,6 +69,7 @@ router.use('/product'       , getProductById);
 router.use('/product'       , updateProduct);
 router.use('/product'       , getProductByName);
 router.use('/product'       , getImageByProduct);
+router.use('/image'       , deleteImageProduct);
 
 
 /* Para usuarios 
@@ -113,9 +115,9 @@ router.use('/',  uploadImage);
 /* Para Mercado Pago
     Author: Nahuel Riveros
 */
-// const mercadoPago = require('./mercadopago');
+const mercadoPago = require('./mercadopago');
 
-// router.use('/payment', mercadoPago);
+router.use('/payment', mercadoPago);
 
 
 
