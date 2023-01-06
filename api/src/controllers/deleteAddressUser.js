@@ -5,13 +5,13 @@
 
 const { Address } = require("../db");
 
-const deleteAddressUser = async (id,userId) => {
+const deleteAddressUser = async (id,userEmail) => {
     try {
 
         const street = await Address.findOne({
             where: {
                 id: id,
-                userId: userId
+                userEmail: userEmail
                 
             },
           });
@@ -20,7 +20,7 @@ const deleteAddressUser = async (id,userId) => {
             await street.destroy(); // deletes the row
           }
 
-        return `Se elimino el domicilio con id: ${id} y usuario: ${userId}`;
+        return `Se elimino el domicilio con id: ${id} y usuario: ${userEmail}`;
     } catch (error) {
         console.log(error);
     }

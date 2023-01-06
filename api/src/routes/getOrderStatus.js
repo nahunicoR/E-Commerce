@@ -1,33 +1,31 @@
 const { Router } = require('express');
-const { getAddressByUser } = require('../controllers/getAddressByUser');
-const {User, Address} = require('../db');
+const { getOrderStatus } = require('../controllers/getOrderStatus');
+const {Order, Orderdetail} = require('../db');
 
-/* Date Creation: December 20, 2022
+/* Date Creation: January 3, 2023
    Author: Alejandro Téllez Aguilar
    Description: Crea la ruta /addresses/:id/streets para otener todas los domicilios del usuario
 */
 const router = Router();
 
-router.get('/:email/streets', async (req, res, next) => {
-    const email = req.params.email;
+router.get('/:status/products', async (req, res, next) => {
+    const status = req.params.status;
     try {
-      const data = await User.findOne({
+      const data = await Order.findOne({
         where: { 
-            email: email,
+            status: status,
         },
         include: [{//esta llave es por si tiene más relaciones, puede quitarse si sólo es una relación como en este caso
-            model: Address,
-            as: "streets",
-            atributes:["mainstreet", "number","postalcode",
-                        "street1", "street2", "name", "phonenumber",
-                        "additonals"]
+            model: Orderdetail,
+            as: "headorder",
+            atributes:["purchasedamount", "purchaseprice"]
         }]
         
       }); 
       if (data) {
         return res.status(200).json(data);
       } else {
-        return res.status(404).json({message:"No se encontró usuario"});
+        return res.status(404).json({message:"No se encontraron ordenes con ese status"});
       }  
       
     } catch (error) {

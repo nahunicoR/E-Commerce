@@ -89,13 +89,12 @@ async function sendMail(to, name, orderproducts){
     // enviar correo con objeto de transporte definido
     return transporter.sendMail({ //await
       from: '"Su compra realizada." <pruebadecorreo@example.com>', // sender address
-      
       to: to,
       subject: "Gracias por su compra " + name, // Subject line
       //"Enviando correo de prueba desde la API E-Commerce generado por Alejandro Téllez.", // plain text body
       text: 'Productos comprados:  ' + orderproducts,
       //html: "<b>Hello world?</b>", // html body
-  }, (err, info) => {
+     }, (err, info) => {
     if (err) res.status(500).send({success: false, error: err.message});
     return res.status(200).send({
         success: true,

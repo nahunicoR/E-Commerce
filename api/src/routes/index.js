@@ -12,7 +12,7 @@ const getAllReviewByProduct = require('./getAllReview');
 const createReview = require('./createReview');
 const updateReview = require('./updateReview');
 const deleteReview = require('./deleteReview');
-   
+
 
 /* Para usuarios 
    Author: Alejandro Téllez
@@ -29,9 +29,10 @@ const updateUser = require('./updateUser');               // Creado por Jesús D
 
 const createOrder = require('./createOrder');
 const createDetailorder = require('./createDetailorder');
-const cancelOrder = require('./cancelOrder');
+const packOffOrder = require('./packOffOrder');
 const getOrdersUsers = require('./getOrdersUsers');
 const getOrderByUser = require('./getOrderByUser');
+const getOrderStatus = require('./getOrderStatus');
 
 
 /* Para Address 
@@ -48,6 +49,13 @@ const deleteAddressUser = require('./deleteAddressUser');
 */
 
 const createMail = require('./createMail');
+
+
+/* Para cloudinary 
+    Author: Alejandro Téllez
+*/
+
+const uploadImage = require('./uploadImage');
 
 const router = Router();
 
@@ -86,9 +94,10 @@ router.use('/user',  updateUser);
 
 router.use('/order',  createOrder);
 router.use('/detailorder',  createDetailorder);
-router.use('/order',  cancelOrder);
+router.use('/order',  packOffOrder);
 router.use('/orders', getOrdersUsers);
 router.use('/order', getOrderByUser);
+router.use('/order', getOrderStatus);
 
 /* Para Address 
    Author: Alejandro Téllez 
@@ -105,13 +114,18 @@ router.use('/address', deleteAddressUser);
 
 router.use('/',  createMail);
 
+/* Para Cloudinary  
+   Author: Alejandro Téllez 
+*/
+
+router.use('/',  uploadImage);
 /* Para Mercado Pago
     Author: Nahuel Riveros
 */
-const mercadoPago = require('./mercadopago');
-const { getAllReviewDB } = require('../controllers/getAllReviewDB');
 
-router.use('/payment', mercadoPago);
+// const mercadoPago = require('./mercadopago');
+
+// router.use('/payment', mercadoPago);
 
 
 
@@ -160,18 +174,10 @@ router.get('/', async (req,res,next) => {
         {
             '*************** ORDERS ': '*********************** ',
             'Peticion /POST': '/order, para crear la orden en la base de datos',
-            
-        },
-        
-        {
+            'Peticion /PUT': '/order, para modificar la orden en la base de datos',
             'Peticion /POST': '/detailorder, para crear el detalle de la orden en la base de datos',
-        },
-        {
             'Peticion /GET': '/orders, para obtener todos los usuarios y sus ordenes de la base de datos',
             'Peticion /GET': '/order/:userid/orders, para obtener todas las ordenes de un usuario',
-            'Peticion /POST': '/order, para crear la orden ',
-            'Peticion /POST': '/orderdetail, para crear detalle de la orden ',
-            'Peticion /DELETE': '/order/:id, para cancelar la orden ',
         }, 
 
         {
@@ -192,13 +198,7 @@ router.get('/', async (req,res,next) => {
             '*************** MAIL ': '*********************** ',
             'Peticion /POST': '/mail, para crear el correo y enviarlo',
         },
-        {
-            '*************** ORDERS ': '*********************** ',
-            
-
-        },
-
-    ])
+        ])
 });
 
 module.exports = router;

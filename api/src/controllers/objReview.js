@@ -22,7 +22,6 @@ module.exports = reviews =[
         "rating": 4,
         "productId": 3,
         "userEmail":"martin@gmail.com"
-        
     },
     {
         "description": "al final lo devolvi porque se rompio a la semana",
@@ -35,7 +34,6 @@ module.exports = reviews =[
         "rating": 5,
         "productId": 4,
         "userEmail":"martin@gmail.com"
-        
     },
     {
         "description": "es justo la bombilla que buscaba",
@@ -60,6 +58,7 @@ module.exports = reviews =[
         "rating": 3,
         "productId": 8,
         "userEmail":"martin@gmail.com"
+
     },
     {
         "description": "esta muy bueno es increible",
