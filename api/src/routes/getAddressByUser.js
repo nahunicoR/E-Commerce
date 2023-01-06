@@ -8,12 +8,12 @@ const {User, Address} = require('../db');
 */
 const router = Router();
 
-router.get('/:iduser/streets', async (req, res, next) => {
-    const id = Number(req.params.iduser);
+router.get('/:email/streets', async (req, res, next) => {
+    const email = req.params.email;
     try {
       const data = await User.findOne({
         where: { 
-            id: id,
+            email: email,
         },
         include: [{//esta llave es por si tiene más relaciones, puede quitarse si sólo es una relación como en este caso
             model: Address,

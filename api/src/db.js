@@ -49,7 +49,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { User, Order, Orderdetail, Product, Address, Review } = sequelize.models; // Importar Modelos
+const { User, Order, Orderdetail, Product, Address, Review, Image } = sequelize.models; // Importar Modelos
 
 // Aca vendrian las relaciones
 // Relación uno a muchos
@@ -63,7 +63,9 @@ Order.belongsTo(Address, { as: "addressorder"});  //Una orden debe llevar el dom
 
 //La orden está formada por muchos productos
 Product.hasMany(Orderdetail, { as: "orderdetails", foreignkey: "id" });
+// El producto tiene muchas imagebes
 Orderdetail.belongsTo(Product, { as: "product" });
+Product.hasMany(Image, { as: "imageproduct"});
 
 //y además, la Orden es el encabezado del detalle de la orden, por lo que Order es uno a mucho Orderdetail
 Order.hasMany(Orderdetail, { as: "headorder", foreignkey: "id" });
@@ -76,7 +78,7 @@ User.hasMany(Address, { as: "streets", foreignkey: "id" });
 Product.hasMany(Review);
 Review.belongsTo(Product);
 
-User.hasMany(Review);
+User.hasMany(Review ,{  foreignkey: "userEmail" });
 Review.belongsTo(User);
 
 module.exports = {

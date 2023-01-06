@@ -8,7 +8,12 @@ const deleteProduct = require('./deleteProduct');
 const getProductById = require('./getProductById');
 const updateProduct = require('./updateProduct');
 const getProductByName = require('./getProductByName');
+const getImageByProduct = require('./getImageByProduct');
 
+const getAllReviewByProduct = require('./getAllReview');
+const createReview = require('./createReview');
+const updateReview = require('./updateReview');
+const deleteReview = require('./deleteReview');
 
 
 /* Para usuarios 
@@ -47,6 +52,13 @@ const deleteAddressUser = require('./deleteAddressUser');
 
 const createMail = require('./createMail');
 
+
+/* Para cloudinary 
+    Author: Alejandro Téllez
+*/
+
+const uploadImage = require('./uploadImage');
+
 const router = Router();
 
 
@@ -59,7 +71,16 @@ router.use('/product'       , deleteProduct);
 router.use('/product'       , getProductById);
 router.use('/product'       , updateProduct);
 router.use('/product'       , getProductByName);
+router.use('/product'       , getImageByProduct);
 
+/**Para Reviews */
+
+router.use('/review'        , createReview);
+router.use('/reviews'       , getAllReviewByProduct);
+router.use('/review'       , updateReview);
+router.use('/review'       , deleteReview);
+
+// router.use('/reviews'        , getAllReviewByProduct); para pruebas con bulkCreate
 
 /* Para usuarios 
    Author: Alejandro Téllez 
@@ -74,21 +95,21 @@ router.use('/user',  updateUser);
    Author: Alejandro Téllez 
 */
 
-router.use('/order',  createOrder);
+router.use('/order',        createOrder);
 router.use('/detailorder',  createDetailorder);
-router.use('/order',  packOffOrder);
-router.use('/orders', getOrdersUsers);
-router.use('/order', getOrderByUser);
-router.use('/order', getOrderStatus);
+router.use('/order',        packOffOrder);
+router.use('/orders',       getOrdersUsers);
+router.use('/order',        getOrderByUser);
+router.use('/order',        getOrderStatus);
 
 /* Para Address 
    Author: Alejandro Téllez 
 */
 
-router.use('/address',  createAdress);
+router.use('/address',   createAdress);
 router.use('/addresses', getAddressByUser);
-router.use('/address', updateAddressUser);
-router.use('/address', deleteAddressUser);
+router.use('/address',   updateAddressUser);
+router.use('/address',   deleteAddressUser);
 
 /* Para Mails 
    Author: Alejandro Téllez 
@@ -96,9 +117,15 @@ router.use('/address', deleteAddressUser);
 
 router.use('/',  createMail);
 
+/* Para Cloudinary  
+   Author: Alejandro Téllez 
+*/
+
+router.use('/',  uploadImage);
 /* Para Mercado Pago
     Author: Nahuel Riveros
 */
+
 // const mercadoPago = require('./mercadopago');
 
 // router.use('/payment', mercadoPago);
@@ -174,13 +201,7 @@ router.get('/', async (req,res,next) => {
             '*************** MAIL ': '*********************** ',
             'Peticion /POST': '/mail, para crear el correo y enviarlo',
         },
-        {
-            '*************** ORDERS ': '*********************** ',
-            
-
-        },
-
-    ])
+        ])
 });
 
 module.exports = router;
