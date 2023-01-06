@@ -8,6 +8,7 @@ const deleteProduct = require('./deleteProduct');
 const getProductById = require('./getProductById');
 const updateProduct = require('./updateProduct');
 const getProductByName = require('./getProductByName');
+const getImageByProduct = require('./getImageByProduct');
 
 
 
@@ -66,6 +67,7 @@ router.use('/product'       , deleteProduct);
 router.use('/product'       , getProductById);
 router.use('/product'       , updateProduct);
 router.use('/product'       , getProductByName);
+router.use('/product'       , getImageByProduct);
 
 
 /* Para usuarios 
@@ -81,21 +83,21 @@ router.use('/user',  updateUser);
    Author: Alejandro Téllez 
 */
 
-router.use('/order',  createOrder);
+router.use('/order',        createOrder);
 router.use('/detailorder',  createDetailorder);
-router.use('/order',  packOffOrder);
-router.use('/orders', getOrdersUsers);
-router.use('/order', getOrderByUser);
-router.use('/order', getOrderStatus);
+router.use('/order',        packOffOrder);
+router.use('/orders',       getOrdersUsers);
+router.use('/order',        getOrderByUser);
+router.use('/order',        getOrderStatus);
 
 /* Para Address 
    Author: Alejandro Téllez 
 */
 
-router.use('/address',  createAdress);
+router.use('/address',   createAdress);
 router.use('/addresses', getAddressByUser);
-router.use('/address', updateAddressUser);
-router.use('/address', deleteAddressUser);
+router.use('/address',   updateAddressUser);
+router.use('/address',   deleteAddressUser);
 
 /* Para Mails 
    Author: Alejandro Téllez 
