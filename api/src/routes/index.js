@@ -10,6 +10,10 @@ const updateProduct = require('./updateProduct');
 const getProductByName = require('./getProductByName');
 const getImageByProduct = require('./getImageByProduct');
 
+const getAllReviewByProduct = require('./getAllReview');
+const createReview = require('./createReview');
+const updateReview = require('./updateReview');
+const deleteReview = require('./deleteReview');
 
 
 /* Para usuarios 
@@ -69,6 +73,14 @@ router.use('/product'       , updateProduct);
 router.use('/product'       , getProductByName);
 router.use('/product'       , getImageByProduct);
 
+/**Para Reviews */
+
+router.use('/review'        , createReview);
+router.use('/reviews'       , getAllReviewByProduct);
+router.use('/review'       , updateReview);
+router.use('/review'       , deleteReview);
+
+// router.use('/reviews'        , getAllReviewByProduct); para pruebas con bulkCreate
 
 /* Para usuarios 
    Author: Alejandro Téllez 
@@ -113,6 +125,7 @@ router.use('/',  uploadImage);
 /* Para Mercado Pago
     Author: Nahuel Riveros
 */
+
 // const mercadoPago = require('./mercadopago');
 
 // router.use('/payment', mercadoPago);
