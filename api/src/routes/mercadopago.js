@@ -2,16 +2,17 @@ const express = require('express');
 const router = express.Router();
 const { Product, Order, Orderdetail, User, Address } = require('../db.js');
 const mercadopago = require('mercadopago');
+const { merchant_orders } = require('mercadopago');
 const {ACCESS_TOKEN} = process.env;
 
 
 mercadopago.configure({
-    access_token: MERCADO_PAGO_KEY_TEST
+    access_token: ACCESS_TOKEN
 });
 
     //---------------------------------------------------------------------------------->
     //POST DE PREFERENCIA HASTA EL MOMENTO INDIVIDUAL SIN CARRITO DE COMPRAS
-router.post('/',  (req,res,next) => {
+router.post('/payment',  (req,res,next) => {
     // const {cartItems, user} = req.body;
     // const ml_cart = cartItems.map(item => {
     //     return {
@@ -44,10 +45,11 @@ router.post('/',  (req,res,next) => {
         //     email: user.email,
         // },
         back_urls: {
-            success: "http://localhost:3000/checkout-success",
+            success: "",
             failure: "",
             pending: ""
         },
+        notification_url: "https://4e59-201-254-94-96.sa.ngrok.io/notification",
         // payment_methods: {
         //     excluded_payment_methods: [
         //         {
@@ -65,13 +67,52 @@ router.post('/',  (req,res,next) => {
     }
     mercadopago.preferences.create(preference)
     .then((resp)=> {
-        console.log(resp)
         res.json(resp.body.init_point)
     }).catch((err)=> {
         console.log(err)
         res.send({error: err.message})
         next(err)
     });
+});
+
+router.post('/notification', async (req,res,next) => {
+    const {body,query} = req;
+    const topic = query.topic;
+
+    console.log('Hola soy Query',{query})
+    console.log('Hola soy Topic',{topic})
+    var merchantOrder;
+    switch(topic){
+        case 'payment':
+            const paymentId = query.id || query['data.id'];
+            console.log(topic,'getting payment------>',paymentId);
+            const payment = await mercadopago.payment.findById(paymentId);
+            console.log(payment,'payment-------->');
+            //console.log('payment body',payment.body)
+            merchantOrder = await mercadopago.merchant_orders.findById(payment.body.order.id);
+            //console.log('merchantOrder',merchantOrder.body)
+            break;
+        case 'merchant_order':
+            const orderId = query.id;
+            console.log(topic,'getting merchant_order---->',orderId);
+            merchantOrder = await mercadopago.merchant_orders.findById(orderId);
+            //console.log('merchantOrder',merchantOrder.body)
+            break;            
+    }
+    console.log('merchantOrder------------------->',merchantOrder)
+    let paidAmount = 0;
+    // merchantOrder.payments.forEach(payment => {
+    //     if(payment.status === 'approved'){
+    //         paidAmount += payment.transaction_amount;
+    //     }
+    // });
+    // if(paidAmount >= merchantOrder.body.total_amount){
+    //     console.log('----EL PAGO SE COMPLETO!!!----')
+    // }else{
+    //     console.log('----EL PAGO NOOOO SE COMPLETO----')
+    // }
+
+    res.send('ok')
 });
 //---------------------------------------------------------------------------------->
 //  MODELO DE PREFERENCIA DE MERCADO PAGO
