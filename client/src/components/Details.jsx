@@ -43,7 +43,6 @@ export default function Details(props) {
 			setLoading(false);
 		}, 800);
 	}, [dispatch, id]);
-	const reviews = useSelector(state => state.products.reviews)
 	return (
 		/* productId.length === 0 ? (
 				<div className={styles.detailPage}>

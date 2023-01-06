@@ -11,6 +11,7 @@ import Cart from "./components/Cart";
 import CheckoutSucces from "./components/CheckoutSucces";
 import Error404 from "./components/Error404";
 import PrivateRoute from "./auth/PrivateRoute";
+import ReviewCharge from "./components/ReviewCharge";
 
 function App() {
 	return (
@@ -26,6 +27,7 @@ function App() {
 				</Route>
 				<Route path="/cart" element={<Cart />} />
 				<Route path="/checkout-success" element={<CheckoutSucces />} />
+				<Route path="/reviews-prueba" element={<ReviewCharge />}/>
 				<Route path="*" element={<Error404 />} />
 			</Routes>
 		</div>
