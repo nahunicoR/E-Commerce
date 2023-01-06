@@ -18,6 +18,7 @@ import {
 } from "@chakra-ui/react";
 import { FaArrowLeft, FaHeart } from "react-icons/fa";
 import axios from "axios";
+import { addProductsCart } from "../redux/actions";
 
 export default function Details(props) {
 	const { id } = useParams();
@@ -35,17 +36,18 @@ export default function Details(props) {
 	};
 
 	const handleCompra = () => {
-		console.log('compra');
-		console.log(productId)
+		console.log("compra");
+		console.log(productId);
 		let compra = {
 			...productId,
-			quantity: 1
-		}
+			quantity: 1,
+		};
 		console.log(compra);
-		axios.post('/payment', compra)
-		.then((res)=> window.location.href = res.data)
-		.catch((err)=> console.log(err))
-	}
+		axios
+			.post("/payment", compra)
+			.then((res) => (window.location.href = res.data))
+			.catch((err) => console.log(err));
+	};
 
 	useEffect(() => {
 		dispatch(getDetails(id));
@@ -84,7 +86,13 @@ export default function Details(props) {
 							justifyContent={"space-evenly"}
 							alignItems={"center"}
 						>
-							<Flex flexDirection={"column"} alignItems={"center"} margin={30} w={"50%"} h={"500"}>
+							<Flex
+								flexDirection={"column"}
+								alignItems={"center"}
+								margin={30}
+								w={"50%"}
+								h={"500"}
+							>
 								<Image
 									alt="product show"
 									height={"100%"}
@@ -116,71 +124,77 @@ export default function Details(props) {
 									{productId.material}
 								</Tag>
 								<Heading size={"md"}>Categoria</Heading>
-								<Tag size={"md"} w={"fit-content"}>{productId.category}</Tag>
+								<Tag size={"md"} w={"fit-content"}>
+									{productId.category}
+								</Tag>
 								<Flex
 									gap={3}
 									flexDirection={"row"}
 									justifyContent={"center"}
 									alignItems={"center"}
 									marginTop={50}
-								>
-								</Flex>
+								></Flex>
 							</Flex>
-							
 						</Flex>
-						<Flex 
-							flexDirection={"row"} 
+						<Flex
+							flexDirection={"row"}
 							p="-10"
 							justifyContent={"space-evenly"}
 							margin-top="100"
 						>
-						<Button
-							onClick={
-								isAuthenticated
-								? null
-								: () => {
-									toast({
-										title: "Primero inicie sesión",
-										position: "bottom",
-										status: "info",
-										isClosable: true,
-									});
-							}}
-							w={"40%"}
-							colorScheme={"teal"}
-							>
-							Añadir al Carrito
-						</Button>
-						<IconButton
-							onClick={handleLike}
-							color={liked ? "red.400" : null}
-							icon={<FaHeart />}
-							margin="0 15px"
-							/>
-						{
-							isAuthenticated
-							?
 							<Button
-								onClick={ handleCompra }
+								onClick={
+									isAuthenticated
+										? () => {
+												dispatch(addProductsCart(productId));
+												toast({
+													status: "success",
+													title: `${productId.title} ha sido agregado a tu carrito!`,
+													isClosable: true,
+												});
+										  }
+										: () => {
+												toast({
+													title: "Primero inicie sesión",
+													position: "bottom",
+													status: "info",
+													isClosable: true,
+												});
+										  }
+								}
 								w={"40%"}
 								colorScheme={"teal"}
-								top="85%"
 							>
-								Comprar
+								Añadir al Carrito
 							</Button>
-							:
-							<Button
-								onClick={ handleCompra }
-								w={"40%"}
-								colorScheme={"teal"}
-								top="85%"
-								disabled
-							>
-							Comprar
-						</Button>
-						}
+							<IconButton
+								onClick={handleLike}
+								color={liked ? "red.400" : null}
+								icon={<FaHeart />}
+								margin="0 15px"
+							/>
+							{isAuthenticated ? (
+								<Button
+									onClick={handleCompra}
+									w={"40%"}
+									colorScheme={"teal"}
+									top="85%"
+								>
+									Comprar
+								</Button>
+							) : (
+								<Button
+									onClick={handleCompra}
+									w={"40%"}
+									colorScheme={"teal"}
+									top="85%"
+									disabled
+								>
+									Comprar
+								</Button>
+							)}
 						</Flex>
-					</Box>	
+					</Box>
 					<Box
 						borderWidth="3px"
 						borderRadius="lg"
@@ -188,8 +202,7 @@ export default function Details(props) {
 						w="40%"
 						h={"610"}
 						alignSelf={"start"}
-					>
-					</Box>	
+					></Box>
 				</Flex>
 			) : (
 				<Flex h={"1000px"} justifyContent={"center"} alignItems="center">
