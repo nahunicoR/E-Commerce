@@ -11,6 +11,10 @@ const getProductByName = require('./getProductByName');
 const getImageByProduct = require('./getImageByProduct');
 const deleteImageProduct = require('./deleteImageProduct');
 
+const getAllReviewByProduct = require('./getAllReview');
+const createReview = require('./createReview');
+const updateReview = require('./updateReview');
+const deleteReview = require('./deleteReview');
 
 
 /* Para usuarios 
@@ -71,6 +75,14 @@ router.use('/product'       , getProductByName);
 router.use('/product'       , getImageByProduct);
 router.use('/image'       , deleteImageProduct);
 
+/**Para Reviews */
+
+router.use('/review'        , createReview);
+router.use('/reviews'       , getAllReviewByProduct);
+router.use('/review'       , updateReview);
+router.use('/review'       , deleteReview);
+
+// router.use('/reviews'        , getAllReviewByProduct); para pruebas con bulkCreate
 
 /* Para usuarios 
    Author: Alejandro Téllez 

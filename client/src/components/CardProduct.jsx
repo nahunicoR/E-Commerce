@@ -10,7 +10,7 @@ import {
 	Flex,
 	Divider,
 	HStack,
-	/* useToast, */
+	useToast,
 } from "@chakra-ui/react";
 import { Card, CardBody, CardFooter } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
@@ -27,8 +27,8 @@ export default function CardProduct({
 	material,
 	product,
 }) {
-	/* const { isAuthenticated } = useAuth0();
-	const toast = useToast(); */
+	/* const { isAuthenticated } = useAuth0(); */
+	const toast = useToast();
 	const dispatch = useDispatch();
 
 	return (
@@ -93,16 +93,14 @@ export default function CardProduct({
 							size={"md"}
 							colorScheme={"teal"}
 							marginLeft={"1.5"}
-							onClick={
-								() => dispatch(addProductsCart(product))
-								/* isAuthenticated
-									? handleAddProduct(product)
-									: toast({
-											status: "info",
-											title: "Primero inicie sesión",
-											isClosable: true,
-									  }) */
-							}
+							onClick={() => {
+								dispatch(addProductsCart(product));
+								toast({
+									status: "success",
+									title: `${name} ha sido agregado a tu carrito!`,
+									isClosable: true,
+								});
+							}}
 						>
 							+
 						</Button>
