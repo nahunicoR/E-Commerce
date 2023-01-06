@@ -11,7 +11,7 @@ import Cart from "./components/Cart";
 import CheckoutSucces from "./components/CheckoutSucces";
 import Error404 from "./components/Error404";
 import PrivateRoute from "./auth/PrivateRoute";
-import Footer from "./components/Footer";
+/* import Footer from "./components/Footer"; */
 
 function App() {
 	return (
@@ -29,7 +29,6 @@ function App() {
 				<Route path="/checkout-success" element={<CheckoutSucces />} />
 				<Route path="*" element={<Error404 />} />
 			</Routes>
-			<Footer />
 		</div>
 	);
 }
