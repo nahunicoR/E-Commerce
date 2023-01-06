@@ -75,7 +75,7 @@ User.hasMany(Address, { as: "streets", foreignkey: "id" });
 Product.hasMany(Review);
 Review.belongsTo(Product);
 
-User.hasMany(Review);
+User.hasMany(Review ,{  foreignkey: "userEmail" });
 Review.belongsTo(User);
 
 module.exports = {
