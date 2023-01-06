@@ -9,7 +9,6 @@ router.post('/', async (req, res, next) => {
         if(!price) return res.status(400).json('No se ingreso precio');
         if(!category) return res.status(400).json('No se ingreso categoria');
         if(!description) return res.status(400).json('No se ingreso descripcion');
-        if(!image) return res.status(400).json('No se ingreso imagen');
         if(!material) return res.status(400).json('No se ingreso material');
         if(!stock) return res.status(400).json('No se ingreso stock');
         const newProduct = {
@@ -17,7 +16,6 @@ router.post('/', async (req, res, next) => {
             price,
             category,
             description,
-            image,
             material,
             stock
         }
@@ -27,7 +25,6 @@ router.post('/', async (req, res, next) => {
                 price,
                 category,
                 description,
-                image,
                 material,
                 stock
             },
