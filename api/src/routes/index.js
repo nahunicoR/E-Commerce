@@ -47,6 +47,13 @@ const deleteAddressUser = require('./deleteAddressUser');
 
 const createMail = require('./createMail');
 
+
+/* Para cloudinary 
+    Author: Alejandro Téllez
+*/
+
+const uploadImage = require('./uploadImage');
+
 const router = Router();
 
 
@@ -96,6 +103,11 @@ router.use('/address', deleteAddressUser);
 
 router.use('/',  createMail);
 
+/* Para Cloudinary  
+   Author: Alejandro Téllez 
+*/
+
+router.use('/',  uploadImage);
 /* Para Mercado Pago
     Author: Nahuel Riveros
 */
@@ -174,13 +186,7 @@ router.get('/', async (req,res,next) => {
             '*************** MAIL ': '*********************** ',
             'Peticion /POST': '/mail, para crear el correo y enviarlo',
         },
-        {
-            '*************** ORDERS ': '*********************** ',
-            
-
-        },
-
-    ])
+        ])
 });
 
 module.exports = router;
