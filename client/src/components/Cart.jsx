@@ -25,9 +25,9 @@ export function formatPrice(value, opts = {}) {
 }
 
 export default function Cart() {
-	const {isAuthenticated} = useAuth0()
+	const {isAuthenticated, user} = useAuth0()
 	const productsInCart = useSelector((state) => state.products.cart);
-	// let products = productsInCart;
+	
 	let total = 0;
 	productsInCart.map((product) => {
 		total = total + product.price * product.quantity;
@@ -36,6 +36,11 @@ export default function Cart() {
 	useEffect(() => {
 		localStorage.setItem("cart", JSON.stringify(productsInCart));
 	}, [productsInCart]);
+	// objeto con el carrito y el user
+	console.log({
+		user: user,
+		carrito: productsInCart
+	})
 
 	const handleCompra = () => {
 		let compra = {
