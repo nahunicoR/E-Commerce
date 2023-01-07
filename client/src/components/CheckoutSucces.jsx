@@ -1,22 +1,41 @@
-import React from 'react';
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import logo from "../assets/LogoTo-Mate.png";
-import { Text, Stack,Container, Card, Image, HStack } from '@chakra-ui/react';
-
+import { Text, Container, Image, HStack, Flex, Button } from "@chakra-ui/react";
 
 const CheckoutSucces = () => {
-  return (
-    <Card bg='gray.200'>
-    <Stack>
-    <HStack>
-        <Container maxW='md' bg='gray.200' color='black'>
-                <Text fontSize='4xl' as='b' color='black' textAlign='center'> Su pago ha sido: </Text>
-                <Text fontSize='50px' color='green.600'>Exitoso!!</Text>
-                <Image src={logo} alt="page logo" w={"250px"}/>
-        </Container>
-    </HStack>
-    </Stack>
-</Card>    
-  )
-}
+	const navigate = useNavigate();
+	return (
+		<>
+			<Flex h={"1000"} justifyContent={"center"} bg={"green.500"}>
+				<HStack>
+					<Container
+						display={"flex"}
+						flexDirection={"column"}
+						justifyContent={"center"}
+						maxW="md"
+						color="black"
+					>
+						<Text fontSize="4xl" as="b" color="white" textAlign="center">
+							Su pago ha sido:
+						</Text>
+						<Text
+							textAlign={"center"}
+							fontSize="80px"
+							fontStyle={"normal"}
+							color={"white"}
+						>
+							Exitoso
+						</Text>
+						<Image marginLeft={"5"} src={logo} alt="page logo" w={"250px"} />
+						<Button marginTop={"3"} onClick={() => navigate("/home")}>
+							Volver al comercio
+						</Button>
+					</Container>
+				</HStack>
+			</Flex>
+		</>
+	);
+};
 
-export default CheckoutSucces
+export default CheckoutSucces;

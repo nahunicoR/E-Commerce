@@ -7,7 +7,7 @@ function Pagination({ productsPerPage, allProducts, pagination }) {
 		pageNumbers.push(i + 1);
 	}
 	return (
-		<GridItem rowSpan={1} colStart={2} colEnd={5} /* bg={"red.100"} */>
+		<GridItem gridArea={"pag"} /* bg={"red.100"} */>
 			<HStack alignItems={"center"} justifyContent={"center"} padding={"10"}>
 				{pageNumbers
 					? pageNumbers.map((number) => (

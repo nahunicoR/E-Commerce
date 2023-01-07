@@ -7,5 +7,7 @@ const multer = require('multer');
 
 module.exports = multer({
   storage: multer.diskStorage({}),
-  limits: { fileSize: 500000 }   //500 megas de capacidad
+  limits: { fileSize: 10485760 }  //10 megas de tamaño de cada imagen
+  
+  
 });

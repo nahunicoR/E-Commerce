@@ -12,6 +12,7 @@ import CheckoutSucces from "./components/CheckoutSucces";
 import Error404 from "./components/Error404";
 import PrivateRoute from "./auth/PrivateRoute";
 import Favorites from "./components/Favorites";
+/* import Footer from "./components/Footer"; */
 
 function App() {
 	return (

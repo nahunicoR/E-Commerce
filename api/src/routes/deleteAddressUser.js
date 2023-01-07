@@ -11,10 +11,10 @@ const router = Router();
 router.delete('/', async (req, res, next) => {
     
     let { id } = req.query;
-    let { userId } = req.query
+    let { userEmail } = req.query
     
     try {
-        let deleteA = await deleteAddressUser(id,userId);
+        let deleteA = await deleteAddressUser(id,userEmail);
         res.json({
             'Eliminado': `${deleteA}`
         });
