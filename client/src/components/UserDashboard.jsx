@@ -1,9 +1,9 @@
 import React from "react";
 import orders from "../odersMock.js";
-import {
+/* import {
 	HiOutlineChevronDoubleLeft,
 	HiOutlineChevronDoubleRight,
-} from "react-icons/hi";
+} from "react-icons/hi"; */
 import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from "react-router-dom";
 
@@ -16,7 +16,6 @@ import {
 	Text,
 	Tag,
 	Image,
-	IconButton,
 	Stat,
 	StatLabel,
 	StatNumber,
@@ -26,7 +25,7 @@ export default function UserDashboard() {
 	const { user } = useAuth0();
 	const navigate = useNavigate();
 	console.log(user);
-
+	/* 
 	const slideRight = () => {
 		var slider = document.getElementsByClassName("css-1peemgu");
 		console.log(slider);
@@ -37,7 +36,7 @@ export default function UserDashboard() {
 		console.log(slider);
 
 		slider.scrollLeft = slider.scrollLeft + 500;
-	};
+	}; */
 
 	return (
 		<>
@@ -110,19 +109,19 @@ export default function UserDashboard() {
 					borderRadius={"md"}
 					bg={"white"}
 					alignItems={"center"}
-					gap={5}
 					overflow={"hidden"}
 				>
 					<Heading alignSelf={"flex-start"} size={"md"}>
 						My Orders
 					</Heading>
 					<Flex
-						gap={5}
-						flexDirection={"row"}
+						gap={3}
+						overflowX={"hidden"}
 						alignSelf={"flex-start"}
-						overflowX={"scroll"}
-						overflowY={"clip"}
+						padding={26}
+						flexDirection={"row"}
 						scrollBehavior={"smooth"}
+						overflowY={"clip"}
 					>
 						{orders.map((o) => {
 							return (
@@ -141,16 +140,6 @@ export default function UserDashboard() {
 								</Box>
 							);
 						})}
-					</Flex>
-					<Flex gap={3}>
-						<IconButton
-							onClick={slideLeft}
-							icon={<HiOutlineChevronDoubleLeft />}
-						/>
-						<IconButton
-							onClick={slideRight}
-							icon={<HiOutlineChevronDoubleRight />}
-						/>
 					</Flex>
 				</Flex>
 			</Box>
