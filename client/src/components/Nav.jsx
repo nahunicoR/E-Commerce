@@ -9,14 +9,14 @@ import { useSelector } from "react-redux";
 
 export default function Nav() {
 	const { loginWithRedirect, isAuthenticated, user, logout } = useAuth0();
-	const QuantityOfProduct = useSelector(state => state.products.cart)
-	let topCenter = 4
-	let leftCenter = 2.5
-	let size = "larger"
-	if(QuantityOfProduct.length > 9) {
-		topCenter = 3
-		leftCenter = 1
-		size = "md"
+	const QuantityOfProduct = useSelector((state) => state.products.cart);
+	let topCenter = 4;
+	let leftCenter = 2.5;
+	let size = "larger";
+	if (QuantityOfProduct.length > 9) {
+		topCenter = 3;
+		leftCenter = 1;
+		size = "md";
 	}
 	return (
 		<>
@@ -66,6 +66,7 @@ export default function Nav() {
 					{isAuthenticated ? (
 						<Button
 							fontSize={"lg"}
+							rounded={"full"}
 							colorScheme={"red"}
 							leftIcon={<BiLogOut />}
 							onClick={() =>
@@ -79,7 +80,18 @@ export default function Nav() {
 						paddingRight={"1.5"}
 						position={"relative"}
 					>
-						{QuantityOfProduct.length ? <Text position={"absolute"} top={-topCenter} left={leftCenter} fontSize={size} color={"white"} fontWeight={"bold"}>{QuantityOfProduct.length}</Text>: null}
+						{QuantityOfProduct.length ? (
+							<Text
+								position={"absolute"}
+								top={-topCenter}
+								left={leftCenter}
+								fontSize={size}
+								color={"white"}
+								fontWeight={"bold"}
+							>
+								{QuantityOfProduct.length}
+							</Text>
+						) : null}
 						<Link to={"/cart"}>
 							<FaShoppingCart color="white" fontSize={"1.5rem"} />
 						</Link>

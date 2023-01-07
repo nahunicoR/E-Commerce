@@ -11,9 +11,9 @@ export default function Landing() {
 			<Stack position={"relative"} height={"86vh"}>
 				<Box
 					as="video"
-					controls
+					controls={false}
 					src={videomate}
-					autoplay
+					autoPlay
 					loop
 					muted
 					alt="video to-mate"
@@ -22,6 +22,7 @@ export default function Landing() {
 						aspectRatio: "16/9",
 					}}
 				/>
+
 				<Button
 					colorScheme={"teal"}
 					position={"absolute"}
