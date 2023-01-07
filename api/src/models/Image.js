@@ -19,7 +19,7 @@ module.exports = (sequelize) => {
     url: {                        //Guarda la URL de la imagen en la nube                  
       type: DataTypes.STRING,
     },
-    folder: {                     //Carpeta dentro de la nube donde serán guardados
+    public_id: {                     //Carpeta dentro de la nube donde serán guardados
       type: DataTypes.STRING,
     },
   },
