@@ -16,7 +16,7 @@ import {
 import { Card, CardBody, CardFooter } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { addProductsCart } from "../redux/actions";
+import { addFavorites, addProductsCart } from "../redux/actions";
 /* import { useAuth0 } from "@auth0/auth0-react"; */
 import Rating from "./Rating";
 import { FaHeart } from "react-icons/fa"
@@ -48,7 +48,7 @@ export default function CardProduct({
 				>
 					<CardBody position={"relative"}>
 					<IconButton
-							// onClick={handleLike}
+							onClick={()=> dispatch(addFavorites(product))}
 							// color={liked ? "red.400" : null}
 							color={"teal"}
 							icon={<FaHeart />}

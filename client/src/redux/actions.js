@@ -9,7 +9,9 @@ import {
 	deleteProductCart,
 	getProductByName,
 	deleteQuantity,
-	reviews
+	reviews,
+	addFavorite,
+	deleteFavorite
 } from "./reducer";
 import axios from "axios";
 
@@ -81,4 +83,11 @@ export const getReviews = () => async (dispatch) => {
 // 		let post = await axios.post("/review", reviewInfo);
 // 		return post;
 // 	};
+export const addFavorites = product => (dispatch) => {
+	return dispatch(addFavorite(product))
+};
+export const deleteFavorites = product => (dispatch) => {
+	return dispatch(deleteFavorite(product))
+};
+
 
