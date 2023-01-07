@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getDetails } from "../redux/actions";
+import { getDetails, getReviews } from "../redux/actions";
 import { Link, useParams } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import {
@@ -17,6 +17,7 @@ import {
 	useToast,
 } from "@chakra-ui/react";
 import { FaArrowLeft, FaHeart } from "react-icons/fa";
+import Review from "./Review";
 import axios from "axios";
 import { addProductsCart } from "../redux/actions";
 
@@ -30,6 +31,7 @@ export default function Details(props) {
 	const [liked, setLiked] = useState(false);
 
 	const productId = useSelector((state) => state.products.productsDetail);
+	/* console.log("product id"); */
 
 	const handleLike = () => {
 		setLiked(!liked);
@@ -50,12 +52,12 @@ export default function Details(props) {
 	};
 
 	useEffect(() => {
+		dispatch(getReviews())
 		dispatch(getDetails(id));
 		setTimeout(() => {
 			setLoading(false);
 		}, 800);
 	}, [dispatch, id]);
-
 	return (
 		/* productId.length === 0 ? (
 				<div className={styles.detailPage}>
@@ -202,7 +204,8 @@ export default function Details(props) {
 						w="40%"
 						h={"610"}
 						alignSelf={"start"}
-					></Box>
+					>
+					</Box>	
 				</Flex>
 			) : (
 				<Flex h={"1000px"} justifyContent={"center"} alignItems="center">

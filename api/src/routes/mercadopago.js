@@ -5,9 +5,9 @@ const mercadopago = require('mercadopago');
 const {ACCESS_TOKEN} = process.env;
 
 
-mercadopago.configure({
-    access_token: MERCADO_PAGO_KEY_TEST
-});
+// mercadopago.configure({
+//     access_token: MERCADO_PAGO_KEY_TEST
+// });
 
     //---------------------------------------------------------------------------------->
     //POST DE PREFERENCIA HASTA EL MOMENTO INDIVIDUAL SIN CARRITO DE COMPRAS
