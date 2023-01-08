@@ -131,6 +131,8 @@ const mercadoPago = require('./mercadopago');
 
 router.use('/payment', mercadoPago);
 
+const review = require("./createReview");
+router.use("/reviews", review)
 
 
 router.get('/', async (req,res,next) => {
