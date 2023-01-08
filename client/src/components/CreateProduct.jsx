@@ -17,6 +17,7 @@ const validate = (form) => {
 	if (!form.description) {
 		errors.description = "Este campo es Obligatorio";
 	}
+	
 	// if (!form.image) {
 	// 	errors.image = 'Este campo es Obligatorio'
 	// }
@@ -34,6 +35,7 @@ export default function CreateProduct() {
 		material: "",
 		description: "",
 		image: "",
+		stock: 0,
 	});
 	const [errors, setErrors] = useState({
 		title: "",
@@ -42,6 +44,7 @@ export default function CreateProduct() {
 		material: "",
 		description: "",
 		image: "",
+		stock: 0,
 	});
 
 	useEffect(() => {
@@ -112,6 +115,7 @@ export default function CreateProduct() {
 			material: "",
 			description: "",
 			image: "",
+			stock: 0,
 		});
 	};
 
@@ -186,7 +190,7 @@ export default function CreateProduct() {
 				</div>
 
 				<div className={`${styles.image}`}>
-					<label>Imagen: </label>
+					<label>Imagen </label>
 					<input
 						hidden
 						type="text"
@@ -206,6 +210,7 @@ export default function CreateProduct() {
 							<h4>Cargar imagen...</h4>
 						)}
 					</div>
+					
 				</div>
 
 				<button type="submit" disabled={button}>

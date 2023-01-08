@@ -6,6 +6,7 @@ import {
 } from "react-icons/hi";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from "react-router-dom";
+
 import {
 	Button,
 	Avatar,
@@ -16,11 +17,15 @@ import {
 	Tag,
 	Image,
 	IconButton,
+	Stat,
+	StatLabel,
+	StatNumber,
 } from "@chakra-ui/react";
 
 export default function UserDashboard() {
 	const { user } = useAuth0();
 	const navigate = useNavigate();
+	console.log(user);
 
 	const slideRight = () => {
 		var slider = document.getElementsByClassName("css-1peemgu");
@@ -65,7 +70,7 @@ export default function UserDashboard() {
 					bg={"white"}
 					alignItems={"center"}
 				>
-					<Flex gap={"9"} flexDir={"row"}>
+					<Flex paddingLeft={5} gap={"9"} flexDir={"row"}>
 						<Avatar
 							size={"2xl"}
 							name={user.name}
@@ -84,8 +89,13 @@ export default function UserDashboard() {
 							</Tag>
 						</Flex>
 					</Flex>
-					<Heading>info1</Heading>
-					<Heading>info 2</Heading>
+
+					<Flex paddingRight={5}>
+						<Stat>
+							<StatLabel>Updated at:</StatLabel>
+							<StatNumber>{user.updated_at}</StatNumber>
+						</Stat>
+					</Flex>
 				</Flex>
 
 				<Flex

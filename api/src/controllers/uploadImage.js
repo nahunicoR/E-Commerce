@@ -21,7 +21,7 @@ const  uploadImage = async (filePath, productId) => {
       //La imagen subida retorna el lugar donde está guardada la imagen y la url que se debe almacenar 
       let newImage = await Image.create({
          productId: productId,  
-         folder: imageUpload.public_id,
+         public_id: imageUpload.public_id,
          url: imageUpload.secure_url
      });
         
