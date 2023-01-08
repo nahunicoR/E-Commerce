@@ -20,7 +20,6 @@ import { FaArrowLeft, FaHeart } from "react-icons/fa";
 import Review from "./Review";
 import axios from "axios";
 import { addProductsCart } from "../redux/actions";
-import ReviewCharge from "./ReviewCharge";
 
 export default function Details(props) {
 	const { id } = useParams();
@@ -60,7 +59,7 @@ export default function Details(props) {
 			setLoading(false);
 		}, 800);
 	}, [dispatch, id]);
-	const reviews = useSelector(state => state.products.reviews)
+	// const reviews = useSelector(state => state.products.reviews)
 	return (
 		/* productId.length === 0 ? (
 				<div className={styles.detailPage}>

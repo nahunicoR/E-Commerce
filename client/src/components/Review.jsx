@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector } from "react-redux"
 import { Text, Stack, Box } from "@chakra-ui/react"
 import Rating from './Rating';
+import ReviewCharge from './ReviewCharge';
 
 function Review() {
   const reviews = useSelector(state => state.products.reviews)
@@ -17,9 +18,10 @@ function Review() {
                 </Box>
                 <Text>{rev.description}</Text>
               </Stack>
-            </div>
+            </div>          
           );
         })}
+        <ReviewCharge />
     </div>
   );
 }
