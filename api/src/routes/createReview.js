@@ -1,5 +1,4 @@
 const { Router } = require('express');
-const { Review } = require('../db');
 const router = Router();
 
 router.post('/', async (req, res, next) => {
