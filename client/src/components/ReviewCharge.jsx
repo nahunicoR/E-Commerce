@@ -6,11 +6,10 @@ const colors = {
     grey: "#a9a9a9"
 }
 
-function ReviewCharge({productId}){
+function ReviewCharge(){
     const stars = Array(5).fill(0);
     const [currentValue, setCurrentValue] = React.useState(0);
     const [hoverValue, setHoverValue] = React.useState(undefined);
-    console.log(productId)
     const handleClick = value => {
         console.log(value,'--------soy value hancldeClick')
         setCurrentValue(value)

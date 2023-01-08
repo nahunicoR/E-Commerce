@@ -132,6 +132,8 @@ router.use('/',  uploadImage);
 
 // router.use('/', mercadoPago);
 
+const review = require("./createReview");
+router.use("/reviews", review)
 
 
 router.get('/', async (req,res,next) => {

@@ -6,6 +6,7 @@ import logo from "../assets/LogoTo-Mate.png";
 import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useSelector } from "react-redux";
+import { MdOutlineFavoriteBorder } from "react-icons/md"
 
 export default function Nav() {
 	const { loginWithRedirect, isAuthenticated, user, logout } = useAuth0();
@@ -94,6 +95,11 @@ export default function Nav() {
 						) : null}
 						<Link to={"/cart"}>
 							<FaShoppingCart color="white" fontSize={"1.5rem"} />
+						</Link>
+						<Link to={"/favorites"}>
+							<Button bg={"transparent"} variant={"unstyled"} margin={"0 1rem 0 1rem"}>
+								<MdOutlineFavoriteBorder fontSize={"1.8rem"} color={"white"} />
+							</Button>
 						</Link>
 					</Flex>
 				</Flex>
