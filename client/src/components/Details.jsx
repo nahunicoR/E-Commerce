@@ -19,6 +19,7 @@ import {
 import { FaArrowLeft, FaHeart } from "react-icons/fa";
 import axios from "axios";
 import { addProductsCart } from "../redux/actions";
+import ReviewCharge from "./ReviewCharge";
 
 export default function Details(props) {
 	const { id } = useParams();
@@ -201,14 +202,20 @@ export default function Details(props) {
 						margin="2px"
 						w="40%"
 						h={"610"}
-						alignSelf={"start"}
-					></Box>
-				</Flex>
-			) : (
-				<Flex h={"1000px"} justifyContent={"center"} alignItems="center">
-					<Spinner color="teal" alignSelf={"center"} size={"xl"} />
-				</Flex>
-			)}
-		</>
-	);
+						overflowY={"scroll"}
+				>
+					<Text marginLeft={"1.5rem"} fontSize={"1.5rem"} fontWeight={"bold"} marginTop={"1rem"}>
+						Opiniones del producto
+					</Text>
+					<ReviewCharge productId={productId}/>
+				</Box>	
+			</Flex>
+		) : (
+			<Flex h={"1000px"} justifyContent={"center"} alignItems="center">
+				<Spinner color="teal" alignSelf={"center"} size={"xl"} />
+			</Flex>
+		)}
+	</>
+);
 }
+					
