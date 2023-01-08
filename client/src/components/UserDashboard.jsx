@@ -1,9 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import orders from "../odersMock.js";
-import {
-	HiOutlineChevronDoubleLeft,
-	HiOutlineChevronDoubleRight,
-} from "react-icons/hi";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from "react-router-dom";
 
@@ -16,27 +13,36 @@ import {
 	Text,
 	Tag,
 	Image,
-	IconButton,
 	Stat,
 	StatLabel,
 	StatNumber,
+	HStack,
+	IconButton,
 } from "@chakra-ui/react";
 
 export default function UserDashboard() {
+	const [scroll, setScroll] = useState(0);
+	const scrollIndex = 500;
 	const { user } = useAuth0();
 	const navigate = useNavigate();
-	console.log(user);
+	const styleSlide = {
+		display: "flex",
+		padding: "25px",
+		scrollBehavior: "smooth",
+		transform: `translateX(${scroll}px)`,
+		marginLeft: "auto",
+		columnGap: "15px",
+		transition: "transform 330ms ease-in-out",
+	};
 
 	const slideRight = () => {
-		var slider = document.getElementsByClassName("css-1peemgu");
-		console.log(slider);
-		slider.scrollRight = slider.scrollRight + 500;
+		var slider = document.getElementsByClassName("inner");
+		setScroll((state) => state - scrollIndex);
+		console.log(scroll);
+		slider.scrollRight += 10;
 	};
 	const slideLeft = () => {
-		var slider = document.getElementsByClassName("css-1peemgu");
-		console.log(slider);
-
-		slider.scrollLeft = slider.scrollLeft + 500;
+		return scroll === 0 ? null : setScroll((state) => state + scrollIndex);
 	};
 
 	return (
@@ -110,19 +116,19 @@ export default function UserDashboard() {
 					borderRadius={"md"}
 					bg={"white"}
 					alignItems={"center"}
-					gap={5}
 					overflow={"hidden"}
 				>
 					<Heading alignSelf={"flex-start"} size={"md"}>
-						My Orders
+						Tus Ordenes
 					</Heading>
-					<Flex
-						gap={5}
-						flexDirection={"row"}
+					<div
+						className="inner"
+						style={styleSlide}
+						/* gap={3}
 						alignSelf={"flex-start"}
-						overflowX={"scroll"}
-						overflowY={"clip"}
-						scrollBehavior={"smooth"}
+						padding={26}
+						flexDirection={"row"}
+						scrollBehavior={"smooth"} */
 					>
 						{orders.map((o) => {
 							return (
@@ -141,17 +147,46 @@ export default function UserDashboard() {
 								</Box>
 							);
 						})}
-					</Flex>
-					<Flex gap={3}>
-						<IconButton
-							onClick={slideLeft}
-							icon={<HiOutlineChevronDoubleLeft />}
-						/>
-						<IconButton
-							onClick={slideRight}
-							icon={<HiOutlineChevronDoubleRight />}
-						/>
-					</Flex>
+					</div>
+					<HStack>
+						<IconButton icon={<FaChevronLeft />} onClick={slideLeft} />
+
+						<IconButton icon={<FaChevronRight />} onClick={slideRight} />
+					</HStack>
+				</Flex>
+				<Flex
+					alignSelf={"center"}
+					justifyContent={"space-between"}
+					w={"70%"}
+					h={"200"}
+					flexDirection={"column"}
+					padding={"8"}
+					border={"1px"}
+					borderColor={"gray.200"}
+					borderRadius={"md"}
+					bg={"white"}
+					alignItems={"center"}
+				>
+					<Heading alignSelf={"flex-start"} size={"md"}>
+						Tus Comentarios
+					</Heading>
+				</Flex>
+				<Flex
+					alignSelf={"center"}
+					justifyContent={"space-between"}
+					w={"70%"}
+					h={"200"}
+					flexDirection={"column"}
+					padding={"8"}
+					border={"1px"}
+					borderColor={"gray.200"}
+					borderRadius={"md"}
+					bg={"white"}
+					alignItems={"center"}
+				>
+					<Heading alignSelf={"flex-start"} size={"md"}>
+						Tus Favoritos
+					</Heading>
 				</Flex>
 			</Box>
 		</>
