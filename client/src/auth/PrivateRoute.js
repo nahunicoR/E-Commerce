@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+/* import { Outlet } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 
 export default function PrivateRoute() {
@@ -14,3 +14,12 @@ export default function PrivateRoute() {
 		);
 	}
 }
+ */
+import React from "react";
+import { withAuthenticationRequired } from "@auth0/auth0-react";
+const ProtectedRoute = ({ component, ...args }) => {
+	const Component = withAuthenticationRequired(component, args);
+	return <Component />;
+};
+
+export default ProtectedRoute;
