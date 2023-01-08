@@ -40,18 +40,18 @@ router.post('/payment', async (req,res,next) => {
             console.log('total-------------------->',total, 'total-------------------->')
             //creamos la orden de compra, solo inicializamos sin información realmente fiable.
             //EN DUDA DE SI CREAR AQUI Y MODIFICAR AQUI LOS MODELOS. 
-            const newPurchase = await Order.create({
-                purchaseCost: total,
-            },
-            {
-                include: {
-                    model: User,
-                    where:{
-                        email: body.user.email,
-                        name: body.user.name,
-                    },
-                },
-            });
+            // const newPurchase = await Order.create({
+            //     purchaseCost: total,
+            // },
+            // {
+            //     include: {
+            //         model: User,
+            //         where:{
+            //             email: body.user.email,
+            //             name: body.user.name,
+            //         },
+            //     },
+            // });
                 
 
             let preference = {
@@ -79,11 +79,11 @@ router.post('/payment', async (req,res,next) => {
                         }
                     ],
                     //cantidad de cuotas para pruebas es 0.
-                    installments: 0
+                    // installments: 
                 },
                 //anula la posibilidad de pago en efectivo
                 binary_mode: true,
-                notification_url: "https://cb05-201-254-94-96.sa.ngrok.io/notification",
+                notification_url: "https://1ca5-201-254-94-96.sa.ngrok.io/notification",
             }
             console.log('preference------------------->',preference, 'preference------------------->')
             mercadopago.preferences.create(preference)
@@ -109,7 +109,7 @@ router.post('/payment', async (req,res,next) => {
 // SI OBVIAMOS ESTA DATA, EN REALIDAD DEBERIAMOS PODER CREAR EL POST DE LA COMPRA
 // SIN AFECTAR NADA EN LA BASE DE DATOS, POR QUE ES SOLO PARA DESPLEGAR REALMENTE LA APP CON DINERO REAL.
 router.post('/notification', async (req,res,next) => {
-    console.log('req------------------->',req.body, 'req------------------->')
+    console.log('req.topic------------------->',req.body.topic, 'req.topic------------------->')
     try {
         res.status(200).send('ok')
     } catch (error) {

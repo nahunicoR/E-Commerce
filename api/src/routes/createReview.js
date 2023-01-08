@@ -20,7 +20,6 @@ router.post('/', async (req, res, next) => {
         next(error);
         res.status(400).json(error.message)
     }
-   
 });
 
 module.exports = router;
