@@ -45,10 +45,8 @@ export default function Cart() {
 
 	const handleCompra = () => {
 		let compra = {
-			title: "Compra del carrito",
-			description: "orden de compra de todos los productos",
-			quantity: 1,
-			price: total,
+			user:user,
+			cart:productsInCart
 		};
 		axios
 			.post("/payment", compra)
