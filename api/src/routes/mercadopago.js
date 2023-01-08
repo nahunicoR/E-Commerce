@@ -2,76 +2,121 @@ const express = require('express');
 const router = express.Router();
 const { Product, Order, Orderdetail, User, Address } = require('../db.js');
 const mercadopago = require('mercadopago');
+const { REAL } = require('sequelize');
 const {ACCESS_TOKEN} = process.env;
 
 
 mercadopago.configure({
-    access_token: MERCADO_PAGO_KEY_TEST
+    access_token: ACCESS_TOKEN
 });
+
+    //Por favor, consologuear tanto payment, como probar el endpoint en notification url con protocolo seguro (https)
+    //herramienta para ello: ngrok.  https://ngrok.com/    
+    //una vez descargado e instalado simplemente ejecutar y aparecerá una terminal donde hay que tipear EN ESA LINEA DE TERMINAL TAL CUAL ESTA DEBAJO.
+    //ngrok http http://localhost:3001        
+
+    //Luego entrega puerto que debe ser reemplazar y añadido a /notification 
 
     //---------------------------------------------------------------------------------->
     //POST DE PREFERENCIA HASTA EL MOMENTO INDIVIDUAL SIN CARRITO DE COMPRAS
-router.post('/',  (req,res,next) => {
-    // const {cartItems, user} = req.body;
-    // const ml_cart = cartItems.map(item => {
-    //     return {
-    //         id: item.id,
-    //         title: item.name,
-    //         quantity: item.quantity,
-    //         description: item.description,
-    //         image: item.image,
-    //         currency_id: 'ARS',
-    //         unit_price: item.price
-    //     }
-    // })
-    const prod = req.body
-    const preference = {
-        items: [
-            {
-                id: prod.id,
-                title: prod.title,
+router.post('/payment', async (req,res,next) => {
+    const {body} = req;
+    // console.log('user-------------------->',body.user, 'user------------------->')
+    // console.log('cart-------------------->',body.cart, 'cart------------------->')
+    try {
+        //mapeamos lo que llega del front en el carrito de compras y/o details user es {}.
+            const items_ml = body.cart.map((product) =>({
+                id: product.id,
+                title: product.title,
+                unit_price: product.price,
+                quantity: product.quantity,
                 currency_id: "ARS",
-                picture_url: prod.image,
-                description: prod.description,
-                category_id: "art",
-                quantity: prod.quantity,
-                unit_price: prod.price
+            })); 
+            // console.log('items_ml-------------------->',items_ml, 'items_ml-------------------->')
+            //creamos la preferencia de pago con el carrito de compras y/o details user {}.
+
+            const total = body.cart.reduce((acc, product) => acc + product.price * product.quantity, 0);
+            //sacamos el total del carrito de compras
+            console.log('total-------------------->',total, 'total-------------------->')
+            //creamos la orden de compra, solo inicializamos sin información realmente fiable.
+            //EN DUDA DE SI CREAR AQUI Y MODIFICAR AQUI LOS MODELOS. 
+            const newPurchase = await Order.create({
+                purchaseCost: total,
+            },
+            {
+                include: {
+                    model: User,
+                    where:{
+                        email: body.user.email,
+                        name: body.user.name,
+                    },
+                },
+            });
+                
+
+            let preference = {
+                items: items_ml,
+                payer: {
+                    name: body.user.name,
+                    email: body.user.email,
+                },
+                //urls a las q redirecciona el pago segun su estado
+                back_urls: {
+                    success: "http://localhost:3000/checkout-success",
+                    failure: "",
+                    pending: ""
+                },
+                payment_methods: {
+                //excluimos pagos por cajero automático y tickets.
+                    excluded_payment_methods: [
+                        {
+                            id: "atm"
+                        }
+                    ],
+                    excluded_payment_types: [
+                        {
+                            id: "ticket"
+                        }
+                    ],
+                    //cantidad de cuotas para pruebas es 0.
+                    installments: 0
+                },
+                //anula la posibilidad de pago en efectivo
+                binary_mode: true,
+                notification_url: "https://cb05-201-254-94-96.sa.ngrok.io/notification",
             }
-        ],
-        // payer: {
-        //     name: user.give_name,
-        //     surname: user.family_name,
-        //     email: user.email,
-        // },
-        back_urls: {
-            success: "http://localhost:3000/checkout-success",
-            failure: "",
-            pending: ""
-        },
-        // payment_methods: {
-        //     excluded_payment_methods: [
-        //         {
-        //             id: ""
-        //         }
-        //     ],
-        //     excluded_payment_types: [
-        //         {
-        //             id: "ticket"
-        //         }
-        //     ],
-        //     installments: 3
-        // },
-        binary_mode: true,
+            console.log('preference------------------->',preference, 'preference------------------->')
+            mercadopago.preferences.create(preference)
+            .then((resp)=> {
+                 console.log(resp)
+                //global.id = resp.body.id;
+                return res
+                .status(200)
+                .json(resp.body.init_point)
+            }).catch((err)=> {
+                 console.log(err)
+                res.send({error: err.message})
+                next(err)
+            });
+    } catch (error) {
+        console.log(error);
+        next(error);
+        return res.status(500).send({message:error});
     }
-    mercadopago.preferences.create(preference)
-    .then((resp)=> {
-        console.log(resp)
-        res.json(resp.body.init_point)
-    }).catch((err)=> {
-        console.log(err)
-        res.send({error: err.message})
-        next(err)
-    });
+});
+
+//RUTA NOTIFICATION DONDE RECIBIMOS LA DATA DEL PAGO. 
+// SI OBVIAMOS ESTA DATA, EN REALIDAD DEBERIAMOS PODER CREAR EL POST DE LA COMPRA
+// SIN AFECTAR NADA EN LA BASE DE DATOS, POR QUE ES SOLO PARA DESPLEGAR REALMENTE LA APP CON DINERO REAL.
+router.post('/notification', async (req,res,next) => {
+    console.log('req------------------->',req.body, 'req------------------->')
+    try {
+        res.status(200).send('ok')
+    } catch (error) {
+        console.log(error);
+        next(error);
+        return res.status(500).send({message:error});
+    }
 });
 //---------------------------------------------------------------------------------->
 //  MODELO DE PREFERENCIA DE MERCADO PAGO
