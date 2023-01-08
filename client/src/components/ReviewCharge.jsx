@@ -1,27 +1,29 @@
-import { current } from "@reduxjs/toolkit";
 import React from "react";
 import { FaStar } from "react-icons/fa";
-
+import { Button } from "@chakra-ui/react";
 const colors = {
     orange: "#FFBA5A",
     grey: "#a9a9a9"
 }
 
-function ReviewCharge(){
+function ReviewCharge({productId}){
     const stars = Array(5).fill(0);
     const [currentValue, setCurrentValue] = React.useState(0);
     const [hoverValue, setHoverValue] = React.useState(undefined);
-
+    console.log(productId)
     const handleClick = value => {
+        console.log(value,'--------soy value hancldeClick')
         setCurrentValue(value)
     };
 
     const handleMouseOver = value =>{
         setHoverValue(value)
+
     };
 
     const handleMouseLeave = value =>{
         setHoverValue(undefined)
+
     };
 
     return (
@@ -50,7 +52,13 @@ function ReviewCharge(){
                 placeholder="Cuéntanos tu opinión"
                 style={styles.textarea}
             />
-            <button style={styles.button}>Enviar</button>
+            <Button
+                w={"40%"}
+                colorScheme={"teal"}
+                top="85%"
+            >
+                Enviar
+            </Button>
         </div>
     );
 };
@@ -61,6 +69,10 @@ const styles = {
         flexDirection: "column",
         alignItems: "center",
     },
+    stars: {
+        display: "flex",
+        flexDirection: "row",
+      },
     textarea: {
         border: "1px solid #a9a9a9",
         borderRadius: 5,
