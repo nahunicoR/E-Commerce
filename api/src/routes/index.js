@@ -127,9 +127,10 @@ router.use('/',  uploadImage);
 /* Para Mercado Pago
     Author: Nahuel Riveros
 */
-const mercadoPago = require('./mercadopago');
 
-router.use('/payment', mercadoPago);
+// const mercadoPago = require('./mercadopago');
+
+// router.use('/', mercadoPago);
 
 const review = require("./createReview");
 router.use("/reviews", review)

@@ -101,7 +101,7 @@ export default function Home() {
 				gridTemplateRows="repeat(4,1fr)"
 				gridTemplateColumns="repeat(4,1fr)"
 				gridTemplateAreas={
-					'"filter card card card" "filter card card card" "filter card card card" ". pag pag pag" ". map map ."'
+					'"filter card card card" "filter card card card" "filter card card card" ". pag pag pag" "map map map map"'
 				}
 				rowGap={"10"}
 				padding="10"
