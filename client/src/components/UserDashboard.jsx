@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import orders from "../odersMock.js";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from "react-router-dom";
-/* import { useApi } from "../hooks/useApi.jsx"; */
 import {
 	Button,
 	Avatar,
@@ -12,38 +10,27 @@ import {
 	Heading,
 	Text,
 	Tag,
-	Image,
 	Stat,
 	StatLabel,
 	StatNumber,
-	HStack,
-	IconButton,
 } from "@chakra-ui/react";
+import ProductCarousel from "./ProductCarousel.jsx";
+/* import { useApi } from "../hooks/useApi.jsx"; */
 
 export default function UserDashboard() {
-	const scrollIndex = 1270;
-	const productsLength = (orders.length - 10) * 255;
-	const [scroll, setScroll] = useState(0);
 	const { user /* getAccessTokenSilently */ } = useAuth0();
 	const navigate = useNavigate();
-	const styleSlide = {
-		display: "flex",
-		padding: "25px",
-		scrollBehavior: "smooth",
-		transform: `translateX(${scroll}px)`,
-		marginLeft: "auto",
-		columnGap: "15px",
-		transition: "transform 330ms ease-in-out",
+	const options = {
+		weekday: "long",
+		year: "numeric",
+		month: "short",
+		day: "numeric",
 	};
 
-	const slideRight = () => {
-		return scroll <= -productsLength
-			? null
-			: setScroll((state) => state - scrollIndex);
-	};
-	const slideLeft = () => {
-		return scroll === 0 ? null : setScroll((state) => state + scrollIndex);
-	};
+	const updatedAt = new Date(user.updated_at).toLocaleDateString(
+		"es-ES",
+		options
+	);
 
 	//Llamado a un endpoint de nuestra api para corroborar permisos del usuario
 	/* 	const opts = {
@@ -104,74 +91,20 @@ export default function UserDashboard() {
 								colorScheme={user.email_verified ? "green" : null}
 								w={"fit-content"}
 							>
-								{user.email_verified ? "Verified" : "Unverified"}
+								{user.email_verified ? "Verificado" : "Sin Verificar"}
 							</Tag>
 						</Flex>
 					</Flex>
 
 					<Flex paddingRight={5}>
 						<Stat>
-							<StatLabel>Updated at:</StatLabel>
-							<StatNumber>{user.updated_at}</StatNumber>
+							<StatLabel>Ultima Actualizacion:</StatLabel>
+							<StatNumber>{updatedAt}</StatNumber>
 						</Stat>
 					</Flex>
 				</Flex>
-
-				<Flex
-					alignSelf={"center"}
-					justifyContent={"space-between"}
-					w={"70%"}
-					h={"fit-content"}
-					flexDirection={"column"}
-					padding={"8"}
-					border={"1px"}
-					borderColor={"gray.200"}
-					borderRadius={"md"}
-					bg={"white"}
-					alignItems={"center"}
-					overflow={"hidden"}
-				>
-					<Heading alignSelf={"flex-start"} size={"md"}>
-						Tus Ordenes
-					</Heading>
-					<div
-						className="inner"
-						style={styleSlide}
-						/* gap={3}
-						alignSelf={"flex-start"}
-						padding={26}
-						flexDirection={"row"}
-						scrollBehavior={"smooth"} */
-					>
-						{orders.map((o) => {
-							return (
-								<Box
-									display={"flex"}
-									alignItems={"center"}
-									padding={"8"}
-									border={"1px"}
-									borderColor={"gray.200"}
-									borderRadius={"md"}
-									h={"230px"}
-									w={"230px"}
-									bg={"white"}
-								>
-									<Image
-										height={"100%"}
-										width={"100%"}
-										objectFit={"contain"}
-										src={o.image}
-									/>
-								</Box>
-							);
-						})}
-					</div>
-					<HStack>
-						<IconButton icon={<FaChevronLeft />} onClick={slideLeft} />
-
-						<IconButton icon={<FaChevronRight />} onClick={slideRight} />
-					</HStack>
-				</Flex>
+				<ProductCarousel label={"Tus Ordenes"} array={orders} />
+				<ProductCarousel label={"Tus Favoritos"} />
 				<Flex
 					alignSelf={"center"}
 					justifyContent={"space-between"}
@@ -187,23 +120,6 @@ export default function UserDashboard() {
 				>
 					<Heading alignSelf={"flex-start"} size={"md"}>
 						Tus Comentarios
-					</Heading>
-				</Flex>
-				<Flex
-					alignSelf={"center"}
-					justifyContent={"space-between"}
-					w={"70%"}
-					h={"200"}
-					flexDirection={"column"}
-					padding={"8"}
-					border={"1px"}
-					borderColor={"gray.200"}
-					borderRadius={"md"}
-					bg={"white"}
-					alignItems={"center"}
-				>
-					<Heading alignSelf={"flex-start"} size={"md"}>
-						Tus Favoritos
 					</Heading>
 				</Flex>
 			</Box>

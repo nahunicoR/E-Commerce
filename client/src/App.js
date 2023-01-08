@@ -27,6 +27,7 @@ function App() {
 					path="/dashboard"
 					element={<ProtectedRoute component={UserDashboard} />}
 				/>
+
 				<Route path="/cart" element={<Cart />} />
 				<Route path="/checkout-success" element={<CheckoutSucces />} />
 				<Route path="*" element={<Error404 />} />
