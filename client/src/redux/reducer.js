@@ -10,6 +10,10 @@ const productsSlice = createSlice({
 		cart: localStorage.hasOwnProperty("cart")
 			? JSON.parse(localStorage.getItem("cart"))
 			: [],
+		reviews: [],
+		favorites: localStorage.hasOwnProperty("favorites")
+		? JSON.parse(localStorage.getItem("favorites"))
+		: [],	
 	},
 	cart: [],
 	reducers: {
@@ -119,7 +123,18 @@ const productsSlice = createSlice({
 								: product
 						),
 				  }: null
-		}
+		},
+		reviews: (state, action) => {
+			state.reviews = action.payload
+		},
+		addFavorite: (state, action) => {
+			let find = state.favorites.find(f => f.id === action.payload.id)
+			if(!find)	state.favorites = [...state.favorites, action.payload]
+		},
+		deleteFavorite: (state, action) => {
+			let deleteProduct = state.favorites.filter((p) => p.id !== action.payload.id);
+			state.favorites = deleteProduct;
+		},
 	},
 });
 
@@ -133,7 +148,10 @@ export const {
 	addProductCart,
 	deleteProductCart,
 	getProductByName,
-	deleteQuantity
+	deleteQuantity,
+	reviews,
+	addFavorite,
+	deleteFavorite
 } = productsSlice.actions;
 
 export default productsSlice.reducer;

@@ -10,14 +10,16 @@ import {
 	Flex,
 	Divider,
 	HStack,
-	useToast,
+	IconButton,
+	 useToast, 
 } from "@chakra-ui/react";
 import { Card, CardBody, CardFooter } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { addProductsCart } from "../redux/actions";
-
+import { addFavorites, addProductsCart } from "../redux/actions";
 /* import { useAuth0 } from "@auth0/auth0-react"; */
+import Rating from "./Rating";
+import { FaHeart } from "react-icons/fa"
 
 export default function CardProduct({
 	id,
@@ -31,7 +33,6 @@ export default function CardProduct({
 	/* const { isAuthenticated } = useAuth0(); */
 	const toast = useToast();
 	const dispatch = useDispatch();
-
 	return (
 		<>
 			<GridItem /* colSpan={1} */ gridArea={"card"}>
@@ -46,7 +47,16 @@ export default function CardProduct({
 					margin={"auto"}
 					/* overflow={"hidden"} */
 				>
-					<CardBody>
+					<CardBody position={"relative"}>
+					<IconButton
+							onClick={()=> dispatch(addFavorites(product))}
+							// color={liked ? "red.400" : null}
+							color={"teal"}
+							icon={<FaHeart />}
+							margin="0 15px"
+							position={"absolute"}
+							right={0}
+							/>
 						<Flex
 							borderRadius={"lg"}
 							h={"220"}
@@ -72,11 +82,14 @@ export default function CardProduct({
 								{name}
 							</Heading>
 							{/* <Text size={"sm"}>{description}</Text> */}
-							<HStack>
+							<HStack gap={"0.5rem"}>
 								<Tag w={"fit-content"}>{category}</Tag>
-								<Tag colorScheme={"teal"} variant={"outline"} w={"fit-content"}>
+								<Tag colorScheme={"teal"} variant={"outline"} w={"fit-content"} >
 									{material}
 								</Tag>
+								<Rating
+								productId={id}
+								size={"1.2rem"} />
 							</HStack>
 						</Stack>
 					</CardBody>
