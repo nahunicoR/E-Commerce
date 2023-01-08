@@ -3,7 +3,7 @@ import orders from "../odersMock.js";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from "react-router-dom";
-
+/* import { useApi } from "../hooks/useApi.jsx"; */
 import {
 	Button,
 	Avatar,
@@ -23,9 +23,8 @@ import {
 export default function UserDashboard() {
 	const scrollIndex = 1270;
 	const productsLength = (orders.length - 10) * 255;
-
 	const [scroll, setScroll] = useState(0);
-	const { user } = useAuth0();
+	const { user /* getAccessTokenSilently */ } = useAuth0();
 	const navigate = useNavigate();
 	const styleSlide = {
 		display: "flex",
@@ -45,6 +44,19 @@ export default function UserDashboard() {
 	const slideLeft = () => {
 		return scroll === 0 ? null : setScroll((state) => state + scrollIndex);
 	};
+
+	//Llamado a un endpoint de nuestra api para corroborar permisos del usuario
+	/* 	const opts = {
+		audience: 'e-commercetomate',
+		scope: 'read:dashboard',
+	  };
+	  const { login, getAccessTokenWithPopup } = useAuth0();
+	  const {
+		loading,
+		error,
+		refresh,
+		data: users,
+	  } = useApi('', opts); */
 
 	return (
 		<>

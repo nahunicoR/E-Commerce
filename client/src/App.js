@@ -23,9 +23,6 @@ function App() {
 				<Route path="/home" element={<Home />} />
 				<Route path="/create" element={<CreateProduct />} />
 				<Route path="/detail/:id" element={<Details />} />
-				{/* <Route path="/dashboard" element={<PrivateRoute />}>
-					<Route index element={<UserDashboard />} />
-				</Route> */}
 				<Route
 					path="/dashboard"
 					element={<ProtectedRoute component={UserDashboard} />}
