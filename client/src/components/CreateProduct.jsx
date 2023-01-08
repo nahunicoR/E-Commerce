@@ -17,11 +17,7 @@ const validate = (form) => {
 	if (!form.description) {
 		errors.description = "Este campo es Obligatorio";
 	}
-	if (!values.stock) {
-		errors.stock = "Éste campo es Obligatorio";
-	  } else if (values.stock < 0) {
-		errors.stock = "El stock debe ser mayor a 0";
-	  }
+	
 	// if (!form.image) {
 	// 	errors.image = 'Este campo es Obligatorio'
 	// }
@@ -214,16 +210,7 @@ export default function CreateProduct() {
 							<h4>Cargar imagen...</h4>
 						)}
 					</div>
-					<div>
-						<label htmlFor="stock">Stock </label>
-						<Field type="number" id="stock" name="stock" />
-						<ErrorMessage
-						name="stock"
-						component={() => (
-							<div className={styles.error}>{errors.stock}</div>
-						)}
-						/>
-					</div>
+					
 				</div>
 
 				<button type="submit" disabled={button}>

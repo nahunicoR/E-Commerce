@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import CartItem from "./CartItem";
 import { useSelector } from "react-redux";
-import PayButton from './PayButton.jsx';
+// import PayButton from './PayButton.jsx';
 import {useAuth0} from '@auth0/auth0-react';
 import {
 	Box,
