@@ -53,6 +53,7 @@ export default function UserDashboard() {
 				flexDirection={"column"}
 				justifyContent={"center"}
 				h={"100%"}
+				pb={"60px"}
 			>
 				<Button
 					w={"fit-content"}
@@ -109,7 +110,7 @@ export default function UserDashboard() {
 					alignSelf={"center"}
 					justifyContent={"space-between"}
 					w={"70%"}
-					h={"200"}
+					h={"fit-content"}
 					flexDirection={"column"}
 					padding={"8"}
 					border={"1px"}
@@ -121,6 +122,11 @@ export default function UserDashboard() {
 					<Heading alignSelf={"flex-start"} size={"md"}>
 						Tus Comentarios
 					</Heading>
+					<Flex justifyContent={"center"}>
+						<Text fontWeight={"bold"} color={"gray.400"}>
+							Aún no hay comentarios.
+						</Text>
+					</Flex>
 				</Flex>
 			</Box>
 		</>
