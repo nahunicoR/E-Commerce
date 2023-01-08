@@ -21,8 +21,10 @@ import {
 } from "@chakra-ui/react";
 
 export default function UserDashboard() {
+	const scrollIndex = 1270;
+	const productsLength = (orders.length - 10) * 255;
+
 	const [scroll, setScroll] = useState(0);
-	const scrollIndex = 500;
 	const { user } = useAuth0();
 	const navigate = useNavigate();
 	const styleSlide = {
@@ -36,10 +38,9 @@ export default function UserDashboard() {
 	};
 
 	const slideRight = () => {
-		var slider = document.getElementsByClassName("inner");
-		setScroll((state) => state - scrollIndex);
-		console.log(scroll);
-		slider.scrollRight += 10;
+		return scroll <= -productsLength
+			? null
+			: setScroll((state) => state - scrollIndex);
 	};
 	const slideLeft = () => {
 		return scroll === 0 ? null : setScroll((state) => state + scrollIndex);
@@ -143,7 +144,12 @@ export default function UserDashboard() {
 									w={"230px"}
 									bg={"white"}
 								>
-									<Image src={o.image} />
+									<Image
+										height={"100%"}
+										width={"100%"}
+										objectFit={"contain"}
+										src={o.image}
+									/>
 								</Box>
 							);
 						})}
