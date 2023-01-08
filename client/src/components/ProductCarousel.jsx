@@ -57,6 +57,7 @@ function ProductCarousel({ label, array = [] }) {
 						array.map((o) => {
 							return (
 								<Box
+									key={o.id}
 									display={"flex"}
 									alignItems={"center"}
 									padding={"8"}
