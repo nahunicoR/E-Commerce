@@ -13,11 +13,12 @@ import logo from "../assets/LogoTo-Mate.png";
 import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useSelector } from "react-redux";
-import { MdOutlineFavoriteBorder } from "react-icons/md"
+import { MdOutlineFavoriteBorder, MdOutlineFavorite } from "react-icons/md"
 
 export default function Nav() {
 	const { loginWithRedirect, isAuthenticated, user, logout } = useAuth0();
 	const QuantityOfProduct = useSelector((state) => state.products.cart);
+	const QuantityFavorites = useSelector((state) => state.products.favorites);
 	let topCenter = 4;
 	let leftCenter = 2.5;
 	let size = "larger";
@@ -105,7 +106,11 @@ export default function Nav() {
 						</Link>
 						<Link to={"/favorites"}>
 							<Button bg={"transparent"} variant={"unstyled"} margin={"0 1rem 0 1rem"}>
-								<MdOutlineFavoriteBorder fontSize={"1.8rem"} color={"white"} />
+								{
+									!QuantityFavorites.length
+										? <MdOutlineFavoriteBorder fontSize={"1.8rem"} color={"white"} />
+										: <MdOutlineFavorite fontSize={"1.8rem"} color={"white"} />
+								}
 							</Button>
 						</Link>
 					</Flex>

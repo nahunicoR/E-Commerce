@@ -70,8 +70,8 @@ export const deleteProductsCart = (product) => (dispatch) => {
 export const deleteQuantityCard = (product) => (dispatch) => {
 	return dispatch(deleteQuantity(product));
 };
-export const getReviews = () => async (dispatch) => {
-		let reviewsResponse = await axios.get("/reviews")
+export const getReviews = (id) => async (dispatch) => {
+		let reviewsResponse = await axios.get(`/reviews/${id}`)
 		console.log(reviewsResponse)
 		try {
 			return dispatch(reviews(reviewsResponse.data))
