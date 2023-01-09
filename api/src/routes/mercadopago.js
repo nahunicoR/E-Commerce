@@ -42,8 +42,60 @@ router.post('/payment', async (req,res,next) => {
             // const newOrder = await Order.create({
 
             // })
-                
 
+            const quatityProducts = body.cart.reduce((acc, product) => acc + product.quantity, 0);
+            //sacamos la cantidad de productos del carrito de compras
+            // console.log('quatityProducts-------------------->',quatityProducts, 'quatityProducts-------------------->')
+                const newOrder = await Order.create({
+                    status: 'creada',
+                    purchaseCost: total,
+                    payOrder: 'mercadopago',
+                    id: body.user.email,
+                    paymentMethod: 'mercadopago',
+                    userId: body.user.email,
+                })
+                // console.log('newOrder-------------------->',newOrder, 'newOrder-------------------->')
+
+                const newOrderDetail = await Orderdetail.create({
+                    purchasedamount: quatityProducts,
+                    purchaseprice: total,
+                });
+
+                // const newAddress = await Address.create({
+                //     street: body.user.street,
+                //     number: body.user.number,
+                //     city: body.user.city,
+                //     state: body.user.state,
+                //     country: body.user.country,
+                //     postalCode: body.user.postalCode,
+                // });
+                const newUser = {
+                    name: body.user.name,
+                    email: body.user.email,
+                    rol: 'user',
+                }
+                const [user,created] = await User.findOrCreate({
+                    where: {
+                        email: body.user.email,
+                        rol: 'user',
+                    },
+                    defaults: {
+                        newUser
+                    } 
+                });
+                if(created){
+                    console.log('usuario creado')
+                }else{
+                    console.log('usuario ya existe')
+                }     
+
+                const stockProducts = await Promise.all(body.cart.map(async (product) => {
+                    const productStock = await Product.findByPk(product.id);
+                    const newStock = productStock.stock - product.quantity;
+                    await productStock.update({stock: newStock});
+                    return productStock;
+                }));
+                
             let preference = {
                 items: items_ml,
                 payer: {
@@ -52,8 +104,8 @@ router.post('/payment', async (req,res,next) => {
                 },
                 //urls a las q redirecciona el pago segun su estado
                 back_urls: {
-                    success: "http://localhost:3001/checkout-success",
-                    failure: "http://localhost:3000/checkout-failure",
+                    success: "http://localhost:3001/result",//rutas deben ser de back no front.
+                    failure: "http://localhost:3000/result",
                     pending: ""
                 },
                 payment_methods: {
@@ -74,6 +126,7 @@ router.post('/payment', async (req,res,next) => {
                 //anula la posibilidad de pago en efectivo
                 binary_mode: true,
                 notification_url: "https://7995-201-254-94-96.sa.ngrok.io/notification",
+                statement_descriptor: "To-Mate",
             }
             // console.log('preference------------------->',preference, 'preference------------------->')
             mercadopago.preferences.create(preference)
@@ -98,12 +151,46 @@ router.post('/payment', async (req,res,next) => {
 // SI OBVIAMOS ESTA DATA, EN REALIDAD DEBERIAMOS PODER CREAR EL POST DE LA COMPRA
 // SIN AFECTAR NADA EN LA BASE DE DATOS, POR QUE ES SOLO PARA DESPLEGAR REALMENTE LA APP CON DINERO REAL.
 
-router.get('/checkout-success', function (req, res) {
-    console.log('req.query------------------->',req.query, 'req.query------------------->')
-    console.log('req.body------------------->',req.body, 'req.body------------------->')
 
-});
 
+router.get("/result", async (req, res) => {
+    //approved = APRO
+    //in_process = CONT (pendiente de pago)
+    //rejected = OTHE (rechazado)
+    console.info("EN LA RUTA DE PAGOS ");
+    const payment_id = req.query.payment_id;
+    console.log(payment_id);
+    const payment_status = req.query.status;
+    const external_reference = req.query.external_reference;
+    console.log(external_reference);
+    const merchant_order_id = req.query.merchant_order_id;
+    console.log(merchant_order_id);
+    let status = payment_status === "approved" ? "Approved" : "Failed";
+    console.log(status);
+
+    switch (status) {
+        case "Approved":
+          return res.redirect("http://localhost:3000/checkout-success");
+        default:
+          return res.redirect("http://localhost:3000/checkout-failure");
+      }
+  });
+  
+  router.get("/payment/:id", (req, res) => {
+    const mp = new mercadopago(ACCESS_TOKEN);
+    const id = req.params.id;
+
+    console.info("Buscando el id", id);
+    mp.get(`/v1/payments/search`, { id: id })
+      .then((result) => {
+        console.info("resultado", result);
+        res.status(200).send({ result: result });
+      })
+      .catch((err) => {
+        console.error("No se consulto:", err);
+        res.status(400).send({ error: err });
+      });
+  });
 
 router.post('/notification', async (req,res,next) => {
     const {query} = req;

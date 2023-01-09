@@ -25,7 +25,6 @@ module.exports = (sequelize) => {
     },
     name: {                            //Nombre del usuario
       type: DataTypes.STRING,
-      allowNull: false,
       validate:{
         notNull:{
           msg:"El campo no puede estar vacio"
@@ -38,7 +37,6 @@ module.exports = (sequelize) => {
     },
     lastName: {
       type: DataTypes.STRING,
-      allowNull: false,
       validate:{
         notNull:{
           msg:"El campo no puede estar vacio"
