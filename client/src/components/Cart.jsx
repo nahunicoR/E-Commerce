@@ -7,10 +7,11 @@ import {
 	Box,
 	Stack,
 	Heading,
-	/*  Flex, */ 
+	/*  Flex, */
 	Text,
 	HStack,
 	Button,
+	Tooltip,
 } from "@chakra-ui/react";
 import axios from "axios";
 
@@ -25,9 +26,9 @@ export function formatPrice(value, opts = {}) {
 }
 
 export default function Cart() {
-	const {isAuthenticated, user} = useAuth0()
+	const { isAuthenticated, user } = useAuth0();
 	const productsInCart = useSelector((state) => state.products.cart);
-	
+
 	let total = 0;
 	productsInCart.map((product) => {
 		total = total + product.price * product.quantity;
@@ -39,20 +40,19 @@ export default function Cart() {
 	// objeto con el carrito y el user
 	console.log({
 		user: user,
-		carrito: productsInCart
-	})
+		carrito: productsInCart,
+	});
 
 	const handleCompra = () => {
 		let compra = {
-			title: 'Compra del carrito',
-			description: 'orden de compra de todos los productos',
-			quantity: 1,
-			price: total
-		}
-		axios.post('/payment', compra)
-		.then((res)=> window.location.href = res.data)
-		.catch((err)=> console.log(err))
-	}
+			user:user,
+			cart:productsInCart
+		};
+		axios
+			.post("/payment", compra)
+			.then((res) => (window.location.href = res.data))
+			.catch((err) => console.log(err));
+	};
 	return (
 		<div>
 			<Box
@@ -87,22 +87,29 @@ export default function Cart() {
 									</Text>
 								</Stack>
 							</Stack>
-							
-							{ isAuthenticated 
-								?
-									<Button
-										onClick={ handleCompra }
-										w={"40%"}
-										colorScheme={"teal"}
-										top="85%"
-									>
-										Comprar
-									</Button>
-								:									
-									<Text fontSize="lg" fontWeight="semibold">
-										Registrate para poder pagar por tus productos!
-									</Text>
-							}
+							<Tooltip
+								placement="bottom-start"
+								label={
+									isAuthenticated
+										? null
+										: "Inicia sesión para comprar el producto"
+								}
+							>
+								<Button
+									onClick={handleCompra}
+									w={"fit-content"}
+									colorScheme={"teal"}
+									top="85%"
+									isDisabled={!isAuthenticated}
+								>
+									Comprar
+								</Button>
+							</Tooltip>
+							{/*  (
+								<Text fontSize="lg" fontWeight="semibold">
+									Registrate para poder pagar por tus productos!
+								</Text>
+							)  */}
 						</Stack>
 					</HStack>
 				</HStack>

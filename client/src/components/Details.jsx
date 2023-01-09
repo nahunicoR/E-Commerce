@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getDetails } from "../redux/actions";
+import { getDetails, getReviews } from "../redux/actions";
 import { Link, useParams } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import {
@@ -17,21 +17,31 @@ import {
 	useToast,
 } from "@chakra-ui/react";
 import { FaArrowLeft, FaHeart } from "react-icons/fa";
+import Review from "./Review";
 import axios from "axios";
 import { addProductsCart } from "../redux/actions";
+import { addFavorites, deleteFavorites } from "../redux/actions";
 
 export default function Details(props) {
 	const { id } = useParams();
 	const dispatch = useDispatch();
 	const { isAuthenticated } = useAuth0();
 	const toast = useToast();
+
 	//estados locales
 	const [loading, setLoading] = useState(true);
 	const [liked, setLiked] = useState(false);
 
 	const productId = useSelector((state) => state.products.productsDetail);
-
+	/* console.log("product id"); */
+	// const reviews = useSelector(state => state.products.reviews)
+	// console.log(reviews)
 	const handleLike = () => {
+		if (liked) {
+			dispatch(deleteFavorites(productId));
+		} else {
+			dispatch(addFavorites(productId));
+		}
 		setLiked(!liked);
 	};
 
@@ -50,12 +60,13 @@ export default function Details(props) {
 	};
 
 	useEffect(() => {
+		dispatch(getReviews(id))
 		dispatch(getDetails(id));
 		setTimeout(() => {
 			setLoading(false);
 		}, 800);
 	}, [dispatch, id]);
-
+	// const reviews = useSelector(state => state.products.reviews)
 	return (
 		/* productId.length === 0 ? (
 				<div className={styles.detailPage}>
@@ -63,16 +74,7 @@ export default function Details(props) {
 				</div> */
 		<>
 			{!loading ? (
-				<Flex flexDirection={"row"} p="2">
-					<Link to="/home">
-						<Button
-							leftIcon={<FaArrowLeft />}
-							alignSelf={"flex-start"}
-							colorScheme={"teal"}
-						>
-							Volver
-						</Button>
-					</Link>
+				<Flex flexDirection={"row"} p="2" justifyContent={"center"}>
 					<Box
 						borderWidth="3px"
 						borderRadius="lg"
@@ -85,7 +87,20 @@ export default function Details(props) {
 							flexDirection={"row"}
 							justifyContent={"space-evenly"}
 							alignItems={"center"}
+							position={"relative"}
 						>
+							<Link to="/home">
+								<Button
+									leftIcon={<FaArrowLeft />}
+									alignSelf={"flex-start"}
+									colorScheme={"teal"}
+									position={"absolute"}
+									top={0}
+									margin={"0.5rem"}
+								>
+									Volver
+								</Button>
+							</Link>
 							<Flex
 								flexDirection={"column"}
 								alignItems={"center"}
@@ -202,7 +217,18 @@ export default function Details(props) {
 						w="40%"
 						h={"610"}
 						alignSelf={"start"}
-					></Box>
+						overflowY={"scroll"}
+					>
+						<Text
+							marginLeft={"1.5rem"}
+							fontSize={"1.5rem"}
+							fontWeight={"bold"}
+							marginTop={"1rem"}
+						>
+							Opiniones del producto
+						</Text>
+						<Review productId={id} />
+					</Box>	
 				</Flex>
 			) : (
 				<Flex h={"1000px"} justifyContent={"center"} alignItems="center">

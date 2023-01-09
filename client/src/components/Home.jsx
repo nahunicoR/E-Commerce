@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Grid, GridItem, Spinner, Flex } from "@chakra-ui/react";
+import { Grid, GridItem, Spinner, Flex, Heading } from "@chakra-ui/react";
 /* import { BiSearch } from "react-icons/bi"; */
 import CardProduct from "./CardProduct";
 import Pagination from "./Pagination";
@@ -11,6 +11,7 @@ import {
 	filterByCategory,
 	filterByMaterials,
 	searchProduct,
+	getReviews
 } from "../redux/actions";
 import Filter from "./Filter";
 // import { AspectRatio } from "@chakra-ui/react";
@@ -87,6 +88,7 @@ export default function Home() {
 	//info de nuestra db https://e-commerce-production-d476.up.railway.app/products
 	useEffect(() => {
 		dispatch(getProducts());
+		dispatch(getReviews(0))
 		setTimeout(() => {
 			setLoading(false);
 		}, 800);
@@ -99,7 +101,7 @@ export default function Home() {
 				gridTemplateRows="repeat(4,1fr)"
 				gridTemplateColumns="repeat(4,1fr)"
 				gridTemplateAreas={
-					'"filter card card card" "filter card card card" "filter card card card" ". pag pag pag" ". map map ."'
+					'"filter card card card" "filter card card card" "map card card card" ". pag pag pag" '
 				}
 				rowGap={"10"}
 				padding="10"

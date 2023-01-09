@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useToast } from "@chakra-ui/react";
 import { postProducts } from "../redux/actions";
+import { useNavigate } from "react-router-dom";
 import styles from "../css/CreateProduct.module.css";
 
 const validate = (form) => {
@@ -25,6 +27,8 @@ const validate = (form) => {
 };
 
 export default function CreateProduct() {
+	const toast = useToast();
+	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const [image, setImage] = useState("");
 	const [button, setButton] = useState(true);
@@ -66,6 +70,7 @@ export default function CreateProduct() {
 			...form,
 			[e.target.name]: e.target.value,
 		});
+
 		setErrors(
 			validate({
 				...form,
@@ -105,6 +110,7 @@ export default function CreateProduct() {
 	};
 
 	const handleSubmit = (e) => {
+		//posteo a db
 		e.preventDefault();
 		dispatch(postProducts(form));
 		console.log(form);
@@ -117,6 +123,15 @@ export default function CreateProduct() {
 			image: "",
 			stock: 0,
 		});
+		//feedback de creación del producto y redirección a home.
+		toast({
+			status: "success",
+			title: `${form.title} ha sido agregado a la base de datos`,
+			isClosable: true,
+		});
+		setTimeout(() => {
+			navigate("/home");
+		}, 1300);
 	};
 
 	return (
