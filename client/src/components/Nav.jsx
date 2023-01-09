@@ -1,7 +1,14 @@
 import React from "react";
-import { Flex, Heading, Button, Image, Text } from "@chakra-ui/react";
+import {
+	Flex,
+	Heading,
+	Button,
+	Image,
+	Text,
+	IconButton,
+} from "@chakra-ui/react";
 import { FaUser, FaShoppingCart } from "react-icons/fa";
-import { BiLogOut } from "react-icons/bi";
+import { AiOutlinePoweroff } from "react-icons/ai";
 import logo from "../assets/LogoTo-Mate.png";
 import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -65,15 +72,15 @@ export default function Nav() {
 					</Button>
 
 					{isAuthenticated ? (
-						<Button
+						<IconButton
 							fontSize={"lg"}
 							rounded={"full"}
 							colorScheme={"red"}
-							leftIcon={<BiLogOut />}
+							icon={<AiOutlinePoweroff />}
 							onClick={() =>
 								logout({ returnTo: window.location.origin + "/home" })
 							}
-						></Button>
+						/>
 					) : null}
 
 					<Flex
