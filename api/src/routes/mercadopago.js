@@ -127,8 +127,8 @@ router.post('/payment', async (req,res,next) => {
                 items: items_ml,
                 //urls a las q redirecciona el pago segun su estado
                 back_urls: {
-                    success: "http://localhost:3001/result",//rutas deben ser de back no front.
-                    failure: "http://localhost:3000/result",
+                    success: "https://e-commerce-production-9dbb.up.railway.app/result",//rutas deben ser de back no front.
+                    failure: "https://e-commerce-production-9dbb.up.railway.app/result",
                     pending: ""
                 },
                 payment_methods: {
@@ -148,7 +148,7 @@ router.post('/payment', async (req,res,next) => {
                 },
                 //anula la posibilidad de pago en efectivo
                 binary_mode: true,
-                notification_url: "https://6a5d-201-254-76-52.sa.ngrok.io/notification",
+                notification_url: "https://e-commerce-production-9dbb.up.railway.app/notification",
                 statement_descriptor: "To-Mate",
             }
             // console.log('preference------------------->',preference, 'preference------------------->')
