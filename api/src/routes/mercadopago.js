@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const { Product, Order, Orderdetail, User, Address } = require('../db.js');
 const mercadopago = require('mercadopago');
-const { REAL } = require('sequelize');
 const {ACCESS_TOKEN} = process.env;
 
 
@@ -37,21 +36,12 @@ router.post('/payment', async (req,res,next) => {
 
             const total = body.cart.reduce((acc, product) => acc + product.price * product.quantity, 0);
             //sacamos el total del carrito de compras
-            console.log('total-------------------->',total, 'total-------------------->')
+            // console.log('total-------------------->',total, 'total-------------------->')
             //creamos la orden de compra, solo inicializamos sin información realmente fiable.
             //EN DUDA DE SI CREAR AQUI Y MODIFICAR AQUI LOS MODELOS. 
-            // const newPurchase = await Order.create({
-            //     purchaseCost: total,
-            // },
-            // {
-            //     include: {
-            //         model: User,
-            //         where:{
-            //             email: body.user.email,
-            //             name: body.user.name,
-            //         },
-            //     },
-            // });
+            // const newOrder = await Order.create({
+
+            // })
                 
 
             let preference = {
@@ -62,8 +52,8 @@ router.post('/payment', async (req,res,next) => {
                 },
                 //urls a las q redirecciona el pago segun su estado
                 back_urls: {
-                    success: "http://localhost:3000/checkout-success",
-                    failure: "",
+                    success: "http://localhost:3001/checkout-success",
+                    failure: "http://localhost:3000/checkout-failure",
                     pending: ""
                 },
                 payment_methods: {
@@ -83,12 +73,11 @@ router.post('/payment', async (req,res,next) => {
                 },
                 //anula la posibilidad de pago en efectivo
                 binary_mode: true,
-                notification_url: "https://1ca5-201-254-94-96.sa.ngrok.io/notification",
+                notification_url: "https://7995-201-254-94-96.sa.ngrok.io/notification",
             }
-            console.log('preference------------------->',preference, 'preference------------------->')
+            // console.log('preference------------------->',preference, 'preference------------------->')
             mercadopago.preferences.create(preference)
             .then((resp)=> {
-                 console.log(resp)
                 //global.id = resp.body.id;
                 return res
                 .status(200)
@@ -108,16 +97,26 @@ router.post('/payment', async (req,res,next) => {
 //RUTA NOTIFICATION DONDE RECIBIMOS LA DATA DEL PAGO. 
 // SI OBVIAMOS ESTA DATA, EN REALIDAD DEBERIAMOS PODER CREAR EL POST DE LA COMPRA
 // SIN AFECTAR NADA EN LA BASE DE DATOS, POR QUE ES SOLO PARA DESPLEGAR REALMENTE LA APP CON DINERO REAL.
-router.post('/notification', async (req,res,next) => {
-    console.log('req.topic------------------->',req.body.topic, 'req.topic------------------->')
-    try {
-        res.status(200).send('ok')
-    } catch (error) {
-        console.log(error);
-        next(error);
-        return res.status(500).send({message:error});
-    }
+
+router.get('/checkout-success', function (req, res) {
+    console.log('req.query------------------->',req.query, 'req.query------------------->')
+    console.log('req.body------------------->',req.body, 'req.body------------------->')
+
 });
+
+
+router.post('/notification', async (req,res,next) => {
+    const {query} = req;
+    const body = req.body;
+    console.log('req.body------------------->',body, 'req.body------------------->')
+
+    if(query.id && query.topic == 'merchant-order'){
+        console.log(`merchant-order:---->${query.id}------------mO`)
+    }
+    res.send('ok').status(200);
+});
+
+// mercadopago.merchant_orders.findById()
 //---------------------------------------------------------------------------------->
 //  MODELO DE PREFERENCIA DE MERCADO PAGO
 
