@@ -1,12 +1,7 @@
 import React from "react";
 import orders from "../odersMock.js";
-import {
-	HiOutlineChevronDoubleLeft,
-	HiOutlineChevronDoubleRight,
-} from "react-icons/hi";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from "react-router-dom";
-
 import {
 	Button,
 	Avatar,
@@ -15,29 +10,40 @@ import {
 	Heading,
 	Text,
 	Tag,
-	Image,
-	IconButton,
 	Stat,
 	StatLabel,
 	StatNumber,
 } from "@chakra-ui/react";
+import ProductCarousel from "./ProductCarousel.jsx";
+/* import { useApi } from "../hooks/useApi.jsx"; */
 
 export default function UserDashboard() {
-	const { user } = useAuth0();
+	const { user /* getAccessTokenSilently */ } = useAuth0();
 	const navigate = useNavigate();
-	console.log(user);
-
-	const slideRight = () => {
-		var slider = document.getElementsByClassName("css-1peemgu");
-		console.log(slider);
-		slider.scrollRight = slider.scrollRight + 500;
+	const options = {
+		weekday: "long",
+		year: "numeric",
+		month: "short",
+		day: "numeric",
 	};
-	const slideLeft = () => {
-		var slider = document.getElementsByClassName("css-1peemgu");
-		console.log(slider);
 
-		slider.scrollLeft = slider.scrollLeft + 500;
-	};
+	const updatedAt = new Date(user.updated_at).toLocaleDateString(
+		"es-ES",
+		options
+	);
+
+	//Llamado a un endpoint de nuestra api para corroborar permisos del usuario
+	/* 	const opts = {
+		audience: 'e-commercetomate',
+		scope: 'read:dashboard',
+	  };
+	  const { login, getAccessTokenWithPopup } = useAuth0();
+	  const {
+		loading,
+		error,
+		refresh,
+		data: users,
+	  } = useApi('', opts); */
 
 	return (
 		<>
@@ -47,6 +53,7 @@ export default function UserDashboard() {
 				flexDirection={"column"}
 				justifyContent={"center"}
 				h={"100%"}
+				pb={"60px"}
 			>
 				<Button
 					w={"fit-content"}
@@ -85,19 +92,20 @@ export default function UserDashboard() {
 								colorScheme={user.email_verified ? "green" : null}
 								w={"fit-content"}
 							>
-								{user.email_verified ? "Verified" : "Unverified"}
+								{user.email_verified ? "Verificado" : "Sin Verificar"}
 							</Tag>
 						</Flex>
 					</Flex>
 
 					<Flex paddingRight={5}>
 						<Stat>
-							<StatLabel>Updated at:</StatLabel>
-							<StatNumber>{user.updated_at}</StatNumber>
+							<StatLabel>Ultima Actualizacion:</StatLabel>
+							<StatNumber>{updatedAt}</StatNumber>
 						</Stat>
 					</Flex>
 				</Flex>
-
+				<ProductCarousel label={"Tus Ordenes"} array={orders} />
+				<ProductCarousel label={"Tus Favoritos"} />
 				<Flex
 					alignSelf={"center"}
 					justifyContent={"space-between"}
@@ -110,47 +118,14 @@ export default function UserDashboard() {
 					borderRadius={"md"}
 					bg={"white"}
 					alignItems={"center"}
-					gap={5}
-					overflow={"hidden"}
 				>
 					<Heading alignSelf={"flex-start"} size={"md"}>
-						My Orders
+						Tus Comentarios
 					</Heading>
-					<Flex
-						gap={5}
-						flexDirection={"row"}
-						alignSelf={"flex-start"}
-						overflowX={"scroll"}
-						overflowY={"clip"}
-						scrollBehavior={"smooth"}
-					>
-						{orders.map((o) => {
-							return (
-								<Box
-									display={"flex"}
-									alignItems={"center"}
-									padding={"8"}
-									border={"1px"}
-									borderColor={"gray.200"}
-									borderRadius={"md"}
-									h={"230px"}
-									w={"230px"}
-									bg={"white"}
-								>
-									<Image src={o.image} />
-								</Box>
-							);
-						})}
-					</Flex>
-					<Flex gap={3}>
-						<IconButton
-							onClick={slideLeft}
-							icon={<HiOutlineChevronDoubleLeft />}
-						/>
-						<IconButton
-							onClick={slideRight}
-							icon={<HiOutlineChevronDoubleRight />}
-						/>
+					<Flex justifyContent={"center"}>
+						<Text fontWeight={"bold"} color={"gray.400"}>
+							Aún no hay comentarios.
+						</Text>
 					</Flex>
 				</Flex>
 			</Box>
