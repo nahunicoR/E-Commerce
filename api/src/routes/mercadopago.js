@@ -193,9 +193,9 @@ router.get("/result", async (req, res) => {
 
     switch (status) {
         case "Approved":
-          return res.redirect("http://localhost:3000/checkout-success");
+          return res.redirect("https://testpf.vercel.app//checkout-success");
         default:
-          return res.redirect("http://localhost:3000/checkout-failure");
+          return res.redirect("https://testpf.vercel.app//checkout-failure");
       }
   });
   
