@@ -20,12 +20,14 @@ import { FaArrowLeft, FaHeart } from "react-icons/fa";
 import Review from "./Review";
 import axios from "axios";
 import { addProductsCart } from "../redux/actions";
+import { addFavorites, deleteFavorites } from "../redux/actions";
 
 export default function Details(props) {
 	const { id } = useParams();
 	const dispatch = useDispatch();
 	const { isAuthenticated } = useAuth0();
 	const toast = useToast();
+
 	//estados locales
 	const [loading, setLoading] = useState(true);
 	const [liked, setLiked] = useState(false);
@@ -33,8 +35,13 @@ export default function Details(props) {
 	const productId = useSelector((state) => state.products.productsDetail);
 	/* console.log("product id"); */
 	// const reviews = useSelector(state => state.products.reviews)
-// console.log(reviews)
+	// console.log(reviews)
 	const handleLike = () => {
+		if (liked) {
+			dispatch(deleteFavorites(productId));
+		} else {
+			dispatch(addFavorites(productId));
+		}
 		setLiked(!liked);
 	};
 
@@ -83,18 +90,24 @@ export default function Details(props) {
 							position={"relative"}
 						>
 							<Link to="/home">
-						<Button
-							leftIcon={<FaArrowLeft />}
-							alignSelf={"flex-start"}
-							colorScheme={"teal"}
-							position={"absolute"}
-							top={0}
-							margin={"0.5rem"}
-						>
-							Volver
-						</Button>
-					</Link>
-							<Flex flexDirection={"column"} alignItems={"center"} margin={30} w={"50%"} h={"500"}>
+								<Button
+									leftIcon={<FaArrowLeft />}
+									alignSelf={"flex-start"}
+									colorScheme={"teal"}
+									position={"absolute"}
+									top={0}
+									margin={"0.5rem"}
+								>
+									Volver
+								</Button>
+							</Link>
+							<Flex
+								flexDirection={"column"}
+								alignItems={"center"}
+								margin={30}
+								w={"50%"}
+								h={"500"}
+							>
 								<Image
 									alt="product show"
 									height={"100%"}
@@ -206,7 +219,12 @@ export default function Details(props) {
 						alignSelf={"start"}
 						overflowY={"scroll"}
 					>
-						<Text marginLeft={"1.5rem"} fontSize={"1.5rem"} fontWeight={"bold"} marginTop={"1rem"}>
+						<Text
+							marginLeft={"1.5rem"}
+							fontSize={"1.5rem"}
+							fontWeight={"bold"}
+							marginTop={"1rem"}
+						>
 							Opiniones del producto
 						</Text>
 						<Review productId={id} />
@@ -220,4 +238,3 @@ export default function Details(props) {
 		</>
 	);
 }
-					
