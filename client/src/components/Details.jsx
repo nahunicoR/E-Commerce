@@ -53,7 +53,7 @@ export default function Details(props) {
 	};
 
 	useEffect(() => {
-		dispatch(getReviews())
+		dispatch(getReviews(id))
 		dispatch(getDetails(id));
 		setTimeout(() => {
 			setLoading(false);
@@ -209,7 +209,7 @@ export default function Details(props) {
 						<Text marginLeft={"1.5rem"} fontSize={"1.5rem"} fontWeight={"bold"} marginTop={"1rem"}>
 							Opiniones del producto
 						</Text>
-						<Review />
+						<Review productId={id} />
 					</Box>	
 				</Flex>
 			) : (
