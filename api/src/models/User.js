@@ -26,9 +26,6 @@ module.exports = (sequelize) => {
     name: {                            //Nombre del usuario
       type: DataTypes.STRING,
       validate:{
-        notNull:{
-          msg:"El campo no puede estar vacio"
-        },
         len:{
           args:[3,70],
           msg:"El nombre tiene que ser entre 3 y 70 caracteres"
@@ -38,9 +35,6 @@ module.exports = (sequelize) => {
     lastName: {
       type: DataTypes.STRING,
       validate:{
-        notNull:{
-          msg:"El campo no puede estar vacio"
-        },
         len:{
           args:[3,70],
           msg:"El apellido tiene que ser entre 3 y 70 caracteres"

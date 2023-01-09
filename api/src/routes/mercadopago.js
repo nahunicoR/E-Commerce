@@ -46,17 +46,20 @@ router.post('/payment', async (req,res,next) => {
             const quatityProducts = body.cart.reduce((acc, product) => acc + product.quantity, 0);
             //sacamos la cantidad de productos del carrito de compras
             // console.log('quatityProducts-------------------->',quatityProducts, 'quatityProducts-------------------->')
-                const newOrder = await Order.create({
+
+            //creamos la orden de compra.
+                let newOrder = await Order.create({
                     status: 'creada',
                     purchaseCost: total,
                     payOrder: 'mercadopago',
-                    id: body.user.email,
+                    // id: body.user.email,
                     paymentMethod: 'mercadopago',
-                    userId: body.user.email,
+                    userEmail: body.user.email,
                 })
                 // console.log('newOrder-------------------->',newOrder, 'newOrder-------------------->')
 
-                const newOrderDetail = await Orderdetail.create({
+                //creamos el detalle de la orden de compra.
+                let newOrderDetail = await Orderdetail.create({
                     purchasedamount: quatityProducts,
                     purchaseprice: total,
                 });
@@ -69,39 +72,59 @@ router.post('/payment', async (req,res,next) => {
                 //     country: body.user.country,
                 //     postalCode: body.user.postalCode,
                 // });
-                const newUser = {
-                    name: body.user.name,
-                    email: body.user.email,
-                    rol: 'user',
-                }
-                const [user,created] = await User.findOrCreate({
-                    where: {
-                        email: body.user.email,
-                        rol: 'user',
-                    },
-                    defaults: {
-                        newUser
-                    } 
-                });
-                if(created){
-                    console.log('usuario creado')
-                }else{
-                    console.log('usuario ya existe')
-                }     
 
+                //preguntamos si el usuario existe en la base de datos.
+                const user = await User.findOne({
+                    where: {
+                        email: body.user.email
+                    }
+                });
+                //si no esxiste lo creamos.
+                if(!user){
+                    const newUser = await User.create({
+                        email: body.user.email,
+                        firstName: body.user.name,
+                        // lastName: body.user.lastName,
+                        // phone: body.user.phone,
+                        // street: body.user.street,
+                        // number: body.user.number,
+                        // city: body.user.city,
+                        // state: body.user.state,
+                        // country: body.user.country,
+                        // postalCode: body.user.postalCode,
+                    });
+                }
+                //si existe lo actualizamos.
+                else{
+                    await user.update({
+                        email: body.user.email,
+                        firstName: body.user.name,
+                        // lastName: body.user.lastName,
+                        // phone: body.user.phone,
+                        // street: body.user.street,
+                        // number: body.user.number,
+                        // city: body.user.city,
+                        // state: body.user.state,
+                        // country: body.user.country,
+                        // postalCode: body.user.postalCode,
+                    });
+                }
+
+                //actualizamos el stock de los productos.
+                
                 const stockProducts = await Promise.all(body.cart.map(async (product) => {
                     const productStock = await Product.findByPk(product.id);
                     const newStock = productStock.stock - product.quantity;
                     await productStock.update({stock: newStock});
                     return productStock;
                 }));
+
+                // console.log('stockProducts-------------------->',stockProducts, 'stockProducts-------------------->')
+
+                //creamos la preferencia de pago con el carrito de compras y/o details user {}.
                 
             let preference = {
                 items: items_ml,
-                payer: {
-                    name: body.user.name,
-                    email: body.user.email,
-                },
                 //urls a las q redirecciona el pago segun su estado
                 back_urls: {
                     success: "http://localhost:3001/result",//rutas deben ser de back no front.
@@ -120,12 +143,12 @@ router.post('/payment', async (req,res,next) => {
                             id: "ticket"
                         }
                     ],
-                    //cantidad de cuotas para pruebas es 0.
-                    // installments: 
+                    //cantidad de cuotas para pruebas es 1.
+                    installments: 3
                 },
                 //anula la posibilidad de pago en efectivo
                 binary_mode: true,
-                notification_url: "https://7995-201-254-94-96.sa.ngrok.io/notification",
+                notification_url: "https://6a5d-201-254-76-52.sa.ngrok.io/notification",
                 statement_descriptor: "To-Mate",
             }
             // console.log('preference------------------->',preference, 'preference------------------->')

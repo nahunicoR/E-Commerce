@@ -128,9 +128,9 @@ router.use('/',  uploadImage);
     Author: Nahuel Riveros
 */
 
-// const mercadoPago = require('./mercadopago');
+const mercadoPago = require('./mercadopago');
 
-// router.use('/', mercadoPago);
+router.use('/', mercadoPago);
 
 const review = require("./createReview");
 router.use("/reviews", review)
