@@ -54,7 +54,7 @@ router.post('/payment', async (req,res,next) => {
                     payOrder: 'mercadopago',
                     // id: body.user.email,
                     paymentMethod: 'mercadopago',
-                    userEmail: body.user.email,
+                  
                 })
                 // console.log('newOrder-------------------->',newOrder, 'newOrder-------------------->')
 
@@ -112,12 +112,12 @@ router.post('/payment', async (req,res,next) => {
 
                 //actualizamos el stock de los productos.
                 
-                const stockProducts = await Promise.all(body.cart.map(async (product) => {
-                    const productStock = await Product.findByPk(product.id);
-                    const newStock = productStock.stock - product.quantity;
-                    await productStock.update({stock: newStock});
-                    return productStock;
-                }));
+                // const stockProducts = await Promise.all(body.cart.map(async (product) => {
+                //     const productStock = await Product.findByPk(product.id);
+                //     const newStock = productStock.stock - product.quantity;
+                //     await productStock.update({stock: newStock});
+                //     return productStock;
+                // }));
 
                 // console.log('stockProducts-------------------->',stockProducts, 'stockProducts-------------------->')
 
@@ -193,9 +193,9 @@ router.get("/result", async (req, res) => {
 
     switch (status) {
         case "Approved":
-          return res.redirect("http://localhost:3000/checkout-success");
+          return res.redirect("https://testpf.vercel.app//checkout-success");
         default:
-          return res.redirect("http://localhost:3000/checkout-failure");
+          return res.redirect("https://testpf.vercel.app//checkout-failure");
       }
   });
   
