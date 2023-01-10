@@ -72,6 +72,8 @@ User.hasMany(Order, { as: "ordenes", foreignkey: "email" });
 Order.belongsTo(User, { as: "user" });            //No se requiere generar una foreignkey por ya se creando el id
 Order.belongsTo(Address, { as: "addressorder"});  //Una orden debe llevar el domicilio
 
+Order.belongsToMany(User, {through: 'OrderUser' })
+User.belongsToMany(Order, {through: 'OrderUser' })
 
 //La orden está formada por muchos productos
 Product.hasMany(Orderdetail, { as: "orderdetails", foreignkey: "id" });
