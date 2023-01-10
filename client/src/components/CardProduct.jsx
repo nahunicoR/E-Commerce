@@ -103,11 +103,9 @@ export default function CardProduct({
 							{"$" + price}
 						</Text>
 
-						{/* <Link to={`/detail/${id}`}> */}
-							<Button size={"md"} colorScheme={"teal"}>
+						<Button size={"md"} colorScheme={"teal"}>
 								Detalle
 							</Button>
-						{/* </Link> */}
 						<Button
 							size={"md"}
 							colorScheme={"teal"}
