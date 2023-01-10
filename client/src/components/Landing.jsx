@@ -8,7 +8,7 @@ import videomate from "../assets/to-mate.mp4";
 export default function Landing() {
 	return (
 		<div>
-			<Stack position={"relative"} height={"86vh"}>
+			{/* <Stack position={"relative"} height={"86vh"}> */}
 				<Box
 				
 					as="video"
@@ -29,14 +29,14 @@ export default function Landing() {
 				<Button
 					colorScheme={"teal"}
 					position={"absolute"}
-					top="55%"
-					left={"44%"}
+					// top="55%"
+					// left={"44%"}
 					size={"lg"}
-					w={"15%"}
+					w={"100%"}
 				>
-					<Link to={"/home"}>Vamos a Matear</Link>
+					<Link to={"/home"}></Link>
 				</Button> 
-			</Stack>
+			{/* </Stack> */}
 		</div>
 	);
 }
