@@ -10,9 +10,10 @@ export default function Landing() {
 		<div>
 			<Stack position={"relative"} height={"86vh"}>
 				<Box
+				
 					as="video"
 					controls={false}
-					src={videomate}
+					src={videomate} 
 					autoPlay
 					loop
 					muted
@@ -21,7 +22,9 @@ export default function Landing() {
 					sx={{
 						aspectRatio: "16/9",
 					}}
-				/>
+		
+					
+			/>
 
 				<Button
 					colorScheme={"teal"}
@@ -32,7 +35,7 @@ export default function Landing() {
 					w={"15%"}
 				>
 					<Link to={"/home"}>Vamos a Matear</Link>
-				</Button>
+				</Button> 
 			</Stack>
 		</div>
 	);

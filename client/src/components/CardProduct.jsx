@@ -35,7 +35,10 @@ export default function CardProduct({
 	const dispatch = useDispatch();
 	return (
 		<>
+					<Link to={`/detail/${id}`}>
+		
 			<GridItem /* colSpan={1} */ gridArea={"card"}>
+			
 				<Card
 					transition={"0.2s"}
 					h={"400"}
@@ -47,6 +50,7 @@ export default function CardProduct({
 					margin={"auto"}
 					/* overflow={"hidden"} */
 				>
+					
 					<CardBody position={"relative"}>
 					<IconButton
 							onClick={()=> dispatch(addFavorites(product))}
@@ -99,11 +103,11 @@ export default function CardProduct({
 							{"$" + price}
 						</Text>
 
-						<Link to={`/detail/${id}`}>
+						{/* <Link to={`/detail/${id}`}> */}
 							<Button size={"md"} colorScheme={"teal"}>
 								Detalle
 							</Button>
-						</Link>
+						{/* </Link> */}
 						<Button
 							size={"md"}
 							colorScheme={"teal"}
@@ -122,6 +126,7 @@ export default function CardProduct({
 					</CardFooter>
 				</Card>
 			</GridItem>
+			</Link>
 		</>
 	);
 }
