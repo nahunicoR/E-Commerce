@@ -9,6 +9,7 @@ export default function Landing() {
 	return (
 		<div>
 			{/* <Stack position={"relative"} height={"86vh"}> */}
+				<Link to={"/home"}>
 				<Box
 				
 					as="video"
@@ -25,17 +26,18 @@ export default function Landing() {
 		
 					
 			/>
+			</Link>
 
-				<Button
+				{/* <Button
 					colorScheme={"teal"}
 					position={"absolute"}
-					// top="55%"
-					// left={"44%"}
+					top="55%"
+					left={"44%"}
 					size={"lg"}
 					w={"100%"}
 				>
-					<Link to={"/home"}></Link>
-				</Button> 
+					
+				</Button>  */}
 			{/* </Stack> */}
 		</div>
 	);
