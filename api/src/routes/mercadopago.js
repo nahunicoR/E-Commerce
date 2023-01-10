@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { Product, Order, Orderdetail, User, Address } = require('../db.js');
+const { Product, Order, Orderdetail, User, Address, Notification } = require('../db.js');
 const mercadopago = require('mercadopago');
 const {ACCESS_TOKEN} = process.env;
 
@@ -52,7 +52,8 @@ router.post('/payment', async (req,res,next) => {
                 items: items_ml,
                 //urls a las q redirecciona el pago segun su estado
                 back_urls: {
-                    success: "https://e-commerce-production-9dbb.up.railway.app/result",//rutas deben ser de back no front.
+                    success: "http://localhost:3001/result",
+                    // success: "http://localhost:3000/checkout-success",//rutas deben ser de back no front.
                     failure: "https://e-commerce-production-9dbb.up.railway.app/result",
                     pending: ""
                 },
@@ -102,28 +103,30 @@ router.post('/payment', async (req,res,next) => {
 
 
 
-// router.get("/result", async (req, res) => {
-//     //approved = APRO
-//     //in_process = CONT (pendiente de pago)
-//     //rejected = OTHE (rechazado)
-//     console.info("EN LA RUTA DE PAGOS ");
-//     const payment_id = req.query.payment_id;
-//     console.log(payment_id);
-//     const payment_status = req.query.status;
-//     const external_reference = req.query.external_reference;
-//     console.log(external_reference);
-//     const merchant_order_id = req.query.merchant_order_id;
-//     console.log(merchant_order_id);
-//     let status = payment_status === "approved" ? "Approved" : "Failed";
-//     console.log(status);
+router.get("/result", async (req, res) => {
+    
+    //approved = APRO
+    //in_process = CONT (pendiente de pago)
+    //rejected = OTHE (rechazado)
+    // console.info("EN LA RUTA DE PAGOS ");
+    // const payment_id = req.query.payment_id;
+    // console.log(payment_id);
+    const status = req.query.status;
+    // const external_reference = req.query.external_reference;
+    // console.log(external_reference);
+    // const merchant_order_id = req.query.merchant_order_id;
+    // console.log(merchant_order_id);
+    let pay = status === "approved" ? "Approved" : "Failed";
+    console.log(pay);
 
-//     switch (status) {
-//         case "Approved":
-//           return res.redirect("https://testpf.vercel.app/checkout-success");
-//         default:
-//           return res.redirect("https://testpf.vercel.app/checkout-failure");
-//       }
-//   });
+    switch (pay) {
+        case "Approved":
+        //   return res.redirect("https://testpf.vercel.app/checkout-success");
+        return res.redirect("http://localhost:3000/checkout-success");
+        default:
+          return res.redirect("https://testpf.vercel.app/checkout-failure");
+      }
+  });
   
   router.get("/payment/:id", (req, res) => {
     const mp = new mercadopago(ACCESS_TOKEN);
@@ -142,12 +145,13 @@ router.post('/payment', async (req,res,next) => {
   });
 
 router.post('/notification', async (req,res,next) => {
-    const {query} = req;
-    const body = req.body;
-    console.log('req.body------------------->',body, 'req.body------------------->')
-
-    if(query.id && query.topic == 'merchant-order'){
-        console.log(`merchant-order:---->${query.id}------------mO`)
+    const query = req.query;
+    console.log(query.id)
+    if(query.id && query.topic == 'merchant_order'){
+        console.log(`merchant_order:-->${query.id}------------mO`)
+        const [noti, create] = await Notification.findOrCreate({
+            where: {norder: query.id}
+        })
     }
     res.send('ok').status(200);
 });
