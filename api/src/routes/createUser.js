@@ -1,49 +1,48 @@
 const { Router } = require('express');
 const { User } = require('../db');
-const bcrypt = require('bcrypt');
+// const bcrypt = require('bcrypt');
 const router = Router();
 
-function validatorCreateUser(req,res,next){
-    const { name, lastName, email } = req.body;
+// function validatorCreateUser(req,res,next){
+//     const { name, lastName, email } = req.body;
 
-    if(
-        typeof name !== "string" ||
-        typeof lastName !== "string" ||
-        typeof email !== "string" ||
-        name == "" ||
-        lastName == "" ||
-        email == ""
-    ) {
-        return res.json({
-            error: "bad request"
-        })
-    }
-    next();
+//     if(
+//         typeof name !== "string" ||
+//         typeof lastName !== "string" ||
+//         typeof email !== "string" ||
+//         name == "" ||
+//         lastName == "" ||
+//         email == ""
+//     ) {
+//         return res.json({
+//             error: "bad request"
+//         })
+//     }
+//     next();
     
-}
+// }
 
-router.post('/', validatorCreateUser, async (req, res, next) => {
+router.post('/', /*validatorCreateUser, */async (req, res, next) => {
+    const { name, /*family_name, */email, rol } = req.body;   //password
+    // console.log(family_name, email)
     try {
-        const { name, lastName, email, rol } = req.body;   //password
        
         //let hashedPassword = await bcrypt.hash(password, 10);
 
-        const formatEmail = email.toLowerCase();
+        // const formatEmail = email.toLowerCase();
 
         const [user, created] = await User.findOrCreate({
             where:{
-                name,
-                lastName, 
-                email: formatEmail,
+                email,
+                // family_name, 
+                name: name,
                 rol: rol || 'user'
                 //password: hashedPassword 
             }
         })
-        !created ? res.status(400).json('El usuario ya existe') : res.status(200).json(user);
-
+        created ? res.status(200).json(user) : res.status(200).json(user);
     } catch (error) {
-        next(error);
-        res.status(400).json(error.message)
+        next(error)
     }
 });
 

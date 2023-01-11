@@ -7,23 +7,14 @@ const path = require("path");
 
 //no comentar linea debajo, sirve para pruebas locales de Back-End.
 
-// const { DB_USER, DB_PASSWORD, DB_HOST  // DB_DEPLOY 
-//  } = process.env;
-
-const {  /*DB_USER, DB_PASSWORD, DB_HOST ,*/  DB_DEPLOY } = process.env;
+const { /*DB_USER, DB_PASSWORD, DB_HOST ,*/ DB_DEPLOY } = process.env;
 
 // const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/ecomerce`, {
 //   logging: false, // set to console.log to see the raw SQL queries
 //   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 // });
 
-// const sequelize = new Sequelize(
-//   DB_DEPLOY,
-//   {
-//     logging: false, // set to console.log to see the raw SQL queries
-//     native: false, // lets Sequelize know we can use pg-native for ~30% more speed
-//   }
-// );
+
 
 //  const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/ecomerce`, {
 //  	logging: false, // set to console.log to see the raw SQL queries
@@ -61,7 +52,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { User, Order, Orderdetail, Product, Address, Review, Image } = sequelize.models; // Importar Modelos
+const { User, Order, Orderdetail, Product, Address, Review, Image, Notification } = sequelize.models; // Importar Modelos
 
 // Aca vendrian las relaciones
 // Relación uno a muchos
@@ -72,6 +63,11 @@ User.hasMany(Order, { as: "ordenes", foreignkey: "email" });
 Order.belongsTo(User, { as: "user" });            //No se requiere generar una foreignkey por ya se creando el id
 Order.belongsTo(Address, { as: "addressorder"});  //Una orden debe llevar el domicilio
 
+Order.belongsToMany(User, {through: 'OrderUser' })
+User.belongsToMany(Order, {through: 'OrderUser' })
+
+Notification.belongsToMany(User, {through: 'userNotif' })
+User.belongsToMany(Notification, {through: 'userNotif' })
 
 //La orden está formada por muchos productos
 Product.hasMany(Orderdetail, { as: "orderdetails", foreignkey: "id" });
