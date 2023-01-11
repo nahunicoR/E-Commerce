@@ -14,6 +14,11 @@ import {
 	deleteFavorite,
 } from "./reducer";
 import axios from "axios";
+import { getUser } from "./user";
+
+export const getUseremail = (user) => async (dispatch) => {
+	return dispatch(getUser(user));
+};
 
 export const getProducts = () => async (dispatch) => {
 	let products = await axios.get("/products");
@@ -22,6 +27,11 @@ export const getProducts = () => async (dispatch) => {
 	} catch (error) {
 		console.log(error);
 	}
+};
+
+export const postUser = (authUser) => async (dispatch) => {
+	let dbUser = await axios.post("user", authUser);
+	return dbUser;
 };
 
 export const postProducts = (productInfo) => async (dispatch) => {
@@ -72,7 +82,7 @@ export const deleteQuantityCard = (product) => (dispatch) => {
 };
 export const getReviews = (id) => async (dispatch) => {
 	let reviewsResponse = await axios.get(`/reviews/${id}`);
-	console.log(reviewsResponse);
+	// console.log(reviewsResponse)
 	try {
 		return dispatch(reviews(reviewsResponse.data));
 	} catch (error) {
