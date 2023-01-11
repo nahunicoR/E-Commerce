@@ -13,20 +13,19 @@ import logo from "../assets/LogoTo-Mate.png";
 import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch, useSelector } from "react-redux";
-import { MdOutlineFavoriteBorder, MdOutlineFavorite } from "react-icons/md"
+import { MdOutlineFavoriteBorder, MdOutlineFavorite } from "react-icons/md";
 import { getUseremail, postUser } from "../redux/actions";
-
 
 export default function Nav() {
 	const { loginWithRedirect, isAuthenticated, user, logout } = useAuth0();
 	const dispatch = useDispatch();
 	useEffect(() => {
 		if (isAuthenticated) {
-			dispatch( postUser(user) )
-			dispatch( getUseremail(user.email) )
+			dispatch(postUser(user));
+			dispatch(getUseremail(user.email));
 		}
-	}, [isAuthenticated, dispatch, user])
-	
+	}, [isAuthenticated, dispatch, user]);
+
 	const QuantityOfProduct = useSelector((state) => state.products.cart);
 	const QuantityFavorites = useSelector((state) => state.products.favorites);
 	let topCenter = 4;
@@ -61,9 +60,12 @@ export default function Nav() {
 				</Flex>
 
 				<Flex justifyContent={"space-evenly"} w={"25%"}>
-					<Button fontSize={"lg"} color={"white"} variant="link">
-						<Link to={"/create"}>Crear Producto</Link>
-					</Button>
+					{isAuthenticated ? (
+						<Button fontSize={"lg"} color={"white"} variant="link">
+							<Link to={"/create"}>Crear Producto</Link>
+						</Button>
+					) : null}
+
 					<Button
 						onClick={!isAuthenticated ? () => loginWithRedirect() : null}
 						fontSize={"lg"}
@@ -115,12 +117,19 @@ export default function Nav() {
 							<FaShoppingCart color="white" fontSize={"1.5rem"} />
 						</Link>
 						<Link to={"/favorites"}>
-							<Button bg={"transparent"} variant={"unstyled"} margin={"0 1rem 0 1rem"}>
-								{
-									!QuantityFavorites.length
-										? <MdOutlineFavoriteBorder fontSize={"1.8rem"} color={"white"} />
-										: <MdOutlineFavorite fontSize={"1.8rem"} color={"white"} />
-								}
+							<Button
+								bg={"transparent"}
+								variant={"unstyled"}
+								margin={"0 1rem 0 1rem"}
+							>
+								{!QuantityFavorites.length ? (
+									<MdOutlineFavoriteBorder
+										fontSize={"1.8rem"}
+										color={"white"}
+									/>
+								) : (
+									<MdOutlineFavorite fontSize={"1.8rem"} color={"white"} />
+								)}
 							</Button>
 						</Link>
 					</Flex>
