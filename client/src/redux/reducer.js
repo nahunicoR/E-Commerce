@@ -151,7 +151,7 @@ export const {
 	deleteQuantity,
 	reviews,
 	addFavorite,
-	deleteFavorite
+	deleteFavorite,
 } = productsSlice.actions;
 
 export default productsSlice.reducer;

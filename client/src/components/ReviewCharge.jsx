@@ -1,17 +1,76 @@
-import React from "react";
+import React,{useEffect, useState} from "react";
 import { FaStar } from "react-icons/fa";
-import { Button } from "@chakra-ui/react";
+import { Button , Input} from "@chakra-ui/react";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useDispatch,useSelector } from "react-redux";
+import { postReview } from "../redux/actions";
+import { getUser } from "../redux/user";
 const colors = {
     orange: "#FFBA5A",
     grey: "#a9a9a9"
 }
 
-function ReviewCharge(){
+const validate = (input, currentValue) => {
+	let errors = {};
+	if (input.description) {
+		errors.description = "Este campo es Obligatorio.";
+    }else {
+        if(input.description.length > 250){
+            errors.description = "Solo se permiten hasta 250 caracteres!"
+    }
+    if(currentValue === null){
+        errors.rating = "Éste campo es requerido."
+    }
+    else if(currentValue < 1 || currentValue > 5 || currentValue === 0){
+        errors.currentValue = "La calificación debe estar entre 1 y 5 estrellas.."
+    }
+}
+    return errors;
+}
+
+function ReviewCharge({productId}){
+    const dispatch = useDispatch();
     const stars = Array(5).fill(0);
-    const [currentValue, setCurrentValue] = React.useState(0);
-    const [hoverValue, setHoverValue] = React.useState(undefined);
+    const user = useSelector((state)=> state.user)
+    // const toast = useToast();
+    const {isAuthenticated} = useAuth0();
+    const [currentValue, setCurrentValue] = useState(0);
+    const [hoverValue, setHoverValue] = useState(undefined);
+    const [input , setInput] = useState({
+        description: "",
+        userEmail: user,
+        productId: productId.id
+    });
+
+    let review = {
+        input,
+        currentValue
+    }
+
+    const [errors, setErrors] = useState({
+        description: "",
+        currentValue:""
+    });
+
+    useEffect(()=>{
+        dispatch(getUser())
+    },[dispatch]);
+
+    const handleInput = e =>{
+        setInput({
+            ...input,
+            [e.target.name]:e.target.value
+        });
+        setErrors(
+            validate({
+                ...input,
+                [e.target.name]:e.target.value
+            })
+        );
+    }
+
     const handleClick = value => {
-        console.log(value,'--------soy value hancldeClick')
+        // console.log(value)
         setCurrentValue(value)
     };
 
@@ -24,6 +83,16 @@ function ReviewCharge(){
         setHoverValue(undefined)
 
     };
+
+    const handleSubmit = (e) => {
+        dispatch(postReview(review));
+        // console.log(review,'reviewPOST')
+        setCurrentValue(0);
+        setInput({
+            description:""
+        });
+        //alert('¡Creaste un nuevo comentario!')
+    }
 
     return (
         <div style={styles.container}>
@@ -45,19 +114,27 @@ function ReviewCharge(){
                         />
                     )
                 })}
+                <p>{errors.currentValue && errors.currentValue}</p>
 
             </div>
-            <textarea
-                placeholder="Cuéntanos tu opinión"
-                style={styles.textarea}
-            />
-            <Button
-                w={"40%"}
-                colorScheme={"teal"}
-                top="85%"
-            >
-                Enviar
-            </Button>
+            <div style={styles.containerT}>
+                <Input 
+                    type='text' 
+                    name='description' 
+                    size='lg' 
+                    value={input.description} 
+                    placeholder='Cuentanos tu opinión..' 
+                    onChange={handleInput}/>
+                    <p>{errors.description && errors.description}</p>
+            </div>
+                <Button
+                    onClick={handleSubmit}
+                    w={"40%"}
+                    colorScheme={"teal"}
+                    isActive={!isAuthenticated}
+                >
+                    Enviar
+                </Button>
         </div>
     );
 };
@@ -72,10 +149,16 @@ const styles = {
         display: "flex",
         flexDirection: "row",
       },
+      containerT: {
+        width: '90%',
+        display: "flex",
+        
+      },
     textarea: {
         border: "1px solid #a9a9a9",
         borderRadius: 5,
-        width: 300,
+        width: "100%",
+        flexDirection: "fit-content",
         margin: "20px 0",
         minHeight: 100,
         padding: 10

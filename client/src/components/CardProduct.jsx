@@ -24,6 +24,7 @@ import {
 /* import { useAuth0 } from "@auth0/auth0-react"; */
 import Rating from "./Rating";
 import { FaHeart } from "react-icons/fa";
+import { useSelector } from "react-redux";
 
 export default function CardProduct({
 	id,
@@ -38,15 +39,8 @@ export default function CardProduct({
 	const toast = useToast();
 	const [liked, setLiked] = useState(false);
 	const dispatch = useDispatch();
-
-	const handleLike = () => {
-		if (liked) {
-			dispatch(deleteFavorites(product));
-		} else {
-			dispatch(addFavorites(product));
-		}
-		setLiked(!liked);
-	};
+	const favorites = useSelector((state) => state.products.favorites);
+	const chooseFavorites = favorites.find((f) => f.id === id);
 	return (
 		<>
 			<GridItem /* colSpan={1} */ gridArea={"card"}>
@@ -63,8 +57,13 @@ export default function CardProduct({
 				>
 					<CardBody position={"relative"}>
 						<IconButton
-							onClick={handleLike}
-							color={liked ? "red.400" : "gray.500"}
+							onClick={() =>
+								!chooseFavorites
+									? dispatch(addFavorites(product))
+									: dispatch(deleteFavorites(product))
+							}
+							color={chooseFavorites ? "red" : "teal"}
+							// color={"teal"}
 							icon={<FaHeart />}
 							margin="0 15px"
 							position={"absolute"}

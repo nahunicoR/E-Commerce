@@ -16,6 +16,7 @@ router.post('/', async (req, res, next) => {
             price,
             category,
             description,
+            image,
             material,
             stock
         }
@@ -24,6 +25,7 @@ router.post('/', async (req, res, next) => {
                 title,
                 price,
                 category,
+                image,
                 description,
                 material,
                 stock
