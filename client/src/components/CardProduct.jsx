@@ -16,10 +16,11 @@ import {
 import { Card, CardBody, CardFooter } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { addFavorites, addProductsCart } from "../redux/actions";
+import { addFavorites, addProductsCart, deleteFavorites } from "../redux/actions";
 /* import { useAuth0 } from "@auth0/auth0-react"; */
 import Rating from "./Rating";
 import { FaHeart } from "react-icons/fa"
+import { useSelector } from "react-redux";
 
 export default function CardProduct({
 	id,
@@ -33,6 +34,8 @@ export default function CardProduct({
 	/* const { isAuthenticated } = useAuth0(); */
 	const toast = useToast();
 	const dispatch = useDispatch();
+	const favorites = useSelector(state => state.products.favorites)
+	const chooseFavorites = favorites.find(f => f.id === id )
 	return (
 		<>
 		<Link to={`/detail/${id}`}></Link>
@@ -52,9 +55,9 @@ export default function CardProduct({
 
 					<CardBody position={"relative"}>
 					<IconButton
-							onClick={()=> dispatch(addFavorites(product))}
-							// color={liked ? "red.400" : null}
-							color={"teal"}
+							onClick={()=> !chooseFavorites ? dispatch(addFavorites(product)) : dispatch(deleteFavorites(product))}
+							color={chooseFavorites ? "red" : "teal"}
+							// color={"teal"}
 							icon={<FaHeart />}
 							margin="0 15px"
 							position={"absolute"}

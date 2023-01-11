@@ -19,8 +19,8 @@
 
 .formulario p {
 	margin-top: -10px;
-	color: red;
 	margin-bottom: 0px;
+	justify-content: center;
 }
 
 .formulario > div {
