@@ -1,6 +1,6 @@
 import React,{useEffect, useState} from "react";
 import { FaStar } from "react-icons/fa";
-import { Button , useToast, Input} from "@chakra-ui/react";
+import { Button , Input} from "@chakra-ui/react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch,useSelector } from "react-redux";
 import { postReview } from "../redux/actions";
@@ -32,17 +32,17 @@ function ReviewCharge({productId}){
     const dispatch = useDispatch();
     const stars = Array(5).fill(0);
     const user = useSelector((state)=> state.user)
-    const toast = useToast();
+    // const toast = useToast();
     const {isAuthenticated} = useAuth0();
     const [currentValue, setCurrentValue] = useState(0);
     const [hoverValue, setHoverValue] = useState(undefined);
     const [input , setInput] = useState({
-        userEmail: user,
         description: "",
+        userEmail: user,
         productId: productId.id
     });
 
-    const review = {
+    let review = {
         input,
         currentValue
     }
@@ -70,7 +70,7 @@ function ReviewCharge({productId}){
     }
 
     const handleClick = value => {
-        console.log(value,'--------soy value hancldeClick')
+        // console.log(value)
         setCurrentValue(value)
     };
 
@@ -84,12 +84,15 @@ function ReviewCharge({productId}){
 
     };
 
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     dispatch(postReview(review));
-    //     setCurrentValue(0);
-    //     setDescription("");
-    // }
+    const handleSubmit = (e) => {
+        dispatch(postReview(review));
+        // console.log(review,'reviewPOST')
+        setCurrentValue(0);
+        setInput({
+            description:""
+        });
+        //alert('¡Creaste un nuevo comentario!')
+    }
 
     return (
         <div style={styles.container}>
@@ -125,29 +128,10 @@ function ReviewCharge({productId}){
                     <p>{errors.description && errors.description}</p>
             </div>
                 <Button
-                    onClick={
-                        isAuthenticated
-                            ? () => {
-                                dispatch(postReview(review))
-                                .then((res)=> res.data)
-                                .catch((err)=> console.log(err))
-                                    toast({
-                                        status: "success",
-                                        title: `${user} has creado un nuevo comentario de ${productId}!`,
-                                        isClosable: true,
-                                    });
-                                }
-                            : () => {
-                                    toast({
-                                        title: "Primero inicie sesión",
-                                        position: "bottom",
-                                        status: "info",
-                                        isClosable: true,
-                                    });
-                                }
-                    }
+                    onClick={handleSubmit}
                     w={"40%"}
                     colorScheme={"teal"}
+                    isActive={!isAuthenticated}
                 >
                     Enviar
                 </Button>
