@@ -13,6 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { BiSearch } from "react-icons/bi";
 import React from "react";
+/* import { useState } from "react"; */
 
 function Filter({
 	filters,
@@ -135,6 +136,7 @@ function Filter({
 						>
 							Limpiar Filtros
 						</Button>
+						{/* <Button>test</Button> */}
 					</Flex>
 				</Box>
 			</GridItem>
