@@ -4,15 +4,15 @@ const router = Router();
 
 router.post('/', async (req, res, next) => {
 
-    const { userEmail, description, rating, productId } = req.body;
+    const { body } = req;
     
     try {
             const [review, created] = await Review.findOrCreate({
             where:{
-                description,
-                rating,
-                productId,
-                userEmail
+                description: body.input.description,
+                rating:body.currentValue,
+                productId: body.input.productId,
+                userEmail:body.input.userEmail.email
             }
         })
         !created ? res.status(400).json('La review ya existe') : res.status(200).json(review);

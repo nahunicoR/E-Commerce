@@ -37,7 +37,7 @@ function ReviewCharge({productId}){
     const [currentValue, setCurrentValue] = useState(0);
     const [hoverValue, setHoverValue] = useState(undefined);
     const [input , setInput] = useState({
-        userEmail: user.email,
+        userEmail: user,
         description: "",
         productId: productId.id
     });
