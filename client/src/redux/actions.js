@@ -92,8 +92,10 @@ export const getReviews = (id) => async (dispatch) => {
 
 export const postReview = (reviewInfo) => async (dispatch) => {
 	let post = await axios.post("/review", reviewInfo);
-	return post;
+	//console.log(reviewInfo)
+		return post.data;
 };
+
 export const addFavorites = product => (dispatch) => {
 	return dispatch(addFavorite(product))
 };
