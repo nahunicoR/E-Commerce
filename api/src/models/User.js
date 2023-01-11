@@ -10,45 +10,37 @@ module.exports = (sequelize) => {
     email: {
       type: DataTypes.STRING,
       primaryKey: true,
-      allowNull: false,
-      unique: true,
-      validate: {
-        isEmail: {
-          args: true,
-          msg: 'Email no valido'
-        },
-        isLowercase:{
-          args: true,
-          msg: 'El email debe ser en minuscula'
-        }
-      }
+      // allowNull: false,
+      // unique: true,
+      // validate: {
+      //   isEmail: {
+      //     args: true,
+      //     msg: 'Email no valido'
+      //   },
+      //   isLowercase:{
+      //     args: true,
+      //     msg: 'El email debe ser en minuscula'
+      //   }
+      // }
     },
     name: {                            //Nombre del usuario
       type: DataTypes.STRING,
-      allowNull: false,
-      validate:{
-        notNull:{
-          msg:"El campo no puede estar vacio"
-        },
-        len:{
-          args:[3,70],
-          msg:"El nombre tiene que ser entre 3 y 70 caracteres"
-        }
-      }
+      // validate:{
+      //   len:{
+      //     args:[3,70],
+      //     msg:"El nombre tiene que ser entre 3 y 70 caracteres"
+      //   }
+      // }
     },
-    lastName: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate:{
-        notNull:{
-          msg:"El campo no puede estar vacio"
-        },
-        len:{
-          args:[3,70],
-          msg:"El apellido tiene que ser entre 3 y 70 caracteres"
-        }
-      }
-    },
+    // family_name: {
+    //   type: DataTypes.STRING,
+      // validate:{
+      //   len:{
+      //     args:[3,70],
+      //     msg:"El apellido tiene que ser entre 3 y 70 caracteres"
+      //   }
+      // }
+    // },
     
     rol: {
       type: DataTypes.ENUM,

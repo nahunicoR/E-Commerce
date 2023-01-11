@@ -2,20 +2,12 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/LogoTo-Mate.png";
 import { Text, Container, Image, HStack, Flex, Button } from "@chakra-ui/react";
-import { useAuth0 } from "@auth0/auth0-react";
 
-const CheckoutSucces = () => {
+const CheckoutFailure = () => {
 	const navigate = useNavigate();
-	const { user } = useAuth0();
-
-	const handleClick = () => {
-		console.log('volver')
-		console.log(user)
-	}
-
 	return (
 		<>
-			<Flex h={"1000"} justifyContent={"center"} bg={"green.500"}>
+			<Flex h={"1000"} justifyContent={"center"} bg={"red.500"}>
 				<HStack>
 					<Container
 						display={"flex"}
@@ -25,7 +17,7 @@ const CheckoutSucces = () => {
 						color="black"
 					>
 						<Text fontSize="4xl" as="b" color="white" textAlign="center">
-							Su pago ha sido:
+							Ups!! Aquí hay algo mal, que no esta bien
 						</Text>
 						<Text
 							textAlign={"center"}
@@ -33,14 +25,11 @@ const CheckoutSucces = () => {
 							fontStyle={"normal"}
 							color={"white"}
 						>
-							Exitoso
+							Pago rechazado
 						</Text>
 						<Image marginLeft={"5"} src={logo} alt="page logo" w={"250px"} />
-						<Button marginTop={"3"} 
-							// onClick={() => navigate("/home")}
-							onClick={ handleClick }
-							>
-							Volver al comercio
+						<Button marginTop={"3"} onClick={() => navigate("/home")}>
+							Intenta de nuevo
 						</Button>
 					</Container>
 				</HStack>
@@ -49,4 +38,4 @@ const CheckoutSucces = () => {
 	);
 };
 
-export default CheckoutSucces;
+export default CheckoutFailure;

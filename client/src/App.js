@@ -10,8 +10,9 @@ import UserDashboard from "./components/UserDashboard";
 import Cart from "./components/Cart";
 import CheckoutSucces from "./components/CheckoutSucces";
 import Error404 from "./components/Error404";
-import PrivateRoute from "./auth/PrivateRoute";
+import ProtectedRoute from "./auth/PrivateRoute";
 import Favorites from "./components/Favorites";
+import CheckoutFailure from "./components/CheckoutFailure";
 
 function App() {
 	return (
@@ -22,13 +23,16 @@ function App() {
 				<Route path="/home" element={<Home />} />
 				<Route path="/create" element={<CreateProduct />} />
 				<Route path="/detail/:id" element={<Details />} />
-				<Route path="/dashboard" element={<PrivateRoute />}>
-					<Route index element={<UserDashboard />} />
-				</Route>
+				<Route
+					path="/dashboard"
+					element={<ProtectedRoute component={UserDashboard} />}
+				/>
+
 				<Route path="/cart" element={<Cart />} />
 				<Route path="/checkout-success" element={<CheckoutSucces />} />
-				<Route path="*" element={<Error404 />} />
+				<Route path="/checkout-failure" element={<CheckoutFailure />} />
 				<Route path="/favorites" element={<Favorites />} />
+				<Route path="*" element={<Error404 />} />
 			</Routes>
 		</div>
 	);
