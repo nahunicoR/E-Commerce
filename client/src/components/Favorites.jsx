@@ -17,10 +17,27 @@ export default function Favorites(display) {
   return (
     <>
     <Box>
+        <Link to={"/home"}>
+          < Button
+            colorScheme={"teal"}
+            marginTop={"10"}
+            marginLeft={"7"}
+            position={"absolute"}
+            right={"7"}
+          >
+            Volver
+          </Button>
+        </Link>
         <Container maxWidth={"50%"} background={"white"} >
           <Text fontSize={"1.5rem"} fontWeight={"bold"} textAlign={"center"} padding={"0.5rem"}>
             Bienvenido a Favoritos
           </Text>
+          { getFavorites.length === 0 &&
+            <Text fontSize={"1.5rem"} fontWeight={"bold"} textAlign={"center"} marginTop={"6.5rem"}>
+              Articulos favoritos vacio 
+            </Text>
+          }
+          
       {
         getFavorites && getFavorites.map((f, i) => {
           return(
