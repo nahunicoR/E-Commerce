@@ -12,6 +12,7 @@ import {
 import { BiSearch } from "react-icons/bi";
 import React from "react";
 
+
 function Filter({
 	handleFilterByCategory,
 	handleSortbyName,
@@ -22,14 +23,18 @@ function Filter({
 	input,
 }) {
 	return (
+        
 		<>
 			<GridItem gridArea={"filter"} /* rowSpan={3} colSpan={1} */>
 				<Box borderWidth="1px" borderRadius="lg" p={4}>
 					<Box paddingBottom={4}>
 						<HStack paddingBottom={5}>
+
+						
 							<Input
 								placeholder="Busqueda..."
 								name="search"
+								type="text"
 								value={input}
 								onChange={handleInputChange}
 								size={"md"}
