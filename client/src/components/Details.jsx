@@ -209,7 +209,7 @@ export default function Details(props) {
 						<Text marginLeft={"1.5rem"} fontSize={"1.5rem"} fontWeight={"bold"} marginTop={"1rem"}>
 							Opiniones del producto
 						</Text>
-						<Review />
+						<Review productId={productId} />
 					</Box>	
 				</Flex>
 			) : (

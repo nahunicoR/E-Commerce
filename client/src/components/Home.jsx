@@ -14,7 +14,7 @@ import {
 	getReviews
 } from "../redux/actions";
 import Filter from "./Filter";
-// import { AspectRatio } from "@chakra-ui/react";
+import { AspectRatio } from "@chakra-ui/react";
 
 export default function Home() {
 	//redux

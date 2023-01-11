@@ -79,10 +79,11 @@ export const getReviews = () => async (dispatch) => {
 			console.log(error)
 		}
 	};
-// 	export const postReview = (reviewInfo) => async (dispatch) => {
-// 		let post = await axios.post("/review", reviewInfo);
-// 		return post;
-// 	};
+
+export const postReview = (reviewInfo) => async (dispatch) => {
+	let post = await axios.post("/review", reviewInfo);
+	return post;
+};
 export const addFavorites = product => (dispatch) => {
 	return dispatch(addFavorite(product))
 };

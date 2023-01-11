@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useToast } from "@chakra-ui/react";
 import { postProducts } from "../redux/actions";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import styles from "../css/CreateProduct.module.css";
+import { Link } from 'react-router-dom';
+import { Button, Text } from "@chakra-ui/react";
 
 const validate = (form) => {
 	let errors = {};
@@ -19,6 +21,12 @@ const validate = (form) => {
 	if (!form.description) {
 		errors.description = "Este campo es Obligatorio";
 	}
+	if (!form.stock) {
+		errors.stock = "Este campo es Obligatorio";
+	}
+	if (form.stock < 1) {
+		errors.stock = "No se puede añadir un producto sin stock";
+	}
 	
 	// if (!form.image) {
 	// 	errors.image = 'Este campo es Obligatorio'
@@ -28,7 +36,7 @@ const validate = (form) => {
 
 export default function CreateProduct() {
 	const toast = useToast();
-	const navigate = useNavigate();
+	// const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const [image, setImage] = useState("");
 	const [button, setButton] = useState(true);
@@ -39,7 +47,7 @@ export default function CreateProduct() {
 		material: "",
 		description: "",
 		image: "",
-		stock: 0,
+		stock: "",
 	});
 	const [errors, setErrors] = useState({
 		title: "",
@@ -48,7 +56,7 @@ export default function CreateProduct() {
 		material: "",
 		description: "",
 		image: "",
-		stock: 0,
+		stock: "",
 	});
 
 	useEffect(() => {
@@ -57,7 +65,8 @@ export default function CreateProduct() {
 			form.price.length > 0 &&
 			form.category.length > 0 &&
 			form.material.length > 0 &&
-			form.description.length > 0
+			form.description.length > 0 &&
+			form.stock.length > 0
 		) {
 			setButton(false);
 		} else {
@@ -121,43 +130,45 @@ export default function CreateProduct() {
 			material: "",
 			description: "",
 			image: "",
-			stock: 0,
+			stock: "",
 		});
+			alert("Se creó un nuevo producto!")
+
 		//feedback de creación del producto y redirección a home.
 		toast({
 			status: "success",
 			title: `${form.title} ha sido agregado a la base de datos`,
 			isClosable: true,
 		});
-		setTimeout(() => {
-			navigate("/home");
-		}, 1300);
+		// setTimeout(() => {
+		// 	navigate("/home");
+		// }, 1300);
 	};
 
 	return (
 		<div className={`${styles.content}`}>
 			<form className={`${styles.formulario}`} onSubmit={handleSubmit}>
-				<h2>Crear Producto</h2>
+				<Text marginLeft={"1.5rem"} fontSize={"1.5rem"} fontWeight={"bold"} marginTop={"1rem"}>Crear Producto</Text>
 				<div>
-					{/* <label>Nombre del Producto: </label> */}
+					{/* <label>Nombre del Producto </label> */}
 					<input
 						type="text"
 						value={form.title}
 						name="title"
 						onChange={handleChange}
-						placeholder="Nombre del Producto:"
+						placeholder="Nombre del Producto"
 					/>
 					<p>{errors.title && errors.title}</p>
 				</div>
 
 				<div>
-					{/* <label>Precio: </label> */}
+					{/* <label>Precio </label> */}
 					<input
 						type="number"
 						value={form.price}
 						name="price"
 						onChange={handleChange}
-						placeholder="Precio: "
+						placeholder="Precio"
 					/>
 					<p>{errors.price && errors.price}</p>
 				</div>
@@ -227,10 +238,23 @@ export default function CreateProduct() {
 					</div>
 					
 				</div>
+				<div>
+					<input
+						type="number"
+						value={form.stock}
+						name="stock"
+						onChange={handleChange}
+						placeholder="Stock "
+						/>
+						<p>{errors.stock && errors.stock}</p>
+				</div>
 
 				<button type="submit" disabled={button}>
-					Crear Producto
+					Cargar
 				</button>
+				<Link to='/home'>
+                   <Button>Volver</Button>
+                </Link>
 			</form>
 		</div>
 	);
