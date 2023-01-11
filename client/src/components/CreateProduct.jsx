@@ -19,7 +19,7 @@ const validate = (form) => {
 	if (!form.description) {
 		errors.description = "Este campo es Obligatorio";
 	}
-	
+
 	// if (!form.image) {
 	// 	errors.image = 'Este campo es Obligatorio'
 	// }
@@ -225,7 +225,6 @@ export default function CreateProduct() {
 							<h4>Cargar imagen...</h4>
 						)}
 					</div>
-					
 				</div>
 
 				<button type="submit" disabled={button}>

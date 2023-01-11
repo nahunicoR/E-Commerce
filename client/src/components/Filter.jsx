@@ -8,11 +8,15 @@ import {
 	Radio,
 	Stack,
 	RadioGroup,
+	Button,
+	Flex,
 } from "@chakra-ui/react";
 import { BiSearch } from "react-icons/bi";
 import React from "react";
 
 function Filter({
+	filters,
+	handleCleanFilter,
 	handleFilterByCategory,
 	handleSortbyName,
 	handleSortbyPrice,
@@ -21,6 +25,13 @@ function Filter({
 	handleSearch,
 	input,
 }) {
+	const checkFilter =
+		filters.category !== "" ||
+		filters.material !== "" ||
+		filters.nameFilter !== ""
+			? true
+			: false;
+
 	return (
 		<>
 			<GridItem gridArea={"filter"} /* rowSpan={3} colSpan={1} */>
@@ -115,6 +126,16 @@ function Filter({
 							</Stack>
 						</RadioGroup>
 					</Stack>
+					<Flex py={5} w={"100%"} justifyContent={"center"}>
+						<Button
+							disabled={!checkFilter}
+							onClick={handleCleanFilter}
+							w={"100%"}
+							colorScheme={"teal"}
+						>
+							Limpiar Filtros
+						</Button>
+					</Flex>
 				</Box>
 			</GridItem>
 		</>

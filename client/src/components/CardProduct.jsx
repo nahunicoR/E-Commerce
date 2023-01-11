@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
 	GridItem,
 	Heading,
@@ -11,15 +11,19 @@ import {
 	Divider,
 	HStack,
 	IconButton,
-	 useToast, 
+	useToast,
 } from "@chakra-ui/react";
 import { Card, CardBody, CardFooter } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { addFavorites, addProductsCart } from "../redux/actions";
+import {
+	addFavorites,
+	addProductsCart,
+	deleteFavorites,
+} from "../redux/actions";
 /* import { useAuth0 } from "@auth0/auth0-react"; */
 import Rating from "./Rating";
-import { FaHeart } from "react-icons/fa"
+import { FaHeart } from "react-icons/fa";
 
 export default function CardProduct({
 	id,
@@ -32,7 +36,17 @@ export default function CardProduct({
 }) {
 	/* const { isAuthenticated } = useAuth0(); */
 	const toast = useToast();
+	const [liked, setLiked] = useState(false);
 	const dispatch = useDispatch();
+
+	const handleLike = () => {
+		if (liked) {
+			dispatch(deleteFavorites(product));
+		} else {
+			dispatch(addFavorites(product));
+		}
+		setLiked(!liked);
+	};
 	return (
 		<>
 			<GridItem /* colSpan={1} */ gridArea={"card"}>
@@ -48,15 +62,15 @@ export default function CardProduct({
 					/* overflow={"hidden"} */
 				>
 					<CardBody position={"relative"}>
-					<IconButton
-							onClick={()=> dispatch(addFavorites(product))}
-							// color={liked ? "red.400" : null}
-							color={"teal"}
+						<IconButton
+							onClick={handleLike}
+							color={liked ? "red.400" : "gray.500"}
 							icon={<FaHeart />}
 							margin="0 15px"
 							position={"absolute"}
 							right={0}
-							/>
+							variant={"ghost"}
+						/>
 						<Flex
 							borderRadius={"lg"}
 							h={"220"}
@@ -84,12 +98,10 @@ export default function CardProduct({
 							{/* <Text size={"sm"}>{description}</Text> */}
 							<HStack gap={"0.5rem"}>
 								<Tag w={"fit-content"}>{category}</Tag>
-								<Tag colorScheme={"teal"} variant={"outline"} w={"fit-content"} >
+								<Tag colorScheme={"teal"} variant={"outline"} w={"fit-content"}>
 									{material}
 								</Tag>
-								<Rating
-								productId={id}
-								size={"1.2rem"} />
+								<Rating productId={id} size={"1.2rem"} />
 							</HStack>
 						</Stack>
 					</CardBody>

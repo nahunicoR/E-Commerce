@@ -11,7 +11,7 @@ import {
 	filterByCategory,
 	filterByMaterials,
 	searchProduct,
-	getReviews
+	getReviews,
 } from "../redux/actions";
 import Filter from "./Filter";
 import { AspectRatio } from "@chakra-ui/react";
@@ -23,6 +23,11 @@ export default function Home() {
 	//change
 	const [loading, setLoading] = useState(true);
 	//console.log(products);
+	const [filters, setFilters] = useState({
+		nameFilter: "",
+		category: "",
+		material: "",
+	});
 
 	//Logica de paginaton
 	const [currentPage, setCurrentPage] = useState(1);
@@ -69,26 +74,36 @@ export default function Home() {
 	//logica de checkBoxes
 	const handleSortbyName = (e) => {
 		dispatch(orderByNames(e.target.value));
+		setFilters({ ...filters, nameFilter: e.target.value });
 		setCurrentPage(1);
 	};
 	const handleFilterByCategory = (e) => {
 		console.log(e.target.value);
 		dispatch(filterByCategory(e.target.value));
+		setFilters({ ...filters, category: e.target.value });
 		setCurrentPage(1);
 	};
 	const handleSortbyPrice = (e) => {
 		dispatch(orderByPrices(e.target.value));
+		setFilters({ ...filters, nameFilter: e.target.value });
 		setCurrentPage(1);
 	};
 	const handleFilterByMaterial = (e) => {
 		console.log(e.target.value);
 		dispatch(filterByMaterials(e.target.value));
+		setFilters({ ...filters, material: e.target.value });
 		setCurrentPage(1);
+	};
+	const handleCleanFilter = () => {
+		dispatch(filterByMaterials("all"));
+		dispatch(filterByCategory("all"));
+		dispatch(orderByNames("A-Z"));
+		setFilters({ nameFilter: "", category: "", material: "" });
 	};
 	//info de nuestra db https://e-commerce-production-d476.up.railway.app/products
 	useEffect(() => {
 		dispatch(getProducts());
-		dispatch(getReviews(0))
+		dispatch(getReviews(0));
 		setTimeout(() => {
 			setLoading(false);
 		}, 800);
@@ -101,7 +116,7 @@ export default function Home() {
 				gridTemplateRows="repeat(4,1fr)"
 				gridTemplateColumns="repeat(4,1fr)"
 				gridTemplateAreas={
-					'"filter card card card" "filter card card card" "map card card card" ". pag pag pag" '
+					'"filter card card card" "filter card card card" " filter card card card" ". pag pag pag" ". map map ."'
 				}
 				rowGap={"10"}
 				padding="10"
@@ -135,6 +150,8 @@ export default function Home() {
 				{/*dejo el filtro de abajo ya que soluciona por ahora la paginación automaticamente*/}
 
 				<Filter
+					filters={filters}
+					handleCleanFilter={handleCleanFilter}
 					handleFilterByCategory={handleFilterByCategory}
 					handleSortbyName={handleSortbyName}
 					handleSortbyPrice={handleSortbyPrice}

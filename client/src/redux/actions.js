@@ -11,16 +11,16 @@ import {
 	deleteQuantity,
 	reviews,
 	addFavorite,
-	deleteFavorite
+	deleteFavorite,
 } from "./reducer";
 import axios from "axios";
 
 export const getProducts = () => async (dispatch) => {
-	let products = await axios.get("/products")
+	let products = await axios.get("/products");
 	try {
-		return dispatch(getAllProducts(products.data))
+		return dispatch(getAllProducts(products.data));
 	} catch (error) {
-		console.log(error)
+		console.log(error);
 	}
 };
 
@@ -71,23 +71,21 @@ export const deleteQuantityCard = (product) => (dispatch) => {
 	return dispatch(deleteQuantity(product));
 };
 export const getReviews = (id) => async (dispatch) => {
-		let reviewsResponse = await axios.get(`/reviews/${id}`)
-		console.log(reviewsResponse)
-		try {
-			return dispatch(reviews(reviewsResponse.data))
-		} catch (error) {
-			console.log(error)
-		}
-	};
+	let reviewsResponse = await axios.get(`/reviews/${id}`);
+	console.log(reviewsResponse);
+	try {
+		return dispatch(reviews(reviewsResponse.data));
+	} catch (error) {
+		console.log(error);
+	}
+};
 // 	export const postReview = (reviewInfo) => async (dispatch) => {
 // 		let post = await axios.post("/review", reviewInfo);
 // 		return post;
 // 	};
-export const addFavorites = product => (dispatch) => {
-	return dispatch(addFavorite(product))
+export const addFavorites = (product) => (dispatch) => {
+	return dispatch(addFavorite(product));
 };
-export const deleteFavorites = product => (dispatch) => {
-	return dispatch(deleteFavorite(product))
+export const deleteFavorites = (product) => (dispatch) => {
+	return dispatch(deleteFavorite(product));
 };
-
-
