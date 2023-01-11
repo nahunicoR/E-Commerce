@@ -1,27 +1,28 @@
-import React,{useState} from "react";
+import React,{useEffect, useState} from "react";
 import { FaStar } from "react-icons/fa";
 import { Button , useToast, Input} from "@chakra-ui/react";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { postReview } from "../redux/actions";
+import { getUser } from "../redux/user";
 const colors = {
     orange: "#FFBA5A",
     grey: "#a9a9a9"
 }
 
-const validate = (description, rating) => {
+const validate = (input, currentValue) => {
 	let errors = {};
-	if (!description) {
+	if (input.description) {
 		errors.description = "Este campo es Obligatorio.";
     }else {
-        if(description.length > 250){
+        if(input.description.length > 250){
             errors.description = "Solo se permiten hasta 250 caracteres!"
     }
-    if(rating === null){
+    if(currentValue === null){
         errors.rating = "Éste campo es requerido."
     }
-    else if(rating < 1 || rating > 5 || rating === 0){
-        errors.rating = "La calificación debe estar entre 1 y 5 estrellas.."
+    else if(currentValue < 1 || currentValue > 5 || currentValue === 0){
+        errors.currentValue = "La calificación debe estar entre 1 y 5 estrellas.."
     }
 }
     return errors;
@@ -29,29 +30,43 @@ const validate = (description, rating) => {
 
 function ReviewCharge({productId}){
     const dispatch = useDispatch();
-
     const stars = Array(5).fill(0);
-    const { isAuthenticated, user } = useAuth0();
+    const user = useSelector((state)=> state.user)
+    const toast = useToast();
+    const {isAuthenticated} = useAuth0();
     const [currentValue, setCurrentValue] = useState(0);
     const [hoverValue, setHoverValue] = useState(undefined);
-    const [description, setDescription] = useState('');
-    const [errors, setErrors] = useState({
-        rating: "",
-        description: "",
-    });
-    const toast = useToast();
-    
-    const review = {
+    const [input , setInput] = useState({
         userEmail: user.email,
-        productId: productId,
-        rating: currentValue,
-        description: description
-    }
-    console.log(review.description)
+        description: "",
+        productId: productId.id
+    });
 
-    const handleDescription = e =>{
-        console.log(e.target.value)
-        setDescription(e.target.value)
+    const review = {
+        input,
+        currentValue
+    }
+
+    const [errors, setErrors] = useState({
+        description: "",
+        currentValue:""
+    });
+
+    useEffect(()=>{
+        dispatch(getUser())
+    },[dispatch]);
+
+    const handleInput = e =>{
+        setInput({
+            ...input,
+            [e.target.name]:e.target.value
+        });
+        setErrors(
+            validate({
+                ...input,
+                [e.target.name]:e.target.value
+            })
+        );
     }
 
     const handleClick = value => {
@@ -69,13 +84,12 @@ function ReviewCharge({productId}){
 
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        dispatch(postReview(review));
-        setCurrentValue(0);
-        setDescription("");
-
-    }
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     dispatch(postReview(review));
+    //     setCurrentValue(0);
+    //     setDescription("");
+    // }
 
     return (
         <div style={styles.container}>
@@ -97,14 +111,41 @@ function ReviewCharge({productId}){
                         />
                     )
                 })}
+                <p>{errors.currentValue && errors.currentValue}</p>
 
             </div>
             <div style={styles.containerT}>
-            <Input type='text' name='description' size='lg' value={description} placeholder='Cuentanos tu opinión..' onChange={handleDescription}/>
+                <Input 
+                    type='text' 
+                    name='description' 
+                    size='lg' 
+                    value={input.description} 
+                    placeholder='Cuentanos tu opinión..' 
+                    onChange={handleInput}/>
+                    <p>{errors.description && errors.description}</p>
             </div>
                 <Button
-                    onClick={(e) => handleSubmit(e)}
-                    type="submit"
+                    onClick={
+                        isAuthenticated
+                            ? () => {
+                                dispatch(postReview(review))
+                                .then((res)=> res.data)
+                                .catch((err)=> console.log(err))
+                                    toast({
+                                        status: "success",
+                                        title: `${user} has creado un nuevo comentario de ${productId}!`,
+                                        isClosable: true,
+                                    });
+                                }
+                            : () => {
+                                    toast({
+                                        title: "Primero inicie sesión",
+                                        position: "bottom",
+                                        status: "info",
+                                        isClosable: true,
+                                    });
+                                }
+                    }
                     w={"40%"}
                     colorScheme={"teal"}
                 >
