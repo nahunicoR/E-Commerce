@@ -227,7 +227,7 @@ export default function Details(props) {
 						>
 							Opiniones del producto
 						</Text>
-						<Review productId={id} />
+						<Review productId={productId} />
 					</Box>	
 				</Flex>
 			) : (

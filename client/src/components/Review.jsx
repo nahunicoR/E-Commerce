@@ -4,7 +4,7 @@ import { Text, Stack, Box } from "@chakra-ui/react"
 import Rating from './Rating';
 import ReviewCharge from './ReviewCharge';
 
-function Review() {
+function Review({productId}) {
   const reviews = useSelector(state => state.products.reviews)
   return (
     <div>
@@ -21,7 +21,7 @@ function Review() {
             </div>          
           );
         })}
-        <ReviewCharge />
+        <ReviewCharge productId={productId}/>
     </div>
   );
 }
