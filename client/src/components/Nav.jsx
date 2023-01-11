@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
 	Flex,
 	Heading,
@@ -12,11 +12,21 @@ import { AiOutlinePoweroff } from "react-icons/ai";
 import logo from "../assets/LogoTo-Mate.png";
 import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { MdOutlineFavoriteBorder, MdOutlineFavorite } from "react-icons/md"
+import { getUseremail, postUser } from "../redux/actions";
+
 
 export default function Nav() {
 	const { loginWithRedirect, isAuthenticated, user, logout } = useAuth0();
+	const dispatch = useDispatch();
+	useEffect(() => {
+		if (isAuthenticated) {
+			dispatch( postUser(user) )
+			dispatch( getUseremail(user.email) )
+		}
+	}, [isAuthenticated, dispatch, user])
+	
 	const QuantityOfProduct = useSelector((state) => state.products.cart);
 	const QuantityFavorites = useSelector((state) => state.products.favorites);
 	let topCenter = 4;
