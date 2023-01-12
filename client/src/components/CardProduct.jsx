@@ -38,6 +38,7 @@ export default function CardProduct({
 	const chooseFavorites = favorites.find(f => f.id === id )
 	return (
 		<>
+		<Link to={`/detail/${id}`}></Link>
 			<GridItem /* colSpan={1} */ gridArea={"card"}>
 				<Card
 					transition={"0.2s"}
@@ -50,6 +51,8 @@ export default function CardProduct({
 					margin={"auto"}
 					/* overflow={"hidden"} */
 				>
+						<Link to={`/detail/${id}`}>	
+
 					<CardBody position={"relative"}>
 					<IconButton
 							onClick={()=> !chooseFavorites ? dispatch(addFavorites(product)) : dispatch(deleteFavorites(product))}
@@ -67,6 +70,7 @@ export default function CardProduct({
 							justifyContent={"center"}
 							alignItems={"center"}
 						>
+							
 							<Image
 								src={img}
 								alt="product show"
@@ -96,6 +100,7 @@ export default function CardProduct({
 							</HStack>
 						</Stack>
 					</CardBody>
+					</Link>
 					<Divider />
 					<CardFooter alignItems={"center"}>
 						<Text marginRight={"13"} color="teal" fontSize="3xl">
