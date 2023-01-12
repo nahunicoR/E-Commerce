@@ -16,6 +16,9 @@ const createReview = require('./createReview');
 const updateReview = require('./updateReview');
 const deleteReview = require('./deleteReview');
 
+const login = require('../middlewares/login.js');
+const admin = require('../middlewares/admin');
+
 
 /* Para usuarios 
    Author: Alejandro Téllez
@@ -132,9 +135,13 @@ const mercadoPago = require('./mercadopago');
 
 router.use('/', mercadoPago);
 
-const review = require("./createReview");
-router.use("/reviews", review)
+// const review = require("./createReview");
+// router.use("/reviews", review)
 
+/**Authorization */
+router.get("/authorization", login, admin, (req, res)=>{
+    res.json({message: "authorized"});
+  })
 
 router.get('/', async (req,res,next) => {
     res.json([
