@@ -6,6 +6,7 @@ import {
 	Image,
 	Text,
 	IconButton,
+	useColorMode
 } from "@chakra-ui/react";
 import { FaUser, FaShoppingCart } from "react-icons/fa";
 import { AiOutlinePoweroff } from "react-icons/ai";
@@ -18,6 +19,7 @@ import { getUseremail, postUser } from "../redux/actions";
 
 
 export default function Nav() {
+	const { colorMode, toggleColorMode } = useColorMode();
 	const { loginWithRedirect, isAuthenticated, user, logout } = useAuth0();
 	const dispatch = useDispatch();
 	useEffect(() => {
@@ -61,6 +63,9 @@ export default function Nav() {
 				</Flex>
 
 				<Flex justifyContent={"space-evenly"} w={"25%"}>
+					<Button bg={"gray"} onClick={toggleColorMode}>
+							 {colorMode === "dark" ? "light" : "dark"} mode
+					</Button>
 					<Button fontSize={"lg"} color={"white"} variant="link">
 						<Link to={"/create"}>Crear Producto</Link>
 					</Button>
@@ -81,6 +86,7 @@ export default function Nav() {
 							"Iniciar Sesion"
 						)}
 					</Button>
+
 
 					{isAuthenticated ? (
 						<IconButton
