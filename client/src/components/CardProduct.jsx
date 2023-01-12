@@ -77,7 +77,6 @@ export default function CardProduct({
 								width={"100%"}
 								objectFit={"contain"}
 							/>
-							
 						</Flex>
 						<Stack spacing={"3"}>
 							<Heading
@@ -97,19 +96,15 @@ export default function CardProduct({
 								<Rating
 								productId={id}
 								size={"1.2rem"} />
-								
 							</HStack>
-							
 						</Stack>
 						</Link>
 					</CardBody>
-					
 					<Divider />
 					<CardFooter alignItems={"center"}>
 						<Text marginRight={"13"} color="teal" fontSize="3xl">
 							{"$" + price}
 						</Text>
-
 						<Link to={`/detail/${id}`}>
 							<Button size={"md"} colorScheme={"teal"}>
 								Detalle
