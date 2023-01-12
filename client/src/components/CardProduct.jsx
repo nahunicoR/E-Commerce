@@ -48,7 +48,6 @@ export default function CardProduct({
 					margin={"auto"}
 					/* overflow={"hidden"} */
 				>
-						<Link to={`/detail/${id}`}>	
 
 					<CardBody position={"relative"}>
 					<IconButton
@@ -60,6 +59,7 @@ export default function CardProduct({
 							position={"absolute"}
 							right={0}
 							/>
+							<Link to={`/detail/${id}`}>	
 						<Flex
 							borderRadius={"lg"}
 							h={"220"}
@@ -67,7 +67,6 @@ export default function CardProduct({
 							justifyContent={"center"}
 							alignItems={"center"}
 						>
-							
 							<Image
 								src={img}
 								alt="product show"
@@ -76,6 +75,7 @@ export default function CardProduct({
 								objectFit={"contain"}
 							/>
 						</Flex>
+							</Link>
 						<Stack spacing={"3"}>
 							<Heading
 								whiteSpace={"nowrap"}
@@ -97,7 +97,6 @@ export default function CardProduct({
 							</HStack>
 						</Stack>
 					</CardBody>
-					</Link>
 					<Divider />
 					<CardFooter alignItems={"center"}>
 						<Text marginRight={"13"} color="teal" fontSize="3xl">
