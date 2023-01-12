@@ -40,7 +40,6 @@ export default function CardProduct({
 		<>
 		
 			<GridItem /* colSpan={1} */ gridArea={"card"}>
-			
 				<Card
 					transition={"0.2s"}
 					h={"400"}
@@ -52,9 +51,6 @@ export default function CardProduct({
 					margin={"auto"}
 					/* overflow={"hidden"} */
 				>
-					
-						
-
 					<CardBody position={"relative"}>
 					<IconButton
 							onClick={()=> !chooseFavorites ? dispatch(addFavorites(product)) : dispatch(deleteFavorites(product))}
@@ -74,7 +70,6 @@ export default function CardProduct({
 							justifyContent={"center"}
 							alignItems={"center"}
 						>
-							
 							<Image
 								src={img}
 								alt="product show"
