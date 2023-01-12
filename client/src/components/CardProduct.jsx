@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
 	GridItem,
 	Heading,
@@ -37,7 +37,7 @@ export default function CardProduct({
 }) {
 	/* const { isAuthenticated } = useAuth0(); */
 	const toast = useToast();
-	const [liked, setLiked] = useState(false);
+	//const [liked, setLiked] = useState(false);
 	const dispatch = useDispatch();
 	const favorites = useSelector((state) => state.products.favorites);
 	const chooseFavorites = favorites.find((f) => f.id === id);
