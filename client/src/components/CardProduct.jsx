@@ -38,6 +38,7 @@ export default function CardProduct({
 	const chooseFavorites = favorites.find(f => f.id === id )
 	return (
 		<>
+		
 			<GridItem /* colSpan={1} */ gridArea={"card"}>
 				<Card
 					transition={"0.2s"}
@@ -60,6 +61,8 @@ export default function CardProduct({
 							position={"absolute"}
 							right={0}
 							/>
+						<Link to={`/detail/${id}`}>	
+							
 						<Flex
 							borderRadius={"lg"}
 							h={"220"}
@@ -95,13 +98,13 @@ export default function CardProduct({
 								size={"1.2rem"} />
 							</HStack>
 						</Stack>
+						</Link>
 					</CardBody>
 					<Divider />
 					<CardFooter alignItems={"center"}>
 						<Text marginRight={"13"} color="teal" fontSize="3xl">
 							{"$" + price}
 						</Text>
-
 						<Link to={`/detail/${id}`}>
 							<Button size={"md"} colorScheme={"teal"}>
 								Detalle
