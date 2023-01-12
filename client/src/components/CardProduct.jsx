@@ -38,8 +38,9 @@ export default function CardProduct({
 	const chooseFavorites = favorites.find(f => f.id === id )
 	return (
 		<>
-		<Link to={`/detail/${id}`}></Link>
+		
 			<GridItem /* colSpan={1} */ gridArea={"card"}>
+			
 				<Card
 					transition={"0.2s"}
 					h={"400"}
@@ -51,7 +52,8 @@ export default function CardProduct({
 					margin={"auto"}
 					/* overflow={"hidden"} */
 				>
-						<Link to={`/detail/${id}`}>	
+					
+						
 
 					<CardBody position={"relative"}>
 					<IconButton
@@ -63,6 +65,8 @@ export default function CardProduct({
 							position={"absolute"}
 							right={0}
 							/>
+						<Link to={`/detail/${id}`}>	
+							
 						<Flex
 							borderRadius={"lg"}
 							h={"220"}
@@ -78,6 +82,7 @@ export default function CardProduct({
 								width={"100%"}
 								objectFit={"contain"}
 							/>
+							
 						</Flex>
 						<Stack spacing={"3"}>
 							<Heading
@@ -97,10 +102,13 @@ export default function CardProduct({
 								<Rating
 								productId={id}
 								size={"1.2rem"} />
+								
 							</HStack>
+							
 						</Stack>
+						</Link>
 					</CardBody>
-					</Link>
+					
 					<Divider />
 					<CardFooter alignItems={"center"}>
 						<Text marginRight={"13"} color="teal" fontSize="3xl">
