@@ -6,6 +6,9 @@ import { store } from "./redux/store";
 import { BrowserRouter as Router } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";
 import axios from "axios";
+//import { StrictMode } from "react";
+import  MyTheme  from "./components/MyTheme";
+import { ColorModeScript } from "@chakra-ui/react";
 
 import Auth0ProviderWithHistory from "./auth/auth0-provider-with-history";
 
@@ -19,7 +22,8 @@ root.render(
 	<React.StrictMode>
 		<Router>
 			<Auth0ProviderWithHistory>
-				<ChakraProvider>
+			<ColorModeScript initialColorMode={MyTheme.config.initialColorMode} />
+				<ChakraProvider theme={MyTheme}>
 					<Provider store={store}>
 						<App />
 					</Provider>

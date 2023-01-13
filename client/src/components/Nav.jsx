@@ -6,6 +6,7 @@ import {
 	Image,
 	Text,
 	IconButton,
+	//useColorMode,
 } from "@chakra-ui/react";
 import { FaUser, FaShoppingCart } from "react-icons/fa";
 import { AiOutlinePoweroff } from "react-icons/ai";
@@ -18,10 +19,10 @@ import { getUseremail, postUser } from "../redux/actions";
 import axios from "axios";
 
 export default function Nav() {
+	//const { colorMode, toggleColorMode } = useColorMode();
 	const { loginWithRedirect, isAuthenticated, user, logout } = useAuth0();
 	const [admin, setAdmin] = useState({});
 	const dispatch = useDispatch();
-	//const [auth, setAuth] = useState(false)
 
 	useEffect(() => {
 		if (isAuthenticated) {
@@ -97,9 +98,10 @@ export default function Nav() {
 
 					{isAuthenticated ? (
 						<IconButton
-							fontSize={"lg"}
+							fontSize={"2xl"}
 							rounded={"full"}
-							colorScheme={"red"}
+							variant={"ghost"}
+							color={"orange.400"}
 							icon={<AiOutlinePoweroff />}
 							onClick={() =>
 								logout({ returnTo: window.location.origin + "/home" })

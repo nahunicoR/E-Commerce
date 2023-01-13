@@ -70,6 +70,8 @@ export default function CardProduct({
 							right={0}
 							variant={"ghost"}
 						/>
+						<Link to={`/detail/${id}`} />
+
 						<Flex
 							borderRadius={"lg"}
 							h={"220"}
@@ -109,7 +111,6 @@ export default function CardProduct({
 						<Text marginRight={"13"} color="teal" fontSize="3xl">
 							{"$" + price}
 						</Text>
-
 						<Link to={`/detail/${id}`}>
 							<Button size={"md"} colorScheme={"teal"}>
 								Detalle

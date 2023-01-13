@@ -4,7 +4,7 @@ import { useToast } from "@chakra-ui/react";
 import { postProducts } from "../redux/actions";
 
 import styles from "../css/CreateProduct.module.css";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Button, Text } from "@chakra-ui/react";
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
