@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useToast } from "@chakra-ui/react";
 import { postProducts } from "../redux/actions";
-// import { useNavigate } from "react-router-dom";
+
 import styles from "../css/CreateProduct.module.css";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { Button, Text } from "@chakra-ui/react";
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
@@ -38,7 +38,7 @@ const validate = (form) => {
 
 export default function CreateProduct() {
 	const toast = useToast();
-	// const navigate = useNavigate();
+
 	const { user } = useAuth0();
 	const dispatch = useDispatch();
 	const [image, setImage] = useState("");
@@ -71,7 +71,7 @@ export default function CreateProduct() {
 			form.material.length > 0 &&
 			form.description.length > 0 &&
 			form.stock.length > 0 &&
-			admin.rol === "admin"
+			admin?.rol === "admin"
 		) {
 			setButton(false);
 		} else {
@@ -80,7 +80,7 @@ export default function CreateProduct() {
 	}, [form, setButton, admin]);
 
 	useEffect(() => {
-		axios(`/user/one?mail=${user.email}`).then((res) => {
+		axios(`/user/one?mail=${user?.email}`).then((res) => {
 			console.log(res.data);
 			setAdmin(res.data);
 		});
@@ -158,123 +158,129 @@ export default function CreateProduct() {
 	};
 
 	return (
-		<div className={`${styles.content}`}>
-			<form className={`${styles.formulario}`} onSubmit={handleSubmit}>
-				<Text
-					marginLeft={"1.5rem"}
-					fontSize={"1.5rem"}
-					fontWeight={"bold"}
-					marginTop={"1rem"}
-				>
-					Crear Producto
-				</Text>
-				<div>
-					{/* <label>Nombre del Producto </label> */}
-					<input
-						type="text"
-						value={form.title}
-						name="title"
-						onChange={handleChange}
-						placeholder="Nombre del Producto"
-					/>
-					<p>{errors.title && errors.title}</p>
-				</div>
-
-				<div>
-					{/* <label>Precio </label> */}
-					<input
-						type="number"
-						value={form.price}
-						name="price"
-						onChange={handleChange}
-						placeholder="Precio"
-					/>
-					<p>{errors.price && errors.price}</p>
-				</div>
-
-				<div className={`${styles.selects}`}>
-					<div>
-						{/* <label>Categoria: </label> */}
-						<select
-							name="category"
-							onChange={handleSelectCategory}
-							defaultValue="categoria"
+		<>
+			{admin.rol !== "admin" ? (
+				<Navigate to="/home" />
+			) : (
+				<div className={`${styles.content}`}>
+					<form className={`${styles.formulario}`} onSubmit={handleSubmit}>
+						<Text
+							marginLeft={"1.5rem"}
+							fontSize={"1.5rem"}
+							fontWeight={"bold"}
+							marginTop={"1rem"}
 						>
-							<option disabled value="categoria">
-								Seleccionar Categoria
-							</option>
-							<option value="Bombilla">Bombilla</option>
-							<option value="Kit">Kit</option>
-							<option value="Mate">Mate</option>
-							<option value="Yerba">Yerba</option>
-						</select>
-						{/* <label>Material: </label> */}
-						<select
-							name="material"
-							onChange={handleSelectMaterial}
-							defaultValue="material"
-						>
-							<option disabled value="material">
-								Seleccionar Material
-							</option>
-							<option value="Artesanal">Artesanal</option>
-							<option value="Industrial">Industrial</option>
-							<option value="Sintetico">Sintetico</option>
-						</select>
-					</div>
-				</div>
-
-				<div>
-					<label>Descripcion: </label>
-					<textarea
-						value={form.description}
-						name="description"
-						onChange={handleChange}
-					/>
-					<p>{errors.description && errors.description}</p>
-				</div>
-
-				<div className={`${styles.image}`}>
-					<label>Imagen </label>
-					<input
-						hidden
-						type="text"
-						value={(form.image = image)}
-						name="image"
-						onChange={handleChange}
-					/>
-					<input type="file" onChange={uploadImage} placeholder="Imagen" />
-					<div>
-						{image ? (
-							<img
-								alt="test"
-								src={image}
-								style={{ width: "190px", height: "auto" }}
+							Crear Producto
+						</Text>
+						<div>
+							{/* <label>Nombre del Producto </label> */}
+							<input
+								type="text"
+								value={form.title}
+								name="title"
+								onChange={handleChange}
+								placeholder="Nombre del Producto"
 							/>
-						) : (
-							<h4>Cargar imagen...</h4>
-						)}
-					</div>
-				</div>
-				<div>
-					<input
-						type="number"
-						value={form.stock}
-						name="stock"
-						onChange={handleChange}
-						placeholder="Stock "
-					/>
-					<p>{errors.stock && errors.stock}</p>
-				</div>
+							<p>{errors.title && errors.title}</p>
+						</div>
 
-				<button type="submit" disabled={button}>
-					Cargar
-				</button>
-				<Link to="/home">
-					<Button>Volver</Button>
-				</Link>
-			</form>
-		</div>
+						<div>
+							{/* <label>Precio </label> */}
+							<input
+								type="number"
+								value={form.price}
+								name="price"
+								onChange={handleChange}
+								placeholder="Precio"
+							/>
+							<p>{errors.price && errors.price}</p>
+						</div>
+
+						<div className={`${styles.selects}`}>
+							<div>
+								{/* <label>Categoria: </label> */}
+								<select
+									name="category"
+									onChange={handleSelectCategory}
+									defaultValue="categoria"
+								>
+									<option disabled value="categoria">
+										Seleccionar Categoria
+									</option>
+									<option value="Bombilla">Bombilla</option>
+									<option value="Kit">Kit</option>
+									<option value="Mate">Mate</option>
+									<option value="Yerba">Yerba</option>
+								</select>
+								{/* <label>Material: </label> */}
+								<select
+									name="material"
+									onChange={handleSelectMaterial}
+									defaultValue="material"
+								>
+									<option disabled value="material">
+										Seleccionar Material
+									</option>
+									<option value="Artesanal">Artesanal</option>
+									<option value="Industrial">Industrial</option>
+									<option value="Sintetico">Sintetico</option>
+								</select>
+							</div>
+						</div>
+
+						<div>
+							<label>Descripcion: </label>
+							<textarea
+								value={form.description}
+								name="description"
+								onChange={handleChange}
+							/>
+							<p>{errors.description && errors.description}</p>
+						</div>
+
+						<div className={`${styles.image}`}>
+							<label>Imagen </label>
+							<input
+								hidden
+								type="text"
+								value={(form.image = image)}
+								name="image"
+								onChange={handleChange}
+							/>
+							<input type="file" onChange={uploadImage} placeholder="Imagen" />
+							<div>
+								{image ? (
+									<img
+										alt="test"
+										src={image}
+										style={{ width: "190px", height: "auto" }}
+									/>
+								) : (
+									<h4>Cargar imagen...</h4>
+								)}
+							</div>
+						</div>
+						<div>
+							<input
+								type="number"
+								value={form.stock}
+								name="stock"
+								onChange={handleChange}
+								placeholder="Stock "
+							/>
+							<p>{errors.stock && errors.stock}</p>
+						</div>
+
+						<button type="submit" disabled={button}>
+							Cargar
+						</button>
+						<Link to="/home">
+							<Button>Volver</Button>
+						</Link>
+					</form>
+				</div>
+			)}
+		</>
 	);
 }
 
