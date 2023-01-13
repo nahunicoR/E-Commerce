@@ -6,7 +6,6 @@ const Auth0ProviderWithHistory = ({ children }) => {
 	const navigate = useNavigate();
 	const domain = process.env.REACT_APP_AUTH0_DOMAIN;
 	const clientId = process.env.REACT_APP_AUTH0_CLIENTID;
-	/* const audience = process.env.REACT_APP_AUTH0_AUDIENCE; */
 
 	const onRedirectCallback = (appState) => {
 		navigate((appState && appState.returnTo) || window.location.pathname);
