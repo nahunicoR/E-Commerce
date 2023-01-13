@@ -115,11 +115,11 @@ export default function CardProduct({
 						<Text marginRight={"13"} color="teal" fontSize="3xl">
 							{"$" + price}
 						</Text>
-						<Link to={`/detail/${id}`}>
+						{/* <Link to={`/detail/${id}`}>
 							<Button size={"md"} colorScheme={"teal"}>
 								Detalle
 							</Button>
-						</Link>
+						</Link> */}
 						<Button
 							size={"md"}
 							colorScheme={"teal"}
