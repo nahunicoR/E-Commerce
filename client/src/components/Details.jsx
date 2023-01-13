@@ -60,7 +60,7 @@ export default function Details(props) {
 	};
 
 	useEffect(() => {
-		dispatch(getReviews(id))
+		dispatch(getReviews(id));
 		dispatch(getDetails(id));
 		setTimeout(() => {
 			setLoading(false);
@@ -228,7 +228,7 @@ export default function Details(props) {
 							Opiniones del producto
 						</Text>
 						<Review productId={productId} />
-					</Box>	
+					</Box>
 				</Flex>
 			) : (
 				<Flex h={"1000px"} justifyContent={"center"} alignItems="center">

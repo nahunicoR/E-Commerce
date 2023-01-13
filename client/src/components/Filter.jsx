@@ -8,11 +8,16 @@ import {
 	Radio,
 	Stack,
 	RadioGroup,
+	Button,
+	Flex,
 } from "@chakra-ui/react";
 import { BiSearch } from "react-icons/bi";
 import React from "react";
+/* import { useState } from "react"; */
 
 function Filter({
+	filters,
+	handleCleanFilter,
 	handleFilterByCategory,
 	handleSortbyName,
 	handleSortbyPrice,
@@ -21,6 +26,13 @@ function Filter({
 	handleSearch,
 	input,
 }) {
+	const checkFilter =
+		filters.category !== "" ||
+		filters.material !== "" ||
+		filters.nameFilter !== ""
+			? true
+			: false;
+
 	return (
 		<>
 			<GridItem gridArea={"filter"} /* rowSpan={3} colSpan={1} */>
@@ -30,6 +42,7 @@ function Filter({
 							<Input
 								placeholder="Busqueda..."
 								name="search"
+								type="text"
 								value={input}
 								onChange={handleInputChange}
 								size={"md"}
@@ -44,7 +57,10 @@ function Filter({
 						<Text textAlign={"center"} fontWeight="semibold">
 							Ordenar
 						</Text>
-						<RadioGroup /* defaultValue={"A-Z"} */ colorScheme="teal">
+						<RadioGroup
+							w={"fit-content"}
+							/* defaultValue={"A-Z"} */ colorScheme="teal"
+						>
 							<Stack spacing={[1, 5]} direction={["column"]}>
 								<Radio onChange={handleSortbyName} value="A-Z">
 									A-Z
@@ -67,6 +83,7 @@ function Filter({
 					</Text>
 					<Stack spacing={[1, 5]} direction={["column"]}>
 						<RadioGroup
+							w={"fit-content"}
 							colSpan="auto"
 							colorScheme="teal"
 							/* defaultValue={"all"} */
@@ -95,6 +112,7 @@ function Filter({
 					</Text>
 					<Stack spacing={[1, 5]} direction={["column"]}>
 						<RadioGroup
+							w={"fit-content"}
 							colSpan="auto"
 							colorScheme="teal"
 							/* defaultValue={"all"} */
@@ -115,6 +133,17 @@ function Filter({
 							</Stack>
 						</RadioGroup>
 					</Stack>
+					<Flex py={5} w={"100%"} justifyContent={"center"}>
+						<Button
+							disabled={!checkFilter}
+							onClick={handleCleanFilter}
+							w={"100%"}
+							colorScheme={"teal"}
+						>
+							Limpiar Filtros
+						</Button>
+						{/* <Button>test</Button> */}
+					</Flex>
 				</Box>
 			</GridItem>
 		</>

@@ -12,8 +12,9 @@ const productsSlice = createSlice({
 			: [],
 		reviews: [],
 		favorites: localStorage.hasOwnProperty("favorites")
-		? JSON.parse(localStorage.getItem("favorites"))
-		: [],	
+			? JSON.parse(localStorage.getItem("favorites"))
+			: [],
+		users: [],
 	},
 	cart: [],
 	reducers: {
@@ -122,18 +123,24 @@ const productsSlice = createSlice({
 								? { ...product, quantity: product.quantity - 1 }
 								: product
 						),
-				  }: null
+				  }
+				: null;
 		},
 		reviews: (state, action) => {
-			state.reviews = action.payload
+			state.reviews = action.payload;
 		},
 		addFavorite: (state, action) => {
-			let find = state.favorites.find(f => f.id === action.payload.id)
-			if(!find)	state.favorites = [...state.favorites, action.payload]
+			let find = state.favorites.find((f) => f.id === action.payload.id);
+			if (!find) state.favorites = [...state.favorites, action.payload];
 		},
 		deleteFavorite: (state, action) => {
-			let deleteProduct = state.favorites.filter((p) => p.id !== action.payload.id);
+			let deleteProduct = state.favorites.filter(
+				(p) => p.id !== action.payload.id
+			);
 			state.favorites = deleteProduct;
+		},
+		getUser: (state, action) => {
+			state.users = action.payload;
 		},
 	},
 });
@@ -152,6 +159,7 @@ export const {
 	reviews,
 	addFavorite,
 	deleteFavorite,
+	getUser,
 } = productsSlice.actions;
 
 export default productsSlice.reducer;
