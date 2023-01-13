@@ -30,10 +30,8 @@ router.post('/payment', async (req,res,next) => {
             let preference = {
                 items: items_ml,
                 back_urls: {
-                    // success: "https://e-commerce-production-9dbb.up.railway.app/payment/result",
-                    success: "http://localhost:3001/payment/result",//RUTAS LOCALES PARA PROBAR EL PAGO
-                    failure: "http://localhost:30001/payment/result",//RUTAS LOCALES PARA PROBAR EL PAGO
-                    // failure: "https://e-commerce-production-9dbb.up.railway.app/payment/result",
+                    success: "https://e-commerce-production-9dbb.up.railway.app/payment/result",
+                    failure: "https://e-commerce-production-9dbb.up.railway.app/payment/result",
                     pending: ""
                 },
                 payer:{
@@ -130,9 +128,9 @@ router.get("/payment/result", async (req, res) => {
                 }
             });
         });
-        return res.redirect("http://localhost:3000/checkout-success");
+        return res.redirect("https://testpf.vercel.app/checkout-success");
     }
-    return res.redirect("http://localhost:3000/checkout-failure");
+    return res.redirect("https://testpf.vercel.app/checkout-failure");
 });
 
   
