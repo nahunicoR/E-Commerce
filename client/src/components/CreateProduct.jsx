@@ -159,127 +159,123 @@ export default function CreateProduct() {
 
 	return (
 		<>
-			{admin.rol !== "admin" ? (
-				<Navigate to="/home" />
-			) : (
-				<div className={`${styles.content}`}>
-					<form className={`${styles.formulario}`} onSubmit={handleSubmit}>
-						<Text
-							marginLeft={"1.5rem"}
-							fontSize={"1.5rem"}
-							fontWeight={"bold"}
-							marginTop={"1rem"}
-						>
-							Crear Producto
-						</Text>
+			<div className={`${styles.content}`}>
+				<form className={`${styles.formulario}`} onSubmit={handleSubmit}>
+					<Text
+						marginLeft={"1.5rem"}
+						fontSize={"1.5rem"}
+						fontWeight={"bold"}
+						marginTop={"1rem"}
+					>
+						Crear Producto
+					</Text>
+					<div>
+						{/* <label>Nombre del Producto </label> */}
+						<input
+							type="text"
+							value={form.title}
+							name="title"
+							onChange={handleChange}
+							placeholder="Nombre del Producto"
+						/>
+						<p>{errors.title && errors.title}</p>
+					</div>
+
+					<div>
+						{/* <label>Precio </label> */}
+						<input
+							type="number"
+							value={form.price}
+							name="price"
+							onChange={handleChange}
+							placeholder="Precio"
+						/>
+						<p>{errors.price && errors.price}</p>
+					</div>
+
+					<div className={`${styles.selects}`}>
 						<div>
-							{/* <label>Nombre del Producto </label> */}
-							<input
-								type="text"
-								value={form.title}
-								name="title"
-								onChange={handleChange}
-								placeholder="Nombre del Producto"
-							/>
-							<p>{errors.title && errors.title}</p>
+							{/* <label>Categoria: </label> */}
+							<select
+								name="category"
+								onChange={handleSelectCategory}
+								defaultValue="categoria"
+							>
+								<option disabled value="categoria">
+									Seleccionar Categoria
+								</option>
+								<option value="Bombilla">Bombilla</option>
+								<option value="Kit">Kit</option>
+								<option value="Mate">Mate</option>
+								<option value="Yerba">Yerba</option>
+							</select>
+							{/* <label>Material: </label> */}
+							<select
+								name="material"
+								onChange={handleSelectMaterial}
+								defaultValue="material"
+							>
+								<option disabled value="material">
+									Seleccionar Material
+								</option>
+								<option value="Artesanal">Artesanal</option>
+								<option value="Industrial">Industrial</option>
+								<option value="Sintetico">Sintetico</option>
+							</select>
 						</div>
+					</div>
 
+					<div>
+						<label>Descripcion: </label>
+						<textarea
+							value={form.description}
+							name="description"
+							onChange={handleChange}
+						/>
+						<p>{errors.description && errors.description}</p>
+					</div>
+
+					<div className={`${styles.image}`}>
+						<label>Imagen </label>
+						<input
+							hidden
+							type="text"
+							value={(form.image = image)}
+							name="image"
+							onChange={handleChange}
+						/>
+						<input type="file" onChange={uploadImage} placeholder="Imagen" />
 						<div>
-							{/* <label>Precio </label> */}
-							<input
-								type="number"
-								value={form.price}
-								name="price"
-								onChange={handleChange}
-								placeholder="Precio"
-							/>
-							<p>{errors.price && errors.price}</p>
+							{image ? (
+								<img
+									alt="test"
+									src={image}
+									style={{ width: "190px", height: "auto" }}
+								/>
+							) : (
+								<h4>Cargar imagen...</h4>
+							)}
 						</div>
+					</div>
+					<div>
+						<input
+							type="number"
+							value={form.stock}
+							name="stock"
+							onChange={handleChange}
+							placeholder="Stock "
+						/>
+						<p>{errors.stock && errors.stock}</p>
+					</div>
 
-						<div className={`${styles.selects}`}>
-							<div>
-								{/* <label>Categoria: </label> */}
-								<select
-									name="category"
-									onChange={handleSelectCategory}
-									defaultValue="categoria"
-								>
-									<option disabled value="categoria">
-										Seleccionar Categoria
-									</option>
-									<option value="Bombilla">Bombilla</option>
-									<option value="Kit">Kit</option>
-									<option value="Mate">Mate</option>
-									<option value="Yerba">Yerba</option>
-								</select>
-								{/* <label>Material: </label> */}
-								<select
-									name="material"
-									onChange={handleSelectMaterial}
-									defaultValue="material"
-								>
-									<option disabled value="material">
-										Seleccionar Material
-									</option>
-									<option value="Artesanal">Artesanal</option>
-									<option value="Industrial">Industrial</option>
-									<option value="Sintetico">Sintetico</option>
-								</select>
-							</div>
-						</div>
-
-						<div>
-							<label>Descripcion: </label>
-							<textarea
-								value={form.description}
-								name="description"
-								onChange={handleChange}
-							/>
-							<p>{errors.description && errors.description}</p>
-						</div>
-
-						<div className={`${styles.image}`}>
-							<label>Imagen </label>
-							<input
-								hidden
-								type="text"
-								value={(form.image = image)}
-								name="image"
-								onChange={handleChange}
-							/>
-							<input type="file" onChange={uploadImage} placeholder="Imagen" />
-							<div>
-								{image ? (
-									<img
-										alt="test"
-										src={image}
-										style={{ width: "190px", height: "auto" }}
-									/>
-								) : (
-									<h4>Cargar imagen...</h4>
-								)}
-							</div>
-						</div>
-						<div>
-							<input
-								type="number"
-								value={form.stock}
-								name="stock"
-								onChange={handleChange}
-								placeholder="Stock "
-							/>
-							<p>{errors.stock && errors.stock}</p>
-						</div>
-
-						<button type="submit" disabled={button}>
-							Cargar
-						</button>
-						<Link to="/home">
-							<Button>Volver</Button>
-						</Link>
-					</form>
-				</div>
-			)}
+					<button type="submit" disabled={button}>
+						Cargar
+					</button>
+					<Link to="/home">
+						<Button>Volver</Button>
+					</Link>
+				</form>
+			</div>
 		</>
 	);
 }
