@@ -101,7 +101,7 @@ export default function Nav() {
 							fontSize={"2xl"}
 							rounded={"full"}
 							variant={"ghost"}
-							color={"orange.400"}
+							color={"yellow.500"}
 							icon={<AiOutlinePoweroff />}
 							onClick={() =>
 								logout({ returnTo: window.location.origin + "/home" })

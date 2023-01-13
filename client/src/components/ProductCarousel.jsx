@@ -29,8 +29,12 @@ function ProductCarousel({ label, array = [] }) {
 		padding: "25px",
 		scrollBehavior: "smooth",
 		transform: `translateX(${scroll}px)`,
-		marginLeft: `${array.length === 0 ? "inherit" : "auto"}`,
+		justifyContent: "flex-start",
 		columnGap: "15px",
+		marginLeft: `${
+			array.length === 0 || array.length < 6 ? "inherit" : "auto"
+		}`,
+		marginRight: `${array.length === 0 ? "inherit" : "auto"}`,
 		transition: "transform 330ms ease-in-out",
 	};
 	return (
@@ -87,7 +91,7 @@ function ProductCarousel({ label, array = [] }) {
 					)}
 				</div>
 
-				{array.length === 0 || array.length === 6 ? null : (
+				{array.length === 0 || array.length < 6 ? null : (
 					<HStack pt={3}>
 						<IconButton icon={<FaChevronLeft />} onClick={slideLeft} />
 

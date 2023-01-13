@@ -1,5 +1,5 @@
-import React from "react";
-import orders from "../odersMock.js";
+/* import orders from "../odersMock.js"; */
+import React, { useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from "react-router-dom";
 import {
@@ -14,11 +14,15 @@ import {
 	StatLabel,
 	StatNumber,
 } from "@chakra-ui/react";
+import { useSelector, useDispatch } from "react-redux";
 import ProductCarousel from "./ProductCarousel.jsx";
-/* import { useApi } from "../hooks/useApi.jsx"; */
+import { getOrders } from "../redux/actions.js";
 
 export default function UserDashboard() {
-	const { user /* getAccessTokenSilently */ } = useAuth0();
+	const { user } = useAuth0();
+	const dispatch = useDispatch();
+	const favs = useSelector((state) => state.products.favorites);
+	const orders = useSelector((state) => state.products.orders);
 	const navigate = useNavigate();
 	const options = {
 		weekday: "long",
@@ -32,18 +36,10 @@ export default function UserDashboard() {
 		options
 	);
 
-	//Llamado a un endpoint de nuestra api para corroborar permisos del usuario
-	/* 	const opts = {
-		audience: 'e-commercetomate',
-		scope: 'read:dashboard',
-	  };
-	  const { login, getAccessTokenWithPopup } = useAuth0();
-	  const {
-		loading,
-		error,
-		refresh,
-		data: users,
-	  } = useApi('', opts); */
+	useEffect(() => {
+		localStorage.setItem("favorites", JSON.stringify(favs));
+		dispatch(getOrders(user.email));
+	}, [favs, user, dispatch]);
 
 	return (
 		<>
@@ -105,7 +101,7 @@ export default function UserDashboard() {
 					</Flex>
 				</Flex>
 				<ProductCarousel label={"Tus Ordenes"} array={orders} />
-				<ProductCarousel label={"Tus Favoritos"} />
+				<ProductCarousel label={"Tus Favoritos"} array={favs} />
 				<Flex
 					alignSelf={"center"}
 					justifyContent={"space-between"}

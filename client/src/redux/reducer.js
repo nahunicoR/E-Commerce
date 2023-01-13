@@ -7,6 +7,7 @@ const productsSlice = createSlice({
 		allProducts: [],
 		filteredBatch: [],
 		productsDetail: {},
+		orders: [],
 		cart: localStorage.hasOwnProperty("cart")
 			? JSON.parse(localStorage.getItem("cart"))
 			: [],
@@ -105,6 +106,9 @@ const productsSlice = createSlice({
 		getProductByName: (state, action) => {
 			state.products = action.payload;
 		},
+		getOrderByUser: (state, action) => {
+			state.orders = action.payload;
+		},
 
 		deleteProductCart: (state, action) => {
 			let deleteProduct = state.cart.filter((p) => p.id !== action.payload);
@@ -160,6 +164,7 @@ export const {
 	addFavorite,
 	deleteFavorite,
 	getUser,
+	getOrderByUser,
 } = productsSlice.actions;
 
 export default productsSlice.reducer;
