@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
 	Flex,
 	Heading,
@@ -15,16 +15,27 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch, useSelector } from "react-redux";
 import { MdOutlineFavoriteBorder, MdOutlineFavorite } from "react-icons/md";
 import { getUseremail, postUser } from "../redux/actions";
+import axios from "axios";
 
 export default function Nav() {
 	const { loginWithRedirect, isAuthenticated, user, logout } = useAuth0();
+	const [admin, setAdmin] = useState({});
 	const dispatch = useDispatch();
+	//const [auth, setAuth] = useState(false)
+
 	useEffect(() => {
 		if (isAuthenticated) {
 			dispatch(postUser(user));
 			dispatch(getUseremail(user.email));
 		}
 	}, [isAuthenticated, dispatch, user]);
+
+	useEffect(() => {
+		axios(`/user/one?mail=${user?.email}`).then((res) => {
+			console.log(res.data);
+			setAdmin(res.data);
+		});
+	}, [user]);
 
 	const QuantityOfProduct = useSelector((state) => state.products.cart);
 	const QuantityFavorites = useSelector((state) => state.products.favorites);
@@ -50,7 +61,7 @@ export default function Nav() {
 					paddingLeft={"5"}
 					paddingBottom={"2"}
 					flexDirection={"row"}
-					w={"75%"}
+					w={"50%"}
 					alignItems="center"
 				>
 					<Image src={logo} alt="page logo" w={"80px"} />
@@ -59,8 +70,8 @@ export default function Nav() {
 					</Heading>
 				</Flex>
 
-				<Flex justifyContent={"space-evenly"} w={"25%"}>
-					{isAuthenticated ? (
+				<Flex justifyContent={"space-evenly"} w={"45%"}>
+					{isAuthenticated && admin?.rol === "admin" ? (
 						<Button fontSize={"lg"} color={"white"} variant="link">
 							<Link to={"/create"}>Crear Producto</Link>
 						</Button>

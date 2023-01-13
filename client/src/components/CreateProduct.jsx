@@ -6,6 +6,8 @@ import { postProducts } from "../redux/actions";
 import styles from "../css/CreateProduct.module.css";
 import { Link } from "react-router-dom";
 import { Button, Text } from "@chakra-ui/react";
+import { useAuth0 } from "@auth0/auth0-react";
+import axios from "axios";
 
 const validate = (form) => {
 	let errors = {};
@@ -37,9 +39,11 @@ const validate = (form) => {
 export default function CreateProduct() {
 	const toast = useToast();
 	// const navigate = useNavigate();
+	const { user } = useAuth0();
 	const dispatch = useDispatch();
 	const [image, setImage] = useState("");
 	const [button, setButton] = useState(true);
+	const [admin, setAdmin] = useState({});
 	const [form, setForm] = useState({
 		title: "",
 		price: "",
@@ -66,13 +70,21 @@ export default function CreateProduct() {
 			form.category.length > 0 &&
 			form.material.length > 0 &&
 			form.description.length > 0 &&
-			form.stock.length > 0
+			form.stock.length > 0 &&
+			admin.rol === "admin"
 		) {
 			setButton(false);
 		} else {
 			setButton(true);
 		}
-	}, [form, setButton]);
+	}, [form, setButton, admin]);
+
+	useEffect(() => {
+		axios(`/user/one?mail=${user.email}`).then((res) => {
+			console.log(res.data);
+			setAdmin(res.data);
+		});
+	}, [user]);
 
 	const handleChange = (e) => {
 		setForm({
@@ -243,16 +255,6 @@ export default function CreateProduct() {
 							<h4>Cargar imagen...</h4>
 						)}
 					</div>
-				</div>
-				<div>
-					<input
-						type="number"
-						value={form.stock}
-						name="stock"
-						onChange={handleChange}
-						placeholder="Stock "
-					/>
-					<p>{errors.stock && errors.stock}</p>
 				</div>
 				<div>
 					<input

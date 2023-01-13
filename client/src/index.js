@@ -9,10 +9,10 @@ import axios from "axios";
 
 import Auth0ProviderWithHistory from "./auth/auth0-provider-with-history";
 
-// axios.defaults.baseURL = "http://localhost:3001";
+axios.defaults.baseURL = "http://localhost:3001";
+//axios.defaults.baseURL = "https://feeb-190-84-116-240.ngrok.io";
 // axios.defaults.baseURL = "https://e-commerce-production-9dbb.up.railway.app";
-axios.defaults.baseURL = "https://e-commerce-production-9dbb.up.railway.app/"
-
+// axios.defaults.baseURL = "https://e-commerce-production-9dbb.up.railway.app/"
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

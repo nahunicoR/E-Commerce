@@ -12,9 +12,9 @@ import {
 	reviews,
 	addFavorite,
 	deleteFavorite,
+	getUser,
 } from "./reducer";
 import axios from "axios";
-import { getUser } from "./user";
 
 export const getUseremail = (user) => async (dispatch) => {
 	return dispatch(getUser(user));
@@ -43,6 +43,15 @@ export const getDetails = (id) => async (dispatch) => {
 	try {
 		let detail = await axios.get(`/product/${id}`);
 		return dispatch(getProductsDetail(detail.data));
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+export const getUsers = () => async (dispatch) => {
+	try {
+		let users = await axios.get("/users/all");
+		return dispatch(getUser(users.data));
 	} catch (error) {
 		console.log(error);
 	}
