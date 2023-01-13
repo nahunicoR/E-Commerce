@@ -13,6 +13,7 @@ import {
 	addFavorite,
 	deleteFavorite,
 	getUser,
+	getOrderByUser,
 } from "./reducer";
 import axios from "axios";
 
@@ -66,6 +67,14 @@ export const searchProduct = (query) => async (dispatch) => {
 	}
 };
 
+export const getOrders = (email) => async (dispatch) => {
+	try {
+		let orders = await axios.get(`/order/${email}/orders`);
+		return dispatch(getOrderByUser(orders.data));
+	} catch (error) {
+		console.log(error);
+	}
+};
 export const orderByNames = (filter) => (dispatch) => {
 	return dispatch(orderByName(filter));
 };
