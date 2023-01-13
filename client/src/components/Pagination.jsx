@@ -7,7 +7,12 @@ function Pagination({ productsPerPage, allProducts, pagination }) {
 		pageNumbers.push(i + 1);
 	}
 	return (
-		<GridItem gridArea={"pag"} /* bg={"red.100"} */>
+		<GridItem
+			position={"absolute"}
+			top={"1500"}
+			left={"1290"}
+			gridArea={"pag"} /* bg={"red.100"} */
+		>
 			<HStack alignItems={"center"} justifyContent={"center"} padding={"10"}>
 				{pageNumbers
 					? pageNumbers.map((number) => (

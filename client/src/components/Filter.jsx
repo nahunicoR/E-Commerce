@@ -15,7 +15,6 @@ import { BiSearch } from "react-icons/bi";
 import React from "react";
 /* import { useState } from "react"; */
 
-
 function Filter({
 	filters,
 	handleCleanFilter,
@@ -35,14 +34,11 @@ function Filter({
 			: false;
 
 	return (
-        
 		<>
 			<GridItem gridArea={"filter"} /* rowSpan={3} colSpan={1} */>
 				<Box borderWidth="1px" borderRadius="lg" p={4}>
 					<Box paddingBottom={4}>
 						<HStack paddingBottom={5}>
-
-						
 							<Input
 								placeholder="Busqueda..."
 								name="search"
@@ -61,7 +57,10 @@ function Filter({
 						<Text textAlign={"center"} fontWeight="semibold">
 							Ordenar
 						</Text>
-						<RadioGroup /* defaultValue={"A-Z"} */ colorScheme="teal">
+						<RadioGroup
+							w={"fit-content"}
+							/* defaultValue={"A-Z"} */ colorScheme="teal"
+						>
 							<Stack spacing={[1, 5]} direction={["column"]}>
 								<Radio onChange={handleSortbyName} value="A-Z">
 									A-Z
@@ -84,6 +83,7 @@ function Filter({
 					</Text>
 					<Stack spacing={[1, 5]} direction={["column"]}>
 						<RadioGroup
+							w={"fit-content"}
 							colSpan="auto"
 							colorScheme="teal"
 							/* defaultValue={"all"} */
@@ -112,6 +112,7 @@ function Filter({
 					</Text>
 					<Stack spacing={[1, 5]} direction={["column"]}>
 						<RadioGroup
+							w={"fit-content"}
 							colSpan="auto"
 							colorScheme="teal"
 							/* defaultValue={"all"} */
