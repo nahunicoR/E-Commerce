@@ -18,6 +18,8 @@ import {
 import { useColorMode } from '@chakra-ui/color-mode';
 import { useDispatch } from 'react-redux';
 import { postProducts } from '../redux/actions';
+import { useAuth0 } from '@auth0/auth0-react';
+import axios from 'axios';
 
 
 function validate(form) {
@@ -54,6 +56,8 @@ export default function CreateProduct() {
   const toast = useToast();
   const dispatch = useDispatch();
   const { colorMode } = useColorMode();
+  const { user } = useAuth0();
+  const [admin, setAdmin] = useState({});
   const [image, setImage] = useState("");
   const [button, setButton] = useState(true);
   const [form, setForm] = useState({
@@ -75,20 +79,28 @@ export default function CreateProduct() {
 		stock: "",
   })
 
-  useEffect(() => {
-	if (
-		form.title.length > 0 &&
-		form.price.length > 0 &&
-		form.category.length > 0 &&
-		form.material.length > 0 &&
-		form.description.length > 0 &&
-		form.stock.length > 0
-	) {
-		setButton(false);
-	} else {
-		setButton(true);
-	}
-}, [form, setButton]);
+	useEffect(() => {
+		if (
+			form.title.length > 0 &&
+			form.price.length > 0 &&
+			form.category.length > 0 &&
+			form.material.length > 0 &&
+			form.description.length > 0 &&
+			form.stock.length > 0 &&
+			admin?.rol === "admin"
+		) {
+			setButton(false);
+		} else {
+			setButton(true);
+		}
+	}, [form, setButton, admin]);
+
+	useEffect(() => {
+		axios(`/user/one?mail=${user?.email}`).then((res) => {
+			console.log(res.data);
+			setAdmin(res.data);
+		});
+	}, [user]);
 
 function handleChange(e) {
     setForm({
