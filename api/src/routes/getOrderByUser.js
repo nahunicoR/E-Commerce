@@ -8,10 +8,10 @@ const {User, Order} = require('../db');
 */
 const router = Router();
 
-router.get('/:userId/orders', async (req, res, next) => {
-    const userId = Number(req.params.userId);
+router.get('/:userEmail/orders', async (req, res, next) => {
+    const userEmail = req.params.userEmail;
     try {
-      const data = await getOrderByUser(userId);
+      const data = await getOrderByUser(userEmail);
       return res.status(200).json(data);
     } catch (error) {
         next(error);
