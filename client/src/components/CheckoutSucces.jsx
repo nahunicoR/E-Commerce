@@ -6,12 +6,6 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 const CheckoutSucces = () => {
 	const navigate = useNavigate();
-	const { user } = useAuth0();
-
-	const handleClick = () => {
-		console.log('volver')
-		console.log(user)
-	}
 
 	return (
 		<>
@@ -37,8 +31,7 @@ const CheckoutSucces = () => {
 						</Text>
 						<Image marginLeft={"5"} src={logo} alt="page logo" w={"250px"} />
 						<Button marginTop={"3"} 
-							// onClick={() => navigate("/home")}
-							onClick={ handleClick }
+							onClick={() => navigate("/")}
 							>
 							Volver al comercio
 						</Button>
