@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const { Product, Order, Orderdetail, User, Address, Notification } = require('../db.js');
+const Sequelize = require('sequelize');
 const mercadopago = require('mercadopago');
 const {ACCESS_TOKEN} = process.env;
-
+const axios = require('axios');
 
 mercadopago.configure({
     access_token: ACCESS_TOKEN
@@ -11,7 +12,7 @@ mercadopago.configure({
 
 router.post('/payment', async (req,res,next) => {
     const {body} = req;
-    // console.log('user-------------------->',body.user, 'user------------------->')
+
     try {
             const items_ml = body.cart.map((product) =>({
                 id: product.id,
@@ -19,43 +20,23 @@ router.post('/payment', async (req,res,next) => {
                 unit_price: product.price,
                 quantity: product.quantity,
                 currency_id: "ARS",
-            })); 
-            const total = body.cart.reduce((acc, product) => acc + product.price * product.quantity, 0);
+            }));
+            
+            // const total = body.cart.reduce((acc, product) => acc + product.price * product.quantity, 0);
 
-            const quatityProducts = body.cart.reduce((acc, product) => acc + product.quantity, 0);
+            // const quatityProducts = body.cart.reduce((acc, product) => acc + product.quantity, 0);
             //sacamos la cantidad de productos del carrito de compras
-            // console.log('quatityProducts-------------------->',quatityProducts, 'quatityProducts-------------------->')
-
-            //creamos la orden de compra.
-                let newOrder = await Order.create({
-                    status: 'creada',
-                    purchaseCost: total,
-                    payOrder: 'mercadopago',
-                    // id: body.user.email,
-                    paymentMethod: 'mercadopago',
-                  
-                })
-                console.log(newOrder)
-
-                let userOrder = await User.findByPk(body.user.email)
-                console.log(userOrder)
-                await newOrder.addUser(userOrder);
-    
-                //creamos el detalle de la orden de compra.
-                // let newOrderDetail = await Orderdetail.create({
-                //     purchasedamount: quatityProducts,
-                //     purchaseprice: total,
-                // });
-
 
             let preference = {
                 items: items_ml,
-                //urls a las q redirecciona el pago segun su estado
                 back_urls: {
-                    success: "http://localhost:3001/result",
-                    // success: "http://localhost:3000/checkout-success",//rutas deben ser de back no front.
-                    failure: "https://e-commerce-production-9dbb.up.railway.app/result",
+                    success: "https://e-commerce-production-9dbb.up.railway.app/payment/result",
+                    failure: "https://e-commerce-production-9dbb.up.railway.app/payment/result",
                     pending: ""
+                },
+                payer:{
+                    email: body.user.email,
+                    name: body.user.email,
                 },
                 payment_methods: {
                 //excluimos pagos por cajero automático y tickets.
@@ -75,13 +56,10 @@ router.post('/payment', async (req,res,next) => {
                 //anula la posibilidad de pago en efectivo
                 binary_mode: true,
                 // notification_url: "https://e-commerce-production-9dbb.up.railway.app/notification",
-                notification_url: "https://0780-2803-9800-9011-46af-7586-16bb-a98b-7198.sa.ngrok.io/notification",
                 statement_descriptor: "To-Mate",
             }
-            // console.log('preference------------------->',preference, 'preference------------------->')
             mercadopago.preferences.create(preference)
             .then((resp)=> {
-                //global.id = resp.body.id;
                 return res
                 .status(200)
                 .json(resp.body.init_point)
@@ -101,54 +79,79 @@ router.post('/payment', async (req,res,next) => {
 // SI OBVIAMOS ESTA DATA, EN REALIDAD DEBERIAMOS PODER CREAR EL POST DE LA COMPRA
 // SIN AFECTAR NADA EN LA BASE DE DATOS, POR QUE ES SOLO PARA DESPLEGAR REALMENTE LA APP CON DINERO REAL.
 
+router.get("/payment/result", async (req, res) => {
+    const payment_id = req.query.payment_id;
+    let status = req.query.status; 
 
+     if(status === "approved"){
+         const mercadopagoreq =  await axios.get(`https://api.mercadopago.com/v1/payments/${payment_id}?access_token=${ACCESS_TOKEN}`);
 
-router.get("/result", async (req, res) => {
-    
-    //approved = APRO
-    //in_process = CONT (pendiente de pago)
-    //rejected = OTHE (rechazado)
-    // console.info("EN LA RUTA DE PAGOS ");
-    // const payment_id = req.query.payment_id;
-    // console.log(payment_id);
-    const status = req.query.status;
-    // const external_reference = req.query.external_reference;
-    // console.log(external_reference);
-    // const merchant_order_id = req.query.merchant_order_id;
-    // console.log(merchant_order_id);
-    let pay = status === "approved" ? "Approved" : "Failed";
-    console.log(pay);
+        const payerTomate = mercadopagoreq.data.additional_info.payer.first_name;
+        const itemsPagados =  mercadopagoreq.data.additional_info.items;
+        const {operation_type, transaction_amount,order} = mercadopagoreq.data;
 
-    switch (pay) {
-        case "Approved":
-        //   return res.redirect("https://testpf.vercel.app/checkout-success");
-        return res.redirect("http://localhost:3000/checkout-success");
-        default:
-          return res.redirect("https://testpf.vercel.app/checkout-failure");
-      }
-  });
+        let status = mercadopagoreq.data.status;
+        if(status === 'approved') status = 'creada';
+        if(status === 'rejected') status = 'cancelada';
+
+        let statusDetail = mercadopagoreq.data.status_detail;
+        if(statusDetail === 'accredited') statusDetail = 'completa';
+
+        const orderCreated = await Order.create({
+            status: statusDetail,
+            purchaseCost: transaction_amount,
+            payOrder: order.id,
+            paymentMethod: operation_type,
+            userEmail: payerTomate,
+            email: payerTomate,
+        });
+        await orderCreated.addUser(payerTomate);
+        // console.log(orderCreated,'orderCreated')
+
+        itemsPagados.forEach( async(item) => {
+            let idNumber = Number(item.id);
+            const orderDetailCreated = await Orderdetail.create({
+                purchasedamount: itemsPagados.length,
+                purchaseprice: transaction_amount,
+                orderId: orderCreated.id,
+                productId:idNumber,
+            });
+            // console.log(orderDetailCreated,'orderDetailCreated');
+        });
+        await itemsPagados.forEach(async (item) => {
+            let updateProductStock = await Product.update(
+                {
+                    stock: Sequelize.literal(`stock - ${item.quantity}`),
+                },
+                {where: {
+                    id: item.id
+                }
+            });
+        });
+        return res.redirect("https://testpf.vercel.app/checkout-success");
+    }
+    return res.redirect("https://testpf.vercel.app/checkout-failure");
+});
+
   
   router.get("/payment/:id", (req, res) => {
     const mp = new mercadopago(ACCESS_TOKEN);
     const id = req.params.id;
 
-    console.info("Buscando el id", id);
+    // console.info("Buscando el id", id);
     mp.get(`/v1/payments/search`, { id: id })
       .then((result) => {
-        console.info("resultado", result);
         res.status(200).send({ result: result });
       })
       .catch((err) => {
-        console.error("No se consulto:", err);
         res.status(400).send({ error: err });
       });
   });
 
 router.post('/notification', async (req,res,next) => {
     const query = req.query;
-    console.log(query.id)
+
     if(query.id && query.topic == 'merchant_order'){
-        console.log(`merchant_order:-->${query.id}------------mO`)
         const [noti, create] = await Notification.findOrCreate({
             where: {norder: query.id}
         })

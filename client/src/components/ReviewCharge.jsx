@@ -1,14 +1,14 @@
-import React,{useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { FaStar } from "react-icons/fa";
-import { Button , Input} from "@chakra-ui/react";
+import { Button , Input, Text} from "@chakra-ui/react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch,useSelector } from "react-redux";
-import { postReview } from "../redux/actions";
+import { postReview, getReviews } from "../redux/actions";
 import { getUser } from "../redux/user";
 const colors = {
-    orange: "#FFBA5A",
-    grey: "#a9a9a9"
-}
+	orange: "#FFBA5A",
+	grey: "#a9a9a9",
+};
 
 const validate = (input, currentValue) => {
 	let errors = {};
@@ -31,20 +31,23 @@ const validate = (input, currentValue) => {
 function ReviewCharge({productId}){
     const dispatch = useDispatch();
     const stars = Array(5).fill(0);
-    const user = useSelector((state)=> state.user)
+    // const user2 = useSelector((state)=> state.user)
     // const toast = useToast();
-    const {isAuthenticated} = useAuth0();
+    const {isAuthenticated, user} = useAuth0();
     const [currentValue, setCurrentValue] = useState(0);
     const [hoverValue, setHoverValue] = useState(undefined);
     const [input , setInput] = useState({
         description: "",
-        userEmail: user,
-        productId: productId.id
+        userEmail: {},
+        productId: null
     });
 
     let review = {
-        input,
-        currentValue
+        input: {...input,
+                     userEmail: user ? {email:user?.email}: null,
+                     productId: productId.id
+        },
+        currentValue: currentValue
     }
 
     const [errors, setErrors] = useState({
@@ -86,6 +89,9 @@ function ReviewCharge({productId}){
 
     const handleSubmit = (e) => {
         dispatch(postReview(review));
+       setTimeout(() => {
+        dispatch(getReviews(productId.id));
+       },1000)
         // console.log(review,'reviewPOST')
         setCurrentValue(0);
         setInput({
@@ -127,51 +133,54 @@ function ReviewCharge({productId}){
                     onChange={handleInput}/>
                     <p>{errors.description && errors.description}</p>
             </div>
-                <Button
-                    onClick={handleSubmit}
-                    w={"40%"}
-                    colorScheme={"teal"}
-                    isActive={!isAuthenticated}
-                >
-                    Enviar
-                </Button>
+            { isAuthenticated
+                ?   <Button
+                        onClick={handleSubmit}
+                        w={"40%"}
+                        colorScheme={"teal"}
+                        isActive={!isAuthenticated}
+                    >
+                        Enviar
+                    </Button>
+                :   <Text fontSize={"1.2rem"}>
+                        Inicia sesion para comentar
+                    </Text>
+            }           
         </div>
     );
 };
 
 const styles = {
-    container: {
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-    },
-    stars: {
-        display: "flex",
-        flexDirection: "row",
-      },
-      containerT: {
-        width: '90%',
-        display: "flex",
-        
-      },
-    textarea: {
-        border: "1px solid #a9a9a9",
-        borderRadius: 5,
-        width: "100%",
-        flexDirection: "fit-content",
-        margin: "20px 0",
-        minHeight: 100,
-        padding: 10
-    },
-    button: {
-        border: "1px solid #a9a9a9",
-        borderRadius: 5,
-        width: 100,
-        margin: "20px 0",
-        minHeight: 60,
-        padding: 10
-    }
-}
+	container: {
+		display: "flex",
+		flexDirection: "column",
+		alignItems: "center",
+	},
+	stars: {
+		display: "flex",
+		flexDirection: "row",
+	},
+	containerT: {
+		width: "90%",
+		display: "flex",
+	},
+	textarea: {
+		border: "1px solid #a9a9a9",
+		borderRadius: 5,
+		width: "100%",
+		flexDirection: "fit-content",
+		margin: "20px 0",
+		minHeight: 100,
+		padding: 10,
+	},
+	button: {
+		border: "1px solid #a9a9a9",
+		borderRadius: 5,
+		width: 100,
+		margin: "20px 0",
+		minHeight: 60,
+		padding: 10,
+	},
+};
 
-
-export default ReviewCharge
+export default ReviewCharge;

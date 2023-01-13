@@ -11,15 +11,19 @@ import {
 	Divider,
 	HStack,
 	IconButton,
-	 useToast, 
+	useToast,
 } from "@chakra-ui/react";
 import { Card, CardBody, CardFooter } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { addFavorites, addProductsCart, deleteFavorites } from "../redux/actions";
+import {
+	addFavorites,
+	addProductsCart,
+	deleteFavorites,
+} from "../redux/actions";
 /* import { useAuth0 } from "@auth0/auth0-react"; */
 import Rating from "./Rating";
-import { FaHeart } from "react-icons/fa"
+import { FaHeart } from "react-icons/fa";
 import { useSelector } from "react-redux";
 
 export default function CardProduct({
@@ -33,12 +37,12 @@ export default function CardProduct({
 }) {
 	/* const { isAuthenticated } = useAuth0(); */
 	const toast = useToast();
+	//const [liked, setLiked] = useState(false);
 	const dispatch = useDispatch();
-	const favorites = useSelector(state => state.products.favorites)
-	const chooseFavorites = favorites.find(f => f.id === id )
+	const favorites = useSelector((state) => state.products.favorites);
+	const chooseFavorites = favorites.find((f) => f.id === id);
 	return (
 		<>
-		<Link to={`/detail/${id}`}></Link>
 			<GridItem /* colSpan={1} */ gridArea={"card"}>
 				<Card
 					transition={"0.2s"}
@@ -51,18 +55,23 @@ export default function CardProduct({
 					margin={"auto"}
 					/* overflow={"hidden"} */
 				>
-						<Link to={`/detail/${id}`}>	
-
 					<CardBody position={"relative"}>
-					<IconButton
-							onClick={()=> !chooseFavorites ? dispatch(addFavorites(product)) : dispatch(deleteFavorites(product))}
+						<IconButton
+							onClick={() =>
+								!chooseFavorites
+									? dispatch(addFavorites(product))
+									: dispatch(deleteFavorites(product))
+							}
 							color={chooseFavorites ? "red" : "teal"}
 							// color={"teal"}
 							icon={<FaHeart />}
 							margin="0 15px"
 							position={"absolute"}
 							right={0}
-							/>
+							variant={"ghost"}
+						/>
+						<Link to={`/detail/${id}`} />
+
 						<Flex
 							borderRadius={"lg"}
 							h={"220"}
@@ -70,7 +79,6 @@ export default function CardProduct({
 							justifyContent={"center"}
 							alignItems={"center"}
 						>
-							
 							<Image
 								src={img}
 								alt="product show"
@@ -91,22 +99,18 @@ export default function CardProduct({
 							{/* <Text size={"sm"}>{description}</Text> */}
 							<HStack gap={"0.5rem"}>
 								<Tag w={"fit-content"}>{category}</Tag>
-								<Tag colorScheme={"teal"} variant={"outline"} w={"fit-content"} >
+								<Tag colorScheme={"teal"} variant={"outline"} w={"fit-content"}>
 									{material}
 								</Tag>
-								<Rating
-								productId={id}
-								size={"1.2rem"} />
+								<Rating productId={id} size={"1.2rem"} />
 							</HStack>
 						</Stack>
 					</CardBody>
-					</Link>
 					<Divider />
 					<CardFooter alignItems={"center"}>
 						<Text marginRight={"13"} color="teal" fontSize="3xl">
 							{"$" + price}
 						</Text>
-
 						<Link to={`/detail/${id}`}>
 							<Button size={"md"} colorScheme={"teal"}>
 								Detalle

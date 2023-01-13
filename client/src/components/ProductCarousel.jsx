@@ -29,13 +29,18 @@ function ProductCarousel({ label, array = [] }) {
 		padding: "25px",
 		scrollBehavior: "smooth",
 		transform: `translateX(${scroll}px)`,
-		marginLeft: `${array.length === 0 ? "inherit" : "auto"}`,
+		justifyContent: "flex-start",
 		columnGap: "15px",
+		marginLeft: `${
+			array.length === 0 || array.length < 6 ? "inherit" : "auto"
+		}`,
+		marginRight: `${array.length === 0 ? "inherit" : "auto"}`,
 		transition: "transform 330ms ease-in-out",
 	};
 	return (
 		<>
 			<Flex
+				key={label}
 				alignSelf={"center"}
 				justifyContent={"space-between"}
 				w={"70%"}
@@ -49,7 +54,7 @@ function ProductCarousel({ label, array = [] }) {
 				alignItems={"center"}
 				overflow={"hidden"}
 			>
-				<Heading alignSelf={"flex-start"} size={"md"}>
+				<Heading key={label} alignSelf={"flex-start"} size={"md"}>
 					{label}
 				</Heading>
 				<div className="inner" style={styleSlide}>
@@ -64,8 +69,8 @@ function ProductCarousel({ label, array = [] }) {
 									border={"1px"}
 									borderColor={"gray.200"}
 									borderRadius={"md"}
-									h={"230px"}
-									w={"230px"}
+									h={"235px"}
+									w={"235px"}
 									bg={"white"}
 								>
 									<Image
@@ -86,7 +91,7 @@ function ProductCarousel({ label, array = [] }) {
 					)}
 				</div>
 
-				{array.length === 0 ? null : (
+				{array.length === 0 || array.length < 6 ? null : (
 					<HStack pt={3}>
 						<IconButton icon={<FaChevronLeft />} onClick={slideLeft} />
 

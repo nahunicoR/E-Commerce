@@ -5,6 +5,7 @@ import { Text, Container, Image, HStack, Flex, Button } from "@chakra-ui/react";
 
 const CheckoutFailure = () => {
 	const navigate = useNavigate();
+
 	return (
 		<>
 			<Flex h={"1000"} justifyContent={"center"} bg={"red.500"}>
@@ -28,7 +29,7 @@ const CheckoutFailure = () => {
 							Pago rechazado
 						</Text>
 						<Image marginLeft={"5"} src={logo} alt="page logo" w={"250px"} />
-						<Button marginTop={"3"} onClick={() => navigate("/home")}>
+						<Button marginTop={"3"} onClick={() => navigate("/")}>
 							Intenta de nuevo
 						</Button>
 					</Container>
