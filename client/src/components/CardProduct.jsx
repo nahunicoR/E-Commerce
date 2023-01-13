@@ -70,41 +70,45 @@ export default function CardProduct({
 							right={0}
 							variant={"ghost"}
 						/>
-						<Link to={`/detail/${id}`} />
-
-						<Flex
-							borderRadius={"lg"}
-							h={"220"}
-							w={"400"}
-							justifyContent={"center"}
-							alignItems={"center"}
-						>
-							<Image
-								src={img}
-								alt="product show"
-								height={"100%"}
-								width={"100%"}
-								objectFit={"contain"}
-							/>
-						</Flex>
-						<Stack spacing={"3"}>
-							<Heading
-								whiteSpace={"nowrap"}
-								textOverflow={"ellipsis"}
-								overflow={"hidden"}
-								size={"md"}
+						<Link to={`/detail/${id}`}>
+							<Flex
+								borderRadius={"lg"}
+								h={"220"}
+								w={"400"}
+								justifyContent={"center"}
+								alignItems={"center"}
 							>
-								{name}
-							</Heading>
-							{/* <Text size={"sm"}>{description}</Text> */}
-							<HStack gap={"0.5rem"}>
-								<Tag w={"fit-content"}>{category}</Tag>
-								<Tag colorScheme={"teal"} variant={"outline"} w={"fit-content"}>
-									{material}
-								</Tag>
-								<Rating productId={id} size={"1.2rem"} />
-							</HStack>
-						</Stack>
+								<Image
+									src={img}
+									alt="product show"
+									height={"100%"}
+									width={"100%"}
+									objectFit={"contain"}
+								/>
+							</Flex>
+							<Stack spacing={"3"}>
+								<Heading
+									whiteSpace={"nowrap"}
+									textOverflow={"ellipsis"}
+									overflow={"hidden"}
+									size={"md"}
+								>
+									{name}
+								</Heading>
+								{/* <Text size={"sm"}>{description}</Text> */}
+								<HStack gap={"0.5rem"}>
+									<Tag w={"fit-content"}>{category}</Tag>
+									<Tag
+										colorScheme={"teal"}
+										variant={"outline"}
+										w={"fit-content"}
+									>
+										{material}
+									</Tag>
+									<Rating productId={id} size={"1.2rem"} />
+								</HStack>
+							</Stack>
+						</Link>
 					</CardBody>
 					<Divider />
 					<CardFooter alignItems={"center"}>
