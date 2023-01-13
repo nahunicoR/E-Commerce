@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
 	Flex,
 	Heading,
@@ -6,7 +6,7 @@ import {
 	Image,
 	Text,
 	IconButton,
-	useColorMode
+	//useColorMode,
 } from "@chakra-ui/react";
 import { FaUser, FaShoppingCart } from "react-icons/fa";
 import { AiOutlinePoweroff } from "react-icons/ai";
@@ -14,21 +14,30 @@ import logo from "../assets/LogoTo-Mate.png";
 import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch, useSelector } from "react-redux";
-import { MdOutlineFavoriteBorder, MdOutlineFavorite } from "react-icons/md"
+import { MdOutlineFavoriteBorder, MdOutlineFavorite } from "react-icons/md";
 import { getUseremail, postUser } from "../redux/actions";
-
+import axios from "axios";
 
 export default function Nav() {
-	const { colorMode, toggleColorMode } = useColorMode();
+	//const { colorMode, toggleColorMode } = useColorMode();
 	const { loginWithRedirect, isAuthenticated, user, logout } = useAuth0();
+	const [admin, setAdmin] = useState({});
 	const dispatch = useDispatch();
+
 	useEffect(() => {
 		if (isAuthenticated) {
-			dispatch( postUser(user) )
-			dispatch( getUseremail(user.email) )
+			dispatch(postUser(user));
+			dispatch(getUseremail(user.email));
 		}
-	}, [isAuthenticated, dispatch, user])
-	
+	}, [isAuthenticated, dispatch, user]);
+
+	useEffect(() => {
+		axios(`/user/one?mail=${user?.email}`).then((res) => {
+			console.log(res.data);
+			setAdmin(res.data);
+		});
+	}, [user]);
+
 	const QuantityOfProduct = useSelector((state) => state.products.cart);
 	const QuantityFavorites = useSelector((state) => state.products.favorites);
 	let topCenter = 4;
@@ -53,7 +62,7 @@ export default function Nav() {
 					paddingLeft={"5"}
 					paddingBottom={"2"}
 					flexDirection={"row"}
-					w={"75%"}
+					w={"50%"}
 					alignItems="center"
 				>
 					<Image src={logo} alt="page logo" w={"80px"} />
@@ -62,13 +71,13 @@ export default function Nav() {
 					</Heading>
 				</Flex>
 
-				<Flex justifyContent={"space-evenly"} w={"25%"}>
-					<Button bg={"gray"} onClick={toggleColorMode}>
-							 {colorMode === "dark" ? "light" : "dark"} mode
-					</Button>
-					<Button fontSize={"lg"} color={"white"} variant="link">
-						<Link to={"/create"}>Crear Producto</Link>
-					</Button>
+				<Flex justifyContent={"space-evenly"} w={"45%"}>
+					{isAuthenticated && admin?.rol === "admin" ? (
+						<Button fontSize={"lg"} color={"white"} variant="link">
+							<Link to={"/create"}>Crear Producto</Link>
+						</Button>
+					) : null}
+
 					<Button
 						onClick={!isAuthenticated ? () => loginWithRedirect() : null}
 						fontSize={"lg"}
@@ -87,12 +96,12 @@ export default function Nav() {
 						)}
 					</Button>
 
-
 					{isAuthenticated ? (
 						<IconButton
-							fontSize={"lg"}
+							fontSize={"2xl"}
 							rounded={"full"}
-							colorScheme={"red"}
+							variant={"ghost"}
+							color={"orange.400"}
 							icon={<AiOutlinePoweroff />}
 							onClick={() =>
 								logout({ returnTo: window.location.origin + "/home" })
@@ -121,12 +130,19 @@ export default function Nav() {
 							<FaShoppingCart color="white" fontSize={"1.5rem"} />
 						</Link>
 						<Link to={"/favorites"}>
-							<Button bg={"transparent"} variant={"unstyled"} margin={"0 1rem 0 1rem"}>
-								{
-									!QuantityFavorites.length
-										? <MdOutlineFavoriteBorder fontSize={"1.8rem"} color={"white"} />
-										: <MdOutlineFavorite fontSize={"1.8rem"} color={"white"} />
-								}
+							<Button
+								bg={"transparent"}
+								variant={"unstyled"}
+								margin={"0 1rem 0 1rem"}
+							>
+								{!QuantityFavorites.length ? (
+									<MdOutlineFavoriteBorder
+										fontSize={"1.8rem"}
+										color={"white"}
+									/>
+								) : (
+									<MdOutlineFavorite fontSize={"1.8rem"} color={"white"} />
+								)}
 							</Button>
 						</Link>
 					</Flex>
