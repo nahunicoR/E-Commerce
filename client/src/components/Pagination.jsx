@@ -9,8 +9,8 @@ function Pagination({ productsPerPage, allProducts, pagination }) {
 	return (
 		<GridItem
 			position={"absolute"}
-			top={"1500"}
-			left={"1290"}
+			top={"1400"}
+			left={"700"}
 			gridArea={"pag"} /* bg={"red.100"} */
 		>
 			<HStack alignItems={"center"} justifyContent={"center"} padding={"10"}>
