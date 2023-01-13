@@ -1,8 +1,11 @@
 const { Router } = require('express');
 const { Product } = require('../db');
+const admin = require('../middlewares/admin.js');
+const login = require('../middlewares/login.js');
 const router = Router();
 
-router.post('/', async (req, res, next) => {
+router.post('/',login,admin, async (req, res, next) => {
+    console.log(login);
     const { title, price, category, description, image, material, stock } = req.body;
     try {
         if(!title) return res.status(400).json('No se ingreso titulo');
@@ -16,6 +19,7 @@ router.post('/', async (req, res, next) => {
             price,
             category,
             description,
+            image,
             material,
             stock
         }
@@ -24,6 +28,7 @@ router.post('/', async (req, res, next) => {
                 title,
                 price,
                 category,
+                image,
                 description,
                 material,
                 stock

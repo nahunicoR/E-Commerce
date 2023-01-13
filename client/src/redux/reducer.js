@@ -7,13 +7,15 @@ const productsSlice = createSlice({
 		allProducts: [],
 		filteredBatch: [],
 		productsDetail: {},
+		orders: [],
 		cart: localStorage.hasOwnProperty("cart")
 			? JSON.parse(localStorage.getItem("cart"))
 			: [],
 		reviews: [],
 		favorites: localStorage.hasOwnProperty("favorites")
-		? JSON.parse(localStorage.getItem("favorites"))
-		: [],	
+			? JSON.parse(localStorage.getItem("favorites"))
+			: [],
+		users: [],
 	},
 	cart: [],
 	reducers: {
@@ -104,6 +106,9 @@ const productsSlice = createSlice({
 		getProductByName: (state, action) => {
 			state.products = action.payload;
 		},
+		getOrderByUser: (state, action) => {
+			state.orders = action.payload;
+		},
 
 		deleteProductCart: (state, action) => {
 			let deleteProduct = state.cart.filter((p) => p.id !== action.payload);
@@ -122,18 +127,24 @@ const productsSlice = createSlice({
 								? { ...product, quantity: product.quantity - 1 }
 								: product
 						),
-				  }: null
+				  }
+				: null;
 		},
 		reviews: (state, action) => {
-			state.reviews = action.payload
+			state.reviews = action.payload;
 		},
 		addFavorite: (state, action) => {
-			let find = state.favorites.find(f => f.id === action.payload.id)
-			if(!find)	state.favorites = [...state.favorites, action.payload]
+			let find = state.favorites.find((f) => f.id === action.payload.id);
+			if (!find) state.favorites = [...state.favorites, action.payload];
 		},
 		deleteFavorite: (state, action) => {
-			let deleteProduct = state.favorites.filter((p) => p.id !== action.payload.id);
+			let deleteProduct = state.favorites.filter(
+				(p) => p.id !== action.payload.id
+			);
 			state.favorites = deleteProduct;
+		},
+		getUser: (state, action) => {
+			state.users = action.payload;
 		},
 	},
 });
@@ -151,7 +162,9 @@ export const {
 	deleteQuantity,
 	reviews,
 	addFavorite,
-	deleteFavorite
+	deleteFavorite,
+	getUser,
+	getOrderByUser,
 } = productsSlice.actions;
 
 export default productsSlice.reducer;

@@ -11,17 +11,28 @@ import {
 	deleteQuantity,
 	reviews,
 	addFavorite,
-	deleteFavorite
+	deleteFavorite,
+	getUser,
+	getOrderByUser,
 } from "./reducer";
 import axios from "axios";
 
+export const getUseremail = (user) => async (dispatch) => {
+	return dispatch(getUser(user));
+};
+
 export const getProducts = () => async (dispatch) => {
-	let products = await axios.get("/products")
+	let products = await axios.get("/products");
 	try {
-		return dispatch(getAllProducts(products.data))
+		return dispatch(getAllProducts(products.data));
 	} catch (error) {
-		console.log(error)
+		console.log(error);
 	}
+};
+
+export const postUser = (authUser) => async (dispatch) => {
+	let dbUser = await axios.post("user", authUser);
+	return dbUser;
 };
 
 export const postProducts = (productInfo) => async (dispatch) => {
@@ -37,6 +48,15 @@ export const getDetails = (id) => async (dispatch) => {
 		console.log(error);
 	}
 };
+
+export const getUsers = () => async (dispatch) => {
+	try {
+		let users = await axios.get("/users/all");
+		return dispatch(getUser(users.data));
+	} catch (error) {
+		console.log(error);
+	}
+};
 export const searchProduct = (query) => async (dispatch) => {
 	try {
 		let search = await axios.get(`/product?title=${query}`);
@@ -47,6 +67,14 @@ export const searchProduct = (query) => async (dispatch) => {
 	}
 };
 
+export const getOrders = (email) => async (dispatch) => {
+	try {
+		let orders = await axios.get(`/order/${email}/orders`);
+		return dispatch(getOrderByUser(orders.data));
+	} catch (error) {
+		console.log(error);
+	}
+};
 export const orderByNames = (filter) => (dispatch) => {
 	return dispatch(orderByName(filter));
 };
@@ -71,23 +99,24 @@ export const deleteQuantityCard = (product) => (dispatch) => {
 	return dispatch(deleteQuantity(product));
 };
 export const getReviews = (id) => async (dispatch) => {
-		let reviewsResponse = await axios.get(`/reviews/${id}`)
-		console.log(reviewsResponse)
-		try {
-			return dispatch(reviews(reviewsResponse.data))
-		} catch (error) {
-			console.log(error)
-		}
-	};
-// 	export const postReview = (reviewInfo) => async (dispatch) => {
-// 		let post = await axios.post("/review", reviewInfo);
-// 		return post;
-// 	};
-export const addFavorites = product => (dispatch) => {
-	return dispatch(addFavorite(product))
-};
-export const deleteFavorites = product => (dispatch) => {
-	return dispatch(deleteFavorite(product))
+	let reviewsResponse = await axios.get(`/reviews/${id}`);
+	// console.log(reviewsResponse)
+	try {
+		return dispatch(reviews(reviewsResponse.data));
+	} catch (error) {
+		console.log(error);
+	}
 };
 
+export const postReview = (reviewInfo) => async (dispatch) => {
+	let post = await axios.post("/review", reviewInfo);
+	//console.log(reviewInfo)
+	return post.data;
+};
 
+export const addFavorites = (product) => (dispatch) => {
+	return dispatch(addFavorite(product));
+};
+export const deleteFavorites = (product) => (dispatch) => {
+	return dispatch(deleteFavorite(product));
+};

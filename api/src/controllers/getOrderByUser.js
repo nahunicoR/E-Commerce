@@ -7,27 +7,23 @@ const { Order, Address } = require("../db");
 
 
 
-const getOrderByUser = async (userId) => {
-    const id = userId
+const getOrderByUser = async (userEmail) => {
+    
     try {
         const userOrdes = await Order.findAll({
             where:{
-               userId: id,
+                userEmail: userEmail,
             },
-            include: [{//esta llave es por si tiene más relaciones, puede quitarse si sólo es una relación como en este caso
-                model: Address,
-                as: "addressorder",
-                atributes:["mainstreet", "number","postalcode",
-                            "street1", "street2", "name", "phonenumber",
-                            "additonals"]
-            }]
+            atributes:["id", "number","purchaseCost",
+                            "payOrder", "paymentMethod", "status", "createdAt"]
+            
         });
         if (userOrdes) {
            return userOrdes;
         } else {
             return {
                 'message': 'Usuario no tiene ordenes registradas.',
-                'error': `El id: ${id} no existe`
+                'error': `El id: ${userEmail} no existe`
             };
         } 
         
