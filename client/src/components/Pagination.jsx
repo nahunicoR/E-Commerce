@@ -5,12 +5,12 @@ function Pagination({ productsPerPage, allProducts, pagination }) {
 	const pageNumbers = [];
 	for (let i = 0; i < Math.ceil(allProducts / productsPerPage); i++) {
 		pageNumbers.push(i + 1);
-	}
+	} //"1295px"
 	return (
 		<GridItem
 			position={"absolute"}
-			top={"1400"}
-			left={"700"}
+			top={"1500"}
+			left={{ base: "null", lg: "950px", xl: "52%" }}
 			gridArea={"pag"} /* bg={"red.100"} */
 		>
 			<HStack alignItems={"center"} justifyContent={"center"} padding={"10"}>

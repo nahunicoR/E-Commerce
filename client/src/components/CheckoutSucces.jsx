@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/LogoTo-Mate.png";
 import { Text, Container, Image, HStack, Flex, Button } from "@chakra-ui/react";
-import { useAuth0 } from "@auth0/auth0-react";
+//import { useAuth0 } from "@auth0/auth0-react";
 
 const CheckoutSucces = () => {
 	const navigate = useNavigate();
@@ -30,9 +30,7 @@ const CheckoutSucces = () => {
 							Exitoso
 						</Text>
 						<Image marginLeft={"5"} src={logo} alt="page logo" w={"250px"} />
-						<Button marginTop={"3"} 
-							onClick={() => navigate("/")}
-							>
+						<Button marginTop={"3"} onClick={() => navigate("/")}>
 							Volver al comercio
 						</Button>
 					</Container>
