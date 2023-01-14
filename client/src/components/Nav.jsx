@@ -8,7 +8,7 @@ import {
 	IconButton,
 	useColorMode,
 } from "@chakra-ui/react";
-import { FaUser, FaShoppingCart } from "react-icons/fa";
+import { FaUser, FaShoppingCart, FaMoon, FaSun } from "react-icons/fa";
 import { AiOutlinePoweroff } from "react-icons/ai";
 import logo from "../assets/LogoTo-Mate.png";
 import { Link } from "react-router-dom";
@@ -72,9 +72,14 @@ export default function Nav() {
 				</Flex>
 
 				<Flex justifyContent={"space-evenly"} w={"45%"}>
-					<Button bg={"gray"} onClick={toggleColorMode}>
-						{colorMode === "dark" ? "light" : "dark"} mode
-					</Button>
+					<IconButton
+						icon={colorMode === "dark" ? <FaSun /> : <FaMoon />}
+						variant={"ghost"}
+						fontSize={"xl"}
+						onClick={toggleColorMode}
+						rounded={"full"}
+					/>
+
 					{isAuthenticated && admin?.rol === "admin" ? (
 						<Button fontSize={"lg"} color={"white"} variant="link">
 							<Link to={"/create"}>Crear Producto</Link>
