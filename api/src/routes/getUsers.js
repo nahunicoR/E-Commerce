@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { getUsers } = require('../controllers/getUsers');
-const {User, Order} = require('../db');
+const {response} = require('../utils')
 
 /* Date Creation: December 12, 2022
    Author: Alejandro Téllez Aguilar
@@ -11,7 +11,7 @@ const router = Router();
 router.get('/all', async (req, res, next) => {
     try {
       const data = await getUsers();
-      return res.status(200).json(data);
+      response(res,200,data);
     } catch (error) {
         next(error);
     }
