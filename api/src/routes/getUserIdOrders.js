@@ -1,6 +1,7 @@
 const { Router } = require('express');
-const { getUserIdOrders } = require('../controllers/getUserIdOrders');
+const controller = require('../controllers');
 const {User, Order} = require('../db');
+const {response} = require("../utils")
 
 /* Date Creation: December 13, 2022
    Author: Alejandro Téllez Aguilar
@@ -20,16 +21,14 @@ router.get('/:iduser/ordenes', async (req, res, next) => {
             as: "ordenes",
             atributes:["purchasecost", "payorder","paymentmethod"]
         }]
-        
       }); 
       if (data) {
-        return res.status(200).json(data);
+        return response(res,200,data);
       } else {
-        return res.status(404).json({message:"No se encontró usuario"});
+        return response(res,404,{message:"No se encontró usuario"});
       }  
-      
     } catch (error) {
-        return res.status(404).json({error: error.message});
+        next(error);
     }
 });
 
