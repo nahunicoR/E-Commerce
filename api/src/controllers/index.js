@@ -1,4 +1,5 @@
 module.exports = {
+    createAddressUser : require('./createAddressUser'),
     deleteAddressUser: require('./deleteAddressUser'),
     deleteImageProducts: require('./deleteImageProduct'),
     deleteProduct: require('./deleteProduct'),
