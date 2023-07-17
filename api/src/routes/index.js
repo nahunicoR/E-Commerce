@@ -1,147 +1,71 @@
 const { Router } = require("express");
-
-// Importar todos los routers;
-// Ejemplo: const authRouter = require('./auth.js');
-const createProduct = require("./createProduct");
-const getProductsDb = require("./getProducts");
-const deleteProduct = require("./deleteProduct");
-const getProductById = require("./getProductById");
-const updateProduct = require("./updateProduct");
-const getProductByName = require("./getProductByName");
-const getImageByProduct = require("./getImageByProduct");
-const deleteImageProduct = require("./deleteImageProduct");
-
-const getAllReviewByProduct = require("./getAllReview");
-const createReview = require("./createReview");
-const updateReview = require("./updateReview");
-const deleteReview = require("./deleteReview");
-const getUser = require("./getUserbyEmail");
-
-const login = require("../middlewares/login.js");
-const admin = require("../middlewares/admin");
-
-/* Para usuarios 
-   Author: Alejandro Téllez
-*/
-
-const getUsersDb = require("./getUsers");
-const getUserIdOrders = require("./getUserIdOrders");
-const createUser = require("./createUser"); // Creado por Jesús Delgado
-const updateUser = require("./updateUser"); // Creado por Jesús Delgado
-
-/* Para ordenes 
-   Author: Alejandro Téllez
-*/
-
-const createOrder = require("./createOrder");
-const createDetailorder = require("./createDetailorder");
-const packOffOrder = require("./packOffOrder");
-const getOrdersUsers = require("./getOrdersUsers");
-const getOrderByUser = require("./getOrderByUser");
-const getOrderStatus = require("./getOrderStatus");
-
-/* Para Address 
-   Author: Alejandro Téllez
-*/
-
-const createAdress = require("./createAddress");
-const getAddressByUser = require("./getAddressByUser");
-const updateAddressUser = require("./updateAddressUser");
-const deleteAddressUser = require("./deleteAddressUser");
-
-/* Para Emails 
-   Author: Alejandro Téllez
-*/
-
-const createMail = require("./createMail");
-
-/* Para cloudinary 
-    Author: Alejandro Téllez
-*/
-
-const uploadImage = require("./uploadImage");
-
 const router = Router();
 
+// Importar todos los routers;
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 
-router.use("/product", createProduct);
-router.use("/products", getProductsDb);
-router.use("/product", deleteProduct);
-router.use("/product", getProductById);
-router.use("/product", updateProduct);
-router.use("/product", getProductByName);
-router.use("/product", getImageByProduct);
-router.use("/image", deleteImageProduct);
+router.use("/product", require("./createProduct"));
+router.use("/products", require("./getProducts"));
+router.use("/product", require("./deleteProduct"));
+router.use("/product", require("./getProductById"));
+router.use("/product", require("./updateProduct"));
+router.use("/product", require("./getProductByName"));
+router.use("/product", require("./getImageByProduct"));
+router.use("/image", require("./deleteImageProduct"));
 
-/**Para Reviews */
+/* Para Reviews */
 
-router.use("/review", createReview);
-router.use("/reviews", getAllReviewByProduct);
-router.use("/review", updateReview);
-router.use("/review", deleteReview);
-
+router.use("/review", require("./createReview"));
+router.use("/reviews", require("./getAllReview"));
+router.use("/review", require("./updateReview"));
+router.use("/review", require("./deleteReview"));
 // router.use('/reviews'        , getAllReviewByProduct); para pruebas con bulkCreate
 
-/* Para usuarios 
-   Author: Alejandro Téllez 
-*/
+/* Para usuarios */
 
-router.use("/users", getUsersDb);
-router.use("/users", getUserIdOrders);
-router.use("/user", createUser); //Creado por Jesús Delgado
-router.use("/user", updateUser);
-router.use("/user", getUser);
+router.use("/users", require("./getUsers"));
+router.use("/users", require("./getUserIdOrders"));
+router.use("/user", require("./createUser")); //Creado por Jesús Delgado
+router.use("/user", require("./updateUser"));
+router.use("/user", require("./getUserbyEmail"));
 
-/* Para Ordenes 
-   Author: Alejandro Téllez 
-*/
+/* Para Ordenes */
 
-router.use("/order", createOrder);
-router.use("/detailorder", createDetailorder);
-router.use("/order", packOffOrder);
-router.use("/orders", getOrdersUsers);
-router.use("/order", getOrderByUser);
-router.use("/order", getOrderStatus);
+router.use("/order", require("./createOrder"));
+router.use("/detailorder", require("./createDetailorder"));
+router.use("/order", require("./packOffOrder"));
+router.use("/orders", require("./getOrdersUsers"));
+router.use("/order", require("./getOrderByUser"));
+router.use("/order", require("./getOrderStatus"));
 
-/* Para Address 
-   Author: Alejandro Téllez 
-*/
+/* Para Address */
 
-router.use("/address", createAdress);
-router.use("/addresses", getAddressByUser);
-router.use("/address", updateAddressUser);
-router.use("/address", deleteAddressUser);
+router.use("/address", require("./createAddress"));
+router.use("/addresses", require("./getAddressByUser"));
+router.use("/address", require("./updateAddressUser"));
+router.use("/address", require("./deleteAddressUser"));
 
-/* Para Mails 
-   Author: Alejandro Téllez 
-*/
+/*   Para Mails   */
 
-router.use("/", createMail);
+router.use("/", require("./createMail"));
 
-/* Para Cloudinary  
-   Author: Alejandro Téllez 
-*/
+/* Para Cloudinary */
 
-router.use("/", uploadImage);
-/* Para Mercado Pago
-    Author: Nahuel Riveros
-*/
+router.use("/", require("./uploadImage"));
 
-const mercadoPago = require("./mercadopago");
+/* Para Mercado Pago*/
+router.use("/", require("./mercadopago"));
 
-router.use("/", mercadoPago);
+/*Authorization */
+const login = require("../middlewares/login.js");
+const admin = require("../middlewares/admin");
 
-// const review = require("./createReview");
-// router.use("/reviews", review)
-
-/**Authorization */
 router.get("/authorization", login, admin, (req, res) => {
-	try {
-		res.status(200).send({ authorized: true });
+   try {
+      res.status(200).send({ authorized: true });
 	} catch (error) {
-		res.send({ authorized: false });
+      res.send({ authorized: false });
 	}
 });
 
