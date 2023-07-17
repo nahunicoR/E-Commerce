@@ -1,4 +1,5 @@
 module.exports = {
+    createUser : require('./createUser'),
     createReview : require('./createReview'),
     createProduct: require('./createProduct'),
     createOrder: require('./createOrder'),
