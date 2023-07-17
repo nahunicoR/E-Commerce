@@ -1,6 +1,6 @@
 module.exports = {
     deleteAddressUser: require('./deleteAddressUser'),
-    deleteImagePRoducts: require('./deleteImageProduct'),
+    deleteImageProducts: require('./deleteImageProduct'),
     deleteProduct: require('./deleteProduct'),
     getAddressByUser: require('./getAddressByUser'),
     getAllReviewDB: require('./getAllReviewDB'),
@@ -17,4 +17,4 @@ module.exports = {
     updateProduct: require('./updateProduct'),
     updateUser: require('./updateUser'),
     uploadImage: require('./uploadImage'),
-}
+};

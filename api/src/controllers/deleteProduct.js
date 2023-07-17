@@ -1,16 +1,14 @@
 const { Product } = require("../db");
+const {response} = require("../utils");
 
-const deleteProduct = async (id) => {
+module.exports = async (req,res,next) => {
+    const {id} = req.params;
     try {
         let detail = await Product.destroy({
-            where: {
-                id
-            }
-        })
-        return `Se elimino el producto con id: ${detail}`;
+            where: { id }
+        });
+        return response(res,200,`Se elimino el producto con id: ${detail}`);
     } catch (error) {
-        console.log(error);
-    }
-}
-
-module.exports = { deleteProduct };
+        next(error);
+    };
+};

@@ -2,10 +2,10 @@
    Author: Alejandro Téllez Aguilar
    Description: Crea la ruta /users/orders para otener todos los usuarios con sus ordenes
 */
-
 const { User, Order } = require("../db");
+const { response } = require("../utils");
 
-const getOrdersUsers = async () => {
+module.exports = async (req,res,next) => {
     try {
         const usersDb = await User.findAll({
             //Para traer las ordenes
@@ -15,11 +15,8 @@ const getOrdersUsers = async () => {
                 atributes:["purchasecost", "payorder","paymentmethod"]
             }]
         });
-        
-        return [...usersDb];
+        return response(res,200,[...usersDb]);
     } catch (error) {
-        console.log(error);
-    }
-}
-
-module.exports = { getOrdersUsers };
+        next(error);
+    };
+};
