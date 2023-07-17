@@ -1,4 +1,6 @@
 module.exports = {
+    getProductByName: require('./getProductByName'),
+    deleteReview : require('./deleteReview'),
     createUser : require('./createUser'),
     createReview : require('./createReview'),
     createProduct: require('./createProduct'),
