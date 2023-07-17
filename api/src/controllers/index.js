@@ -1,4 +1,5 @@
 module.exports = {
+    getUserByEmail: require('./getUserByEmail'),
     getProductByName: require('./getProductByName'),
     deleteReview : require('./deleteReview'),
     createUser : require('./createUser'),
