@@ -3,7 +3,7 @@ module.exports = {
     deleteImageProducts: require('./deleteImageProduct'),
     deleteProduct: require('./deleteProduct'),
     getAddressByUser: require('./getAddressByUser'),
-    getAllReviewDB: require('./getAllReviewDB'),
+    getAllReviews: require('./getAllReviewDB'),
     getImageByProduct: require('./getImageByProduct'),
     getOrderByUser: require('./getOrderByUser'),
     getOrderStatus: require('./getOrderStatus'),
