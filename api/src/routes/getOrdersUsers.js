@@ -1,6 +1,5 @@
 const { Router } = require('express');
-const { getOrdersUsers } = require('../controllers/getOrdersUsers');
-const {User, Order} = require('../db');
+const controller = require('../controllers');
 
 /* Date Creation: December 13, 2022
    Author: Alejandro Téllez Aguilar
@@ -8,13 +7,6 @@ const {User, Order} = require('../db');
 */
 const router = Router();
 
-router.get('/', async (req, res, next) => {
-    try {
-      const data = await getOrdersUsers();
-      return res.status(200).json(data);
-    } catch (error) {
-        next(error);
-    }
-});
+router.get('/', controller.getOrdersUsers);
 
 module.exports = router;

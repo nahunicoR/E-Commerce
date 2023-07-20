@@ -1,19 +1,8 @@
 const { Router } = require('express');
-const { getProductById } = require('../controllers/getProductById');
+const controller = require('../controllers/index');
 
 const router = Router();
 
-router.get('/:id', async (req, res, next) => {
-    let { id } = req.params;
-    try {
-        let data = await getProductById(id)
-        if (data.id) {
-            return res.status(200).json(data);
-        }
-        res.status(404).json(data)
-    } catch (error) {
-        next(error)
-    }
-});
+router.get('/:id', controller.getProductById);
 
 module.exports = router;

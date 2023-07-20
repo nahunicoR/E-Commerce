@@ -1,18 +1,18 @@
 const { Product } = require("../db");
+const {response} = require('../utils')
 
-const getProductById = async (id) => {
+module.exports = async (req,res,next) => {
+    const {id} = req.params;
     try {
-        let detail = await Product.findByPk(id);
-        if (detail) {
-            return detail;
-        }
-        return {
-            'message': 'Producto no Encontrado',
-            'error': `El id: ${id} no existe`
-        };
+        const detail = await Product.findByPk(id);
+            if (detail) {
+                return response(res,200,detail);
+            }
+            return response(res,200,{
+                message: 'Producto no Encontrado',
+                error: `El id: ${id} no existe`
+            });
     } catch (error) {
-        console.log(error);
-    }
-}
-
-module.exports = { getProductById };
+      next(error);  
+    };
+};

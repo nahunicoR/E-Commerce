@@ -1,14 +1,11 @@
 const { Order, Address } = require("../db");
-
+const {response} = require("../utils");
 /* Date Creation: January 2, 2023
       Author: Alejandro Téllez Aguilar
    Description: Crea la ruta /users/orders para otener todos los usuarios con sus ordenes
 */
-
-
-
-const getOrderByUser = async (userEmail) => {
-    
+module.exports = async (req,res,next) => {
+    const {userEmail} = req.params;
     try {
         const userOrdes = await Order.findAll({
             where:{
@@ -16,20 +13,15 @@ const getOrderByUser = async (userEmail) => {
             },
             atributes:["id", "number","purchaseCost",
                             "payOrder", "paymentMethod", "status", "createdAt"]
-            
         });
-        if (userOrdes) {
-           return userOrdes;
-        } else {
+        if (!userOrdes) {
             return {
-                'message': 'Usuario no tiene ordenes registradas.',
-                'error': `El id: ${userEmail} no existe`
+                message: 'Usuario no tiene ordenes registradas.',
+                error: `El id: ${userEmail} no existe`
             };
-        } 
-        
+        }
+        return response(res,200,userOrdes);
     } catch (error) {
-        console.log(error);
-    }
-}
-
-module.exports = { getOrderByUser };
+        next(error);
+    };
+};

@@ -1,9 +1,15 @@
 const { Product } = require("../db");
+const products = require('../controllers/objProducts');
+const {response} = require('../utils');
 
-const getProductsDb = async () => {
+module.exports = async (req,res,next) => {
     try {
         const ProductosDb = await Product.findAll();
-        let resp = await ProductosDb?.map( product => {
+        if (!ProductosDb.length) {
+            const load = await Product.bulkCreate(products);
+            return response(res,200,load);
+        };
+        const resp = await ProductosDb.map( product => {
             return {
                 id: product.id,
                 title: product.title,
@@ -14,11 +20,9 @@ const getProductsDb = async () => {
                 material: product.material,
                 stock: product.stock,
             }
-        })
-        return resp;
+        });
+        return response(res,201,resp);
     } catch (error) {
-        console.log(error);
-    }
-}
-
-module.exports = { getProductsDb };
+        next(error);
+    };
+};

@@ -12,14 +12,9 @@
   
 ## PF-SOYHENRY-G9:
   Para la exitosa realización de este proyecto utilizamos las tecnologías aprendidas durante el _BootCamp_ de "Soy Henry":
-  
-  __NodeJs__,
-  __Express__,
-  __MercadoPago__,
-  __Postgres__,
-  __Sequelize__,
-  __ReactJs__,
-  __ReactRouterDom V6__,
-  __ChakraUi__,
-  __Redux__,
-  __Auth0__  
+
+## Frontend:
+__ReactJs__, __ChakraUi__, __Redux__, __ChakraUi__, __ReactRouterDom V6__, __ReduxToolKit__, __React-icons__, __Formik__
+
+## Backend:
+__NodeJs__, __Express__, __MercadoPago__, __Postgres__, __Sequelize__, __Autenticacion__, __Autorizacion__, __JsonWebToken__, __Axios__, __cloudinary__, __Bcrypt__, __Nodemailer__

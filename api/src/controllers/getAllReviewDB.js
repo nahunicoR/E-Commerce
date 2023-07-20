@@ -29,4 +29,36 @@
 //     }
 // }
 
-// module.exports = { getAllReviewDB };
+const { Router } = require('express');
+// const  objReview  = require('../controllers/objReview');
+// const {getAllReviewDB} = require('../controllers/getAllReviewDB');
+const {Review} = require('../db');
+const {response} = require("../utils");
+
+module.exports = async (req, res, next) => {
+	const { id } = req.params;
+	if(parseInt(id) === 0) {
+		try {
+			const reviews = await Review.findAll({
+				attributes: {exclude: ['userEmail']},
+				order:[['id','DESC']]
+			});
+			return response(res,200,reviews);
+		} catch (error) {
+			response(res,400,error);
+		}
+	} else {
+        try {
+            const reviews = await Review.findAll({
+                where: {
+                    productId: id,	
+                },
+                attributes: {exclude: ['userEmail']},
+                order:[['id','DESC']]
+            });
+            return response(res,200,reviews);
+        } catch (error) {
+            next(error);
+        }
+	}	
+};

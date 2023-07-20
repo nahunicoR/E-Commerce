@@ -1,18 +1,11 @@
-
 const { User, Order } = require("../db");
+const {response} = require('../utils')
 
-/* Date Creation: December 12, 2022
-   Author: Alejandro Téllez Aguilar
-   Description: Crea el servicio de la ruta /users/all para otener todos los usuarios
-*/
-const getUsers = async () => {
+module.exports = async (req,res,next) => {
     try {
         const usersDb = await User.findAll();
-        
-        return [...usersDb];
+        return response(res,200,[...usersDb]);  
     } catch (error) {
-        console.log(error);
-    }
-}
-
-module.exports = { getUsers };
+        next(error);
+    };
+};
