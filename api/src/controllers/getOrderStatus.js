@@ -1,7 +1,4 @@
-/* Date Creation: January 3, 2023
-   Author: Alejandro Téllez Aguilar
-   Description: Crea el servicio de la ruta /addresses/?status/products para obtener las ordenes y sus productos
-*/
+
 const { Order, Orderdetail } = require("../db");
 const {response} = require("../utils");
 
