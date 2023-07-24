@@ -1,7 +1,3 @@
-/* Date Creation: December 20, 2022
-   Author: Alejandro Téllez Aguilar
-   Description: Crea el servicio de la ruta /addresses/?id/streets para otener todos los usuarios y sus domicilios
-*/
 const { User, Address } = require("../db");
 const {response} = require("../utils");
 
