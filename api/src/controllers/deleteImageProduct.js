@@ -1,7 +1,4 @@
-/* Date Creation: January 6, 2023
-   Author: Alejandro Téllez Aguilar
-   Description: Crea servicio para eliminar una imagen del producto
-*/
+
 //Librerías para cloudinary
 const cloudinary = require("../services/cloudConfig");
 const { Image } = require("../db");
