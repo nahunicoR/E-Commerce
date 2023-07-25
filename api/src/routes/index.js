@@ -55,7 +55,10 @@ router.use("/", require("./createMail"));
 router.use("/", require("./uploadImage"));
 
 /* Para Mercado Pago*/
-router.use("/", require("./mercadopago"));
+router.use("/payment", require("./createPayment"));
+router.use("/payment/result", require("./getPayment"));
+router.use("/payment/:id", require("./getPaymentById"));
+router.use("/notification", require("./paymentNotification"));
 
 /*Authorization */
 const login = require("../middlewares/login.js");
