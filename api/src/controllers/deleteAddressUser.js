@@ -1,7 +1,3 @@
-/* Date Creation: December 20, 2022
-   Author: Alejandro Téllez Aguilar
-   Description: Crea la ruta /address/id para eliminar un domicilio del Usuari
-*/
 const { Address } = require("../db");
 const {response} = require("../utils");
 

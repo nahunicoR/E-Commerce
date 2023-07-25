@@ -1,16 +1,13 @@
 const { Order, Orderdetail, Product  } = require("../db");
 const {response} = require("../utils");
 const  nodemailer = require('nodemailer');
-/* Date Creation: December 29, 2022
-   Author: Alejandro Téllez Aguilar
-   Description: Crea el servicio de la ruta /oders para cambiar el esatdo de una orden de compra
-*/
+
 let productosCorreo = 0; //Para controlar la cadena de productos que se han vendido
 
 module.exports = async (req,res,next) => {
     const { orderId, email, name, status} = req.body;
     try {
-         // //Cambia de estado de la orden
+         //Cambia de estado de la orden
          let changeOrder = await changeStateOrder(orderId,status);
          //Obtiene el detalle de la orden en la tabla orderdetail
          const data = await Order.findOne({
@@ -26,15 +23,12 @@ module.exports = async (req,res,next) => {
             if (data) { //Obtiene todos los productos de la orden
               //Envía cada productos y cantidad comprada para aumentar el stock
               data.headorder.forEach(element => {
-               console.log(element.productId, element.purchasedamount)
                //Actualiza el stock con cada producto
                if (status === "cancelada") {
                   const odetail = updateStock(element.productId,element.purchasedamount,status);
                   productosCorreo++
                }   
               });   
-              console.log(name,email,productosCorreo)  
-              
               // Envía correo al usuario                
                const send = await sendMail(email,name, productosCorreo, status)
              return response(res,200,{
@@ -98,7 +92,6 @@ module.exports = async (req,res,next) => {
    }
 
    //Si es surtida o en proceso
-   console.log(status);
    if (status === "proceso"){ 
      // enviar correo con objeto de transporte definido
      return transporter.sendMail({ //await

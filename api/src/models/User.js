@@ -1,4 +1,6 @@
 const { DataTypes } = require('sequelize');
+const bcrypt = require('bcrypt');
+
 // Exportamos una funcion que define el modelo
 // Luego le injectamos la conexion a sequelize.
 module.exports = (sequelize) => {
@@ -7,45 +9,29 @@ module.exports = (sequelize) => {
   //corrijo el modelo de User, de acuerdo a lo que debiera mandar Auth0 desde Front-End.
   //queda pendiente la validación de roles en back, ver si es necesaria la asignacion de roles.
   sequelize.define('user', {
+    name: {                            //Nombre del usuario
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     email: {
       type: DataTypes.STRING,
       primaryKey: true,
-      // allowNull: false,
-      // unique: true,
-      // validate: {
-      //   isEmail: {
-      //     args: true,
-      //     msg: 'Email no valido'
-      //   },
-      //   isLowercase:{
-      //     args: true,
-      //     msg: 'El email debe ser en minuscula'
-      //   }
-      // }
+      allowNull: false,
     },
-    name: {                            //Nombre del usuario
+    password: {
       type: DataTypes.STRING,
-      // validate:{
-      //   len:{
-      //     args:[3,70],
-      //     msg:"El nombre tiene que ser entre 3 y 70 caracteres"
-      //   }
-      // }
+      allowNull: false
     },
-    // family_name: {
-    //   type: DataTypes.STRING,
-      // validate:{
-      //   len:{
-      //     args:[3,70],
-      //     msg:"El apellido tiene que ser entre 3 y 70 caracteres"
-      //   }
-      // }
-    // },
-    
     rol: {
-      type: DataTypes.ENUM,
-      values: ['user','superadmin','guest','admin','denegado'],
+      type: DataTypes.STRING,
       defaultValue: 'user'
-   },
+   }
+  },{
+    hooks: {
+      beforeCreate: async (usuario) => {
+        const salt = await bcrypt.genSalt(10);
+        usuario.password = await bcrypt.hash(usuario.password, salt);
+      }
+    }
   });
 };

@@ -1,7 +1,3 @@
-/* Date Creation: January 05, 2023
-   Author: Alejandro Téllez Aguilar
-   Description: Crea el servicio obtener los productos y sus imágenes
-*/
 const {response} = require("../utils");
 const { Image, Product } = require("../db");
 
