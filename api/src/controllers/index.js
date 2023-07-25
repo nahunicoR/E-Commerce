@@ -1,4 +1,8 @@
 module.exports = {
+    paymentNotification: require("./paymentNotification"),
+    getPaymentById: require("./getPaymentById"),
+    getPayment: require("./getPayment"),
+    createPayment: require("./createPayment"),
     getUserByEmail: require('./getUserByEmail'),
     getProductByName: require('./getProductByName'),
     deleteReview : require('./deleteReview'),
