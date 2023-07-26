@@ -41,7 +41,7 @@ module.exports = async (req,res,next) => {
                 installments: 3
             },
             binary_mode: true,
-            // notification_url: `${BACK_URL}/notification`,
+            // notification_url: `${BACK_URL}/payment/notification`,
             statement_descriptor: "To-Mate",
         }
         await mercadopago.preferences.create(preference)
