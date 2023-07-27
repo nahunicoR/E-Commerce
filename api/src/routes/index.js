@@ -58,7 +58,7 @@ router.use("/", require("./uploadImage"));
 router.use("/payment", require("./createPayment"));
 router.use("/payment/result", require("./getPayment"));
 router.use("/payment/:id", require("./getPaymentById"));
-router.use("/notification", require("./paymentNotification"));
+router.use("/payment", require("./paymentNotification"));
 
 /*Authorization */
 const login = require("../middlewares/login.js");
