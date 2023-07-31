@@ -9,6 +9,10 @@ module.exports = (sequelize) => {
   //corrijo el modelo de User, de acuerdo a lo que debiera mandar Auth0 desde Front-End.
   //queda pendiente la validación de roles en back, ver si es necesaria la asignacion de roles.
   sequelize.define('user', {
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4
+    },
     name: {                            //Nombre del usuario
       type: DataTypes.STRING,
       allowNull: false
