@@ -1,4 +1,5 @@
 module.exports = {
+    loginUser: require("./loginUser"),
     paymentNotification: require("./paymentNotification"),
     getPaymentById: require("./getPaymentById"),
     getPayment: require("./getPayment"),
