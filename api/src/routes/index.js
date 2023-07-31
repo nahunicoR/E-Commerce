@@ -26,6 +26,7 @@ router.use("/review", require("./deleteReview"));
 
 router.use("/users", require("./getUsers"));
 router.use("/users", require("./getUserIdOrders"));
+router.use("/login", require("./postLogin"));
 router.use("/user", require("./createUser")); //Creado por Jesús Delgado
 router.use("/user", require("./updateUser"));
 router.use("/user", require("./getUserbyEmail"));
@@ -61,15 +62,15 @@ router.use("/payment/:id", require("./getPaymentById"));
 router.use("/payment", require("./paymentNotification"));
 
 /*Authorization */
-const login = require("../middlewares/login.js");
-const admin = require("../middlewares/admin");
+// const login = require("../middlewares/login.js");
+// const admin = require("../middlewares/admin");
 
-router.get("/authorization", login, admin, (req, res) => {
-   try {
-      res.status(200).send({ authorized: true });
-	} catch (error) {
-      res.send({ authorized: false });
-	}
-});
+// router.get("/authorization", login, admin, (req, res) => {
+//    try {
+//       res.status(200).send({ authorized: true });
+// 	} catch (error) {
+//       res.send({ authorized: false });
+// 	}
+// });
 
 module.exports = router;
