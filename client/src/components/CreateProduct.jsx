@@ -18,7 +18,6 @@ import {
 import { useColorMode } from '@chakra-ui/color-mode';
 import { useDispatch } from 'react-redux';
 import { postProducts } from '../redux/actions';
-import { useAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
 
 
@@ -56,7 +55,6 @@ export default function CreateProduct() {
   const toast = useToast();
   const dispatch = useDispatch();
   const { colorMode } = useColorMode();
-  const { user } = useAuth0();
   const [admin, setAdmin] = useState({});
   const [image, setImage] = useState("");
   const [button, setButton] = useState(true);
@@ -95,12 +93,12 @@ export default function CreateProduct() {
 		}
 	}, [form, setButton, admin]);
 
-	useEffect(() => {
-		axios(`/user/one?mail=${user?.email}`).then((res) => {
-			console.log(res.data);
-			setAdmin(res.data);
-		});
-	}, [user]);
+	// useEffect(() => {
+	// 	axios(`/user/one?mail=${user?.email}`).then((res) => {
+	// 		console.log(res.data);
+	// 		setAdmin(res.data);
+	// 	});
+	// }, [user]);
 
 function handleChange(e) {
     setForm({
