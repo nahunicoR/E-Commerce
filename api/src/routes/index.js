@@ -16,7 +16,7 @@ router.use("/image", require("./deleteImageProduct"));
 
 /* Para Reviews */
 
-router.use("/review", require("./createReview"));
+router.use("/product", require("./createReview"));
 router.use("/reviews", require("./getAllReview"));
 router.use("/review", require("./updateReview"));
 router.use("/review", require("./deleteReview"));
@@ -61,16 +61,5 @@ router.use("/payment/result", require("./getPayment"));
 router.use("/payment/:id", require("./getPaymentById"));
 router.use("/payment", require("./paymentNotification"));
 
-/*Authorization */
-// const login = require("../middlewares/login.js");
-// const admin = require("../middlewares/admin");
-
-// router.get("/authorization", login, admin, (req, res) => {
-//    try {
-//       res.status(200).send({ authorized: true });
-// 	} catch (error) {
-//       res.send({ authorized: false });
-// 	}
-// });
 
 module.exports = router;
