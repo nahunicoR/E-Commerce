@@ -12,7 +12,6 @@ import { FaUser, FaShoppingCart, FaMoon, FaSun } from "react-icons/fa";
 import { AiOutlinePoweroff } from "react-icons/ai";
 import logo from "../assets/LogoTo-Mate.png";
 import { Link } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch, useSelector } from "react-redux";
 import { MdOutlineFavoriteBorder, MdOutlineFavorite } from "react-icons/md";
 import { getUseremail, postUser } from "../redux/actions";
@@ -20,23 +19,22 @@ import axios from "axios";
 
 export default function Nav() {
 	const { colorMode, toggleColorMode } = useColorMode();
-	const { loginWithRedirect, isAuthenticated, user, logout } = useAuth0();
 	const [admin, setAdmin] = useState({});
 	const dispatch = useDispatch();
 
-	useEffect(() => {
-		if (isAuthenticated) {
-			dispatch(postUser(user));
-			dispatch(getUseremail(user.email));
-		}
-	}, [isAuthenticated, dispatch, user]);
+	// useEffect(() => {
+	// 	if (isAuthenticated) {
+	// 		dispatch(postUser(user));
+	// 		dispatch(getUseremail(user.email));
+	// 	}
+	// }, [dispatch]);
 
-	useEffect(() => {
-		axios(`/user/one?mail=${user?.email}`).then((res) => {
-			console.log(res.data);
-			setAdmin(res.data);
-		});
-	}, [user]);
+	// useEffect(() => {
+	// 	axios(`/user/one?mail=${user?.email}`).then((res) => {
+	// 		console.log(res.data);
+	// 		setAdmin(res.data);
+	// 	});
+	// }, [user]);
 
 	const QuantityOfProduct = useSelector((state) => state.products.cart);
 	const QuantityFavorites = useSelector((state) => state.products.favorites);
@@ -79,14 +77,7 @@ export default function Nav() {
 						onClick={toggleColorMode}
 						rounded={"full"}
 					/>
-
-					{isAuthenticated && admin?.rol === "admin" ? (
-						<Button fontSize={"lg"} color={"white"} variant="link">
-							<Link to={"/create"}>Crear Producto</Link>
-						</Button>
-					) : null}
-
-					<Button
+					{/* <Button
 						onClick={!isAuthenticated ? () => loginWithRedirect() : null}
 						fontSize={"lg"}
 						color={"white"}
@@ -102,9 +93,9 @@ export default function Nav() {
 						) : (
 							"Iniciar Sesion"
 						)}
-					</Button>
+					</Button> */}
 
-					{isAuthenticated ? (
+					{/* {isAuthenticated ? (
 						<IconButton
 							fontSize={"2xl"}
 							rounded={"full"}
@@ -115,7 +106,7 @@ export default function Nav() {
 								logout({ returnTo: window.location.origin + "/home" })
 							}
 						/>
-					) : null}
+					) : null} */}
 
 					<Flex
 						alignItems={"center"}
