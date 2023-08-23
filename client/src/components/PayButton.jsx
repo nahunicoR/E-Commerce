@@ -4,10 +4,9 @@ import { Button } from "@chakra-ui/react";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const PayButton = ({ productsInCart }) => {
-	const { user } = useAuth0();
+	// const { user } = useAuth0();
 
 	const handleCheckout = () => {
-		console.log(productsInCart, user);
 	};
 	
 
@@ -17,7 +16,7 @@ const PayButton = ({ productsInCart }) => {
 			size="lg"
 			fontSize="md"
 			rightIcon={<FaArrowRight />}
-			onClick={() => handleCheckout()}
+			onClick={handleCheckout}
 		>
 			Pagar
 		</Button>
