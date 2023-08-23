@@ -5,7 +5,8 @@ const { response } = require('../utils');
 const checkAdminAuth = async( req ,res ,next )=>{
     try {
         const token = req.headers.cookie?.split('=').pop();
-
+        if(!token) return response(res, 401, { msg: "Debes iniciar sesion!!" });
+        
         const tokenData = verifyToken(token);
         
         const userData = await User.findOne({where: {id: tokenData.id}});

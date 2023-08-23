@@ -8,10 +8,9 @@ module.exports = async (req, res, next) => {
     const { email, password } = req.body;
     
     const user = await User.findOne({ where: { email } });
+    if(!user) return response(res, 400, { msg: "El usuario no existe" });
 
     const checkPassword = await bcrypt.compare(password, user.password);
-
-    if(!user) return response(res, 400, { msg: "El usuario no existe" });
     if(!checkPassword) return response(res, 400, { msg: "El password es incorrecto" });
 
     // Si el usuario fue encontrado en la base de datos, se genera el token
@@ -23,7 +22,7 @@ module.exports = async (req, res, next) => {
       maxAge: 3600000, // Tiempo de expiración de la cookie en milisegundos (1 hora)
       sameSite: 'strict', // Solo enviar la cookie en peticiones del mismo sitio
     });
-    next();
+    return response(res, 200, { msg: "Inicio de sesion correcto" });
   } catch (error) {
     next(error);
   }
