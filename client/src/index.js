@@ -22,14 +22,12 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
 	<React.StrictMode>
 		<Router>
-			<Auth0ProviderWithHistory>
-				<ColorModeScript initialColorMode={MyTheme.config.initialColorMode} />
-				<ChakraProvider theme={MyTheme}>
-					<Provider store={store}>
-						<App />
-					</Provider>
-				</ChakraProvider>
-			</Auth0ProviderWithHistory>
+			<ColorModeScript initialColorMode={MyTheme.config.initialColorMode} />
+			<ChakraProvider theme={MyTheme}>
+				<Provider store={store}>
+					<App />
+				</Provider>
+			</ChakraProvider>
 		</Router>
 	</React.StrictMode>
 );
