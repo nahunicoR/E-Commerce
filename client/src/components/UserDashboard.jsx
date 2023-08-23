@@ -1,6 +1,5 @@
 /* import orders from "../odersMock.js"; */
 import React, { useEffect } from "react";
-import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from "react-router-dom";
 import {
 	Button,
@@ -19,7 +18,6 @@ import ProductCarousel from "./ProductCarousel.jsx";
 import { getOrders } from "../redux/actions.js";
 
 export default function UserDashboard() {
-	const { user } = useAuth0();
 	const dispatch = useDispatch();
 	const favs = useSelector((state) => state.products.favorites);
 	const orders = useSelector((state) => state.products.orders);
@@ -31,15 +29,15 @@ export default function UserDashboard() {
 		day: "numeric",
 	};
 
-	const updatedAt = new Date(user.updated_at).toLocaleDateString(
-		"es-ES",
-		options
-	);
+	// const updatedAt = new Date(user.updated_at).toLocaleDateString(
+	// 	"es-ES",
+	// 	options
+	// );
 
-	useEffect(() => {
-		localStorage.setItem("favorites", JSON.stringify(favs));
-		dispatch(getOrders(user.email));
-	}, [favs, user, dispatch]);
+	// useEffect(() => {
+	// 	localStorage.setItem("favorites", JSON.stringify(favs));
+	// 	dispatch(getOrders(user.email));
+	// }, [favs, user, dispatch]);
 
 	return (
 		<>
@@ -76,19 +74,19 @@ export default function UserDashboard() {
 					<Flex paddingLeft={5} gap={"9"} flexDir={"row"}>
 						<Avatar
 							size={"2xl"}
-							name={user.name}
-							src={user.picture}
+							// name={user.name}
+							// src={user.picture}
 							alt="profile-snippet"
 						/>
 
 						<Flex gap={3} flexDirection={"column"}>
-							<Heading>{user.name}</Heading>
-							<Text color={"gray.400"}>{user.email}</Text>
+							{/* <Heading>{user.name}</Heading> */}
+							{/* <Text color={"gray.400"}>{user.email}</Text> */}
 							<Tag
-								colorScheme={user.email_verified ? "green" : null}
+								// colorScheme={user.email_verified ? "green" : null}
 								w={"fit-content"}
 							>
-								{user.email_verified ? "Verificado" : "Sin Verificar"}
+								{/* {user.email_verified ? "Verificado" : "Sin Verificar"} */}
 							</Tag>
 						</Flex>
 					</Flex>
@@ -96,7 +94,7 @@ export default function UserDashboard() {
 					<Flex paddingRight={5}>
 						<Stat>
 							<StatLabel>Ultima Actualizacion:</StatLabel>
-							<StatNumber>{updatedAt}</StatNumber>
+							{/* <StatNumber>{updatedAt}</StatNumber> */}
 						</Stat>
 					</Flex>
 				</Flex>
