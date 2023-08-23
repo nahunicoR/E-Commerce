@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FaStar } from "react-icons/fa";
 import { Button, Input, Text } from "@chakra-ui/react";
-import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch /* useSelector */ } from "react-redux";
 import { postReview, getReviews } from "../redux/actions";
 import { getUser } from "../redux/user";
@@ -33,7 +32,6 @@ function ReviewCharge({ productId }) {
 	const stars = Array(5).fill(0);
 	// const user2 = useSelector((state)=> state.user)
 	// const toast = useToast();
-	const { isAuthenticated, user } = useAuth0();
 	const [currentValue, setCurrentValue] = useState(0);
 	const [hoverValue, setHoverValue] = useState(undefined);
 	const [input, setInput] = useState({
@@ -45,7 +43,7 @@ function ReviewCharge({ productId }) {
 	let review = {
 		input: {
 			...input,
-			userEmail: user ? { email: user?.email } : null,
+			// userEmail: user ? { email: user?.email } : null,
 			productId: productId.id,
 		},
 		currentValue: currentValue,
@@ -136,7 +134,7 @@ function ReviewCharge({ productId }) {
 				/>
 				<p>{errors.description && errors.description}</p>
 			</div>
-			{isAuthenticated ? (
+			{/* {isAuthenticated ? (
 				<Button
 					onClick={handleSubmit}
 					w={"40%"}
@@ -147,7 +145,7 @@ function ReviewCharge({ productId }) {
 				</Button>
 			) : (
 				<Text fontSize={"1.2rem"}>Inicia sesion para comentar</Text>
-			)}
+			)} */}
 		</div>
 	);
 }
