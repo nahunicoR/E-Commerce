@@ -7,7 +7,7 @@ const path = require("path");
 
 //no comentar linea debajo, sirve para pruebas locales de Back-End.
 
-const {/*DB_USER, DB_PASSWORD, DB_HOST*/ DB_DEPLOY } = process.env; 
+const {/*DB_USER, DB_PASSWORD, DB_HOST*/ DB_DEPLOY} = process.env; 
 
 //  const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/ecomerce`, {
 //  	logging: false, // set to console.log to see the raw SQL queries
@@ -76,11 +76,12 @@ User.hasMany(Address, { as: "streets", foreignkey: "id" });
 //Address.belongsTo(User, { as: "user"});  //No se requiere generar una foreignkey por ya se creando el id
 
 //relaciones productos, usuario, review Author: Sebastián
-Product.hasMany(Review);
-Review.belongsTo(Product);
+Product.hasMany(Review, { foreignKey: 'productId' });
+Review.belongsTo(Product, { foreignKey: 'productId' });
 
-User.hasMany(Review ,{  foreignkey: "userEmail" });
-Review.belongsTo(User);
+User.hasMany(Review, { foreignKey: 'userId' });
+Review.belongsTo(User, { foreignKey: 'userId' });
+
 
 module.exports = {
 	...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
