@@ -10,10 +10,9 @@ import axios from "axios";
 import MyTheme from "./components/MyTheme";
 import { ColorModeScript } from "@chakra-ui/react";
 
-import Auth0ProviderWithHistory from "./auth/auth0-provider-with-history";
 
 
-//axios.defaults.baseURL = "http://localhost:3001";
+// axios.defaults.baseURL = "http://localhost:3001";
 //axios.defaults.baseURL = "https://feeb-190-84-116-240.ngrok.io";
 // axios.defaults.baseURL = "https://e-commerce-production-9dbb.up.railway.app";
 axios.defaults.baseURL = "https://mateapi.onrender.com/"; //back redeployado con render y neon.tech
@@ -22,14 +21,12 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
 	<React.StrictMode>
 		<Router>
-			<Auth0ProviderWithHistory>
-				<ColorModeScript initialColorMode={MyTheme.config.initialColorMode} />
-				<ChakraProvider theme={MyTheme}>
-					<Provider store={store}>
-						<App />
-					</Provider>
-				</ChakraProvider>
-			</Auth0ProviderWithHistory>
+			<ColorModeScript initialColorMode={MyTheme.config.initialColorMode} />
+			<ChakraProvider theme={MyTheme}>
+				<Provider store={store}>
+					<App />
+				</Provider>
+			</ChakraProvider>
 		</Router>
 	</React.StrictMode>
 );

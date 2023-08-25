@@ -35,7 +35,6 @@ export default function CardProduct({
 	material,
 	product,
 }) {
-	/* const { isAuthenticated } = useAuth0(); */
 	const toast = useToast();
 	//const [liked, setLiked] = useState(false);
 	const dispatch = useDispatch();

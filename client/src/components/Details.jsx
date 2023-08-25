@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getDetails, getReviews } from "../redux/actions";
 import { Link, useParams } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
 import {
 	Flex,
 	HStack,
@@ -25,7 +24,6 @@ import { addFavorites, deleteFavorites } from "../redux/actions";
 export default function Details(props) {
 	const { id } = useParams();
 	const dispatch = useDispatch();
-	const { isAuthenticated } = useAuth0();
 	const toast = useToast();
 
 	//estados locales
@@ -158,9 +156,7 @@ export default function Details(props) {
 							margin-top="100"
 						>
 							<Button
-								onClick={
-									isAuthenticated
-										? () => {
+								onClick={() => {
 												dispatch(addProductsCart(productId));
 												toast({
 													status: "success",
@@ -168,14 +164,14 @@ export default function Details(props) {
 													isClosable: true,
 												});
 										  }
-										: () => {
-												toast({
-													title: "Primero inicie sesión",
-													position: "bottom",
-													status: "info",
-													isClosable: true,
-												});
-										  }
+										// : () => {
+										// 		toast({
+										// 			title: "Primero inicie sesión",
+										// 			position: "bottom",
+										// 			status: "info",
+										// 			isClosable: true,
+										// 		});
+										//   }
 								}
 								w={"40%"}
 								colorScheme={"teal"}
@@ -188,7 +184,7 @@ export default function Details(props) {
 								icon={<FaHeart />}
 								margin="0 15px"
 							/>
-							{isAuthenticated ? (
+							{/* {isAuthenticated ? ( */}
 								<Button
 									onClick={handleCompra}
 									w={"40%"}
@@ -197,7 +193,7 @@ export default function Details(props) {
 								>
 									Comprar
 								</Button>
-							) : (
+							{/* ) : (
 								<Button
 									onClick={handleCompra}
 									w={"40%"}
@@ -207,7 +203,7 @@ export default function Details(props) {
 								>
 									Comprar
 								</Button>
-							)}
+							)} */}
 						</Flex>
 					</Box>
 					<Box

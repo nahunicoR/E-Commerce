@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import CartItem from "./CartItem";
 import { useSelector } from "react-redux";
 /* import PayButton from "./PayButton.jsx"; */
-import { useAuth0 } from "@auth0/auth0-react";
 import {
 	Box,
 	Stack,
@@ -26,7 +25,6 @@ export function formatPrice(value, opts = {}) {
 }
 
 export default function Cart() {
-	const { isAuthenticated, user } = useAuth0();
 	const productsInCart = useSelector((state) => state.products.cart);
 
 	let total = 0;
@@ -39,13 +37,13 @@ export default function Cart() {
 	}, [productsInCart]);
 	// objeto con el carrito y el user
 	console.log({
-		user: user,
+		// user: user,
 		carrito: productsInCart,
 	});
 
 	const handleCompra = () => {
 		let compra = {
-			user:user,
+			// user:user,
 			cart:productsInCart
 		};
 		axios
@@ -89,18 +87,12 @@ export default function Cart() {
 							</Stack>
 							<Tooltip
 								placement="bottom-start"
-								label={
-									isAuthenticated
-										? null
-										: "Inicia sesión para comprar el producto"
-								}
 							>
 								<Button
 									onClick={handleCompra}
 									w={"fit-content"}
 									colorScheme={"teal"}
 									top="85%"
-									isDisabled={!isAuthenticated}
 								>
 									Comprar
 								</Button>
