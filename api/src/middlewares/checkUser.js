@@ -19,7 +19,7 @@ const checkSessionUser = async( req ,res ,next )=>{
 
         if (userData.rol === 'user') return next();  
         
-        return response(res, 401, { msg: "El administrador no puede hacer una review" });
+        return response(res, 401, { msg: "El administrador no puede realizar esta accion" });
             
     } catch (e) {
         next(e);
