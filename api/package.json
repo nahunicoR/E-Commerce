@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node ./index.js",
     "dev": "nodemon ./index.js",
-    "test": "mocha -w ./tests/**/*.spec.js"
+    "test": "mocha -w ./tests/**/*.spec.js",
+    "db:cargar": "node ./src/seed/seeder.js -i",
+    "db:eliminar": "node ./src/seed/seeder.js -e"
   },
   "author": "Henry",
   "license": "ISC",
